@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guiones · Impermeabilización Solmi</title>
+<meta name="description" content="Guiones de reels y carruseles para Impermeabilización Elástica Solmi, editables, y el perfil de Instagram de ejemplo.">
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:'General Sans';src:url(assets/generalsans-400.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'General Sans';src:url(assets/generalsans-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'General Sans';src:url(assets/generalsans-600.woff2) format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'General Sans';src:url(assets/generalsans-700.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Cabinet Grotesk';src:url(assets/cabinetgrotesk-700.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Cabinet Grotesk';src:url(assets/cabinetgrotesk-800.woff2) format('woff2');font-weight:800;font-display:swap}
+
+/* Sistema del estudio: el mismo de portfolio/personal.html y de la propuesta de Solmi.
+   Negro, hueso, gris y un solo acento naranja. Las tarjetas de guion van en «campo claro»:
+   mismos colores, roles invertidos, así se leen de lejos mientras se graba. */
+:root{
+  --negro:#0E0E0E; --negro-2:#141414; --negro-3:#1C1C1C;
+  --hueso:#F5F4F2; --gris:#A2A29E; --gris-2:#807F79;
+  --naranja:#FF4D00;
+  --linea:rgba(255,255,255,.11); --linea-2:rgba(255,255,255,.2);
+  --sans:'General Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --tit:'Cabinet Grotesk','General Sans',system-ui,sans-serif;
+  --sal:cubic-bezier(.23,1,.32,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:var(--sans);color:var(--hueso);background:var(--negro);font-size:15px;line-height:1.5;letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+button,select{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+::selection{background:var(--naranja);color:#fff}
+:focus-visible{outline:2px solid var(--naranja);outline-offset:3px}
+
+/* barra */
+.bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:10px;padding:12px 20px;background:rgba(14,14,14,.88);backdrop-filter:blur(14px) saturate(150%);border-bottom:1px solid var(--linea)}
+.bar h1{font-family:var(--tit);font-size:19px;font-weight:800;letter-spacing:-.03em;margin:0;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.bar h1 i{width:8px;height:8px;border-radius:50%;background:var(--naranja);display:block}
+.bar h1 small{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:0;color:var(--gris)}
+.bar .sp{flex:1}
+.seg{display:flex;border:1px solid var(--linea-2);border-radius:100px;overflow:hidden;flex-shrink:0;background:rgba(255,255,255,.03)}
+.seg button{border:0;background:transparent;padding:7px 14px;font-size:13px;font-weight:600;color:var(--gris);transition:background .25s,color .25s}
+.seg button[aria-pressed="true"]{background:var(--hueso);color:var(--negro)}
+.chip{border:1px solid var(--linea-2);background:rgba(255,255,255,.03);border-radius:100px;padding:7px 14px;font-size:13px;font-weight:600;white-space:nowrap;color:var(--hueso)}
+.chip[aria-pressed="true"]{border-color:var(--naranja);background:var(--naranja);color:#fff}
+select.chip{appearance:none}
+select.chip option{background:var(--negro-2);color:var(--hueso)}
+
+/* tablero */
+#vp{position:fixed;inset:0;overflow:hidden;touch-action:none;cursor:grab;
+  background-color:var(--negro);background-image:radial-gradient(rgba(255,255,255,.09) 1.2px,transparent 1.2px);background-size:26px 26px}
+#vp.drag{cursor:grabbing}
+#world{position:absolute;left:0;top:0;transform-origin:0 0;padding:110px 64px 140px;display:flex;flex-direction:column;gap:96px;width:max-content}
+.zoomui{position:fixed;right:18px;bottom:18px;z-index:40;display:flex;gap:6px}
+.zoomui button{width:44px;height:44px;border-radius:100px;border:1px solid var(--linea-2);background:rgba(20,20,20,.9);backdrop-filter:blur(8px);font-size:18px;font-weight:600;color:var(--hueso);transition:background .25s var(--sal)}
+.zoomui button:hover{background:var(--naranja);border-color:var(--naranja)}
+
+/* fila */
+.row{display:flex;gap:24px;align-items:flex-start;position:relative}
+.row-title{position:absolute;top:-52px;left:0;display:flex;align-items:baseline;gap:14px;white-space:nowrap}
+.row-title .n{font-family:var(--tit);font-size:15px;font-weight:800;color:var(--naranja);letter-spacing:.02em}
+.row-title .f{font-family:var(--tit);font-size:30px;font-weight:800;letter-spacing:-.035em;line-height:1}
+.row-title .m{font-size:14px;color:var(--gris)}
+
+.card{border-radius:18px;cursor:auto}
+.ref{width:340px;padding:14px;display:flex;flex-direction:column;gap:14px;background:var(--negro-2);border:1px solid var(--linea)}
+.ref .who{font-size:13px;color:var(--gris)}
+.fijo{border:1.5px solid var(--naranja)}
+.fijo .imp{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--negro);background:var(--naranja);border-radius:100px;padding:4px 10px}
+.fijo .q{font-size:15px;color:var(--hueso);margin:0}
+.fijo textarea{display:block;width:100%;min-height:96px;resize:vertical;border:1px solid var(--linea-2);border-radius:10px;background:var(--negro-3);color:var(--hueso);font:inherit;font-size:15px;line-height:1.4;padding:10px 12px}
+.fijo textarea:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+.fijo .guardado{font-size:12px;color:var(--gris-2);margin:6px 0 0;min-height:1em}
+.ref .who b{color:var(--hueso);font-weight:600}
+.vid{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:var(--negro-3);border:1px solid var(--linea);display:grid;place-items:center}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.vid .ph{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--gris);text-align:center;padding:22px;font-size:14px}
+.vid .ph button{border:1px solid var(--naranja);background:var(--naranja);color:#fff;border-radius:100px;padding:12px 22px;font-weight:600;transition:transform .3s var(--sal)}
+.vid .ph button:hover{transform:translateY(-2px)}
+.vid .ph a{font-size:13px}
+.kv{display:flex;flex-wrap:wrap;gap:6px}
+.kv span{font-size:12px;font-weight:500;color:var(--gris);border:1px solid var(--linea-2);border-radius:100px;padding:4px 10px}
+.sticky{border-top:1px solid var(--linea);padding:14px 0 0;font-size:14px;color:var(--hueso)}
+.sticky h4{margin:0 0 8px;font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--naranja)}
+.sticky ol{margin:0;padding-left:18px}
+.sticky li{margin:4px 0}
+.sticky li::marker{color:var(--gris-2);font-weight:600}
+details.tr{border-top:1px solid var(--linea);padding-top:12px}
+details.tr summary{font-weight:600;font-size:13px;cursor:pointer;color:var(--gris)}
+details.tr pre{white-space:pre-wrap;font-family:inherit;font-size:13px;color:var(--gris);margin:10px 0 0;max-height:340px;overflow:auto}
+
+/* guion: campo claro */
+.g{width:450px;overflow:hidden;position:relative;background:var(--hueso);color:#141414;border:1px solid transparent;
+  --tenue:#63625E; --lin:rgba(0,0,0,.12); transition:box-shadow .3s var(--sal)}
+.g header{padding:18px 18px 14px;border-bottom:1px solid var(--lin);position:relative}
+.g .var{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--tenue);margin-bottom:8px}
+.g .var::before{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-family:var(--tit);font-size:13px;letter-spacing:0;color:#fff;background:#141414;box-sizing:border-box}
+.g[data-v="A"] .var::before{content:"A";background:var(--naranja)}
+.g[data-v="B"] .var::before{content:"B"}
+.g[data-v="C"] .var::before{content:"C";background:transparent;color:#141414;border:1.5px solid #141414}
+.g[data-v="D"] .var::before{content:"D";background:#63625E}
+.g h3{font-family:var(--tit);margin:0;font-size:25px;font-weight:800;line-height:1.05;letter-spacing:-.03em;padding-right:48px}
+.g .angle{margin:8px 0 0;font-size:13.5px;color:var(--tenue)}
+.star{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--lin);background:transparent;font-size:18px;line-height:1;color:#141414;transition:background .25s,color .25s,transform .3s var(--sal)}
+.star:hover{transform:scale(1.06)}
+.star[aria-pressed="true"]{background:var(--naranja);border-color:var(--naranja);color:#fff}
+.g.pick{box-shadow:0 0 0 3px var(--naranja)}
+.sec{padding:14px 18px;border-bottom:1px solid var(--lin)}
+.sec:last-child{border-bottom:0}
+.lab{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--naranja);margin:0 0 8px}
+.hook{display:grid;gap:6px}
+.hook div{font-size:14px}
+.hook b{display:inline-block;min-width:56px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tenue)}
+.hook .say{font-family:var(--tit);font-size:21px;font-weight:700;line-height:1.15;letter-spacing:-.02em}
+.hook .say::before{content:"«"}
+.hook .say::after{content:"»"}
+.marco{font-size:12.5px;color:var(--tenue);margin-top:6px}
+.beats{display:flex;flex-direction:column}
+.beat{display:grid;grid-template-columns:42px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--lin)}
+.beat:first-child{border-top:0;padding-top:0}
+.beat .t{font-size:12px;font-weight:700;color:var(--tenue);font-variant-numeric:tabular-nums;padding-top:3px}
+.beat .p{font-size:12.5px;color:var(--tenue)}
+.beat .a{font-size:15px;font-weight:500;color:#141414}
+.beat .a:empty{display:none}
+.beat .d{font-size:12px;color:#C23A00;font-weight:600}
+.cta{font-weight:600;font-size:15px}
+ul.shots{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+ul.shots li{display:flex;gap:10px;font-size:14px;align-items:flex-start}
+ul.shots input{margin-top:3px;accent-color:var(--naranja);width:17px;height:17px;flex-shrink:0}
+ul.shots input:checked + label{color:var(--tenue);text-decoration:line-through}
+.warn{font-size:13px;background:#141414;color:var(--hueso);border-radius:12px;padding:10px 12px}
+.cap{font-size:13px;color:var(--tenue);white-space:pre-line}
+.heras{background:#141414;color:var(--hueso)}
+body.editing [data-ed]{outline:1px dashed rgba(0,0,0,.28);outline-offset:3px;border-radius:4px;cursor:text}
+body.editing [data-ed]:focus{outline:2px solid var(--naranja);background:#fff}
+[data-ed].edited{background:rgba(255,77,0,.1);box-shadow:inset 0 -2px 0 var(--naranja)}
+.acciones{display:flex;gap:8px;flex-wrap:wrap}
+.acciones button{border:1px solid rgba(0,0,0,.18);background:transparent;border-radius:100px;padding:7px 14px;font-size:13px;font-weight:600;color:#141414}
+.acciones button:hover{border-color:var(--naranja);color:var(--naranja)}
+.acciones .reset[hidden]{display:none}
+#editar[aria-pressed="true"]{border-color:var(--naranja);background:var(--naranja);color:#fff}
+.aviso-ed{display:none;position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:60;background:var(--naranja);color:#fff;border-radius:100px;padding:9px 16px;font-size:13px;font-weight:600;max-width:calc(100% - 32px);text-align:center}
+body.editing .aviso-ed{display:block}
+.heras .lab{color:var(--naranja)}
+.heras ul{margin:0;padding-left:18px;font-size:13px;color:var(--gris)}
+.heras li{margin:3px 0}
+
+/* intro */
+.intro{width:420px;padding:26px;background:var(--negro-2);border:1px solid var(--linea)}
+.intro .rotulo{display:block;font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--naranja);margin:0 0 14px}
+.intro h2{font-family:var(--tit);margin:0 0 14px;font-size:40px;font-weight:800;line-height:1;letter-spacing:-.038em}
+.intro p{margin:0 0 12px;font-size:14.5px;color:var(--gris)}
+.intro ul{margin:16px 0 0;padding:16px 0 0 18px;border-top:1px solid var(--linea);font-size:14px}
+.intro li{margin:4px 0}
+.intro li::marker{color:var(--naranja)}
+
+/* lista (celular) */
+body.list #vp{position:static;overflow:visible;touch-action:auto;cursor:auto;min-height:100%}
+body.list #world{position:static;transform:none!important;padding:84px 16px 64px;width:auto;gap:72px}
+body.list .zoomui{display:none}
+body.list .row{flex-direction:column;align-items:stretch;gap:16px}
+body.list .row-title{position:static;white-space:normal;flex-wrap:wrap;row-gap:4px}
+body.list .row-title .f{font-size:26px}
+body.list .row-title .m{flex-basis:100%}
+body.list .ref,body.list .intro,body.list .ped{width:auto}
+body.list .igw{width:100%;max-width:390px;margin:0 auto}
+body.list .intro h2{font-size:32px}
+body.list .scripts{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:4px 16px 14px;scrollbar-width:none}
+body.list .g{flex:0 0 88%;max-width:450px;scroll-snap-align:center}
+body.list .vid{max-width:300px;margin:0 auto;width:100%}
+.scripts{display:flex;gap:24px;align-items:flex-start}
+body.onlypicks .g:not(.pick){display:none}
+body.onlypicks .row:not(:has(.g.pick)){display:none}
+@media (max-width:700px){
+  .bar{gap:6px;padding:10px 12px}
+  .bar h1{font-size:16px}
+  .bar h1 small,#onlypicks .t,#editar .t{display:none}
+  .chip,.seg button{padding:6px 10px;font-size:12px}
+  select.chip{max-width:84px}
+}
+@media (max-width:480px){.seg{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* respuestas de Víctor */
+.beat.e .a{font-family:var(--tit);font-weight:700;font-size:16px;letter-spacing:-.01em}
+.who-e{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tenue)}
+.beat.v .who-v{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#C23A00}
+.beat.v .guia{font-size:13px;color:var(--tenue);margin:2px 0 6px}
+.beat textarea{display:block;width:100%;min-height:62px;resize:vertical;border:1px solid rgba(0,0,0,.18);border-radius:10px;background:#fff;color:#141414;font:inherit;font-size:15px;line-height:1.4;padding:9px 11px;transition:border-color .2s}
+.beat textarea:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+.beat textarea.ok{border-color:#141414}
+details.ej{margin-top:6px}
+details.ej summary{font-size:12.5px;font-weight:600;color:var(--tenue);cursor:pointer;list-style:none}
+details.ej summary::-webkit-details-marker{display:none}
+details.ej summary::before{content:"+ "}
+details.ej[open] summary::before{content:"− "}
+details.ej p{margin:6px 0 0;font-size:13.5px;font-style:italic;color:var(--tenue);border-left:2px solid var(--lin);padding-left:10px}
+details.hks{margin-top:12px;border-top:1px dashed var(--lin);padding-top:10px}
+details.hks summary{font-size:13px;font-weight:700;color:#C23A00;cursor:pointer;list-style:none}
+details.hks summary::-webkit-details-marker{display:none}
+details.hks summary::before{content:"▸ ";display:inline-block;transition:transform .2s}
+details.hks[open] summary::before{transform:rotate(90deg)}
+details.hks ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+details.hks li{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:start;padding:8px 10px;border:1px solid var(--lin);border-radius:10px;background:#fff}
+details.hks li.sel{border-color:var(--naranja);box-shadow:0 0 0 1px var(--naranja)}
+details.hks .mk{grid-column:1;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tenue)}
+details.hks .tx{grid-column:1;font-size:14px;line-height:1.35}
+details.hks .nt{grid-column:1;font-size:12px;font-style:italic;color:var(--tenue)}
+details.hks button{grid-column:2;grid-row:1 / span 3;align-self:center;border:1px solid rgba(0,0,0,.2);background:transparent;border-radius:100px;padding:5px 12px;font-size:12.5px;font-weight:600;color:#141414}
+details.hks li.sel button{background:var(--naranja);border-color:var(--naranja);color:#fff}
+details.hks li.mio{border-style:dashed}
+details.hks li .del{grid-column:1;grid-row:auto;justify-self:start;border:0;background:none;padding:0;font-size:12px;font-weight:600;color:var(--tenue);text-decoration:underline}
+details.hks li.sel .del{background:none;color:var(--tenue)}
+.hkadd{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px;align-items:end}
+.hkadd textarea{width:100%;min-height:48px;resize:vertical;border:1px solid rgba(0,0,0,.18);border-radius:10px;background:#fff;color:#141414;font:inherit;font-size:14px;line-height:1.35;padding:8px 10px}
+.hkadd textarea:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+details.hks .hkadd button{grid-column:2;grid-row:1;align-self:end;background:#141414;border-color:#141414;color:#fff;padding:8px 14px}
+.conf{font-size:13px;background:#fff;border:1px solid var(--naranja);border-radius:12px;padding:10px 12px;display:grid;gap:8px}
+.conf b{color:#C23A00}
+.conf .op{display:flex;gap:6px;flex-wrap:wrap}
+.conf .op button{border:1px solid rgba(0,0,0,.2);background:transparent;border-radius:100px;padding:5px 12px;font-size:12.5px;font-weight:600;color:#141414}
+.conf .op button[aria-pressed="true"]{background:#141414;border-color:#141414;color:#fff}
+.cont{font-size:12px;font-weight:600;color:var(--tenue);margin-top:10px}
+.cont.full{color:#1f7a3a}
+.idea-f{font-family:var(--tit);font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0}
+.idea .sticky p{margin:0;color:var(--gris);font-size:14px}
+.idea .op{display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--linea);padding-top:14px}
+.idea .op button{border:1px solid var(--linea-2);background:transparent;border-radius:100px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--hueso)}
+.idea .op button[aria-pressed="true"]{background:var(--naranja);border-color:var(--naranja);color:#fff}
+#enviar{border-color:var(--naranja);background:var(--naranja);color:#fff}
+dialog{border:1px solid var(--linea-2);border-radius:18px;background:var(--negro-2);color:var(--hueso);padding:22px;width:min(440px,calc(100% - 32px))}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h2{font-family:var(--tit);font-size:26px;font-weight:800;letter-spacing:-.03em;margin:0 0 8px}
+dialog p{color:var(--gris);font-size:14px;margin:0 0 16px}
+dialog .btns{display:grid;gap:8px}
+dialog .btns button{border:1px solid var(--linea-2);background:rgba(255,255,255,.04);border-radius:100px;padding:11px 16px;font-weight:600;color:var(--hueso)}
+dialog .btns button.pri{background:var(--naranja);border-color:var(--naranja);color:#fff}
+dialog .cerrar{margin-top:10px;background:transparent;border:0;color:var(--gris);font-size:13px}
+dialog .resp{margin-top:16px;padding-top:14px;border-top:1px solid var(--linea)}
+dialog .resp p{margin:0 0 10px;font-size:13px}
+dialog .resp .btns{grid-template-columns:1fr 1fr}
+
+/* guardado */
+.toast{position:fixed;left:18px;bottom:18px;z-index:45;background:rgba(20,20,20,.92);border:1px solid var(--linea-2);color:var(--hueso);border-radius:100px;padding:8px 14px;font-size:12.5px;font-weight:600;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s var(--sal);pointer-events:none}
+.toast.on{opacity:1;transform:none}
+.alerta{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:55;background:#C23A00;color:#fff;border-radius:14px;padding:10px 14px;font-size:13.5px;font-weight:600;max-width:calc(100% - 32px);width:560px;text-align:center}
+.alerta[hidden]{display:none}
+
+/* perfil de Instagram: vista previa con la estética de la app, en claro */
+.igw{width:390px;padding:0;overflow:hidden;background:#fff;color:#000;border:1px solid var(--linea);font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;letter-spacing:0}
+.ig-top{display:flex;align-items:center;gap:6px;padding:12px 16px 4px;font-weight:700;font-size:19px}
+.ig-top small{font-size:13px;color:#737373;font-weight:400;margin-left:auto}
+.ig-head{display:flex;align-items:center;gap:22px;padding:10px 16px 0}
+.ig-av{width:86px;height:86px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;overflow:hidden;background:#0A5BAA;color:#F4F1EA;font-family:var(--tit);font-weight:800;font-size:26px;letter-spacing:-.02em;box-shadow:0 0 0 1px #dbdbdb}
+.ig-av img,.ig-hl .c img{width:100%;height:100%;object-fit:cover;display:block}
+.ig-st{display:flex;flex:1;justify-content:space-around;text-align:center;font-size:13px;line-height:1.2}
+.ig-st b{display:block;font-size:17px}
+.ig-bio{padding:10px 16px 0;font-size:14px;line-height:1.35}
+.ig-bio .nm{font-weight:600}
+.ig-bio .ct{color:#737373}
+.ig-bio .tx{white-space:pre-line;overflow-wrap:anywhere}
+.ig-bio .lk{color:#00376B;font-weight:600}
+.ig-btns{display:flex;gap:6px;padding:12px 16px 0}
+.ig-btns span{flex:1;text-align:center;background:#EFEFEF;border-radius:8px;padding:7px 0;font-size:14px;font-weight:600}
+.ig-btns .seg-ig{background:#0095F6;color:#fff}
+.ig-hls{display:flex;gap:14px;padding:14px 16px 4px;overflow-x:auto;scrollbar-width:none}
+.ig-hl{width:66px;flex-shrink:0;text-align:center;font-size:12px}
+.ig-hl .c{width:66px;height:66px;border-radius:50%;padding:3px;background:#fff;box-shadow:0 0 0 1px #dbdbdb;margin-bottom:5px}
+.ig-hl .c > *{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;overflow:hidden;font-family:var(--tit);font-weight:800;font-size:28px}
+.ig-hl .az{background:#0A5BAA;color:#F4F1EA}
+.ig-hl .hu{background:#F4F1EA;color:#0A5BAA}
+.ig-hl .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ig-tabs{display:flex;border-top:1px solid #dbdbdb;margin-top:10px}
+.ig-tabs span{flex:1;text-align:center;padding:9px 0;font-size:12px;font-weight:600;color:#737373}
+.ig-tabs span:first-child{color:#000;box-shadow:inset 0 -1px 0 #000}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.ig-grid div{aspect-ratio:3/4;position:relative;background:#EFEFEF;display:flex;align-items:flex-end;padding:8px;font-size:12.5px;font-weight:700;line-height:1.15;color:#737373}
+.ig-grid .fj{background:#0A5BAA;color:#F4F1EA}
+.ig-grid .fj::before{content:"📌";position:absolute;top:6px;right:6px;font-size:12px}
+.ped{width:390px}
+.ped label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris);margin:0 0 6px}
+.ped .f{display:block}
+.ped input[type=text],.ped textarea,.ped select{display:block;width:100%;border:1px solid var(--linea-2);border-radius:10px;background:var(--negro-3);color:var(--hueso);font:inherit;font-size:15px;line-height:1.4;padding:9px 11px}
+.ped textarea{min-height:108px;resize:vertical}
+.ped input:focus,.ped textarea:focus,.ped select:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+.ped .cnt{font-size:12px;color:var(--gris-2);margin:4px 0 0;text-align:right}
+.ped .cnt.mal{color:#FF7A45;font-weight:700}
+.ped .fila3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.ped .hl{display:grid;grid-template-columns:1fr 54px 92px;gap:6px;align-items:center;padding:8px 0;border-top:1px solid var(--linea)}
+.ped .hl .x{grid-column:1 / -1;display:flex;gap:10px;flex-wrap:wrap}
+.ped .lnk{background:none;border:0;padding:0;font-size:12.5px;font-weight:600;color:var(--gris);text-decoration:underline}
+.ped .btn{border:1px solid var(--linea-2);background:rgba(255,255,255,.04);border-radius:100px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--hueso)}
+.ped .btn:hover{border-color:var(--naranja)}
+.ped .acc{display:flex;gap:8px;flex-wrap:wrap}
+.ped input[type=file]{display:none}
+.hueco{font-size:12.5px;color:var(--gris-2);margin:4px 0 0}
+
+/* guiones editables */
+.beat .who-q{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#C23A00}
+.beat .ve{font-size:12.5px;color:var(--tenue);margin:2px 0 6px}
+textarea[data-e]{overflow:hidden}
+.beat textarea.edited,.lam textarea.edited{border-color:var(--naranja);background:#FFF4EE}
+.g .placa{font-size:12.5px;color:var(--tenue);margin-top:6px}
+.g .placa b{color:#141414}
+.nota{font-size:13px;color:var(--tenue)}
+.cont.mod{color:#C23A00}
+.acciones .reset{border-color:#C23A00;color:#C23A00}
+/* carruseles */
+.car{width:470px}
+.lams{display:flex;flex-direction:column}
+.lam{display:grid;grid-template-columns:22px 92px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--lin);align-items:start}
+.lam:first-child{border-top:0;padding-top:0}
+.lam .ln{font-size:12px;font-weight:700;color:var(--tenue);padding-top:4px;font-variant-numeric:tabular-nums}
+.lam .th{width:92px;aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:#0A5BAA;color:#F4F1EA;display:flex;align-items:flex-end;padding:7px;font-family:var(--tit);font-weight:800;font-size:11.5px;line-height:1.05;letter-spacing:-.01em;position:relative}
+.lam .th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lam .th span{position:relative;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.lam textarea{display:block;width:100%;resize:vertical;border:1px solid rgba(0,0,0,.18);border-radius:10px;background:#fff;color:#141414;font:inherit;line-height:1.35;padding:7px 10px}
+.lam textarea.t1{font-family:var(--tit);font-weight:700;font-size:16px;min-height:38px;margin-bottom:6px}
+.lam textarea.t2{font-size:14px;min-height:54px}
+.lam textarea:focus,.capt:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+.capt{display:block;width:100%;min-height:70px;resize:vertical;border:1px solid rgba(0,0,0,.18);border-radius:10px;background:#fff;color:#141414;font:inherit;font-size:14px;line-height:1.4;padding:8px 10px}
+.ig-av{font-size:18px!important;letter-spacing:.02em!important}
+.falta{margin:16px 0 0;padding:16px 0 0;border-top:1px solid var(--linea)}
+.falta .rotulo{margin-bottom:8px}
+.falta ol{margin:0;padding-left:18px;font-size:14px;color:var(--hueso)}
+.falta li{margin:4px 0}
+.falta li::marker{color:var(--naranja);font-weight:700}
+body.list .car{width:auto}
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1><i></i>Impermeabilización Solmi<small>guiones · techos</small></h1>
+  <span class="sp"></span>
+  <select class="chip" id="jump" aria-label="Ir al formato"></select>
+  <button class="chip" id="enviar">Enviar <span id="prog"></span></button>
+  <div class="seg" role="group" aria-label="Vista">
+    <button id="mBoard" aria-pressed="true">Tablero</button>
+    <button id="mList" aria-pressed="false">Lista</button>
+  </div>
+</div>
+<div id="vp"><div id="world"></div></div>
+<div class="zoomui"><button id="zout" aria-label="Alejar">−</button><button id="zfit" aria-label="Encajar">⤢</button><button id="zin" aria-label="Acercar">+</button></div>
+
+<dialog id="dlg">
+  <h2>Tus cambios</h2>
+  <p id="dlgtxt"></p>
+  <div class="btns">
+    <button class="pri" id="bWa">Mandar por WhatsApp</button>
+    <button id="bCopy">Copiar todo</button>
+    <button id="bTxt">Descargar como texto</button>
+  </div>
+  <div class="resp">
+    <p>Lo escrito vive solo en este dispositivo. Si vas a seguir otro día o en otro aparato, bajate un respaldo y cargalo después.</p>
+    <div class="btns">
+      <button id="bBak">Bajar respaldo</button>
+      <button id="bLoad">Cargar respaldo</button>
+    </div>
+    <input type="file" id="fLoad" accept="application/json,.json" hidden>
+  </div>
+  <button class="cerrar" id="bClose">Cerrar</button>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="alerta" id="alerta" hidden>Este navegador no está guardando lo que escribís (puede ser una ventana privada). Antes de cerrar, tocá «Enviar» o bajate un respaldo.</div>
+
+<script src="guiones.js?v=2026-09-21a"></script>
+<script>
+const D = window.GUIONES;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* guardado: todo en localStorage de este navegador, con prefijo «si-»: el tablero de Solmi & Asociados
+   vive en el mismo dominio (seerystudio.github.io) y usa «sv-». Si falla, se avisa en vez de callarse. */
+let tToast;
+function avisarGuardado(){
+  const t = $('#toast'); if (!t) return;
+  const h = new Date(); t.textContent = 'Guardado en este dispositivo · ' + String(h.getHours()).padStart(2,'0') + ':' + String(h.getMinutes()).padStart(2,'0');
+  t.classList.add('on'); clearTimeout(tToast); tToast = setTimeout(() => t.classList.remove('on'), 1600);
+}
+function alertaGuardado(){ const a = $('#alerta'); if (a) a.hidden = false; }
+let pidioPersistir = false;
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v, callado){
+    try { localStorage.setItem(k, JSON.stringify(v)); }
+    catch { alertaGuardado(); return false; }
+    if (!callado) avisarGuardado();
+    if (!pidioPersistir && navigator.storage && navigator.storage.persist){ pidioPersistir = true; navigator.storage.persist().catch(() => {}); }
+    return true;
+  }
+};
+try { localStorage.setItem('si-test', '1'); localStorage.removeItem('si-test'); } catch { addEventListener('DOMContentLoaded', alertaGuardado); setTimeout(alertaGuardado, 0); }
+let ed = store.get('si-ed', {});     /* textos cambiados: clave → texto nuevo */
+let fijo = store.get('si-fijo', {});
+let conf = store.get('si-conf', {});
+let hkx = store.get('si-hkx', {});
+function allHooks(key, g){ return (g.hooks || []).concat((hkx[key] || []).map(t => ['Tuyo', t, null, true])); }
+const elegido = (key, g) => { const t = conf['hk' + key]; return t && allHooks(key, g).some(x => x[1] === t) ? t : null; };
+function hooksList(key, g){
+  const hk = elegido(key, g), n = (g.hooks || []).length;
+  return allHooks(key, g).map((x, j) => `<li class="${hk === x[1] ? 'sel' : ''}${x[3] ? ' mio' : ''}"><span class="mk">${esc(x[0])}</span><span class="tx">${esc(x[1])}</span>${x[2] ? `<span class="nt">${esc(x[2])}</span>` : ''}<button type="button" data-hk="${key}" data-i="${j}">${hk === x[1] ? 'Elegido' : 'Este'}</button>${x[3] ? `<button type="button" class="del" data-hkdel="${key}" data-i="${j - n}">Borrar</button>` : ''}</li>`).join('');
+}
+/* cada texto editable tiene su clave y su original; ed[clave] existe solo si cambió */
+const ORIG = {};
+const val = k => (k in ed ? ed[k] : ORIG[k]);
+function campo(k, orig, cls, label, rows){
+  ORIG[k] = orig;
+  const v = val(k);
+  return `<textarea data-e="${esc(k)}" rows="${rows || 2}" aria-label="${esc(label)}" class="${cls || ''}${v !== orig ? ' edited' : ''}">${esc(v)}</textarea>`;
+}
+const cambiosDe = pre => Object.keys(ed).filter(k => k.startsWith(pre + '|') && ed[k] !== ORIG[k]).length;
+const guion = key => { for (const r of D.refs) for (const g of r.guiones) if (r.n + g.v === key) return g; };
+const contTxt = n => n ? (n === 1 ? '1 cambio tuyo' : n + ' cambios tuyos') : 'Sin cambios: es la propuesta';
+
+function renderScript(r, g){
+  const key = r.n + g.v;
+  const beats = g.beats.map((b, i) => `<div class="beat"><div class="t">${esc(b[0])}</div><div>
+      <div class="who-q">${esc(b[1])}</div>
+      <div class="ve">Se ve: ${esc(b[2])}</div>
+      ${campo(key + '|b' + i, b[3], '', b[1] + ', ' + b[0], 2)}
+    </div></div>`).join('');
+  const c = conf[key], hk = elegido(key, g), n = cambiosDe(key);
+  const hooks = g.hooks ? `<details class="hks"><summary>${g.hooks.length} arranques más · o escribí el tuyo</summary><ol data-hkl="${key}">${hooksList(key, g)}</ol><div class="hkadd"><textarea data-hkin="${key}" rows="2" aria-label="Tu propio arranque" placeholder="Escribí tu propio arranque…"></textarea><button type="button" data-hkadd="${key}">Agregar</button></div></details>` : '';
+  return `<article class="card g" data-v="${g.v}" data-k="${key}">
+    <header>
+      <span class="var">${esc(g.tipo)}</span>
+      <h3>${esc(g.titulo)}</h3>
+      <p class="angle">${esc(g.angulo)}</p>
+      <div class="cont ${n ? 'mod' : ''}" data-cont="${key}">${contTxt(n)}</div>
+    </header>
+    <div class="sec"><p class="lab">Arranque · primeros 3 segundos · ${esc(g.hook.quien)}</p>
+      <div class="hook"><div class="say" data-say="${key}">${esc(hk || g.hook.dice)}</div></div>
+      ${g.hook.placa ? `<div class="placa"><b>Texto en pantalla:</b> ${esc(g.hook.placa)}</div>` : ''}
+      ${hooks}
+    </div>
+    <div class="sec"><p class="lab">Guion · ${esc(g.dur)} · tocá un texto para cambiarlo</p><div class="beats">${beats}</div></div>
+    <div class="sec"><p class="lab">Cierre</p>${campo(key + '|cta', g.cta, 'capt', 'Cierre', 2)}</div>
+    ${g.ojo ? `<div class="sec"><p class="nota">${esc(g.ojo)}</p></div>` : ''}
+    ${g.confirmar ? `<div class="sec"><div class="conf"><div><b>Confirmanos:</b> ${esc(g.confirmar)}</div>
+      <div class="op">${['Sí, va así', 'No, cambiarlo', 'Lo hablamos'].map(o => `<button type="button" data-conf="${key}" aria-pressed="${c === o}">${o}</button>`).join('')}</div></div></div>` : ''}
+    <div class="sec acciones"><button type="button" class="reset" data-reset="${key}" ${n ? '' : 'hidden'}>Volver al original</button></div>
+  </article>`;
+}
+
+function renderRef(r){
+  return `<aside class="card ref">
+    <div class="vid" data-embed="${r.id}"><div class="ph"><button type="button">▶ Ver el ejemplo</button><a href="https://www.instagram.com/reel/${r.id}/" target="_blank" rel="noopener">abrir en Instagram ↗</a></div></div>
+    <div class="who">${r.cuenta ? `<b>${esc(r.cuenta)}</b> · ` : ''}${esc(r.datos || '')}</div>
+    <div class="kv">${(r.tags || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+    <div class="sticky"><h4>Por qué funciona</h4><ol>${r.mecanica.map(m => `<li>${esc(m)}</li>`).join('')}</ol></div>
+  </aside>`;
+}
+
+function prog(){
+  const n = Object.keys(ed).filter(k => ed[k] !== ORIG[k]).length;
+  $('#prog').textContent = n ? '· ' + n : '';
+  return n;
+}
+/* carruseles: cada lámina con título y bajada editables */
+function renderCarruseles(){
+  const C = D.carruseles; if (!C) return '';
+  return `<section class="row" id="r${C.n}">
+    <div class="row-title"><span class="n">${String(C.n).padStart(2,'0')}</span><span class="f">${esc(C.titulo)}</span><span class="m">${esc(C.resumen)}</span></div>
+    <div class="scripts">${C.items.map(it => {
+      const n = cambiosDe(it.k), c = conf[it.k];
+      const lams = it.laminas.map((l, i) => `<div class="lam"><div class="ln">${i + 1}</div>
+        <div class="th">${l[2] ? `<img src="assets/obras/${esc(l[2])}.jpg" alt="" loading="lazy">` : ''}<span data-th="${it.k}|${i}">${esc(val(it.k + '|l' + i + 't') ?? l[0])}</span></div>
+        <div>${campo(it.k + '|l' + i + 't', l[0], 't1', 'Título de la lámina ' + (i + 1), 1)}${campo(it.k + '|l' + i + 'b', l[1], 't2', 'Texto de la lámina ' + (i + 1), 2)}</div></div>`).join('');
+      return `<article class="card g car" data-v="${it.k === 'C1' ? 'A' : it.k === 'C2' ? 'B' : 'C'}" data-k="${it.k}">
+        <header><span class="var">${esc(it.tipo)}</span><h3>${esc(it.titulo)}</h3><p class="angle">${esc(it.angulo)}</p>
+          <div class="cont ${n ? 'mod' : ''}" data-cont="${it.k}">${contTxt(n)}</div></header>
+        <div class="sec"><p class="lab">${it.laminas.length} láminas · tocá un texto para cambiarlo</p><div class="lams">${lams}</div></div>
+        <div class="sec"><p class="lab">Texto de la publicación</p>${campo(it.k + '|cap', it.caption, 'capt', 'Texto de la publicación', 3)}</div>
+        ${it.confirmar ? `<div class="sec"><div class="conf"><div><b>Confirmanos:</b> ${esc(it.confirmar)}</div>
+          <div class="op">${['Sí, va así', 'No, cambiarlo', 'Lo hablamos'].map(o => `<button type="button" data-conf="${it.k}" aria-pressed="${c === o}">${o}</button>`).join('')}</div></div></div>` : ''}
+        <div class="sec acciones"><button type="button" class="reset" data-reset="${it.k}" ${n ? '' : 'hidden'}>Volver al original</button></div>
+      </article>`;
+    }).join('')}</div>
+  </section>`;
+}
+function renderFijados(){
+  const F = D.fijados; if (!F) return '';
+  return `<section class="row" id="rF">
+    <div class="row-title"><span class="n">★</span><span class="f">${esc(F.titulo)}</span><span class="m">${esc(F.resumen)}</span></div>
+    ${F.items.map((it, j) => `<aside class="card ref idea fijo">
+      <span class="imp">Importante · fijado ${esc(it.n)}</span>
+      <h3 class="idea-f">${esc(it.formato)}</h3>
+      <p class="q">${esc(it.contesta)}</p>
+      <div class="sticky"><h4>La idea</h4><ol>${it.ideas.map(m => `<li>${esc(m)}</li>`).join('')}</ol></div>
+      <div class="sticky"><h4>Guion</h4><p>${esc(it.pide)}</p></div>
+      <div class="sticky"><h4>Tus notas</h4>
+        <textarea data-f="${j}" rows="4" aria-label="Notas sobre el fijado ${esc(it.n)}" placeholder="Escribí lo que se te ocurra: qué dirías, qué cambiarías…">${esc(fijo[j] || '')}</textarea>
+        <p class="guardado" data-fg="${j}">${(fijo[j] || '').trim() ? 'Guardado en este dispositivo ✓' : ''}</p></div>
+    </aside>`).join('')}
+  </section>`;
+}
+/* perfil de Instagram: la propuesta sale de guiones.js; lo que se cambia se guarda encima */
+const P = D.perfil;
+const copia = o => JSON.parse(JSON.stringify(o));
+let perfil = Object.assign(copia(P ? P.base : {}), store.get('si-perfil', {}));
+const LIM = {nombre: 30, bio: 150, usuario: 30};
+const largo = s => [...String(s || '')].length;
+const guardarPerfil = () => store.set('si-perfil', perfil);
+function vistaPerfil(){
+  const p = perfil;
+  const hls = (p.destacadas || []).map(h => `<div class="ig-hl"><div class="c">${h.img ? `<div><img src="${h.img}" alt=""></div>` : `<div class="${h.fondo === 'hueso' ? 'hu' : 'az'}">${esc(h.letra)}</div>`}</div><div class="nm">${esc(h.nombre)}</div></div>`).join('');
+  const fj = (p.fijados || []).map(t => `<div class="fj">${esc(t)}</div>`).join('') + '<div></div><div></div><div></div>';
+  return `<div class="ig-top">${esc(p.usuario)}<small>vista de ejemplo</small></div>
+    <div class="ig-head"><div class="ig-av">SOLMI</div>
+      <div class="ig-st"><div><b>${esc(p.posts)}</b>publicaciones</div><div><b>${esc(p.seguidores)}</b>seguidores</div><div><b>${esc(p.seguidos)}</b>seguidos</div></div></div>
+    <div class="ig-bio"><div class="nm">${esc(p.nombre)}</div>${p.categoria ? `<div class="ct">${esc(p.categoria)}</div>` : ''}<div class="tx">${esc(p.bio)}</div>${p.link ? `<div class="lk">🔗 ${esc(p.link)}</div>` : ''}</div>
+    <div class="ig-btns"><span class="seg-ig">Seguir</span><span>Mensaje</span><span>WhatsApp</span></div>
+    <div class="ig-hls">${hls}</div>
+    <div class="ig-tabs"><span>Publicaciones</span><span>Reels</span><span>Etiquetas</span></div>
+    <div class="ig-grid">${fj}</div>`;
+}
+const cnt = (c, v) => LIM[c] ? `<p class="cnt${largo(v) > LIM[c] ? ' mal' : ''}" data-cnt="${c}">${largo(v)} / ${LIM[c]}</p>` : '';
+function editorPerfil(){
+  const p = perfil, fld = (c, lab) => `<div class="sticky f"><label for="p-${c}">${lab}</label><input type="text" id="p-${c}" data-p="${c}" value="${esc(p[c])}">${cnt(c, p[c])}</div>`;
+  return `${fld('usuario', 'Usuario')}
+    ${fld('nombre', 'Nombre · es lo que busca Instagram')}
+    ${fld('categoria', 'Categoría')}
+    <div class="sticky f"><label for="p-bio">Bio</label><textarea id="p-bio" data-p="bio" rows="5">${esc(p.bio)}</textarea>${cnt('bio', p.bio)}</div>
+    ${fld('link', 'Link')}
+    <div class="sticky"><h4>Números</h4><div class="fila3">
+      ${['posts', 'seguidores', 'seguidos'].map(c => `<input type="text" data-p="${c}" value="${esc(p[c])}" aria-label="${c}" inputmode="numeric">`).join('')}</div>
+      <p class="hueco">Cuenta nueva: arranca en cero.</p></div>
+    <div class="sticky"><h4>Destacadas</h4>
+      ${(p.destacadas || []).map((h, i) => `<div class="hl">
+        <input type="text" data-hl="${i}" data-c="nombre" value="${esc(h.nombre)}" aria-label="Nombre de la destacada ${i + 1}" maxlength="20">
+        <input type="text" data-hl="${i}" data-c="letra" value="${esc(h.letra)}" aria-label="Letra de la portada" maxlength="2">
+        <select data-hl="${i}" data-c="fondo" aria-label="Fondo de la portada"><option value="azul"${h.fondo !== 'hueso' ? ' selected' : ''}>Azul</option><option value="hueso"${h.fondo === 'hueso' ? ' selected' : ''}>Hueso</option></select>
+        <div class="x"><button type="button" class="lnk" data-pfoto="${i}">${h.img ? 'Cambiar imagen' : 'Poner imagen'}</button>${h.img ? `<button type="button" class="lnk" data-pquitar="${i}">Sacar imagen</button>` : ''}<button type="button" class="lnk" data-hlquitar="${i}">Quitar</button></div>
+      </div>`).join('')}
+      <div class="acc" style="margin-top:10px"><button type="button" class="btn" id="hlmas">+ Agregar destacada</button></div></div>
+    <div class="sticky"><h4>Videos fijados</h4>${(p.fijados || []).map((t, i) => `<input type="text" data-fj="${i}" value="${esc(t)}" aria-label="Fijado ${i + 1}" style="margin-bottom:6px">`).join('')}</div>
+    <div class="sticky"><div class="acc"><button type="button" class="btn" id="preset">Volver a la propuesta</button></div></div>
+    <input type="file" id="pfile" accept="image/*">`;
+}
+function renderPerfil(){
+  if (!P) return '';
+  return `<section class="row" id="rP">
+    <div class="row-title"><span class="n">IG</span><span class="f">${esc(P.titulo)}</span><span class="m">${esc(P.resumen)}</span></div>
+    <div class="card igw" id="igv">${vistaPerfil()}</div>
+    <aside class="card ref ped" id="ped">${editorPerfil()}</aside>
+    <aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Por qué así</h4><ol>${P.notas.map(n => `<li>${esc(n)}</li>`).join('')}</ol></div></aside>
+  </section>`;
+}
+const refrescarVista = () => { $('#igv').innerHTML = vistaPerfil(); };
+const refrescarEditor = () => { $('#ped').innerHTML = editorPerfil(); };
+function achicar(file, lado){
+  return new Promise((ok, mal) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const s = Math.min(1, lado / Math.min(img.width, img.height)), w = Math.round(img.width * s), h = Math.round(img.height * s);
+      const c = document.createElement('canvas'), q = Math.min(w, h); c.width = c.height = q;
+      c.getContext('2d').drawImage(img, -(w - q) / 2, -(h - q) / 2, w, h); /* recorte cuadrado al centro */
+      URL.revokeObjectURL(url); ok(c.toDataURL('image/jpeg', .85));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); mal(); };
+    img.src = url;
+  });
+}
+let destinoFoto = null;
+
+function render(){
+  const intro = `<section class="row" id="r0"><div class="card intro">
+    <span class="rotulo">Impermeabilización Elástica Solmi · techos</span>
+    <h2>${esc(D.titulo)}</h2>
+    ${D.intro.map(p => `<p>${esc(p)}</p>`).join('')}
+    <ul>${D.reglas.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+    ${D.falta ? `<div class="falta"><span class="rotulo">Lo que falta para publicar</span><ol>${D.falta.map(p => `<li>${esc(p)}</li>`).join('')}</ol></div>` : ''}
+  </div></section>`;
+  $('#world').innerHTML = intro + renderPerfil() + renderFijados() + D.refs.map(r => `<section class="row" id="r${r.n}">
+    <div class="row-title"><span class="n">${String(r.n).padStart(2,'0')}</span><span class="f">${esc(r.formato)}</span><span class="m">${esc(r.resumen)}</span></div>
+    ${renderRef(r)}
+    <div class="scripts">${r.guiones.map(g => renderScript(r, g)).join('')}</div>
+  </section>`).join('') + renderCarruseles();
+  const C = D.carruseles;
+  $('#jump').innerHTML = `<option value="0">Ir a…</option>` + (P ? `<option value="P">IG · El perfil</option>` : '') + (D.fijados ? `<option value="F">★ · Los 3 fijados</option>` : '') + D.refs.map(r => `<option value="${r.n}">${String(r.n).padStart(2,'0')} · ${esc(r.formato)}</option>`).join('') + (C ? `<option value="${C.n}">${String(C.n).padStart(2,'0')} · ${esc(C.titulo)}</option>` : '');
+  prog();
+}
+const alto = t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 2 + 'px'; };
+const altos = () => document.querySelectorAll('textarea[data-e]').forEach(alto);
+render();
+requestAnimationFrame(altos); addEventListener('load', altos); addEventListener('resize', altos);
+/* si un texto guardado quedó igual al original (o el original cambió), se limpia */
+Object.keys(ed).forEach(k => { if (!(k in ORIG) || ed[k] === ORIG[k]) delete ed[k]; });
+
+function marcarCont(pre){
+  const n = cambiosDe(pre), el = document.querySelector(`[data-cont="${pre}"]`);
+  if (el){ el.textContent = contTxt(n); el.classList.toggle('mod', !!n); }
+  const rb = document.querySelector(`[data-reset="${pre}"]`); if (rb) rb.hidden = !n;
+}
+/* escribir: se guarda en el dispositivo a cada tecla */
+document.addEventListener('input', e => {
+  const pe = e.target;
+  if (pe.dataset && (pe.dataset.p || pe.dataset.hl || pe.dataset.fj)){
+    if (pe.dataset.p){
+      perfil[pe.dataset.p] = pe.value;
+      const c = document.querySelector(`[data-cnt="${pe.dataset.p}"]`);
+      if (c){ const n = largo(pe.value), m = LIM[pe.dataset.p]; c.textContent = n + ' / ' + m; c.classList.toggle('mal', n > m); }
+    } else if (pe.dataset.hl) perfil.destacadas[+pe.dataset.hl][pe.dataset.c] = pe.value;
+    else perfil.fijados[+pe.dataset.fj] = pe.value;
+    guardarPerfil(); refrescarVista();
+    return;
+  }
+  const tf = e.target.closest && e.target.closest('textarea[data-f]');
+  if (tf){
+    const j = tf.dataset.f;
+    if (tf.value.trim()) fijo[j] = tf.value; else delete fijo[j];
+    store.set('si-fijo', fijo);
+    document.querySelector(`[data-fg="${j}"]`).textContent = tf.value.trim() ? 'Guardado en este dispositivo ✓' : '';
+    return;
+  }
+  const ta = e.target.closest && e.target.closest('textarea[data-e]');
+  if (!ta) return;
+  const k = ta.dataset.e;
+  if (ta.value === ORIG[k]) delete ed[k]; else ed[k] = ta.value;
+  store.set('si-ed', ed);
+  ta.classList.toggle('edited', ta.value !== ORIG[k]); alto(ta);
+  const m = k.match(/^(C\d)\|l(\d+)t$/);
+  if (m){ const th = document.querySelector(`[data-th="${m[1]}|${m[2]}"]`); if (th) th.textContent = ta.value; }
+  marcarCont(k.split('|')[0]);
+  prog();
+});
+document.addEventListener('change', async e => {
+  if (e.target.id !== 'pfile' || !e.target.files[0]) return;
+  const f = e.target.files[0]; e.target.value = '';
+  try {
+    perfil.destacadas[+destinoFoto].img = await achicar(f, 200);
+    guardarPerfil();
+    refrescarVista(); refrescarEditor();
+  } catch { alert('No se pudo abrir esa imagen. Probá con una foto JPG o PNG.'); }
+});
+document.addEventListener('click', e => {
+  const pf = e.target.closest('[data-pfoto]');
+  if (pf){ destinoFoto = pf.dataset.pfoto; $('#pfile').click(); return; }
+  const pq = e.target.closest('[data-pquitar]');
+  if (pq){ delete perfil.destacadas[+pq.dataset.pquitar].img; guardarPerfil(); refrescarVista(); refrescarEditor(); return; }
+  const hq = e.target.closest('[data-hlquitar]');
+  if (hq){ perfil.destacadas.splice(+hq.dataset.hlquitar, 1); guardarPerfil(); refrescarVista(); refrescarEditor(); return; }
+  if (e.target.closest('#hlmas')){
+    const n = perfil.destacadas.length;
+    perfil.destacadas.push({nombre: 'Nueva', letra: 'N', fondo: n % 2 ? 'hueso' : 'azul'});
+    guardarPerfil(); refrescarVista(); refrescarEditor(); return;
+  }
+  if (e.target.closest('#preset')){
+    if (!confirm('¿Volver al perfil propuesto? Se pierden los cambios que hiciste en el perfil (los guiones no se tocan).')) return;
+    perfil = copia(P.base); try { localStorage.removeItem('si-perfil'); } catch {}
+    refrescarVista(); refrescarEditor(); return;
+  }
+  const rs = e.target.closest('[data-reset]');
+  if (rs){
+    const pre = rs.dataset.reset;
+    if (!confirm('¿Volver al texto original de este guion? Se pierden los cambios que le hiciste.')) return;
+    Object.keys(ed).filter(k => k.startsWith(pre + '|')).forEach(k => delete ed[k]);
+    store.set('si-ed', ed);
+    rs.closest('.g').querySelectorAll('textarea[data-e]').forEach(t => { t.value = ORIG[t.dataset.e]; t.classList.remove('edited'); alto(t); });
+    rs.closest('.g').querySelectorAll('[data-th]').forEach(s => { s.textContent = ORIG[s.dataset.th.replace('|', '|l') + 't']; });
+    marcarCont(pre); prog();
+    return;
+  }
+  const hb = e.target.closest('[data-hk]');
+  if (hb){
+    const key = hb.dataset.hk, g = guion(key), k = 'hk' + key, t = allHooks(key, g)[+hb.dataset.i][1];
+    conf[k] = conf[k] === t ? null : t; store.set('si-conf', conf);
+    document.querySelector(`[data-hkl="${key}"]`).innerHTML = hooksList(key, g);
+    document.querySelector(`[data-say="${key}"]`).textContent = elegido(key, g) || g.hook.dice;
+    return;
+  }
+  const ab = e.target.closest('[data-hkadd]');
+  if (ab){
+    const key = ab.dataset.hkadd, g = guion(key), ta = document.querySelector(`[data-hkin="${key}"]`), t = ta.value.trim();
+    if (!t){ ta.focus(); return; }
+    (hkx[key] = hkx[key] || []).push(t); store.set('si-hkx', hkx);
+    ta.value = '';
+    document.querySelector(`[data-hkl="${key}"]`).innerHTML = hooksList(key, g);
+    return;
+  }
+  const db = e.target.closest('[data-hkdel]');
+  if (db){
+    const key = db.dataset.hkdel, g = guion(key), i = +db.dataset.i, k = 'hk' + key;
+    const [borrado] = hkx[key].splice(i, 1); if (!hkx[key].length) delete hkx[key]; store.set('si-hkx', hkx);
+    if (conf[k] === borrado && !allHooks(key, g).some(x => x[1] === borrado)){ conf[k] = null; store.set('si-conf', conf); }
+    document.querySelector(`[data-hkl="${key}"]`).innerHTML = hooksList(key, g);
+    document.querySelector(`[data-say="${key}"]`).textContent = elegido(key, g) || g.hook.dice;
+    return;
+  }
+  const cb = e.target.closest('[data-conf]');
+  if (cb){
+    const k = cb.dataset.conf, o = cb.textContent;
+    conf[k] = conf[k] === o ? null : o; store.set('si-conf', conf);
+    cb.parentNode.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', conf[k] === b.textContent));
+    return;
+  }
+  const pb = e.target.closest('.vid[data-embed] button');
+  if (pb){
+    const box = pb.closest('.vid');
+    box.innerHTML = `<iframe src="https://www.instagram.com/reel/${box.dataset.embed}/embed" loading="lazy" allowfullscreen scrolling="no"></iframe>`;
+  }
+});
+
+/* enviar: la versión final de todo, con los cambios marcados */
+function textoTodo(){
+  const L = ['GUIONES · Impermeabilización Elástica Solmi', '(✎ = texto cambiado)', ''];
+  const t = k => (k in ed && ed[k] !== ORIG[k] ? '✎ ' : '') + val(k);
+  D.refs.forEach(r => r.guiones.forEach(g => {
+    const key = r.n + g.v, el = g.hooks ? elegido(key, g) : null;
+    L.push('== ' + String(r.n).padStart(2,'0') + g.v + ' · ' + r.formato + ' · ' + g.titulo);
+    L.push('Arranque' + (el ? ' (elegido, ' + allHooks(key, g).find(x => x[1] === el)[0] + ')' : '') + ': ' + (el || g.hook.dice));
+    (hkx[key] || []).forEach(x => L.push('Arranque propio: ' + x));
+    g.beats.forEach((b, i) => L.push(b[0] + ' · ' + b[1] + ': ' + t(key + '|b' + i)));
+    L.push('Cierre: ' + t(key + '|cta'));
+    if (g.confirmar) L.push('Confirmar: ' + g.confirmar + ' → ' + (conf[key] || 'sin respuesta'));
+    L.push('');
+  }));
+  if (D.carruseles) D.carruseles.items.forEach(it => {
+    L.push('== Carrusel · ' + it.titulo);
+    it.laminas.forEach((l, i) => L.push((i + 1) + '. ' + t(it.k + '|l' + i + 't') + (val(it.k + '|l' + i + 'b') ? ' — ' + t(it.k + '|l' + i + 'b') : '')));
+    L.push('Texto: ' + t(it.k + '|cap'));
+    if (it.confirmar) L.push('Confirmar: ' + it.confirmar + ' → ' + (conf[it.k] || 'sin respuesta'));
+    L.push('');
+  });
+  if (D.fijados){ L.push('== ' + D.fijados.titulo); D.fijados.items.forEach((it, j) => L.push(it.n + ' · ' + it.formato + ': ' + ((fijo[j] || '').trim() || '(sin notas)'))); L.push(''); }
+  if (P){
+    const p = perfil, igual = JSON.stringify(p) === JSON.stringify(P.base);
+    L.push('== El perfil' + (igual ? ' (sin cambios, queda la propuesta)' : ''));
+    L.push('Usuario: ' + p.usuario, 'Nombre: ' + p.nombre, 'Categoría: ' + p.categoria, 'Bio:', p.bio, 'Link: ' + p.link);
+    L.push('Destacadas: ' + (p.destacadas || []).map(h => h.nombre + (h.img ? ' (con imagen)' : ' (' + h.letra + ', ' + h.fondo + ')')).join(' · '));
+    L.push('Fijados: ' + (p.fijados || []).join(' · '));
+  }
+  return L.join('\n');
+}
+/* respaldo: todo lo guardado en un .json que se puede volver a cargar */
+const CLAVES = ['si-ed', 'si-fijo', 'si-conf', 'si-hkx', 'si-perfil'];
+$('#bBak').onclick = () => {
+  const o = {pagina: 'impermeabilizacion-guiones', fecha: new Date().toISOString()};
+  CLAVES.forEach(k => { const v = store.get(k, null); if (v !== null) o[k] = v; });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(o)], {type: 'application/json'}));
+  a.download = 'respaldo-guiones-impermeabilizacion-' + o.fecha.slice(0, 10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+$('#bLoad').onclick = () => $('#fLoad').click();
+$('#fLoad').onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  let o; try { o = JSON.parse(await f.text()); } catch { alert('Ese archivo no es un respaldo de este tablero.'); return; }
+  if (!o || o.pagina !== 'impermeabilizacion-guiones'){ alert('Ese archivo no es un respaldo de este tablero.'); return; }
+  if (!confirm('¿Cargar el respaldo del ' + String(o.fecha || '').slice(0, 10) + '? Reemplaza lo que hay ahora en este dispositivo.')) return;
+  try { CLAVES.forEach(k => { if (k in o) localStorage.setItem(k, JSON.stringify(o[k])); else localStorage.removeItem(k); }); }
+  catch { alertaGuardado(); return; }
+  location.reload();
+};
+$('#enviar').onclick = () => {
+  const n = prog();
+  $('#dlgtxt').textContent = n ? `Cambiaste ${n} ${n === 1 ? 'texto' : 'textos'}. Se manda todo, con los cambios marcados con ✎.` : 'Todavía no cambiaste nada: se manda la propuesta tal como está, con lo que marcaste en «Confirmanos».';
+  $('#dlg').showModal();
+};
+$('#bClose').onclick = () => $('#dlg').close();
+$('#bWa').onclick = async () => {
+  const t = textoTodo();
+  if (navigator.share && matchMedia('(pointer:coarse)').matches) { try { await navigator.share({text: t}); return; } catch {} }
+  window.open('https://wa.me/?text=' + encodeURIComponent(t), '_blank', 'noopener');
+};
+$('#bCopy').onclick = async () => {
+  const t = textoTodo();
+  try { await navigator.clipboard.writeText(t); }
+  catch { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+  $('#bCopy').textContent = 'Copiado ✓'; setTimeout(() => $('#bCopy').textContent = 'Copiar todo', 1600);
+};
+$('#bTxt').onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([textoTodo()], {type: 'text/plain;charset=utf-8'}));
+  a.download = 'guiones-impermeabilizacion-solmi.txt'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+
+/* tablero: pan y zoom */
+const vp = $('#vp'), world = $('#world');
+let tx = 0, ty = 0, sc = 0.6;
+const apply = () => { world.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`; };
+const zoomAt = (f, cx, cy) => {
+  const ns = Math.min(1.6, Math.max(0.15, sc * f));
+  tx = cx - (cx - tx) * (ns / sc); ty = cy - (cy - ty) * (ns / sc); sc = ns; apply();
+};
+const pts = new Map(); let last = null, pinch = null;
+vp.addEventListener('pointerdown', e => {
+  if (document.body.classList.contains('list')) return;
+  if (e.target.closest('button,a,input,label,summary,select,iframe,pre,textarea,details,.beats,.lams,.cap')) return;
+  vp.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
+  last = [e.clientX, e.clientY]; vp.classList.add('drag');
+});
+vp.addEventListener('pointermove', e => {
+  if (!pts.has(e.pointerId)) return;
+  pts.set(e.pointerId, [e.clientX, e.clientY]);
+  if (pts.size === 2){
+    const [a, b] = [...pts.values()];
+    const d = Math.hypot(a[0]-b[0], a[1]-b[1]), cx = (a[0]+b[0])/2, cy = (a[1]+b[1])/2;
+    if (pinch) zoomAt(d / pinch, cx, cy);
+    pinch = d; return;
+  }
+  tx += e.clientX - last[0]; ty += e.clientY - last[1]; last = [e.clientX, e.clientY]; apply();
+});
+const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size) vp.classList.remove('drag'); else last = [...pts.values()][0]; };
+vp.addEventListener('pointerup', up); vp.addEventListener('pointercancel', up);
+vp.addEventListener('wheel', e => {
+  if (document.body.classList.contains('list')) return;
+  e.preventDefault();
+  if (e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * 0.01), e.clientX, e.clientY);
+  else { tx -= e.deltaX; ty -= e.deltaY; apply(); }
+}, {passive:false});
+$('#zin').onclick = () => zoomAt(1.2, innerWidth/2, innerHeight/2);
+$('#zout').onclick = () => zoomAt(1/1.2, innerWidth/2, innerHeight/2);
+$('#zfit').onclick = () => { sc = Math.min(1, (innerWidth - 40) / world.scrollWidth); tx = 20; ty = 10; apply(); };
+
+function goTo(n){
+  const el = document.getElementById('r' + n); if (!el) return;
+  if (document.body.classList.contains('list')){ window.scrollTo({top: el.offsetTop - 60, behavior:'smooth'}); return; }
+  sc = Math.max(sc, 0.7);
+  tx = 20 - el.offsetLeft * sc; ty = 70 - (el.offsetTop - 50) * sc; apply();
+}
+$('#jump').onchange = e => { goTo(e.target.value); e.target.value = '0'; };
+
+function setMode(m){
+  document.body.classList.toggle('list', m === 'list');
+  $('#mList').setAttribute('aria-pressed', m === 'list');
+  $('#mBoard').setAttribute('aria-pressed', m !== 'list');
+  store.set('si-mode', m, true);
+  if (m !== 'list') apply();
+  requestAnimationFrame(altos);
+}
+$('#mBoard').onclick = () => setMode('board');
+$('#mList').onclick = () => setMode('list');
+setMode(store.get('si-mode', innerWidth < 900 ? 'list' : 'board'));
+apply();
+</script>
+</body>
+</html>
