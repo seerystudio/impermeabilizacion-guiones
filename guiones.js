@@ -422,7 +422,7 @@ window.GUIONES.fijados = {
 /* Perfil de Instagram de ejemplo. Cuenta nueva: todavía no existe. Todo se puede cambiar en la página. */
 window.GUIONES.perfil = {
   titulo: "Así se vería el perfil",
-  resumen: "Nombre, bio y destacadas. Tocá cualquier cosa del panel de la derecha y cambiala: se guarda en este dispositivo",
+  resumen: "Cuatro versiones para elegir. Tocá una arriba del panel de la derecha y después cambiale lo que quieras: se guarda en este dispositivo",
   base: {
     usuario: "impermeabilizacionsolmi",
     nombre: "Solmi | Impermeabilización",
@@ -443,6 +443,111 @@ window.GUIONES.perfil = {
     "El usuario no está reservado todavía. Otras opciones: solmi.impermeabilizacion, solmi1889.",
     "«Sin romper nada» sale del folleto; la confirman ustedes antes de publicar.",
     "El link va al WhatsApp cuando esté el número. solmi.com.ar no: es de 2018 y mezcla otros proyectos.",
+    "Cada versión trae un usuario distinto de los tres posibles. «Sin romper nada» (B) y «Se recuperan sin cambiarlos» (D) los confirman ustedes antes de publicar.",
     "Los fijados se fijan en orden 03, 02, 01: Instagram muestra primero el último."
   ]
 };
+
+/* Versiones del perfil para elegir. Cada una pisa sobre la base solo lo que cambia. */
+window.GUIONES.perfil.versiones = [
+  {
+    "v": "A",
+    "titulo": "La empresa",
+    "porque": "La propuesta de hasta ahora: qué hacen, que el producto es propio y desde cuándo.",
+    "datos": {}
+  },
+  {
+    "v": "B",
+    "titulo": "El problema primero",
+    "porque": "La bio arranca por lo que le pasa al que busca: humedad y goteras. Es la que mejor acompaña a los anuncios.",
+    "datos": {
+      "usuario": "solmi.impermeabilizacion",
+      "nombre": "Solmi | Techos y humedad",
+      "bio": "¿Humedad o goteras en el techo?\nLo arreglamos sin romper nada\nFabricamos y aplicamos nuestro producto\n📍 San Pedro · obras en todo el país",
+      "destacadas": [
+        {
+          "nombre": "Antes y después",
+          "letra": "A",
+          "fondo": "azul"
+        },
+        {
+          "nombre": "Cómo lo hacemos",
+          "letra": "C",
+          "fondo": "hueso"
+        },
+        {
+          "nombre": "Obras",
+          "letra": "O",
+          "fondo": "azul"
+        },
+        {
+          "nombre": "Escribinos",
+          "letra": "E",
+          "fondo": "hueso"
+        }
+      ]
+    }
+  },
+  {
+    "v": "C",
+    "titulo": "La familia",
+    "porque": "El 1889 adelante: seis generaciones en el mismo lugar de San Pedro. El dato lo confirma el papel que falta.",
+    "datos": {
+      "usuario": "solmi1889",
+      "nombre": "Solmi | Techos · desde 1889",
+      "bio": "Una familia de San Pedro desde 1889\nHoy arreglamos techos, terrazas y chapas\nFabricamos y aplicamos nuestro producto\n💬 Escribinos por WhatsApp",
+      "destacadas": [
+        {
+          "nombre": "Nuestra historia",
+          "letra": "89",
+          "fondo": "azul"
+        },
+        {
+          "nombre": "Techos",
+          "letra": "T",
+          "fondo": "hueso"
+        },
+        {
+          "nombre": "Obras",
+          "letra": "O",
+          "fondo": "azul"
+        },
+        {
+          "nombre": "Consultar",
+          "letra": "C",
+          "fondo": "hueso"
+        }
+      ]
+    }
+  },
+  {
+    "v": "D",
+    "titulo": "Las obras",
+    "porque": "Casi sin palabras propias: qué techos arreglan y para quién trabajaron. La prueba antes que la promesa.",
+    "datos": {
+      "bio": "Techos con humedad y chapas oxidadas\nSe recuperan sin cambiarlos\nFábricas, hoteles, edificios y casas\nDesde 1889 · San Pedro, Bs. As.",
+      "destacadas": [
+        {
+          "nombre": "Obras",
+          "letra": "O",
+          "fondo": "azul"
+        },
+        {
+          "nombre": "Chapa",
+          "letra": "C",
+          "fondo": "hueso"
+        },
+        {
+          "nombre": "Terrazas",
+          "letra": "T",
+          "fondo": "azul"
+        },
+        {
+          "nombre": "Consultar",
+          "letra": "?",
+          "fondo": "hueso"
+        }
+      ]
+    }
+  }
+];

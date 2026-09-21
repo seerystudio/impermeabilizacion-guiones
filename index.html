@@ -294,6 +294,11 @@ dialog .resp .btns{grid-template-columns:1fr 1fr}
 .ped .btn{border:1px solid var(--linea-2);background:rgba(255,255,255,.04);border-radius:100px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--hueso)}
 .ped .btn:hover{border-color:var(--naranja)}
 .ped .acc{display:flex;gap:8px;flex-wrap:wrap}
+.ped .ver{display:block;width:100%;text-align:left;border:1px solid var(--linea-2);background:rgba(255,255,255,.03);border-radius:12px;padding:10px 12px;margin:0 0 8px;color:var(--hueso);font:inherit;cursor:pointer}
+.ped .ver b{display:block;font-size:14px}
+.ped .ver span{display:block;font-size:12.5px;color:var(--gris);margin-top:3px;line-height:1.35}
+.ped .ver:hover{border-color:var(--naranja)}
+.ped .ver.on{border-color:var(--naranja);background:rgba(255,77,0,.08)}
 .ped input[type=file]{display:none}
 .hueco{font-size:12.5px;color:var(--gris-2);margin:4px 0 0}
 
@@ -365,7 +370,7 @@ body.list .car{width:auto}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="alerta" id="alerta" hidden>Este navegador no está guardando lo que escribís (puede ser una ventana privada). Antes de cerrar, tocá «Enviar» o bajate un respaldo.</div>
 
-<script src="guiones.js?v=2026-09-21c"></script>
+<script src="guiones.js?v=2026-09-21d"></script>
 <script>
 const D = window.GUIONES;
 const $ = s => document.querySelector(s);
@@ -498,7 +503,13 @@ function renderFijados(){
 /* perfil de Instagram: la propuesta sale de guiones.js; lo que se cambia se guarda encima */
 const P = D.perfil;
 const copia = o => JSON.parse(JSON.stringify(o));
-let perfil = Object.assign(copia(P ? P.base : {}), store.get('si-perfil', {}));
+/* versiones: cada una pisa sobre la base; lo que cambia la persona se guarda encima de la versión elegida */
+const VER = (P && P.versiones) || [];
+const verDe = v => VER.find(x => x.v === v) || VER[0];
+const datosDe = v => { const x = verDe(v); return Object.assign(copia(P ? P.base : {}), x ? copia(x.datos) : {}, x ? {version: x.v} : {}); };
+const cargarPerfil = o => Object.assign(datosDe((o || {}).version), o || {});
+const esOriginal = () => JSON.stringify(perfil) === JSON.stringify(datosDe(perfil.version));
+let perfil = cargarPerfil(store.get('si-perfil', {}));
 const LIM = {nombre: 30, bio: 150, usuario: 30};
 const largo = s => [...String(s || '')].length;
 const guardarPerfil = () => store.set('si-perfil', perfil);
@@ -506,7 +517,7 @@ function vistaPerfil(){
   const p = perfil;
   const hls = (p.destacadas || []).map(h => `<div class="ig-hl"><div class="c">${h.img ? `<div><img src="${h.img}" alt=""></div>` : `<div class="${h.fondo === 'hueso' ? 'hu' : 'az'}">${esc(h.letra)}</div>`}</div><div class="nm">${esc(h.nombre)}</div></div>`).join('');
   const fj = (p.fijados || []).map(t => `<div class="fj">${esc(t)}</div>`).join('') + '<div></div><div></div><div></div>';
-  return `<div class="ig-top">${esc(p.usuario)}<small>vista de ejemplo</small></div>
+  return `<div class="ig-top">${esc(p.usuario)}<small>${perfil.version ? 'versión ' + esc(perfil.version) : 'vista de ejemplo'}</small></div>
     <div class="ig-head"><div class="ig-av">SOLMI</div>
       <div class="ig-st"><div><b>${esc(p.posts)}</b>publicaciones</div><div><b>${esc(p.seguidores)}</b>seguidores</div><div><b>${esc(p.seguidos)}</b>seguidos</div></div></div>
     <div class="ig-bio"><div class="nm">${esc(p.nombre)}</div>${p.categoria ? `<div class="ct">${esc(p.categoria)}</div>` : ''}<div class="tx">${esc(p.bio)}</div>${p.link ? `<div class="lk">🔗 ${esc(p.link)}</div>` : ''}</div>
@@ -518,7 +529,8 @@ function vistaPerfil(){
 const cnt = (c, v) => LIM[c] ? `<p class="cnt${largo(v) > LIM[c] ? ' mal' : ''}" data-cnt="${c}">${largo(v)} / ${LIM[c]}</p>` : '';
 function editorPerfil(){
   const p = perfil, fld = (c, lab) => `<div class="sticky f"><label for="p-${c}">${lab}</label><input type="text" id="p-${c}" data-p="${c}" value="${esc(p[c])}">${cnt(c, p[c])}</div>`;
-  return `${fld('usuario', 'Usuario')}
+  return `${VER.length > 1 ? `<div class="sticky vers" style="border-top:0;padding-top:0"><h4>Versiones · elegí una</h4>${VER.map(x => `<button type="button" class="ver${x.v === perfil.version ? ' on' : ''}" data-ver="${x.v}"><b>${esc(x.v)} · ${esc(x.titulo)}${x.v === perfil.version ? ' · elegida' + (esOriginal() ? '' : ', con cambios tuyos') : ''}</b><span>${esc(x.porque)}</span></button>`).join('')}</div>` : ''}
+    ${fld('usuario', 'Usuario')}
     ${fld('nombre', 'Nombre · es lo que busca Instagram')}
     ${fld('categoria', 'Categoría')}
     <div class="sticky f"><label for="p-bio">Bio</label><textarea id="p-bio" data-p="bio" rows="5">${esc(p.bio)}</textarea>${cnt('bio', p.bio)}</div>
@@ -535,7 +547,7 @@ function editorPerfil(){
       </div>`).join('')}
       <div class="acc" style="margin-top:10px"><button type="button" class="btn" id="hlmas">+ Agregar destacada</button></div></div>
     <div class="sticky"><h4>Videos fijados</h4>${(p.fijados || []).map((t, i) => `<input type="text" data-fj="${i}" value="${esc(t)}" aria-label="Fijado ${i + 1}" style="margin-bottom:6px">`).join('')}</div>
-    <div class="sticky"><div class="acc"><button type="button" class="btn" id="preset">Volver a la propuesta</button></div></div>
+    <div class="sticky"><div class="acc"><button type="button" class="btn" id="preset">Deshacer mis cambios en esta versión</button></div></div>
     <input type="file" id="pfile" accept="image/*">`;
 }
 function renderPerfil(){
@@ -646,9 +658,17 @@ document.addEventListener('click', e => {
     perfil.destacadas.push({nombre: 'Nueva', letra: 'N', fondo: n % 2 ? 'hueso' : 'azul'});
     guardarPerfil(); refrescarVista(); refrescarEditor(); return;
   }
+  const vb = e.target.closest('[data-ver]');
+  if (vb){
+    const v = vb.dataset.ver;
+    if (v === perfil.version) return;
+    if (!esOriginal() && !confirm('¿Pasar a la versión ' + v + '? Los cambios que hiciste en la ' + perfil.version + ' se pierden.')) return;
+    perfil = datosDe(v); guardarPerfil(); refrescarVista(); refrescarEditor(); return;
+  }
   if (e.target.closest('#preset')){
-    if (!confirm('¿Volver al perfil propuesto? Se pierden los cambios que hiciste en el perfil (los guiones no se tocan).')) return;
-    perfil = copia(P.base); try { localStorage.removeItem('si-perfil'); } catch {}
+    if (esOriginal()) return;
+    if (!confirm('¿Deshacer los cambios que hiciste en la versión ' + perfil.version + '? Los guiones no se tocan.')) return;
+    perfil = datosDe(perfil.version); guardarPerfil();
     refrescarVista(); refrescarEditor(); return;
   }
   const rs = e.target.closest('[data-reset]');
@@ -725,8 +745,8 @@ function textoTodo(){
   });
   if (D.fijados){ L.push('== ' + D.fijados.titulo); D.fijados.items.forEach((it, j) => L.push(it.n + ' · ' + it.formato + ': ' + ((fijo[j] || '').trim() || '(sin notas)'))); L.push(''); }
   if (P){
-    const p = perfil, igual = JSON.stringify(p) === JSON.stringify(P.base);
-    L.push('== El perfil' + (igual ? ' (sin cambios, queda la propuesta)' : ''));
+    const p = perfil, igual = esOriginal(), x = verDe(p.version);
+    L.push('== El perfil · versión ' + (x ? x.v + ' «' + x.titulo + '»' : '') + (igual ? ' (tal cual)' : ' (con cambios tuyos)'));
     L.push('Usuario: ' + p.usuario, 'Nombre: ' + p.nombre, 'Categoría: ' + p.categoria, 'Bio:', p.bio, 'Link: ' + p.link);
     L.push('Destacadas: ' + (p.destacadas || []).map(h => h.nombre + (h.img ? ' (con imagen)' : ' (' + h.letra + ', ' + h.fondo + ')')).join(' · '));
     L.push('Fijados: ' + (p.fijados || []).join(' · '));
