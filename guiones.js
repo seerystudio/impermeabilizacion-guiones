@@ -1,4 +1,5 @@
-/* Guiones · Impermeabilización Elástica Solmi (21/09/2026, versión 2: recortados y aptos para publicidad).
+/* Guiones · Impermeabilización Elástica Solmi (21/09/2026, versión 2: recortados y aptos para publicidad;
+   22/09/2026: se suman la fila 05, la temporada del Niño, y los carruseles C4 y C5).
    Cada dato sale del folleto de la empresa, de lo que contestó en el formulario o de lo que dijo Víctor.
    Beat: [tiempo, quién, qué se ve, texto]. El texto se puede cambiar en la página; lo que va [entre corchetes]
    se completa en la obra con el dato real. */
@@ -6,6 +7,7 @@ window.GUIONES = {
   titulo: "Techos: los primeros videos y carruseles",
   intro: [
     "Todo apunta a impermeabilizar techos. Cada fila es uno de los cuatro formatos de la propuesta: a la izquierda, el video de ejemplo; a la derecha, sus guiones. Más abajo, los carruseles y el perfil.",
+    "Nuevo: la fila 05 y los carruseles C4 y C5 apuntan a la temporada del Niño. Conviene publicarlos antes de las tormentas fuertes.",
     "Cada pieza sirve también como anuncio: se entiende sin sonido, dice una sola cosa y termina en WhatsApp.",
     "Los textos se pueden cambiar: tocá cualquiera. Lo que cambiás queda en naranja y «Volver al original» lo deshace. Cuando termines, tocá «Enviar»."
   ],
@@ -22,7 +24,8 @@ window.GUIONES = {
     "Permiso para nombrar a Cementos Avellaneda, Editorial Perfil, Molinos Cañuelas y Multigranos.",
     "Las fotos originales: las del folleto miden 230 píxeles.",
     "Un papel que muestre el 1889.",
-    "La próxima obra para filmar."
+    "La próxima obra para filmar.",
+    "Las piezas del Niño: chequear el pronóstico del Servicio Meteorológico la semana que se publica cada una."
   ],
   refs: [
     {
@@ -321,15 +324,104 @@ window.GUIONES = {
           confirmar: "¿Tienen estas fotos en tamaño original?"
         }
       ]
+    },
+    {
+      n: 5, id: "DdUkouxAQVt",
+      formato: "La temporada del Niño",
+      resumen: "Tres piezas para las semanas antes de las tormentas: la noticia que todos vieron, llevada a qué hacer con el techo",
+      cuenta: "@kartonsec", datos: "19 me gusta · 15/09/2026",
+      titMec: "Qué tomamos y qué mejoramos",
+      tags: ["Noticia del clima", "Antes de las tormentas", "Algo para hacer hoy"],
+      mecanica: [
+        "Tomamos: la noticia del Niño como gancho. La gente ya la vio en el noticiero y la reconoce en un segundo.",
+        "Mejoramos el dato: Kartonsec dice que la ONU avisó que «será el más fuerte que se haya registrado». Eso no lo dijo nadie: la Organización Meteorológica Mundial habla de un Niño «fuerte». Nosotros citamos al Servicio Meteorológico Nacional y no inflamos.",
+        "Mejoramos el final: ellos cierran en su producto, con fotos de catálogo. Nosotros le damos al que mira algo para revisar hoy en su techo, con obras reales, y recién ahí el WhatsApp."
+      ],
+      guiones: [
+        {
+          v: "A", tipo: "Pieza animada · se publica ya",
+          titulo: "El Niño ya está acá. ¿Y tu techo?",
+          hooks: [
+            ["Pregunta inducida", "Seguro escuchaste que llegó el Niño. ¿Qué tiene que ver con tu techo?"],
+            ["Impacto visual", "[Placa] El mapa del pronóstico del Servicio Meteorológico, y encima un balde. Texto: «¿Y tu techo?»"],
+            ["Predicción", "Lo dijo el Servicio Meteorológico: el Niño sigue hasta el verano. Tu techo, ¿llega?", "Chequear el pronóstico vigente la semana que se publica."],
+            ["Contraste", "El pronóstico lo mirás todos los días. El techo, ¿cuándo lo miraste?"],
+            ["Advertencia", "Antes de la próxima tormenta, mirá arriba."],
+            ["Provocación", "El Niño no te va a avisar por dónde entra el agua."],
+            ["Contraste", "Arreglar el techo con sol, o con el balde abajo."],
+            ["Pregunta inducida", "¿Te acordás de la última tormenta fuerte? ¿Y de dónde pusiste el balde?"]
+          ],
+          angulo: "La noticia que todos vieron, llevada a una sola idea: el techo se arregla antes, con sol.",
+          dur: "≈18 s",
+          hook: { quien: "Voz", dice: "Seguro escuchaste que llegó el Niño. ¿Qué tiene que ver con tu techo?", placa: "El Niño y tu techo" },
+          beats: [
+            ["0:04", "Voz", "Placa: «Fuente: Servicio Meteorológico Nacional».", "El Servicio Meteorológico lo confirmó: el Niño está activo y sigue hasta el verano."],
+            ["0:09", "Voz", "Una mancha de humedad en un techo de obra.", "Con el Niño, en buena parte del país llueve más de lo normal. Y una tormenta fuerte encuentra cualquier fisura."],
+            ["0:14", "Voz", "Foto de una aplicación.", "Un techo se arregla con sol, no con el balde abajo."],
+            ["0:17", "Texto", "Placa final: logo y «Desde 1889».", "Impermeabilización Elástica Solmi. Desde 1889."]
+          ],
+          cta: "Revisalo antes de la próxima tormenta. Escribinos por WhatsApp.",
+          ojo: "Nada de «el más fuerte de la historia»: no lo dice ninguna fuente. Para San Pedro el pronóstico de primavera no marca más lluvia que lo normal (la señal fuerte es el Litoral y el sudoeste bonaerense), por eso dice «en buena parte del país» y no «en tu zona».",
+          confirmar: "¿El producto se puede aplicar con el techo húmedo, o necesitan días secos? Cambia el «con sol» del cierre."
+        },
+        {
+          v: "B", tipo: "Paso a paso en el techo · para guardar",
+          titulo: "Tres cosas que mirar en tu techo antes de la tormenta",
+          hooks: [
+            ["Lista", "Antes de la próxima tormenta, subí al techo y mirá estas tres cosas."],
+            ["Impacto visual", "[Sin hablar] Una mano saca un puñado de hojas mojadas de una canaleta. Corte a la cara, a cámara."],
+            ["Advertencia", "Si tu techo tiene alguna de estas tres, el Niño la va a encontrar."],
+            ["Pregunta inducida", "¿Sabés qué mirar en tu techo antes de que llueva fuerte?"],
+            ["Error", "Casi todos miran el techo recién cuando aparece la gotera."],
+            ["Secreto", "Por dónde entra el agua a un techo. No es por donde creés."],
+            ["Pregunta inducida", "¿Por dónde entra el agua cuando tu techo gotea?"],
+            ["Lista", "Canaleta, grietas y bordes. Revisalo hoy."]
+          ],
+          angulo: "Algo útil de verdad: el que mira sube a su techo con el video. Es el que se guarda y se manda.",
+          dur: "≈28 s",
+          hook: { quien: "Habla", dice: "Antes de la próxima tormenta, subí al techo y mirá estas tres cosas.", placa: "3 cosas para mirar en tu techo antes de la tormenta" },
+          beats: [
+            ["0:04", "Habla", "La canaleta con hojas, de cerca.", "Una: canaletas y desagües. Si están tapados, el agua se junta arriba y busca por dónde entrar."],
+            ["0:11", "Habla", "Una grieta en la losa, de cerca.", "Dos: grietas. Por más finas que sean, una tormenta fuerte las encuentra."],
+            ["0:17", "Habla", "Un borde de membrana levantado, o óxido en los tornillos de una chapa.", "Tres: bordes y uniones. Membrana que se levanta, o chapa oxidada alrededor de los tornillos."],
+            ["0:24", "Habla", "Vos en el techo, a cámara.", "Si encontraste alguna, arreglala ahora, antes de que llueva."]
+          ],
+          cta: "¿Encontraste una? Mandanos la foto por WhatsApp.",
+          confirmar: "¿Los tres puntos son los que ustedes revisarían primero? ¿Contestan si les mandan una foto? ¿Y quién habla?"
+        },
+        {
+          v: "C", tipo: "Obra con voz en off · galpones y chapa",
+          titulo: "Si guardás algo bajo un techo de chapa, esto es para vos",
+          hooks: [
+            ["Advertencia", "Si guardás algo bajo un techo de chapa, esto es para vos."],
+            ["Impacto visual", "[Sin hablar] Una gota que cae de un agujerito de óxido sobre una máquina, adentro de un galpón."],
+            ["Pregunta inducida", "¿Qué hay abajo de tu techo de chapa cuando llueve fuerte?"],
+            ["Contraste", "Lo que se moja no es el techo. Es lo que está abajo."],
+            ["Pregunta inducida", "¿Galpón, quincho o depósito con la chapa oxidada? Antes del Niño, mirá esto."],
+            ["Contracorriente", "Para llegar bien al verano no hace falta cambiar las chapas."]
+          ],
+          angulo: "La temporada de lluvia, contada desde lo que se pierde abajo del techo. Se une con «recuperar en vez de cambiar».",
+          dur: "≈22 s",
+          hook: { quien: "Voz", dice: "Si guardás algo bajo un techo de chapa, esto es para vos.", placa: "¿Qué hay abajo de tu techo de chapa?" },
+          beats: [
+            ["0:04", "Voz", "Óxido en los tornillos y en las uniones, de cerca.", "La chapa se oxida primero en los tornillos y en las uniones. Por ahí entra el agua."],
+            ["0:09", "Voz", "Adentro del galpón: lo que se guarda abajo.", "Con el Niño, lo que se moja no es el techo: es lo que tenés abajo."],
+            ["0:14", "Voz", "Antes y después de chapa, del folleto.", "Frenamos el óxido y lo protegemos con plastificación elástica. Sin cambiar las chapas."],
+            ["0:20", "Texto", "Placa final: logo y «Desde 1889».", "Impermeabilización Elástica Solmi. Desde 1889."]
+          ],
+          cta: "¿Tu techo de chapa está así? Escribinos por WhatsApp.",
+          confirmar: "¿Trabajan galpones de campo y depósitos, además de silos y fábricas? ¿Se puede filmar adentro de uno?"
+        }
+      ]
     }
   ]
 };
 
 /* Carruseles: cada lámina es [título, bajada, foto (opcional)]. Las fotos salen del folleto (p. 4 y 10). */
 window.GUIONES.carruseles = {
-  n: 5,
+  n: 6,
   titulo: "Carruseles",
-  resumen: "Tres para arrancar. Cada lámina se puede cambiar",
+  resumen: "Tres para arrancar y dos para la temporada del Niño. Cada lámina se puede cambiar",
   items: [
     {
       k: "C1", tipo: "Presentación",
@@ -379,6 +471,39 @@ window.GUIONES.carruseles = {
       ],
       caption: "Losa, chapa o membrana vieja: los tres se arreglan sin romper el techo. Escribinos por WhatsApp.",
       confirmar: "¿Los tres arreglos se pueden explicar así?"
+    },
+    {
+      k: "C4", tipo: "El Niño · para guardar",
+      titulo: "El Niño ya está acá: cinco cosas para mirar en tu techo",
+      angulo: "El «Llega el Niño» de Kartonsec, pero con algo para hacer en cada lámina. Es el que se guarda y se manda.",
+      laminas: [
+        ["El Niño ya está acá. ¿Tu techo?", "Cinco cosas para mirar hoy, antes de la próxima tormenta."],
+        ["Qué es el Niño, en una línea", "El Pacífico más caliente de lo normal cambia las lluvias en Sudamérica. El Servicio Meteorológico lo da activo hasta el verano."],
+        ["1 · Canaletas y desagües", "Sacales hojas y tierra. Tapados, el agua se junta arriba."],
+        ["2 · Grietas", "Por más finas que sean, una tormenta fuerte las encuentra."],
+        ["3 · Membrana", "Bordes levantados, globos o capas arriba de capas: por ahí entra."],
+        ["4 · Chapa", "Óxido alrededor de los tornillos y en las uniones.", "chapa-2-antes"],
+        ["5 · Adentro", "Manchas o pintura inflada en el cielorraso o arriba de las paredes: el agua ya está entrando."],
+        ["¿Encontraste alguna?", "Mandanos la foto por WhatsApp. El techo se arregla antes de que llueva."]
+      ],
+      caption: "El Niño está activo y, según el Servicio Meteorológico Nacional, sigue hasta el verano. Antes de la próxima tormenta, mirá estas cinco cosas en tu techo. Guardalo para tenerlo a mano y, si encontrás alguna, mandanos la foto por WhatsApp.",
+      confirmar: "¿Los cinco puntos los firmarían ustedes? ¿Contestan si les mandan una foto?"
+    },
+    {
+      k: "C5", tipo: "El Niño · creencias",
+      titulo: "Cuatro frases que se dicen antes de las lluvias",
+      angulo: "Cada lámina es algo que el que mira ya dijo. La respuesta sale del folleto, sin prometer de más.",
+      laminas: [
+        ["Cuatro frases que se escuchan antes de las lluvias", "Y lo que pasa en el techo."],
+        ["«Si no gotea, está bien»", "La humedad avanza antes de que caiga la primera gota. Cuando gotea, ya viene de antes."],
+        ["«Le pongo otra membrana y listo»", "Las capas se acumulan y el agua sigue entrando. No hace falta sacarlas: se repara la última y se protege."],
+        ["«La chapa oxidada hay que cambiarla»", "Se repara, se frena el óxido y se protege. Sin cambiar las chapas.", "chapa-3-antes"],
+        ["Así queda", "La misma chapa.", "chapa-3-despues"],
+        ["«Lo arreglo cuando pare de llover»", "Con el Niño activo hasta el verano, el momento de arreglarlo es ahora, con sol."],
+        ["¿Dijiste alguna?", "Escribinos por WhatsApp."]
+      ],
+      caption: "Si no gotea, está bien. Le pongo otra membrana y listo. Lo arreglo cuando pare de llover. Antes del Niño, cuatro frases que conviene revisar. Escribinos por WhatsApp.",
+      confirmar: "¿«La humedad avanza antes de que gotee» se puede decir así? ¿Y lo de las membranas y la chapa, igual que en el folleto?"
     }
   ]
 };

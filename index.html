@@ -358,7 +358,7 @@ body.list .car{width:auto}
     <button id="bTxt">Descargar como texto</button>
   </div>
   <div class="resp">
-    <p>Lo escrito vive solo en este dispositivo. Si vas a seguir otro día o en otro aparato, bajate un respaldo y cargalo después.</p>
+    <p id="dlgresp">Lo escrito vive solo en este dispositivo. Si vas a seguir otro día o en otro aparato, bajate un respaldo y cargalo después.</p>
     <div class="btns">
       <button id="bBak">Bajar respaldo</button>
       <button id="bLoad">Cargar respaldo</button>
@@ -370,19 +370,24 @@ body.list .car{width:auto}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="alerta" id="alerta" hidden>Este navegador no está guardando lo que escribís (puede ser una ventana privada). Antes de cerrar, tocá «Enviar» o bajate un respaldo.</div>
 
-<script src="guiones.js?v=2026-09-21d"></script>
+<script src="guiones.js?v=2026-09-22b"></script>
 <script>
 const D = window.GUIONES;
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 /* guardado: todo en localStorage de este navegador, con prefijo «si-»: el tablero de Solmi & Asociados
-   vive en el mismo dominio (seerystudio.github.io) y usa «sv-». Si falla, se avisa en vez de callarse. */
+   vive en el mismo dominio (seerystudio.github.io) y usa «sv-». Si hay NUBE, también en la planilla de Google
+   (el mismo script que el de Asociados, con otro nombre de tablero). Si falla, se avisa en vez de callarse. */
+const NUBE = 'https://script.google.com/macros/s/AKfycbxgjYt2q3iZXebWQTGmeCoIkdg6bAyGNUPSIwTy47F43D51ED09QDCZU1WNqTMlQp31qw/exec', TABLERO = 'impermeabilizacion';
+const CLAVES = ['si-ed', 'si-fijo', 'si-conf', 'si-hkx', 'si-perfil'];
+const DONDE = NUBE ? 'Guardado' : 'Guardado en este dispositivo';
 let tToast;
-function avisarGuardado(){
+const hora = (h = new Date()) => String(h.getHours()).padStart(2,'0') + ':' + String(h.getMinutes()).padStart(2,'0');
+function toast(txt, ms = 1600){
   const t = $('#toast'); if (!t) return;
-  const h = new Date(); t.textContent = 'Guardado en este dispositivo · ' + String(h.getHours()).padStart(2,'0') + ':' + String(h.getMinutes()).padStart(2,'0');
-  t.classList.add('on'); clearTimeout(tToast); tToast = setTimeout(() => t.classList.remove('on'), 1600);
+  t.textContent = txt; t.classList.add('on'); clearTimeout(tToast); tToast = setTimeout(() => t.classList.remove('on'), ms);
 }
+const avisarGuardado = () => toast(DONDE + ' · ' + hora());
 function alertaGuardado(){ const a = $('#alerta'); if (a) a.hidden = false; }
 let pidioPersistir = false;
 const store = {
@@ -390,12 +395,62 @@ const store = {
   set(k, v, callado){
     try { localStorage.setItem(k, JSON.stringify(v)); }
     catch { alertaGuardado(); return false; }
+    if (CLAVES.includes(k)) marcarCambio();
     if (!callado) avisarGuardado();
     if (!pidioPersistir && navigator.storage && navigator.storage.persist){ pidioPersistir = true; navigator.storage.persist().catch(() => {}); }
     return true;
   }
 };
 try { localStorage.setItem('si-test', '1'); localStorage.removeItem('si-test'); } catch { addEventListener('DOMContentLoaded', alertaGuardado); setTimeout(alertaGuardado, 0); }
+/* nube: cada cambio se sube a la planilla un segundo y medio después de la última tecla. Al abrir, si la
+   planilla tiene algo más nuevo que este dispositivo (lo escribió en otro aparato), se trae eso. */
+const leerN = k => { try { return Number(localStorage.getItem(k)) || 0; } catch { return 0; } };
+const anotarN = (k, n) => { try { localStorage.setItem(k, String(n)); } catch {} };
+let tSubir, subiendo = false, huboCambio = false;
+function marcarCambio(){
+  /* nunca para atrás: si el reloj de otro aparato iba adelantado, el cambio de acá igual queda como el último */
+  huboCambio = true; anotarN('si-cambio', Math.max(Date.now(), leerN('si-cambio') + 1));
+  if (NUBE){ clearTimeout(tSubir); tSubir = setTimeout(subir, 1500); }
+}
+function estadoLocal(){ const o = {}; CLAVES.forEach(k => { const v = store.get(k, null); if (v !== null) o[k] = v; }); return o; }
+async function subir(keep){
+  if (!NUBE) return;
+  const fecha = leerN('si-cambio');
+  if (!fecha || fecha <= leerN('si-subido')) return;
+  if (subiendo && !keep){ clearTimeout(tSubir); tSubir = setTimeout(subir, 1500); return; }
+  subiendo = true;
+  try {
+    const r = await fetch(NUBE, {method: 'POST', keepalive: !!keep, body: JSON.stringify({t: TABLERO, fecha, estado: estadoLocal(), filas: filasTodo()})});
+    const o = await r.json();
+    if (!o.ok) throw 0;
+    anotarN('si-subido', fecha);
+    if (!keep) toast('Guardado en la nube · ' + hora());
+  } catch {
+    if (!keep) toast('Sin conexión: quedó en este dispositivo y se sube solo cuando vuelva', 3500);
+  } finally { subiendo = false; }
+}
+async function bajar(){
+  if (!NUBE) return;
+  try {
+    const o = await (await fetch(NUBE + '?t=' + encodeURIComponent(TABLERO))).json();
+    if (!o.ok) return;
+    if (o.estado && o.fecha > leerN('si-cambio') && !huboCambio){
+      CLAVES.forEach(k => { if (k in o.estado) localStorage.setItem(k, JSON.stringify(o.estado[k])); else localStorage.removeItem(k); });
+      anotarN('si-cambio', o.fecha); anotarN('si-subido', o.fecha);
+      ed = store.get('si-ed', {}); fijo = store.get('si-fijo', {}); conf = store.get('si-conf', {}); hkx = store.get('si-hkx', {});
+      perfil = cargarPerfil(store.get('si-perfil', {}));
+      render(); limpiarEd(); requestAnimationFrame(altos); if (!document.body.classList.contains('list')) apply();
+      toast('Traje lo último que escribiste · ' + hora(new Date(o.fecha)), 2500);
+    } else {
+      /* lo escrito antes de que existiera la nube no tiene fecha de cambio: se sube igual */
+      if (!o.estado && !leerN('si-cambio') && Object.keys(estadoLocal()).length) anotarN('si-cambio', Date.now());
+      subir();
+    }
+  } catch {}
+}
+addEventListener('online', () => subir());
+addEventListener('pagehide', () => subir(true));
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') subir(true); });
 let ed = store.get('si-ed', {});     /* textos cambiados: clave → texto nuevo */
 let fijo = store.get('si-fijo', {});
 let conf = store.get('si-conf', {});
@@ -453,7 +508,7 @@ function renderRef(r){
     <div class="vid" data-embed="${r.id}"><div class="ph"><button type="button">▶ Ver el ejemplo</button><a href="https://www.instagram.com/reel/${r.id}/" target="_blank" rel="noopener">abrir en Instagram ↗</a></div></div>
     <div class="who">${r.cuenta ? `<b>${esc(r.cuenta)}</b> · ` : ''}${esc(r.datos || '')}</div>
     <div class="kv">${(r.tags || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
-    <div class="sticky"><h4>Por qué funciona</h4><ol>${r.mecanica.map(m => `<li>${esc(m)}</li>`).join('')}</ol></div>
+    <div class="sticky"><h4>${esc(r.titMec || 'Por qué funciona')}</h4><ol>${r.mecanica.map(m => `<li>${esc(m)}</li>`).join('')}</ol></div>
   </aside>`;
 }
 
@@ -496,7 +551,7 @@ function renderFijados(){
       <div class="sticky"><h4>Guion</h4><p>${esc(it.pide)}</p></div>
       <div class="sticky"><h4>Tus notas</h4>
         <textarea data-f="${j}" rows="4" aria-label="Notas sobre el fijado ${esc(it.n)}" placeholder="Escribí lo que se te ocurra: qué dirías, qué cambiarías…">${esc(fijo[j] || '')}</textarea>
-        <p class="guardado" data-fg="${j}">${(fijo[j] || '').trim() ? 'Guardado en este dispositivo ✓' : ''}</p></div>
+        <p class="guardado" data-fg="${j}">${(fijo[j] || '').trim() ? DONDE + ' ✓' : ''}</p></div>
     </aside>`).join('')}
   </section>`;
 }
@@ -598,7 +653,8 @@ const altos = () => document.querySelectorAll('textarea[data-e]').forEach(alto);
 render();
 requestAnimationFrame(altos); addEventListener('load', altos); addEventListener('resize', altos);
 /* si un texto guardado quedó igual al original (o el original cambió), se limpia */
-Object.keys(ed).forEach(k => { if (!(k in ORIG) || ed[k] === ORIG[k]) delete ed[k]; });
+const limpiarEd = () => Object.keys(ed).forEach(k => { if (!(k in ORIG) || ed[k] === ORIG[k]) delete ed[k]; });
+limpiarEd();
 
 function marcarCont(pre){
   const n = cambiosDe(pre), el = document.querySelector(`[data-cont="${pre}"]`);
@@ -623,7 +679,7 @@ document.addEventListener('input', e => {
     const j = tf.dataset.f;
     if (tf.value.trim()) fijo[j] = tf.value; else delete fijo[j];
     store.set('si-fijo', fijo);
-    document.querySelector(`[data-fg="${j}"]`).textContent = tf.value.trim() ? 'Guardado en este dispositivo ✓' : '';
+    document.querySelector(`[data-fg="${j}"]`).textContent = tf.value.trim() ? DONDE + ' ✓' : '';
     return;
   }
   const ta = e.target.closest && e.target.closest('textarea[data-e]');
@@ -753,8 +809,38 @@ function textoTodo(){
   }
   return L.join('\n');
 }
+/* lo mismo, en filas para la planilla: [sección, qué, texto]. Lo cambiado lleva «✎» en «qué». */
+function filasTodo(){
+  const F = [], cambio = k => k in ed && ed[k] !== ORIG[k] ? ' ✎' : '';
+  D.refs.forEach(r => r.guiones.forEach(g => {
+    const key = r.n + g.v, sec = String(r.n).padStart(2,'0') + g.v + ' · ' + g.titulo;
+    const el = g.hooks ? elegido(key, g) : null;
+    F.push([sec, 'Arranque' + (el ? ' elegido' : ''), el || g.hook.dice + (g.hooks ? ' (el propuesto)' : '')]);
+    (hkx[key] || []).forEach(t => F.push([sec, 'Arranque propio', t]));
+    g.beats.forEach((b, i) => F.push([sec, b[0] + ' · ' + b[1] + cambio(key + '|b' + i), val(key + '|b' + i)]));
+    F.push([sec, 'Cierre' + cambio(key + '|cta'), val(key + '|cta')]);
+    if (g.confirmar) F.push([sec, 'Confirmar: ' + g.confirmar, conf[key] || '']);
+  }));
+  if (D.carruseles) D.carruseles.items.forEach(it => {
+    const sec = 'Carrusel ' + it.k + ' · ' + it.titulo;
+    it.laminas.forEach((l, i) => {
+      const kt = it.k + '|l' + i + 't', kb = it.k + '|l' + i + 'b';
+      F.push([sec, 'Lámina ' + (i + 1) + (cambio(kt) || cambio(kb)), val(kt) + (val(kb) ? ' — ' + val(kb) : '')]);
+    });
+    F.push([sec, 'Texto de la publicación' + cambio(it.k + '|cap'), val(it.k + '|cap')]);
+    if (it.confirmar) F.push([sec, 'Confirmar: ' + it.confirmar, conf[it.k] || '']);
+  });
+  if (D.fijados) D.fijados.items.forEach((it, j) => F.push(['★ Fijado ' + it.n + ' · ' + it.formato, 'Notas', (fijo[j] || '').trim()]));
+  if (P){
+    const p = perfil, x = verDe(p.version) || {};
+    F.push(['Perfil', 'Versión', (x.v || '') + ' · ' + (x.titulo || '') + (esOriginal() ? '' : ' (con cambios)')]);
+    [['Usuario', p.usuario], ['Nombre', p.nombre], ['Categoría', p.categoria], ['Bio', p.bio], ['Link', p.link]].forEach(([q, v]) => F.push(['Perfil', q, v || '']));
+    F.push(['Perfil', 'Destacadas', (p.destacadas || []).map(h => h.nombre).join(' · ')]);
+    F.push(['Perfil', 'Fijados', (p.fijados || []).join(' · ')]);
+  }
+  return F;
+}
 /* respaldo: todo lo guardado en un .json que se puede volver a cargar */
-const CLAVES = ['si-ed', 'si-fijo', 'si-conf', 'si-hkx', 'si-perfil'];
 $('#bBak').onclick = () => {
   const o = {pagina: 'impermeabilizacion-guiones', fecha: new Date().toISOString()};
   CLAVES.forEach(k => { const v = store.get(k, null); if (v !== null) o[k] = v; });
@@ -770,6 +856,7 @@ $('#fLoad').onchange = async e => {
   if (!confirm('¿Cargar el respaldo del ' + String(o.fecha || '').slice(0, 10) + '? Reemplaza lo que hay ahora en este dispositivo.')) return;
   try { CLAVES.forEach(k => { if (k in o) localStorage.setItem(k, JSON.stringify(o[k])); else localStorage.removeItem(k); }); }
   catch { alertaGuardado(); return; }
+  anotarN('si-cambio', Math.max(Date.now(), leerN('si-cambio') + 1)); anotarN('si-subido', 0);
   location.reload();
 };
 $('#enviar').onclick = () => {
@@ -853,6 +940,8 @@ $('#mBoard').onclick = () => setMode('board');
 $('#mList').onclick = () => setMode('list');
 setMode(store.get('si-mode', innerWidth < 900 ? 'list' : 'board'));
 apply();
+if (NUBE) $('#dlgresp').textContent = 'Lo escrito se guarda en una planilla nuestra: si abrís esta página en otro aparato, aparece lo último. El respaldo queda por las dudas.';
+bajar();
 </script>
 </body>
 </html>
