@@ -1,31 +1,34 @@
 /* Guiones · Impermeabilización Elástica Solmi (21/09/2026, versión 2: recortados y aptos para publicidad;
-   22/09/2026: se suman la fila 05, la temporada del Niño, y los carruseles C4 y C5).
-   Cada dato sale del folleto de la empresa, de lo que contestó en el formulario o de lo que dijo Víctor.
-   Beat: [tiempo, quién, qué se ve, texto]. El texto se puede cambiar en la página; lo que va [entre corchetes]
-   se completa en la obra con el dato real. */
+   22/09/2026: se suman la fila 05, la temporada del Niño, y los carruseles C4 y C5;
+   23/09/2026: se arranca con carruseles y videos animados. Los guiones de video pasan a carrusel, se suman carruseles
+   de los videos de YouTube de la empresa, y entran la estrategia, el calendario y la pauta).
+   Cada dato sale de los folletos de la empresa (2013 y 2018), de sus videos, de lo que contestó en el formulario o de lo
+   que dijo Víctor. Beat: [tiempo, quién, qué se ve, texto]. El texto se puede cambiar en la página; lo que va
+   [entre corchetes] se completa en la obra con el dato real. */
 window.GUIONES = {
-  titulo: "Techos: los primeros videos y carruseles",
+  titulo: "Techos: carruseles, videos animados y estrategia",
   intro: [
-    "Todo apunta a impermeabilizar techos. Cada fila es uno de los cuatro formatos de la propuesta: a la izquierda, el video de ejemplo; a la derecha, sus guiones. Más abajo, los carruseles y el perfil.",
-    "Nuevo: la fila 05 y los carruseles C4 y C5 apuntan a la temporada del Niño. Conviene publicarlos antes de las tormentas fuertes.",
-    "Cada pieza sirve también como anuncio: se entiende sin sonido, dice una sola cosa y termina en WhatsApp.",
-    "Los textos se pueden cambiar: tocá cualquiera. Lo que cambiás queda en naranja y «Volver al original» lo deshace. Cuando termines, tocá «Enviar»."
+    "Arrancamos con carruseles y videos animados: por ahora no hace falta filmar. Son dos publicaciones por semana, en dos estrategias, una para empresas y otra para particulares.",
+    "De arriba abajo: la estrategia, el calendario de ocho semanas, la pauta, el perfil, los tres fijados y los carruseles de cada estrategia. Después, los videos de YouTube de ustedes, de donde salen varios carruseles, y al final los guiones de video, para cuando se filme.",
+    "Lo del Niño va en el primer mes: conviene publicarlo antes de las tormentas fuertes.",
+    "Los textos se pueden cambiar: tocá cualquiera. Lo que cambiás queda en naranja y «Volver al original» lo deshace. En cada carrusel podés elegir la portada. Cuando termines, tocá «Enviar»."
   ],
   reglas: [
     "Sin precios.",
     "Se habla de la membrana como método, nunca de otra empresa.",
     "Ni plazos ni garantías hasta que Solmi los defina.",
     "Cómo actúa el producto lo confirma Solmi antes de publicar.",
-    "Entre 15 y 35 segundos, con el texto en pantalla."
+    "Nada inventado: cada frase sale de los folletos, de los videos de ustedes o de lo que nos dijeron."
   ],
   falta: [
-    "Quién habla a cámara en los formatos 01 y 02.",
-    "El WhatsApp que se publica: el 7352 es el mismo del estudio jurídico.",
-    "Permiso para nombrar a Cementos Avellaneda, Editorial Perfil, Molinos Cañuelas y Multigranos.",
-    "Las fotos originales: las del folleto miden 230 píxeles.",
+    "El WhatsApp que se publica: el 7352 es el mismo del estudio jurídico. Los videos de YouTube publican el 7351: ¿es ese?",
+    "La cuenta publicitaria de Meta a nombre de Solmi, para la pauta.",
+    "El OK a lo que dice cada carrusel en «Confirmanos».",
     "Un papel que muestre el 1889.",
-    "La próxima obra para filmar.",
-    "Las piezas del Niño: chequear el pronóstico del Servicio Meteorológico la semana que se publica cada una."
+    "Permiso para nombrar a Cementos Avellaneda, Editorial Perfil, Molinos Cañuelas y Multigranos.",
+    "Las fotos originales (las del folleto miden 230 píxeles) y, si están, los videos originales.",
+    "Una foto actual del lugar y una de un techo terminado.",
+    "Lo del Niño: chequear el pronóstico del Servicio Meteorológico la semana que se publica cada pieza."
   ],
   refs: [
     {
@@ -417,130 +420,383 @@ window.GUIONES = {
   ]
 };
 
-/* Carruseles: cada lámina es [título, bajada, foto (opcional)]. Las fotos salen del folleto (p. 4 y 10). */
-window.GUIONES.carruseles = {
-  n: 6,
-  titulo: "Carruseles",
-  resumen: "Tres para arrancar y dos para la temporada del Niño. Cada lámina se puede cambiar",
-  items: [
-    {
-      k: "C1", tipo: "Presentación",
-      titulo: "Quiénes somos",
-      angulo: "Para el que llega al perfil o al anuncio y quiere saber con quién habla.",
-      laminas: [
-        ["Impermeabilización Elástica Solmi", "Impermeabilizamos techos. Desde 1889."],
-        ["Desde 1889", "En San Pedro, donde la familia tenía una herrería de carruajes. Seis generaciones después, seguimos en el mismo lugar."],
-        ["El producto es nuestro", "Lo fabricamos y lo aplicamos nosotros. Sin intermediarios."],
-        ["Sin romper el techo", "Entra mojándolo, como el agua, y lo sella por dentro. Sin albañiles, sin polvo, sin membrana."],
-        ["Qué hacemos", "Impermeabilizamos techos y terrazas. Recuperamos techos de chapa y membranas viejas."],
-        ["En todo el país", "De Jujuy a Mar del Plata: fábricas, hoteles, edificios y casas.", "molinos-canuelas"],
-        ["¿Humedad en el techo?", "Escribinos por WhatsApp."]
-      ],
-      caption: "Impermeabilización Elástica Solmi. Desde 1889, la misma familia en San Pedro. Fabricamos nuestro producto y lo aplicamos en todo el país. Escribinos por WhatsApp.",
-      confirmar: "¿Se puede publicar así cómo actúa el producto?"
-    },
-    {
-      k: "C2", tipo: "Fotos de obra",
-      titulo: "Dónde trabajamos",
-      angulo: "Una foto por lámina: la prueba de todo lo demás.",
-      laminas: [
-        ["Dónde trabajamos", "Impermeabilización Elástica Solmi · desde 1889", "cementos-avellaneda"],
-        ["Cementos Avellaneda", "Impermeabilización en altura.", "cementos-avellaneda"],
-        ["Editorial Perfil", "Terraza.", "editorial-perfil"],
-        ["Molinos Cañuelas", "Silos.", "molinos-canuelas"],
-        ["Multigranos", "Techo de silos.", "multigranos-silos"],
-        ["Techo de chapa · antes", "", "chapa-1-antes"],
-        ["Después", "Recuperado, sin cambiar las chapas.", "chapa-1-despues"],
-        ["Techo de chapa · antes", "", "chapa-3-antes"],
-        ["Después", "", "chapa-3-despues"],
-        ["¿Tu techo es el próximo?", "Escribinos por WhatsApp."]
-      ],
-      caption: "Fábricas, silos, terrazas y techos de chapa, en todo el país. Escribinos por WhatsApp.",
-      confirmar: "¿Se puede nombrar a estos cuatro clientes? ¿Tienen las fotos en tamaño original?"
-    },
-    {
-      k: "C3", tipo: "La técnica, simple",
-      titulo: "Tres techos que se arreglan sin romperlos",
-      angulo: "Cada uno reconoce su techo en una lámina.",
-      laminas: [
-        ["¿Tu techo tiene humedad?", "Tres techos, tres arreglos. Ninguno lo rompe."],
-        ["Losa o terraza", "El producto entra mojándolo, como el agua, y lo sella por dentro."],
-        ["Chapa oxidada", "Se repara, se frena el óxido y se protege. Sin cambiar las chapas.", "chapa-2-antes"],
-        ["Capas de membrana", "No hace falta sacarlas: se repara la última y se protege."],
-        ["¿Cuál es el tuyo?", "Escribinos por WhatsApp."]
-      ],
-      caption: "Losa, chapa o membrana vieja: los tres se arreglan sin romper el techo. Escribinos por WhatsApp.",
-      confirmar: "¿Los tres arreglos se pueden explicar así?"
-    },
-    {
-      k: "C4", tipo: "El Niño · para guardar",
-      titulo: "El Niño ya está acá: cinco cosas para mirar en tu techo",
-      angulo: "El «Llega el Niño» de Kartonsec, pero con algo para hacer en cada lámina. Es el que se guarda y se manda.",
-      laminas: [
-        ["El Niño ya está acá. ¿Tu techo?", "Cinco cosas para mirar hoy, antes de la próxima tormenta."],
-        ["Qué es el Niño, en una línea", "El Pacífico más caliente de lo normal cambia las lluvias en Sudamérica. El Servicio Meteorológico lo da activo hasta el verano."],
-        ["1 · Canaletas y desagües", "Sacales hojas y tierra. Tapados, el agua se junta arriba."],
-        ["2 · Grietas", "Por más finas que sean, una tormenta fuerte las encuentra."],
-        ["3 · Membrana", "Bordes levantados, globos o capas arriba de capas: por ahí entra."],
-        ["4 · Chapa", "Óxido alrededor de los tornillos y en las uniones.", "chapa-2-antes"],
-        ["5 · Adentro", "Manchas o pintura inflada en el cielorraso o arriba de las paredes: el agua ya está entrando."],
-        ["¿Encontraste alguna?", "Mandanos la foto por WhatsApp. El techo se arregla antes de que llueva."]
-      ],
-      caption: "El Niño está activo y, según el Servicio Meteorológico Nacional, sigue hasta el verano. Antes de la próxima tormenta, mirá estas cinco cosas en tu techo. Guardalo para tenerlo a mano y, si encontrás alguna, mandanos la foto por WhatsApp.",
-      confirmar: "¿Los cinco puntos los firmarían ustedes? ¿Contestan si les mandan una foto?"
-    },
-    {
-      k: "C5", tipo: "El Niño · creencias",
-      titulo: "Cuatro frases que se dicen antes de las lluvias",
-      angulo: "Cada lámina es algo que el que mira ya dijo. La respuesta sale del folleto, sin prometer de más.",
-      laminas: [
-        ["Cuatro frases que se escuchan antes de las lluvias", "Y lo que pasa en el techo."],
-        ["«Si no gotea, está bien»", "La humedad avanza antes de que caiga la primera gota. Cuando gotea, ya viene de antes."],
-        ["«Le pongo otra membrana y listo»", "Las capas se acumulan y el agua sigue entrando. No hace falta sacarlas: se repara la última y se protege."],
-        ["«La chapa oxidada hay que cambiarla»", "Se repara, se frena el óxido y se protege. Sin cambiar las chapas.", "chapa-3-antes"],
-        ["Así queda", "La misma chapa.", "chapa-3-despues"],
-        ["«Lo arreglo cuando pare de llover»", "Con el Niño activo hasta el verano, el momento de arreglarlo es ahora, con sol."],
-        ["¿Dijiste alguna?", "Escribinos por WhatsApp."]
-      ],
-      caption: "Si no gotea, está bien. Le pongo otra membrana y listo. Lo arreglo cuando pare de llover. Antes del Niño, cuatro frases que conviene revisar. Escribinos por WhatsApp.",
-      confirmar: "¿«La humedad avanza antes de que gotee» se puede decir así? ¿Y lo de las membranas y la chapa, igual que en el folleto?"
-    }
+/* 23/09/2026 · se arranca con carruseles y videos animados, dos publicaciones por semana, en dos estrategias.
+   Los guiones de video de arriba quedan para cuando se filme; sus ideas pasaron a carrusel.
+   Cada lámina: {t: título, b: bajada, foto: foto del folleto (o [antes, después]), img: qué imagen va, yt: [video, segundo], f: de dónde sale}.
+   Vale lo mismo que en todo el tablero: nada inventado; lo que depende de Solmi va en «Confirmanos». */
+const SOLMI_YT = {A: 'll7fdX5Ntco', B: '9ZQBr8aMLAg', C: 'llcor5tzM7M', D: '5qr3om-G8BE'};
+
+window.GUIONES.estrategia = {
+  titulo: "Dos estrategias: empresas y particulares",
+  resumen: "El mismo perfil, dos públicos. Los tres fijados sirven a los dos",
+  decisiones: [
+    "Se arranca con carruseles y videos animados: por ahora no se filma nada.",
+    "Los guiones de video pasan a carrusel, y los tres fijados también. Se suman carruseles hechos con los videos de YouTube de la empresa.",
+    "Dos estrategias, empresas y particulares, con carruseles para la temporada del Niño.",
+    "Dos publicaciones por semana y $150.000 de pauta."
+  ],
+  confirmar: [
+    {k: "est-frec", q: "Dos publicaciones por semana en total en la cuenta, no dos por estrategia."},
+    {k: "est-pauta", q: "Los $150.000 de pauta son por mes."},
+    {k: "est-cons", q: "Los administradores de consorcio van con empresas: deciden con presupuestos y asamblea."}
+  ],
+  cols: [
+    {k: "PAR", nombre: "Particulares", filas: [
+      ["A quién", "La dueña de casa con goteras (Sandra, en la propuesta)."],
+      ["Qué le pasa", "Tiene goteras y ya se lo arreglaron una vez y volvió. La frena que le rompan todo."],
+      ["Cómo llega", "Ve una publicación y escribe."],
+      ["Qué necesita ver", "Por qué volvió a filtrar, qué mirar antes de la tormenta y la prueba de que no se rompe nada."],
+      ["Cómo se le habla", "El problema adelante, con su palabra: humedad. Se le muestra, no se le promete: ya le prometieron antes."],
+      ["El Niño", "Abre la puerta: la noticia que todos vieron, llevada a algo para revisar hoy en el techo. Con el dato del Servicio Meteorológico, sin «en tu zona» ni «el más fuerte de la historia»."],
+      ["Publicaciones", "El Niño en video (V1) · P1 · P2 · Y2 · Y1 · P4 · P3 · La humedad no avisa (V3)"],
+      ["Cierre", "«Mandanos la foto por WhatsApp» o «Escribinos por WhatsApp»."],
+      ["Pauta", "$100.000"],
+      ["Qué se mide", "Cuántos escriben por WhatsApp y cuántos mandan la foto del techo. Guardados y envíos: P1 y P2 son para guardar."]
+    ]},
+    {k: "EMP", nombre: "Empresas", filas: [
+      ["A quién", "El que tiene un galpón, un depósito o una planta; el jefe de mantenimiento (Marcelo, en la propuesta); el administrador de consorcio."],
+      ["Qué le pasa", "Chapa oxidada y filtraciones sobre lo que guarda. Parar una planta cuesta plata: lo que más lo frena es la obra, no el precio."],
+      ["Cómo llega", "Casi siempre le pasan el nombre y lo busca antes de llamar. Los de galpón y los de consorcio sí escriben."],
+      ["Qué necesita ver", "Que existen desde 1889 y trabajaron en plantas, que la chapa se recupera sin cambiarla y que el trabajo es llave en mano."],
+      ["Cómo se le habla", "Con el argumento económico del folleto: se recupera la chapa y se evita el costo de chapas nuevas y la mano de obra de cambiar un techo. Sin precios."],
+      ["El Niño", "Entra por lo que se moja abajo del techo (E1)."],
+      ["Publicaciones", "E1 · Y3 · No cambies el techo de chapa en video (V2) · E3 · E2. Y el plastificado (Y5, Y6) cuando lo definamos."],
+      ["Cierre", "«Escribinos por WhatsApp». Para este público también puede servir el mail: lo definimos juntos."],
+      ["Pauta", "$50.000"],
+      ["Qué se mide", "Cuántos escriben, cuántos miran el perfil y cuántos terminan en visita o presupuesto. Para el que busca el nombre, la ficha de Google pesa tanto como las publicaciones."]
+    ]}
   ]
 };
 
-window.GUIONES.fijados = {
-  titulo: "Importante · los 3 videos fijados",
-  resumen: "Van arriba de todo en el perfil, para el que quiere saber quiénes son antes de escribir",
+window.GUIONES.calendario = {
+  titulo: "Calendario · ocho semanas, dos por semana",
+  resumen: "La semana 1 es la semana en que se abre la cuenta. Dos días fijos, por ejemplo martes y viernes",
+  semanas: [
+    ["F1 · Quiénes somos", "carrusel · fijado", "V1 · El Niño ya está acá (5A)", "video animado · particulares · Niño"],
+    ["F3 · Cómo trabajamos", "carrusel · fijado", "P1 · El Niño: cinco cosas", "carrusel · particulares · Niño"],
+    ["F2 · Qué nos diferencia", "carrusel · fijado", "E1 · Si guardás algo bajo un techo de chapa", "carrusel · empresas · Niño"],
+    ["P2 · Cuatro frases antes de las lluvias", "carrusel · particulares · Niño", "Y3 · Tu techo de chapa en tres pasos", "carrusel · empresas"],
+    ["Y2 · Sin tratamiento, la humedad pasa", "carrusel · particulares", "V2 · No cambies el techo de chapa (4B)", "video animado · empresas"],
+    ["Y1 · ¿Membranas y pinturas que fallan?", "carrusel · particulares", "E3 · Obras", "carrusel · empresas"],
+    ["P4 · Tres techos sin romperlos", "carrusel · particulares", "E2 · No cambies el techo de chapa: recuperalo", "carrusel · empresas"],
+    ["P3 · ¿Le pusiste membrana y sigue filtrando?", "carrusel · particulares", "V3 · La humedad no avisa (4A)", "video animado · particulares"]
+  ],
+  notas: [
+    "Lo del Niño va en el primer mes: pierde valor si se corre. Cada publicación sale con el pronóstico del Servicio Meteorológico chequeado esa semana.",
+    "Los fijados se fijan en orden F3, F2, F1: Instagram muestra primero el último.",
+    "E3 nombra clientes: si no hay permiso, sale sin nombres o cambia de semana con P3.",
+    "Los tres videos animados son los guiones 5A, 4B y 4A de más abajo. Los videos de YouTube tienen material para armarlos sin filmar: la demostración del gel y la aplicación en un techo de chapa real.",
+    "En reserva: Y4, Y5 y Y6, de plastificado."
+  ]
+};
+
+window.GUIONES.pauta = {
+  titulo: "Pauta · $150.000",
+  resumen: "Una propuesta: el reparto, las publicaciones y la zona se definen juntos",
+  donde: "En Instagram y Facebook, con anuncios que abren una conversación de WhatsApp. No hace falta página web: el que toca el anuncio escribe directo. Google Ads necesita una página a donde llevar el clic, así que queda para cuando haya web.",
+  reparto: [
+    ["Particulares", "$100.000", "$25.000 por semana. Semanas 1 y 2: el video animado del Niño (V1). Semanas 3 y 4: la publicación de particulares que más mensajes y guardados haya traído (P1 o P2)."],
+    ["Empresas", "$50.000", "$25.000 por semana, en las semanas 3 y 4: E1, los galpones con el Niño."]
+  ],
+  antes: [
+    "El WhatsApp propio de impermeabilización. El 11 5954 7352 es el del estudio jurídico: las consultas se mezclarían y no se podría saber qué trajo cada anuncio. Los videos de YouTube de la empresa, de 2010 a 2019, publican el 11 5954 7351: ¿es ese?",
+    "Una cuenta publicitaria de Meta a nombre de Solmi, con su tarjeta: la pauta se paga directo.",
+    "Instagram abierto y con los tres fijados arriba: el que llega desde un anuncio mira el perfil antes de escribir.",
+    "Quién contesta los mensajes y en cuánto tiempo. Un anuncio que trae mensajes que tardan días en contestarse hace más daño que no pautar.",
+    "La zona: a dónde puede ir la cuadrilla. Con este monto rinde más una zona chica que todo el país."
+  ],
+  mide: [
+    "Cuántas conversaciones empezaron desde cada anuncio y cuánto costó cada una.",
+    "Cuántas trajeron la foto del techo y cuántas terminaron en visita o presupuesto.",
+    "Guardados y envíos de cada publicación, pautada o no."
+  ],
+  notas: [
+    "El primer mes se pauta lo del Niño, que vence con la temporada. Desde el segundo, la plata va a la publicación de cada estrategia que más mensajes trajo.",
+    "Nada de campañas de «reconocimiento de marca»: cada peso va a que alguien escriba.",
+    "No prometemos un número de mensajes ni de clientes: el primer mes es para medir."
+  ]
+};
+
+window.GUIONES.videos = {
+  titulo: "Los videos de YouTube de Solmi",
+  resumen: "Tres canales: solmisa, Victor Solmi y Solmi San Pedro. De acá salen tres carruseles y las imágenes de otros",
   items: [
-    {
-      n: "01", formato: "Quiénes somos",
-      contesta: "¿Quiénes son?",
-      ideas: [
-        "Desde 1889, la misma familia en el mismo lugar de San Pedro.",
-        "Hoy impermeabilizan techos con un producto propio.",
-        "Tu idea: «al alcance tuyo»."
-      ],
-      pide: "Guion 2A. Necesita a alguien de la familia caminando el lugar."
-    },
-    {
-      n: "02", formato: "Qué nos diferencia",
-      contesta: "¿Por qué ustedes?",
-      ideas: [
-        "Fabrican y aplican su propio producto.",
-        "No prometen de más: muestran la obra.",
-        "La misma familia desde 1889."
-      ],
-      pide: "Guion 3A. Nadie sale en cámara."
-    },
-    {
-      n: "03", formato: "Cómo trabajamos",
-      contesta: "¿Qué pasa si les escribo?",
-      ideas: [
-        "Tu idea: «Así es como impermeabilizamos tu techo, paso a paso».",
-        "Una obra real, de la mancha al techo terminado."
-      ],
-      pide: "Guion 1A. Se filma en la próxima obra."
-    }
+    {v: "A", id: SOLMI_YT.A, nombre: "La prueba de la casita", anio: "2010", versiones: ["xRK8_1AMjk4", "2LZDXmNvwZ0", "XQNKZ5LxwMc", "JUhPwxjI6dc"],
+      que: "Spot de 26 segundos: una casita de maqueta, un bloque tratado y la demostración del producto, un gotero y una cuchara que levanta el gel.",
+      dice: "Tratamiento interno y elástico, no superficial; ingresa como agua y se transforma en gel, sellando por dentro; no lo afectan el sol ni el granizo.",
+      usa: "Y2 entero · imágenes de F1, F2 y F3"},
+    {v: "B", id: SOLMI_YT.B, nombre: "La chapa en tres pasos", anio: "2011", versiones: ["YIc90o8a8eQ", "IN1bP8C9wdE"],
+      que: "Spot de 28 segundos filmado en un techo de chapa real, con los aplicadores trabajando.",
+      dice: "«Recuperamos su techo de chapa en solo tres pasos»: curado y pavonizado, un freno al óxido y la corrosión; impermeabilizado, para evitar la filtración; plastificado.",
+      usa: "Y3 entero · imágenes de F1, F2, P1, E1 y E2"},
+    {v: "C", id: SOLMI_YT.C, nombre: "¿Membranas y pinturas fallan?", anio: "2011", versiones: [],
+      que: "Animado de 44 segundos: fotos de humedad, la aplicación en una terraza en 3D y placas.",
+      dice: "Productos que, actuando como el agua, ingresan a la estructura y se transforman en gel; ocupan elásticamente el lugar del agua; de desarrollo propio, no se venden en el mercado.",
+      usa: "Y1 entero · imágenes de F3, P1, P2, P3 y P4"},
+    {v: "D", id: SOLMI_YT.D, nombre: "La placa de 2019", anio: "2019", versiones: [],
+      que: "Diez segundos, la única en alta: «Techos · Paredes · Piletas · Sin molestia de obra · Llave en mano».",
+      dice: "Son cuatro frases: no da para un carrusel propio.",
+      usa: "«Llave en mano» de F3"}
+  ],
+  plast: "Dieciocho de plastificado (2011 y 2012): paredes y frentes, pisos y caminos de tierra, bateas, contenedores, un barco y piletas. Salen Y4, Y5 y Y6, en reserva.",
+  fuera: "No se usan: el de quita-grafiti, el de 2019 sin locución, Lubrifilm, el tren a hidrógeno y los de autos. De lo que dicen, tampoco lo que es promesa o plazo: «el agua no entra más», «protección definitiva», «solución en el momento», «degradable a partir de los 100 años».",
+  nota: "Los videos son de 480 píxeles de alto: sirven para mostrar la obra dentro de una lámina, no de fondo. Si tienen los originales, mejor."
+};
+
+/* Carruseles, por estrategia. hooks: las tres portadas para elegir; la primera va por defecto. */
+window.GUIONES.carruseles = {
+  grupos: [
+    {id: "F", n: "★", titulo: "Los 3 fijados, ahora en carrusel", resumen: "Van arriba de todo en el perfil: es lo que mira el que llega desde un anuncio o una recomendación",
+      intro: {titulo: "Cómo leer los carruseles", lista: [
+        "Portada: tres para elegir. La primera va por defecto.",
+        "Cada lámina: el texto grande, el chico, qué imagen va y de dónde sale.",
+        "«Video A 0:12» es el cuadro de ese segundo del video A: tocalo y se abre en ese punto.",
+        "Todos los textos se pueden cambiar, como los guiones."
+      ], titulo2: "De dónde sale cada uno", lista2: [
+        "F1 ← 2A y C1 · F2 ← 3A · F3 ← 1A",
+        "P1 ← C4, 5A y 5B · P2 ← C5 · P3 ← 3B · P4 ← C3",
+        "E1 ← 5C · E2 ← 1B y 4B · E3 ← C2",
+        "Y1, Y2 e Y3 ← los videos de YouTube",
+        "4A, 4B y 5A quedan también como videos animados"
+      ]},
+      items: [
+        {k: "F1", tipo: "Fijado 01 · la historia", titulo: "Quiénes somos", para: "Las dos estrategias", sale: "2A, con el cambio guardado el 23/09, C1 y el folleto de 2018",
+          hooks: [["Idea tuya (2A)", "Una empresa familiar desde 1889. Y al alcance tuyo."], ["Contracorriente", "No empezamos arreglando techos. Empezamos haciendo carruajes."], ["Pregunta", "¿Qué tiene que ver una herrería de carruajes con tu techo?"]],
+          laminas: [
+            {t: "Una empresa familiar desde 1889. Y al alcance tuyo.", b: "", img: "El logo «Desde 1889»", f: "2A"},
+            {t: "No empezamos arreglando techos.", b: "Empezamos haciendo carruajes.", img: "Solo texto", f: "2A · folleto 2018"},
+            {t: "Estamos en San Pedro.", b: "Acá nuestra familia instaló una herrería de carruajes, antes de que existieran los autos.", img: "Una foto actual de Mitre 2250 (falta). Si no llega, solo texto con «1889» grande", f: "2A, el cambio del 23/09"},
+            {t: "Seis generaciones después, seguimos en el mismo lugar.", b: "La misma familia, sin cortes.", img: "Solo texto", f: "C1 · folleto 2018"},
+            {t: "Hoy impermeabilizamos techos y terrazas.", b: "Y recuperamos techos de chapa y membranas viejas.", img: "Video B 0:06 · el aplicador en el techo", yt: [SOLMI_YT.B, 6], f: "C1"},
+            {t: "El producto es nuestro.", b: "Lo fabricamos y lo aplicamos nosotros. Sin intermediarios.", img: "Video A 0:14 · el gel", yt: [SOLMI_YT.A, 14], f: "C1 · Víctor · video C"},
+            {t: "En todo el país.", b: "De Jujuy a Mar del Plata: fábricas, hoteles, edificios y casas.", foto: "molinos-canuelas", img: "Folleto: los silos de Molinos Cañuelas", f: "C1 · lista de clientes del folleto"},
+            {t: "¿Humedad en el techo?", b: "Escribinos por WhatsApp.", img: "El logo", f: "2A"}
+          ],
+          caption: "Impermeabilización Elástica Solmi. Desde 1889, la misma familia en San Pedro. Fabricamos nuestro producto y lo aplicamos en todo el país. Escribinos por WhatsApp.",
+          confirmar: "¿Tienen un papel que muestre el 1889? ¿Y una foto actual del lugar?"},
+        {k: "F2", tipo: "Fijado 02", titulo: "Qué nos diferencia", para: "Las dos estrategias", sale: "3A y los dos folletos",
+          hooks: [["Tensión (3A)", "Seguro ya te prometieron que tu techo no iba a filtrar más."], ["Lista", "Tres hechos que nos diferencian. Ninguno es una promesa."], ["Pregunta", "¿Quién hizo el producto que te pusieron en el techo?"]],
+          laminas: [
+            {t: "Seguro ya te prometieron que tu techo no iba a filtrar más.", b: "", img: "Solo texto", f: "3A"},
+            {t: "Nosotros preferimos mostrártelo.", b: "Tres hechos. Ninguno es una promesa.", img: "Solo texto, fondo azul", f: "3A"},
+            {t: "1 · El producto lo fabricamos nosotros.", b: "A medida de cada trabajo.", img: "Video A 0:12 · el gotero", yt: [SOLMI_YT.A, 12], f: "3A · los dos folletos"},
+            {t: "2 · Lo aplicamos nosotros.", b: "De la fábrica a tu techo, sin intermediarios.", img: "Video B 0:10 · a pincel", yt: [SOLMI_YT.B, 10], f: "3A · Víctor"},
+            {t: "3 · Somos la misma familia desde 1889.", b: "Seis generaciones, en el mismo lugar de San Pedro.", img: "El logo «Desde 1889»", f: "3A · folleto 2018"},
+            {t: "No te prometemos de más.", b: "Te mostramos la obra.", foto: ["chapa-3-antes", "chapa-3-despues"], img: "Folleto: el techo de chapa, antes y después", f: "3A"},
+            {t: "Escribinos por WhatsApp", b: "y mirá cómo trabajamos.", img: "El logo", f: "3A"}
+          ],
+          caption: "Seguro ya te prometieron que tu techo no iba a filtrar más. Nosotros preferimos mostrártelo: el producto lo fabricamos y lo aplicamos nosotros, y somos la misma familia desde 1889. Escribinos por WhatsApp.",
+          confirmar: "¿Hablamos de garantía o todavía no? ¿Tienen un papel que muestre el 1889?"},
+        {k: "F3", tipo: "Fijado 03", titulo: "Cómo trabajamos", para: "Las dos estrategias", sale: "1A, los videos A y C y los dos folletos",
+          hooks: [["Idea tuya (1A)", "Así es como impermeabilizamos tu techo, paso a paso."], ["Pregunta", "¿Cómo se arregla un techo con humedad sin romperlo?"], ["Vulnerabilidad", "Si ya arreglaste el techo y volvió a filtrar, mirá cómo lo hacemos nosotros."]],
+          laminas: [
+            {t: "Así es como impermeabilizamos tu techo, paso a paso.", b: "", img: "Video C 0:09 · el aplicador en la terraza", yt: [SOLMI_YT.C, 9], f: "1A"},
+            {t: "Este techo tiene humedad.", b: "No lo vamos a romper: sin albañiles, sin polvo, sin membrana.", img: "Video C 0:03 · el cielorraso con la grieta", yt: [SOLMI_YT.C, 3], f: "1A · folleto 2013"},
+            {t: "1 · Usamos nuestro producto.", b: "Lo fabricamos nosotros, para cada trabajo.", img: "Video A 0:12 · el gotero", yt: [SOLMI_YT.A, 12], f: "1A · folleto 2018"},
+            {t: "2 · Entra en el techo como el agua.", b: "Lo moja y recorre el mismo camino que el agua.", img: "Video C 0:14 · entra en la losa", yt: [SOLMI_YT.C, 14], f: "1A · los dos folletos · video A"},
+            {t: "3 · En segundos, se hace un gel elástico.", b: "Y sella el techo por dentro.", img: "Video A 0:14 · la cuchara que levanta el gel", yt: [SOLMI_YT.A, 14], f: "1A · folleto 2013 · video A"},
+            {t: "Así queda.", b: "", img: "Falta: una foto real de un techo terminado. Mientras tanto, video A 0:09, «Con Solmi la humedad no pasa»", yt: [SOLMI_YT.A, 9], f: "1A · video A"},
+            {t: "Llave en mano.", b: "Fabricamos el producto y lo aplicamos con nuestra gente.", img: "Solo texto", f: "Los dos folletos · video D · Víctor"},
+            {t: "¿Humedad en el techo?", b: "Escribinos por WhatsApp.", img: "El logo", f: "1A"}
+          ],
+          caption: "Así impermeabilizamos un techo con humedad: con nuestro producto, que entra como el agua y en segundos se hace un gel elástico que lo sella por dentro. Sin albañiles, sin polvo, sin membrana. Escribinos por WhatsApp.",
+          confirmar: "¿El paso a paso es así en obra, o hay algo antes de aplicar que convenga mostrar? ¿Se puede decir así cómo actúa el producto y «sin romper»? ¿Tienen la foto de un techo terminado?"}
+      ]},
+    {id: "PAR", n: "PAR", titulo: "Carruseles · particulares", resumen: "Para la dueña de casa con goteras. Los del Niño van primero",
+      intro: {titulo: "Para particulares", lista: [
+        "El problema adelante, nunca la empresa, y con su palabra: humedad.",
+        "El Niño abre la puerta: algo para revisar hoy en el techo.",
+        "Después, por qué volvió a filtrar y la prueba de que no se rompe nada.",
+        "P1 y P2 son para guardar; el resto cierra en WhatsApp."
+      ]},
+      items: [
+        {k: "P1", tipo: "Particulares · El Niño", titulo: "El Niño: cinco cosas para mirar en tu techo", para: "La dueña de casa", sale: "C4 (con el título cambiado el 23/09), que reúne a 5A y 5B",
+          hooks: [["Predicción (C4)", "El Niño ya está acá. ¿Tu techo?"], ["Pregunta (5A)", "Seguro escuchaste que llegó el Niño. ¿Qué tiene que ver con tu techo?"], ["Lista (5B)", "Antes de la próxima tormenta, subí al techo y mirá estas cinco cosas."]],
+          laminas: [
+            {t: "El Niño ya está acá. ¿Tu techo?", b: "Cinco cosas para mirar hoy, antes de la próxima tormenta.", img: "Solo texto", f: "C4"},
+            {t: "Qué es el Niño", b: "El Pacífico más caliente de lo normal cambia las lluvias en Sudamérica. El Servicio Meteorológico lo da activo hasta el verano.", img: "Solo texto, con «Fuente: Servicio Meteorológico Nacional»", f: "C4 · Servicio Meteorológico Nacional"},
+            {t: "1 · Canaletas y desagües", b: "Sacales hojas y tierra. Tapados, el agua se junta arriba.", img: "Solo texto", f: "C4"},
+            {t: "2 · Grietas", b: "Por más finas que sean, una tormenta fuerte las encuentra.", img: "Video C 0:03 · la grieta", yt: [SOLMI_YT.C, 3], f: "C4"},
+            {t: "3 · Membrana", b: "Bordes levantados, globos o capas arriba de capas: por ahí entra.", img: "Video C 0:04 · las membranas rotas", yt: [SOLMI_YT.C, 4], f: "C4"},
+            {t: "4 · Chapa", b: "Óxido alrededor de los tornillos y en las uniones.", img: "Video B 0:02 · el techo de chapa", yt: [SOLMI_YT.B, 2], f: "C4"},
+            {t: "5 · Adentro", b: "Manchas o pintura inflada en el cielorraso o arriba de las paredes: el agua ya está entrando.", img: "Video C 0:01 · la pared manchada", yt: [SOLMI_YT.C, 1], f: "C4"},
+            {t: "¿Encontraste alguna?", b: "Mandanos la foto por WhatsApp. El techo se arregla antes de que llueva.", img: "El logo", f: "C4"}
+          ],
+          caption: "El Niño está activo y, según el Servicio Meteorológico Nacional, sigue hasta el verano. Antes de la próxima tormenta, mirá estas cinco cosas en tu techo. Guardalo para tenerlo a mano y, si encontrás alguna, mandanos la foto por WhatsApp.",
+          confirmar: "¿Los cinco puntos los firmarían ustedes? ¿Contestan si les mandan una foto? El pronóstico se chequea la semana que sale."},
+        {k: "P2", tipo: "Particulares · El Niño", titulo: "Cuatro frases que se escuchan antes de las lluvias", para: "La dueña de casa", sale: "C5, con dos frases cambiadas porque no tenían fuente",
+          hooks: [["Creencias (C5)", "Cuatro frases que se escuchan antes de las lluvias."], ["Espejo", "«Si no gotea, está bien». ¿La dijiste?"], ["Pregunta", "¿Cuál de estas cuatro dijiste antes de la última tormenta?"]],
+          laminas: [
+            {t: "Cuatro frases que se escuchan antes de las lluvias.", b: "Y lo que pasa en el techo.", img: "Solo texto", f: "C5"},
+            {t: "1 · «Si no gotea, está bien.»", b: "Las membranas viejas juntan humedad por debajo.", img: "Solo texto", f: "Folleto 2018 (antes decía «la humedad avanza antes de que gotee», sin fuente)"},
+            {t: "2 · «Le pongo otra membrana y listo.»", b: "Las capas se acumulan y el agua sigue entrando. No hace falta sacarlas: se repara la última y se protege.", img: "Video C 0:04 · las membranas rotas", yt: [SOLMI_YT.C, 4], f: "C5 · folleto 2013"},
+            {t: "3 · «La chapa oxidada hay que cambiarla.»", b: "Se repara, se frena el óxido y se protege. Sin cambiar las chapas.", foto: "chapa-3-antes", img: "Folleto: el techo de chapa, antes", f: "C5"},
+            {t: "Así queda.", b: "Recuperada, sin cambiar las chapas.", foto: "chapa-3-despues", img: "Folleto: el mismo techo, después", f: "C5 · C2"},
+            {t: "4 · «Lo arreglo cuando pare de llover.»", b: "Con el Niño activo hasta el verano, el momento de arreglarlo es ahora.", img: "Solo texto", f: "C5, sin «con sol» · Servicio Meteorológico Nacional"},
+            {t: "¿Dijiste alguna?", b: "Escribinos por WhatsApp.", img: "El logo", f: "C5"}
+          ],
+          caption: "Si no gotea, está bien. Le pongo otra membrana y listo. La chapa oxidada hay que cambiarla. Lo arreglo cuando pare de llover. Antes del Niño, cuatro frases que conviene revisar. Escribinos por WhatsApp.",
+          confirmar: "¿Lo de las membranas y la chapa se puede decir así? ¿El producto se aplica con el techo húmedo? (por eso salió el «con sol»)"},
+        {k: "P3", tipo: "Particulares", titulo: "¿Le pusiste membrana y sigue filtrando?", para: "La dueña de casa (sirve también para el administrador)", sale: "3B y los dos folletos",
+          hooks: [["Pregunta (3B)", "¿Le pusiste membrana y sigue filtrando?"], ["Número", "Una membrana. Dos. Tres. Y la gotera sigue ahí."], ["Provocación", "¿Cuántas membranas le pusiste ya a tu techo?"]],
+          laminas: [
+            {t: "¿Le pusiste membrana y sigue filtrando?", b: "", img: "Video C 0:04 · las membranas rotas", yt: [SOLMI_YT.C, 4], f: "3B"},
+            {t: "Cada vez que filtra, otra membrana arriba.", b: "Las capas se acumulan y el agua sigue entrando.", img: "Solo texto", f: "3B · folleto 2013"},
+            {t: "Y abajo, la humedad.", b: "Las membranas viejas juntan humedad por debajo.", img: "Solo texto", f: "Folleto 2018"},
+            {t: "Nuestro producto no es una membrana.", b: "Entra en el techo y lo sella por dentro.", img: "Video C 0:21 · se llenan las grietas", yt: [SOLMI_YT.C, 21], f: "3B · video C"},
+            {t: "¿Y las membranas viejas?", b: "No hace falta sacarlas: se repara la última y se protege con plastificación elástica.", img: "Solo texto", f: "3B · los dos folletos"},
+            {t: "Así queda.", b: "Membranas recuperadas y protegidas.", foto: ["membranas-antes", "membranas-despues"], img: "Folleto 2018: membranas, antes y después", f: "Folleto 2018"},
+            {t: "¿Te pasa?", b: "Escribinos por WhatsApp.", img: "El logo", f: "3B"}
+          ],
+          caption: "Cada vez que filtra, otra membrana arriba: las capas se acumulan, juntan humedad por debajo y el agua sigue entrando. Nuestro producto no es una membrana: entra en el techo y lo sella por dentro. Y las membranas viejas no hace falta sacarlas. ¿Te pasa? Escribinos por WhatsApp.",
+          confirmar: "¿Las membranas viejas nunca hace falta sacarlas, o depende del techo? ¿El antes y el después de la lámina 6 son el mismo techo?"},
+        {k: "P4", tipo: "Particulares", titulo: "Tres techos que se arreglan sin romperlos", para: "La dueña de casa", sale: "C3, con otra portada por defecto (la del C3 era genérica)",
+          hooks: [["Espejo", "Losa, chapa o membrana vieja: ¿cuál es tu techo?"], ["Pregunta (C3)", "¿Tu techo tiene humedad?"], ["Pregunta", "¿Cómo se arregla un techo con humedad sin romperlo?"]],
+          laminas: [
+            {t: "Losa, chapa o membrana vieja: ¿cuál es tu techo?", b: "Tres techos, tres arreglos. Ninguno lo rompe.", img: "Solo texto", f: "C3"},
+            {t: "1 · Losa o terraza", b: "El producto entra mojándolo, como el agua, y lo sella por dentro.", img: "Video C 0:09 · la terraza", yt: [SOLMI_YT.C, 9], f: "C3"},
+            {t: "2 · Chapa oxidada", b: "Se repara, se frena el óxido y se protege. Sin cambiar las chapas.", foto: "chapa-1-antes", img: "Folleto: chapa, antes", f: "C3"},
+            {t: "3 · Capas de membrana", b: "No hace falta sacarlas: se repara la última y se protege.", foto: "membranas-antes", img: "Folleto 2018: membranas", f: "C3"},
+            {t: "¿Cuál es el tuyo?", b: "Escribinos por WhatsApp.", img: "El logo", f: "C3"}
+          ],
+          caption: "Losa, chapa o membrana vieja: los tres se arreglan sin romper el techo. Escribinos por WhatsApp.",
+          confirmar: "¿Los tres arreglos se pueden explicar así?"},
+        {k: "Y1", tipo: "Particulares · del video C", titulo: "¿Membranas y pinturas que fallan?", para: "La dueña de casa", sale: "El video C y el folleto de 2013",
+          hooks: [["Pregunta (video C)", "¿Membranas y pinturas que fallan?"], ["Pregunta (video C)", "¿Humedad? ¿Filtraciones? Hay otra técnica."], ["Vulnerabilidad (3B)", "Si ya le pusiste membrana al techo y volvió a filtrar, no pases de largo."]],
+          laminas: [
+            {t: "¿Membranas y pinturas que fallan?", b: "", img: "Video C 0:04", yt: [SOLMI_YT.C, 4], f: "Video C"},
+            {t: "Humedad. Filtraciones.", b: "", img: "Video C 0:01 y 0:03 · la pared y el cielorraso", yt: [SOLMI_YT.C, 1], f: "Video C"},
+            {t: "Hay otra técnica.", b: "Un producto que, actuando como el agua, entra en la estructura y se transforma en gel.", img: "Video C 0:09", yt: [SOLMI_YT.C, 9], f: "Video C"},
+            {t: "Y queda como gel, adentro.", b: "Ocupa elásticamente el lugar del agua.", img: "Video C 0:21", yt: [SOLMI_YT.C, 21], f: "Video C"},
+            {t: "Sin membrana, pintura ni brea.", b: "Y sin molestias de obra ni roturas.", img: "Solo texto", f: "Video C · folleto 2013"},
+            {t: "No lo afecta el sol ni el granizo.", b: "Es impermeabilización interna, no superficial.", img: "Solo texto", f: "Video C · los dos folletos"},
+            {t: "Sin tratamiento, la humedad pasa. Con Solmi, no.", b: "", img: "Video C 0:24 · la casita", yt: [SOLMI_YT.C, 24], f: "Video C"},
+            {t: "Un producto propio.", b: "De desarrollo propio: no se vende en el mercado.", img: "Solo texto", f: "Video C"},
+            {t: "¿Te pasa?", b: "Escribinos por WhatsApp.", img: "El logo", f: "3B"}
+          ],
+          caption: "¿Membranas y pinturas que fallan? Hay otra técnica: un producto que entra como el agua, se transforma en gel y sella por dentro. Sin membrana, pintura ni brea, y sin roturas. Escribinos por WhatsApp.",
+          confirmar: "¿Se puede decir así: «ocupa el lugar del agua», «no lo afecta el sol ni el granizo», «interna, no superficial»?"},
+        {k: "Y2", tipo: "Particulares · del video A", titulo: "Sin tratamiento, la humedad pasa", para: "La dueña de casa", sale: "El video A y el folleto de 2013",
+          hooks: [["Contraste (video A)", "Sin tratamiento, la humedad pasa."], ["Lista (video A)", "Filtraciones, goteras, humedad de todo tipo."], ["Pregunta (1A)", "¿Cómo se arregla un techo con humedad sin romperlo?"]],
+          laminas: [
+            {t: "Sin tratamiento, la humedad pasa.", b: "", img: "Video A 0:06 · la casita", yt: [SOLMI_YT.A, 6], f: "Video A"},
+            {t: "Con Solmi, no pasa.", b: "", img: "Video A 0:09 · el bloque tratado", yt: [SOLMI_YT.A, 9], f: "Video A"},
+            {t: "Es un líquido que entra como el agua…", b: "", img: "Video A 0:12 · el gotero", yt: [SOLMI_YT.A, 12], f: "Video A"},
+            {t: "…y se transforma en gel.", b: "Elástico: sella por dentro.", img: "Video A 0:14 · la cuchara", yt: [SOLMI_YT.A, 14], f: "Video A"},
+            {t: "Tratamiento interno, no superficial.", b: "Por eso no lo afecta el sol ni el granizo.", img: "Video A 0:17", yt: [SOLMI_YT.A, 17], f: "Video A · folleto 2013"},
+            {t: "Filtraciones, goteras, humedad de todo tipo.", b: "En losas, terrazas, techos de chapa, paredes y quinchos.", img: "Solo texto", f: "Video A"},
+            {t: "¿Humedad en el techo?", b: "Escribinos por WhatsApp.", img: "El logo", f: "El tablero"}
+          ],
+          caption: "Sin tratamiento, la humedad pasa; con Solmi, no. Es un líquido que entra como el agua y se transforma en un gel elástico que sella por dentro. Escribinos por WhatsApp.",
+          confirmar: "¿Se puede contar así cómo actúa el producto? («Solución en el momento», que dice el video, no va: es un plazo.)"}
+      ]},
+    {id: "EMP", n: "EMP", titulo: "Carruseles · empresas", resumen: "Para galpones, depósitos, plantas y consorcios",
+      intro: {titulo: "Para empresas", lista: [
+        "Al que busca el nombre, la cuenta le confirma que existen y con quién trabajaron.",
+        "A galpones y depósitos, el argumento económico: la chapa se recupera y se evita el costo de chapas nuevas.",
+        "El Niño entra por lo que se moja abajo.",
+        "El plastificado va en reserva, más abajo."
+      ]},
+      items: [
+        {k: "E1", tipo: "Empresas · El Niño", titulo: "Si guardás algo bajo un techo de chapa", para: "Galpones, depósitos y plantas", sale: "5C y el folleto de 2013",
+          hooks: [["Advertencia (5C)", "Si guardás algo bajo un techo de chapa, esto es para vos."], ["Contraste", "Lo que se moja no es el techo. Es lo que está abajo."], ["Pregunta", "¿Galpón, quincho o depósito con la chapa oxidada? Antes del Niño, mirá esto."]],
+          laminas: [
+            {t: "Si guardás algo bajo un techo de chapa, esto es para vos.", b: "", img: "Video B 0:02", yt: [SOLMI_YT.B, 2], f: "5C"},
+            {t: "Por dónde entra el agua.", b: "La chapa se oxida primero en los tornillos y en las uniones. Por ahí entra.", foto: "chapa-2-antes", img: "Folleto: chapa, antes", f: "5C"},
+            {t: "Con el Niño, lo que se moja no es el techo.", b: "Es lo que tenés abajo.", img: "Solo texto, fondo azul, con «El Niño sigue activo hasta el verano, según el Servicio Meteorológico Nacional»", f: "5C · Servicio Meteorológico Nacional"},
+            {t: "No hace falta cambiar las chapas.", b: "Frenamos el óxido y protegemos la chapa con plastificación elástica.", img: "Video B 0:13 · el plastificado", yt: [SOLMI_YT.B, 13], f: "5C"},
+            {t: "Un techo de chapa, recuperado.", b: "", foto: ["chapa-1-antes", "chapa-1-despues"], img: "Folleto: chapa, antes y después", f: "Folleto 2013"},
+            {t: "Sin chapas nuevas.", b: "Se evita el costo de las chapas nuevas y la mano de obra de cambiar un techo.", img: "Solo texto", f: "Folleto 2013"},
+            {t: "¿Tu techo de chapa está así?", b: "Escribinos por WhatsApp.", img: "El logo", f: "5C"}
+          ],
+          caption: "Si guardás algo bajo un techo de chapa, esto es para vos. La chapa se oxida primero en los tornillos y en las uniones, y por ahí entra el agua. Con el Niño activo hasta el verano, lo que se moja es lo que tenés abajo. Frenamos el óxido y protegemos la chapa, sin cambiarla. Escribinos por WhatsApp.",
+          confirmar: "¿Trabajan galpones de campo y depósitos? ¿La chapa se oxida primero en tornillos y uniones? El pronóstico se chequea la semana que sale."},
+        {k: "E2", tipo: "Empresas", titulo: "No cambies el techo de chapa: recuperalo", para: "Plantas, galpones y edificios con techo de chapa", sale: "1B, 4B y los dos folletos",
+          hooks: [["Contracorriente (1B y 4B)", "No cambies el techo de chapa: recuperalo."], ["Número (4B)", "Tres techos de chapa. Ninguno se cambió."], ["Contracorriente (1B)", "Techo de chapa oxidado no quiere decir techo nuevo."]],
+          laminas: [
+            {t: "No cambies el techo de chapa: recuperalo.", b: "", img: "Solo texto", f: "1B · 4B"},
+            {t: "¿Óxido en el techo de chapa?", b: "Antes de cambiar todas las chapas, mirá estos tres techos.", img: "Solo texto", f: "1B y 4B"},
+            {t: "Techo 1 de 3", b: "Antes · después", foto: ["chapa-1-antes", "chapa-1-despues"], img: "Folleto: el primer par", f: "Folleto 2013"},
+            {t: "Techo 2 de 3", b: "Antes · después", foto: ["chapa-2-antes", "chapa-2-despues"], img: "Folleto: el segundo par", f: "Folleto 2013"},
+            {t: "Techo 3 de 3", b: "Antes · después", foto: ["chapa-3-antes", "chapa-3-despues"], img: "Folleto: el tercer par (en el de 2018 está más grande)", f: "Los dos folletos"},
+            {t: "Ninguno se cambió.", b: "Se repara lo que haga falta, se frena el óxido y se protege con plastificación elástica, que copia la forma de la chapa.", img: "Video B 0:13", yt: [SOLMI_YT.B, 13], f: "4B · 1B · folleto 2013"},
+            {t: "¿Tu techo de chapa está así?", b: "Escribinos por WhatsApp.", img: "El logo", f: "1B"}
+          ],
+          caption: "Tres techos de chapa, antes y después. Ninguno se cambió: se reparó lo que hacía falta, se frenó el óxido y se protegió la chapa con plastificación elástica. ¿Tu techo de chapa está así? Escribinos por WhatsApp.",
+          confirmar: "¿En qué orden van los pasos? El folleto de 2013 dice reparación, pavonizado y plastificación; el video B, curado y pavonizado, impermeabilizado y plastificado. ¿Tienen las fotos en tamaño original?"},
+        {k: "E3", tipo: "Empresas", titulo: "Obras", para: "El que busca el nombre antes de llamar", sale: "C2, sin los antes y después de chapa (ahora van en E2)",
+          hooks: [["Prueba", "De una cementera a un molino: cuatro obras."], ["Lista", "Fábricas, silos y terrazas. En todo el país."], ["Título (C2)", "Dónde trabajamos."]],
+          laminas: [
+            {t: "De una cementera a un molino: cuatro obras.", b: "Impermeabilización Elástica Solmi · desde 1889", foto: "cementos-avellaneda", img: "Folleto: Cementos Avellaneda", f: "C2"},
+            {t: "¿Con quién trabajaron?", b: "Algunas obras, con sus fotos.", img: "Solo texto", f: "La pregunta del que busca antes de llamar"},
+            {t: "1 de 4 · Cementos Avellaneda", b: "Impermeabilización en altura.", foto: "cementos-avellaneda", img: "Folleto", f: "C2"},
+            {t: "2 de 4 · Editorial Perfil", b: "Terraza.", foto: "editorial-perfil", img: "Folleto", f: "C2"},
+            {t: "3 de 4 · Molinos Cañuelas", b: "Silos.", foto: "molinos-canuelas", img: "Folleto", f: "C2"},
+            {t: "4 de 4 · Multigranos", b: "Techo de silos.", foto: "multigranos-silos", img: "Folleto", f: "C2"},
+            {t: "También hoteles, edificios y casas.", b: "En todo el país, de Jujuy a Mar del Plata.", img: "Solo texto", f: "C1 · lista de clientes del folleto"},
+            {t: "¿Tu techo es el próximo?", b: "Escribinos por WhatsApp.", img: "El logo", f: "C2"}
+          ],
+          caption: "Fábricas, silos y terrazas, en todo el país. Escribinos por WhatsApp.",
+          confirmar: "¿Se puede nombrar a estos cuatro clientes? Si no, va sin nombres: una cementera, una editorial, un molino, una planta de cereales. ¿Tienen las fotos en tamaño original?"},
+        {k: "Y3", tipo: "Empresas · del video B", titulo: "Tu techo de chapa, en tres pasos", para: "Galpones, plantas y quinchos", sale: "El video B y el folleto de 2013",
+          hooks: [["Proceso (video B)", "Tu techo de chapa se recupera en tres pasos."], ["Advertencia (video B)", "Detené el deterioro de tu techo de chapa."], ["Contracorriente (1B)", "Techo de chapa oxidado no quiere decir techo nuevo."]],
+          laminas: [
+            {t: "Tu techo de chapa se recupera en tres pasos.", b: "", img: "Video B 0:02", yt: [SOLMI_YT.B, 2], f: "Video B"},
+            {t: "1 · Curado y pavonizado", b: "Un freno al óxido y la corrosión.", img: "Video B 0:06", yt: [SOLMI_YT.B, 6], f: "Video B"},
+            {t: "2 · Impermeabilizado", b: "Para que no filtre el agua.", img: "Video B 0:10", yt: [SOLMI_YT.B, 10], f: "Video B"},
+            {t: "3 · Plastificado", b: "Protege la chapa.", img: "Video B 0:13", yt: [SOLMI_YT.B, 13], f: "Video B"},
+            {t: "Sin cambiar las chapas.", b: "Se evita el costo de las chapas nuevas y la mano de obra de cambiar un techo.", img: "Solo texto", f: "Folleto 2013"},
+            {t: "Detené el deterioro de tu techo.", b: "", img: "Video B 0:18 · el cartel", yt: [SOLMI_YT.B, 18], f: "Video B"},
+            {t: "¿Tu techo de chapa está así?", b: "Escribinos por WhatsApp.", img: "El logo", f: "1B"}
+          ],
+          caption: "Tu techo de chapa se recupera en tres pasos: curado y pavonizado, un freno al óxido y la corrosión; impermeabilizado, para que no filtre; y plastificado, para protegerla. Sin cambiar las chapas. Escribinos por WhatsApp.",
+          confirmar: "¿Siguen siendo estos tres pasos? ¿Tienen el video original? («Protección definitiva», que dice el video, no va: es una promesa.)"}
+      ]},
+    {id: "RES", n: "RES", titulo: "En reserva · plastificado", resumen: "Listos. Salen cuando definamos cómo se muestran los derivados",
+      intro: {titulo: "Por qué en reserva", lista: [
+        "Salen de los videos de plastificado de YouTube (2011 y 2012).",
+        "La impermeabilización es el tronco; cómo se muestran los derivados lo hablamos con Víctor.",
+        "Los videos son de 240 píxeles: sirven para mostrar la prueba en un recuadro."
+      ]},
+      items: [
+        {k: "Y4", tipo: "Reserva · particulares", titulo: "La gota que no entra", para: "Paredes, frentes y piletas", sale: "Los videos de plastificado sobre un auto, una pared y frentes",
+          hooks: [["Contraste (video)", "Esta mitad está plastificada. Esta no."], ["Curiosidad", "Mirá qué hace el agua en cada mitad."], ["Pregunta", "¿Humedad en la pared?"]],
+          laminas: [
+            {t: "Esta mitad está plastificada. Esta no.", b: "", img: "El capó, mitad y mitad", yt: ["rHYZLWd80s0", 11], f: "Video"},
+            {t: "Mirá el agua.", b: "Del lado plastificado queda en gotas separadas. Del otro, se junta.", img: "El capó con agua", yt: ["rHYZLWd80s0", 20], f: "Video"},
+            {t: "En una pared, igual.", b: "La parte plastificada repele la humedad: el agua no entra. La otra queda húmeda.", img: "La pared", yt: ["3WJaUy4qvlQ", 37], f: "Video"},
+            {t: "Transparente.", b: "Protege la superficie y la pintura, y la resalta.", img: "Solo texto", f: "Folleto 2018"},
+            {t: "Frentes, paredes, piletas.", b: "", img: "El frente de una radio de San Pedro y una pileta terminada", yt: ["DtMugFKsifs", 14], f: "Los videos · folleto 2018"},
+            {t: "¿Humedad en la pared?", b: "Escribinos por WhatsApp.", img: "El logo", f: ""}
+          ],
+          caption: "Esta mitad está plastificada; esta no. Del lado plastificado el agua queda en gotas y no entra. Plastificado elástico para frentes, paredes y piletas. Escribinos por WhatsApp.",
+          confirmar: "¿Cómo se muestra el plastificado? ¿Se puede decir que repele la humedad?"},
+        {k: "Y5", tipo: "Reserva · empresas", titulo: "Contra el óxido", para: "Campo, logística y náutica", sale: "Los videos de la batea, el contenedor y el barco, y el folleto de 2018",
+          hooks: [["Caso (video)", "Esta batea se la estaba comiendo el óxido."], ["Pregunta", "¿Tus bateas, contenedores o tanques están así?"], ["Causa", "Humedad y fermentación del maíz: así quedó esta batea."]],
+          laminas: [
+            {t: "Esta batea se la estaba comiendo el óxido.", b: "", img: "La batea corroída", yt: ["w7D0Ar8ZGOw", 10], f: "Video"},
+            {t: "Por la humedad y la fermentación del maíz.", b: "Quedó toda degradada, oxidada.", img: "Detalle", yt: ["w7D0Ar8ZGOw", 38], f: "Video"},
+            {t: "Se plastifica para salvar lo que queda.", b: "Y que no se siga deteriorando con el tiempo.", img: "La aplicación", yt: ["w7D0Ar8ZGOw", 50], f: "Video"},
+            {t: "Contenedores", b: "Plastificado resistente a químicos.", img: "El contenedor", yt: ["DWkz10IswOk", 14], f: "Descripción del video"},
+            {t: "Barcos", b: "De la línea de flotación para abajo el agua desliza y no se pegan el musgo ni los bichos. Y se protegen del óxido la quilla y las partes de hierro.", img: "El casco", yt: ["IYQhyx85Na4", 7], f: "Video"},
+            {t: "Tanques, cañerías y estructuras", b: "Contra ácidos, vapores, humedad, salitre y fertilizantes.", img: "Folleto 2018: tanques y cañerías", f: "Folleto 2018"},
+            {t: "¿Tenés algo que se está oxidando?", b: "Escribinos por WhatsApp.", img: "El logo", f: ""}
+          ],
+          caption: "Esta batea se la estaba comiendo el óxido, por la humedad y la fermentación del maíz. Se plastifica para salvar lo que queda. Plastificado anticorrosión para bateas, contenedores, barcos, tanques y cañerías. Escribinos por WhatsApp.",
+          confirmar: "¿Cómo se muestra el plastificado? ¿Se puede mostrar la batea? ¿«Resistente a químicos» se puede decir así?"},
+        {k: "Y6", tipo: "Reserva · empresas", titulo: "Pisos, playones y caminos", para: "Plantas, playones y campos", sale: "Los videos del piso y del camino de tierra",
+          hooks: [["Demostración (video)", "Largamos algo pesado y con puntas sobre este piso."], ["Curiosidad", "Un camino de tierra que no levanta tierra."], ["Pregunta", "¿Piso de playón o camino interno?"]],
+          laminas: [
+            {t: "Largamos algo pesado y con puntas sobre este piso.", b: "", img: "El piso", yt: ["hXP24IKVCzY", 8], f: "Video"},
+            {t: "No se rompió.", b: "Es un piso de hormigón plastificado: aguanta los golpes.", img: "El piso después del golpe", yt: ["hXP24IKVCzY", 11], f: "Video y descripción"},
+            {t: "Y no resbala.", b: "Se puede hacer rugoso, para que no se deslice la gente.", img: "Solo texto", f: "Video"},
+            {t: "Para pisos y playones.", b: "", img: "El piso", yt: ["hXP24IKVCzY", 27], f: "Video"},
+            {t: "Caminos de tierra", b: "Plastificado queda firme e impermeable, y no vuela tierra cuando pasan los vehículos.", img: "La franja plastificada", yt: ["M_Hz3me-6B4", 15], f: "Video y descripción"},
+            {t: "¿Tenés un piso o un camino así?", b: "Escribinos por WhatsApp.", img: "El logo", f: ""}
+          ],
+          caption: "Largamos algo pesado y con puntas sobre un piso de hormigón plastificado, y no se rompió. Se puede hacer rugoso para que no resbale. También en caminos de tierra: queda firme y no vuela tierra. Escribinos por WhatsApp.",
+          confirmar: "¿Cómo se muestra el plastificado? ¿«Aguanta los golpes» y «no resbala» se pueden decir así?"}
+      ]}
   ]
 };
 
