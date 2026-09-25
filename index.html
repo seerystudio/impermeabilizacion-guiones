@@ -368,6 +368,83 @@ body.list .car{width:auto}
 .lsrc{margin:2px 0 0;font-size:11.5px;color:var(--tenue)}
 body.list .est,body.list .cal{width:auto}
 body.list .cal{overflow-x:auto}
+
+/* 25/09: el recorrido con flechas y el apartado de las piezas ya diseñadas */
+
+/* el recorrido: el mapa de todo el tablero, arriba de todo, con flechas */
+.mapa{margin:18px 0 0;padding:16px 0 0;border-top:1px solid var(--linea)}
+.mapa .rotulo{display:block;font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--naranja);margin:0 0 10px}
+.mapa .pasos{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.mapa button{border:1px solid var(--linea-2);background:rgba(255,255,255,.04);border-radius:100px;padding:6px 12px;font-size:12.5px;font-weight:600;color:var(--hueso);transition:border-color .25s,color .25s}
+.mapa button:hover{border-color:var(--naranja);color:var(--naranja)}
+.mapa button.aca{border-color:var(--naranja);background:rgba(255,77,0,.12)}
+.mapa .fx{color:var(--naranja);font-weight:700;font-size:14px;line-height:1}
+
+/* la flecha que une una fila con la siguiente */
+.flecha{display:flex;align-items:flex-start;gap:10px;height:46px;margin:-25px 0;position:relative;z-index:2;pointer-events:none}
+.flecha svg{flex:0 0 auto;margin-left:12px;color:var(--naranja)}
+.flecha span{margin-top:9px;font-size:12.5px;color:var(--gris);background:var(--negro);border:1px solid var(--linea);border-radius:100px;padding:4px 12px;white-space:nowrap}
+body.list .flecha{margin:-20px 0}
+body.list .flecha span{white-space:normal}
+
+/* piezas ya diseñadas: el carrusel o la historia terminada, para que del otro lado la aprueben */
+.piez{width:470px}
+.piez header{display:block}
+.piez .tit{display:block;width:100%;border:0;border-bottom:1px dashed var(--lin);background:transparent;font-family:var(--tit);font-size:25px;font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#141414;padding:0 0 4px}
+.piez .tit:focus{outline:none;border-bottom-color:var(--naranja)}
+.piez .tit::placeholder{color:#B4B2AC}
+.piez .var.pz::before{content:none}
+.piez .var.pz{background:#141414;color:#fff;border-radius:100px;padding:4px 10px;letter-spacing:.09em}
+.piez[data-t="Historia"] .var.pz{background:var(--naranja)}
+.tiras{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.tiras button{flex:0 0 auto;width:86px;aspect-ratio:4/5;border:1px solid var(--lin);border-radius:8px;overflow:hidden;background:#fff;padding:0;position:relative}
+.piez[data-t="Historia"] .tiras button{aspect-ratio:9/16;width:72px}
+.tiras img{width:100%;height:100%;object-fit:cover;display:block}
+.tiras .n{position:absolute;left:4px;top:4px;background:rgba(0,0,0,.62);color:#fff;font-size:10.5px;font-weight:700;border-radius:100px;padding:1px 6px}
+.vacio{border:1px dashed var(--lin);border-radius:12px;padding:18px;text-align:center;font-size:13.5px;color:var(--tenue)}
+.pzlink{display:flex;align-items:center;gap:8px;margin-top:10px}
+.pzlink input{flex:1;min-width:0;border:1px solid rgba(0,0,0,.18);border-radius:10px;background:#fff;color:#141414;font:inherit;font-size:13.5px;padding:8px 10px}
+.pzlink input:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+.pzlink a{font-size:13px;font-weight:600;color:#C23A00;white-space:nowrap}
+.pzlink a[hidden]{display:none}
+.pzfila{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.piez select,.piez input.txt{width:100%;border:1px solid rgba(0,0,0,.18);border-radius:10px;background:#fff;color:#141414;font:inherit;font-size:14px;padding:8px 10px}
+.piez select:focus,.piez input.txt:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+.piez textarea.nota{display:block;width:100%;min-height:58px;resize:vertical;border:1px solid rgba(0,0,0,.18);border-radius:10px;background:#fff;color:#141414;font:inherit;font-size:14px;line-height:1.4;padding:8px 10px;margin-top:8px}
+.piez textarea.nota:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+.piez .conf textarea{display:block;width:100%;min-height:52px;resize:vertical;border:1px solid rgba(0,0,0,.18);border-radius:10px;background:#fff;color:#141414;font:inherit;font-size:14px;line-height:1.4;padding:8px 10px}
+.piez .conf textarea:focus{outline:none;border-color:var(--naranja);box-shadow:0 0 0 3px rgba(255,77,0,.18)}
+.piez .ir{border:0;background:none;padding:0;margin-top:8px;font-size:13px;font-weight:600;color:#C23A00;text-decoration:underline}
+.piez .ir[hidden]{display:none}
+.piez .est-pz{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:100px;padding:3px 10px;border:1px solid var(--lin);color:var(--tenue)}
+.piez .est-pz.listo{background:#141414;color:#fff;border-color:#141414}
+.piez .est-pz.pub{background:#1f7a3a;color:#fff;border-color:#1f7a3a}
+.piez input[type=file]{display:none}
+body.list .piez{width:auto}
+
+/* la flechita que aparece en el guion o el carrusel del que sale una pieza */
+.yadis{display:block;margin-top:10px;border:1px solid var(--naranja);background:rgba(255,77,0,.1);border-radius:100px;padding:5px 12px;font-size:12.5px;font-weight:600;color:#C23A00;text-align:left}
+.yadis:hover{background:var(--naranja);color:#fff}
+
+/* el visor grande de una lámina */
+#lbox{width:min(560px,calc(100% - 24px));padding:12px;background:var(--negro-2)}
+#lbox img{display:block;width:100%;border-radius:12px}
+#lbox .nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+#lbox .nav button{border:1px solid var(--linea-2);background:rgba(255,255,255,.04);border-radius:100px;padding:8px 16px;font-weight:600;color:var(--hueso)}
+#lbox .nav span{font-size:13px;color:var(--gris)}
+
+/* la tarjeta oscura que explica el apartado */
+.piezas-int .peso{font-size:12.5px;color:var(--gris-2);margin:8px 0 0}
+.piezas-int .peso.mucho{color:#FF7A45;font-weight:700}
+.piezas-int .btn{border:1px solid var(--linea-2);background:rgba(255,255,255,.04);border-radius:100px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--hueso)}
+.piezas-int .btn:hover{border-color:var(--naranja)}
+.piezas-int .btn.pri{background:var(--naranja);border-color:var(--naranja);color:#fff}
+.piezas-int .acc{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* copiar: en cada carrusel y en la tarjeta que abre el grupo */
+.acc-copia{margin-top:14px;padding-top:14px;border-top:1px solid var(--linea)}
+.acc-copia button{border:1px solid var(--linea-2);background:rgba(255,255,255,.04);border-radius:100px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--hueso)}
+.acc-copia button:hover{border-color:var(--naranja);color:var(--naranja)}
 </style>
 </head>
 <body>
@@ -418,7 +495,7 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;
    vive en el mismo dominio (seerystudio.github.io) y usa «sv-». Si hay NUBE, también en la planilla de Google
    (el mismo script que el de Asociados, con otro nombre de tablero). Si falla, se avisa en vez de callarse. */
 const NUBE = 'https://script.google.com/macros/s/AKfycbxgjYt2q3iZXebWQTGmeCoIkdg6bAyGNUPSIwTy47F43D51ED09QDCZU1WNqTMlQp31qw/exec', TABLERO = 'impermeabilizacion';
-const CLAVES = ['si-ed', 'si-fijo', 'si-conf', 'si-hkx', 'si-perfil'];
+const CLAVES = ['si-ed', 'si-fijo', 'si-conf', 'si-hkx', 'si-perfil', 'si-piezas'];
 const DONDE = NUBE ? 'Guardado' : 'Guardado en este dispositivo';
 let tToast;
 const hora = (h = new Date()) => String(h.getHours()).padStart(2,'0') + ':' + String(h.getMinutes()).padStart(2,'0');
@@ -478,7 +555,8 @@ async function bajar(){
       anotarN('si-cambio', o.fecha); anotarN('si-subido', o.fecha);
       ed = store.get('si-ed', {}); fijo = store.get('si-fijo', {}); conf = store.get('si-conf', {}); hkx = store.get('si-hkx', {});
       perfil = cargarPerfil(store.get('si-perfil', {}));
-      render(); limpiarEd(); requestAnimationFrame(altos); if (!document.body.classList.contains('list')) apply();
+      piezas = store.get(PZK, []);
+      render(); despuesDeRender(); limpiarEd(); requestAnimationFrame(altos); if (!document.body.classList.contains('list')) apply();
       toast('Traje lo último que escribiste · ' + hora(new Date(o.fecha)), 2500);
     } else {
       /* lo escrito antes de que existiera la nube no tiene fecha de cambio: se sube igual */
@@ -581,14 +659,14 @@ function renderCar(it, gr){
     <div class="sec"><p class="lab">${it.laminas.length} láminas · tocá un texto para cambiarlo</p><div class="lams">${lams}</div></div>
     <div class="sec"><p class="lab">Texto de la publicación</p>${campo(it.k + '|cap', it.caption, 'capt', 'Texto de la publicación', 3)}</div>
     ${it.confirmar ? `<div class="sec"><div class="conf"><div><b>Confirmanos:</b> ${esc(it.confirmar)}</div>${opciones(it.k)}</div></div>` : ''}
-    <div class="sec acciones"><button type="button" class="reset" data-reset="${it.k}" ${n ? '' : 'hidden'}>Volver al original</button></div>
+    <div class="sec acciones"><button type="button" data-copiarcar="${it.k}">Copiar el carrusel</button><button type="button" class="reset" data-reset="${it.k}" ${n ? '' : 'hidden'}>Volver al original</button></div>
   </article>`;
 }
 function renderGrupo(gr){
   const I = gr.intro, lista = a => `<ol>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`;
   return `<section class="row" id="r${gr.id}">
     <div class="row-title"><span class="n">${esc(gr.n)}</span><span class="f">${esc(gr.titulo)}</span><span class="m">${esc(gr.resumen)}</span></div>
-    ${I ? `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>${esc(I.titulo)}</h4>${lista(I.lista)}</div>${I.titulo2 ? `<div class="sticky"><h4>${esc(I.titulo2)}</h4>${lista(I.lista2)}</div>` : ''}</aside>` : ''}
+    ${I ? `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>${esc(I.titulo)}</h4>${lista(I.lista)}</div>${I.titulo2 ? `<div class="sticky"><h4>${esc(I.titulo2)}</h4>${lista(I.lista2)}</div>` : ''}<div class="acc-copia"><button type="button" data-copiargrupo="${gr.items.map(x => x.k).join(',')}">Copiar los ${gr.items.length} carruseles</button></div></aside>` : ''}
     <div class="scripts">${gr.items.map(it => renderCar(it, gr)).join('')}</div>
   </section>`;
 }
@@ -705,6 +783,356 @@ function achicar(file, lado){
 }
 let destinoFoto = null;
 
+/* el texto del carrusel o del guion del que sale una pieza: es lo que se copia para diseñarlo */
+function textoFuente(k){
+  if (!k) return '';
+  const it = CARS.find(x => x.k === k);
+  if (it){
+    const L = ['CARRUSEL ' + it.k + ' · ' + it.titulo, 'Para: ' + it.para];
+    L.push('Portada: ' + (elegido(it.k, it) || it.hook.dice), '');
+    it.laminas.forEach((l, i) => {
+      const t = val(it.k + '|l' + i + 't'), b = val(it.k + '|l' + i + 'b');
+      L.push((i + 1) + '. ' + t + (b ? ' — ' + b : ''));
+      if (l.img) L.push('   imagen: ' + l.img);
+    });
+    L.push('', 'Texto de la publicación:', val(it.k + '|cap'));
+    return L.join('\n');
+  }
+  for (const r of D.refs) for (const g of r.guiones) if (r.n + g.v === k){
+    const L = ['GUION ' + String(r.n).padStart(2,'0') + g.v + ' · ' + r.formato + ' · ' + g.titulo];
+    L.push('Arranque: ' + (elegido(k, g) || g.hook.dice));
+    g.beats.forEach((b, i) => L.push(b[0] + ' · ' + b[1] + ': ' + val(k + '|b' + i)));
+    L.push('Cierre: ' + val(k + '|cta'));
+    return L.join('\n');
+  }
+  return '';
+}
+/* ── 25/09 · Piezas ya diseñadas ───────────────────────────────────────────
+   Un lugar para cargar el carrusel o la historia que ya está diseñada: se suben
+   las láminas o se pega el link, se dice de qué guion sale —de ahí la flecha—
+   y del otro lado se aprueba. Lo cargado se guarda como todo lo demás. */
+const PZK = 'si-piezas';
+let piezas = store.get(PZK, []);
+const PZ_EST = ['Borrador', 'Listo para publicar', 'Publicado'];
+const LIGAS = [].concat(
+  GR.flatMap(g => g.items.map(it => ({k: it.k, t: 'Carrusel ' + it.k + ' · ' + it.titulo, row: g.id}))),
+  D.refs.flatMap(r => r.guiones.map(g => ({k: r.n + g.v, t: 'Guion ' + String(r.n).padStart(2,'0') + g.v + ' · ' + g.titulo, row: r.n})))
+);
+const ligaDe = k => LIGAS.find(x => x.k === k);
+const guardarPz = callado => store.set(PZK, piezas, callado);
+const nuevaId = () => 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+const pesoPz = () => Math.round(JSON.stringify(piezas).length / 1024);
+const pieza = id => piezas.find(p => p.id === id);
+const estCls = e => e === 'Publicado' ? 'pub' : e === 'Listo para publicar' ? 'listo' : '';
+
+/* achicar sin recortar: la lámina entra entera, que es lo que se aprueba */
+function achicarEntera(file, max){
+  return new Promise((ok, mal) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const s = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url); ok(c.toDataURL('image/jpeg', .68));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); mal(); };
+    img.src = url;
+  });
+}
+async function alPortapapeles(t){
+  try { await navigator.clipboard.writeText(t); }
+  catch { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+}
+function avisarCopia(btn, dice){
+  const antes = btn.textContent;
+  btn.textContent = 'Copiado ✓';
+  setTimeout(() => { btn.textContent = antes; }, 1600);
+  if (dice) toast(dice);
+}
+function textoPieza(p, conFuente){
+  const L = [(p.tipo || 'Carrusel').toUpperCase() + ' · ' + ((p.titulo || '').trim() || 'sin título')];
+  const l = ligaDe(p.de); if (l) L.push('Sale de: ' + l.t);
+  L.push('Estado: ' + (p.estado || PZ_EST[0]) + (p.cuando ? ' · ' + p.cuando : ''));
+  if (p.link) L.push('Link: ' + p.link);
+  if ((p.imgs || []).length) L.push('Láminas cargadas en el tablero: ' + p.imgs.length);
+  if ((p.nota || '').trim()) L.push('Nota: ' + p.nota.trim());
+  const ok = conf['pz' + p.id]; if (ok) L.push('Aprobación: ' + ok);
+  if ((p.com || '').trim()) L.push('Comentario: ' + p.com.trim());
+  const f = conFuente ? textoFuente(p.de) : '';
+  if (f) L.push('', '-- el texto del que sale --', f);
+  return L.join('\n');
+}
+const textoPiezas = () => piezas.map(p => textoPieza(p, false)).join('\n\n');
+
+function renderPz(p){
+  const l = ligaDe(p.de), est = p.estado || PZ_EST[0];
+  const tiras = (p.imgs || []).length
+    ? `<div class="tiras">${p.imgs.map((src, i) => `<button type="button" data-pzver="${p.id}" data-i="${i}" aria-label="Ver la lámina ${i + 1} en grande"><img src="${src}" alt=""><span class="n">${i + 1}</span></button>`).join('')}</div>`
+    : `<div class="vacio">Todavía no hay láminas cargadas. Subilas o pegá el link de donde están.</div>`;
+  return `<article class="card g piez" data-pz="${p.id}" data-t="${esc(p.tipo)}">
+    <header>
+      <span class="var pz">${esc(p.tipo)}</span>
+      <input class="tit" type="text" data-pz="${p.id}" data-c="titulo" value="${esc(p.titulo || '')}" placeholder="${p.tipo === 'Historia' ? 'Nombre de la historia' : 'Nombre del carrusel'}" aria-label="Nombre de la pieza">
+      <p class="angle">${l ? 'Sale de: ' + esc(l.t) : 'Todavía no dice de qué guion sale'}</p>
+      <div class="cont"><span class="est-pz ${estCls(est)}" data-pzest="${p.id}">${esc(est)}</span></div>
+    </header>
+    <div class="sec"><p class="lab">La pieza ya diseñada</p>
+      ${tiras}
+      <div class="acciones" style="margin-top:10px">
+        <button type="button" data-pzsubir="${p.id}">${(p.imgs || []).length ? 'Sumar láminas' : 'Subir láminas'}</button>
+        ${(p.imgs || []).length ? `<button type="button" data-pzvaciar="${p.id}">Sacar las láminas</button>` : ''}
+      </div>
+      <div class="pzlink">
+        <input type="text" data-pz="${p.id}" data-c="link" value="${esc(p.link || '')}" placeholder="…o pegá el link (Drive, Canva, Instagram)" aria-label="Link de la pieza" inputmode="url">
+        <a href="${esc(p.link || '#')}" target="_blank" rel="noopener" data-pzabrir="${p.id}"${p.link ? '' : ' hidden'}>Abrir ↗</a>
+      </div>
+      <input type="file" accept="image/*" multiple data-pzfile="${p.id}">
+    </div>
+    <div class="sec"><p class="lab">De dónde sale</p>
+      <select data-pz="${p.id}" data-c="de" aria-label="De qué guion sale esta pieza">
+        <option value="">— elegí de qué sale —</option>
+        ${LIGAS.map(x => `<option value="${esc(x.k)}"${x.k === p.de ? ' selected' : ''}>${esc(x.t)}</option>`).join('')}
+      </select>
+      <button type="button" class="ir" data-pzir="${p.id}"${l ? '' : ' hidden'}>Ver de dónde sale ↗</button>
+    </div>
+    <div class="sec"><p class="lab">Cómo está</p>
+      <div class="pzfila">
+        <select data-pz="${p.id}" data-c="estado" aria-label="Estado de la pieza">${PZ_EST.map(x => `<option${x === est ? ' selected' : ''}>${x}</option>`).join('')}</select>
+        <input class="txt" type="text" data-pz="${p.id}" data-c="cuando" value="${esc(p.cuando || '')}" placeholder="Cuándo sale" aria-label="Cuándo se publica">
+      </div>
+      <textarea class="nota" data-pz="${p.id}" data-c="nota" rows="2" placeholder="Nota nuestra: qué mirar, qué falta…" aria-label="Nota sobre la pieza">${esc(p.nota || '')}</textarea>
+    </div>
+    <div class="sec"><div class="conf">
+      <div><b>Confirmanos:</b> ¿va así o cambiamos algo?</div>
+      <div class="op">${['Va así', 'Cambiar algo', 'Lo hablamos'].map(o => `<button type="button" data-conf="pz${p.id}" aria-pressed="${conf['pz' + p.id] === o}">${o}</button>`).join('')}</div>
+      <textarea data-pz="${p.id}" data-c="com" rows="2" placeholder="Si hay algo para cambiar, escribilo acá…" aria-label="Comentario sobre la pieza">${esc(p.com || '')}</textarea>
+    </div></div>
+    <div class="sec acciones">
+      <button type="button" data-pzcopiar="${p.id}">Copiar</button>
+      <button type="button" class="reset" data-pzquitar="${p.id}">Quitar</button>
+    </div>
+  </article>`;
+}
+function disInner(){
+  const n = piezas.length, kb = pesoPz(), mucho = kb > 1500;
+  const intro = `<aside class="card ref piezas-int">
+    <div class="sticky" style="border-top:0;padding-top:0"><h4>Qué es esto</h4><ol>
+      <li>Acá va el carrusel o la historia <b>ya diseñada</b>: se suben las láminas, o se pega el link de donde están.</li>
+      <li>Cada pieza dice de qué guion o carrusel sale, y desde allá queda la flecha para venir hasta acá.</li>
+      <li>Del otro lado se aprueba o se pide el cambio, igual que en todo lo demás.</li>
+    </ol></div>
+    <div class="sticky"><h4>Cómo va</h4>
+      <p>${n ? (n === 1 ? 'Hay 1 pieza cargada.' : 'Hay ' + n + ' piezas cargadas.') : 'Todavía no hay ninguna pieza cargada.'}</p>
+      ${n ? `<p class="peso${mucho ? ' mucho' : ''}">Ocupa ${kb} KB${mucho ? ' · ya pesa bastante para viajar en el celular: conviene dejar las láminas en un link' : ''}</p>` : ''}
+      <div class="acc">
+        <button type="button" class="btn pri" data-pzadd="Carrusel">+ Carrusel</button>
+        <button type="button" class="btn pri" data-pzadd="Historia">+ Historia</button>
+        ${n ? '<button type="button" class="btn" id="pzcopiartodo">Copiar la lista</button>' : ''}
+      </div>
+    </div>
+  </aside>`;
+  return `<div class="row-title"><span class="n">PZ</span><span class="f">Lo que ya está diseñado</span><span class="m">Los carruseles y las historias terminadas, para aprobar</span></div>`
+    + intro + `<div class="scripts">${piezas.map(renderPz).join('')}</div>`;
+}
+const renderDis = () => `<section class="row" id="rDIS">${disInner()}</section>`;
+function refrescarDis(){
+  const s = document.getElementById('rDIS'); if (!s) return;
+  s.innerHTML = disInner(); marcarLigas();
+}
+/* la flecha de ida: en el guion o el carrusel del que sale, un botón para venir hasta la pieza */
+function marcarLigas(){
+  document.querySelectorAll('.yadis').forEach(b => b.remove());
+  piezas.forEach(p => {
+    if (!p.de) return;
+    const card = document.querySelector(`[data-k="${CSS.escape(p.de)}"] header`);
+    if (!card) return;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'yadis'; b.dataset.pzir2 = p.id;
+    b.textContent = '▼ Ya diseñado: ' + ((p.titulo || '').trim() || p.tipo.toLowerCase());
+    card.appendChild(b);
+  });
+}
+function irAPieza(id){
+  goTo('DIS');
+  const el = document.querySelector(`[data-pz="${id}"]`);
+  if (el && document.body.classList.contains('list')) el.scrollIntoView({behavior: 'smooth', block: 'center'});
+}
+
+/* el recorrido de arriba y las flechas entre una fila y la siguiente */
+const RECORRIDO = [{id: 'EST', t: 'La estrategia'}, {id: 'CAL', t: 'El calendario'}, {id: 'PAU', t: 'La pauta'}, {id: 'P', t: 'El perfil'},
+  {id: 'F', t: 'Los 3 fijados'}, {id: 'PAR', t: 'Particulares'}, {id: 'EMP', t: 'Empresas'}, {id: 'YT', t: 'Los videos'},
+  {id: 'RES', t: 'En reserva'}, {id: 'DIS', t: 'Lo ya diseñado'}, {id: 'VID', t: 'Guiones de video'}];
+const FLUJO = {
+  '0': 'Empecemos por la estrategia',
+  'EST': 'De la estrategia sale el calendario',
+  'CAL': 'Y para empujarlo, la pauta',
+  'PAU': 'Todo cae en el mismo perfil',
+  'P': 'Lo primero que se ve: los tres fijados',
+  'F': 'Después, los carruseles de cada público',
+  'PAR': 'El otro público: empresas',
+  'EMP': 'Varios de estos salen de sus propios videos',
+  'YT': 'Y estos quedan listos, en reserva',
+  'RES': 'Cuando el carrusel ya está diseñado, va acá',
+  'DIS': 'Más adelante, cuando se filme: los guiones de video'
+};
+const mapaHTML = () => `<div class="mapa"><span class="rotulo">El recorrido</span><div class="pasos">${RECORRIDO.map((p, i) => `${i ? '<span class="fx">→</span>' : ''}<button type="button" data-go="${esc(p.id)}">${esc(p.t)}</button>`).join('')}</div></div>`;
+const FLECHA_SVG = '<svg width="24" height="46" viewBox="0 0 24 46" fill="none" aria-hidden="true"><path d="M12 2 V31" stroke="currentColor" stroke-width="2" stroke-dasharray="5 6" stroke-linecap="round"/><path d="M5.5 27 L12 36 L18.5 27" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function flechas(){
+  const w = $('#world');
+  w.querySelectorAll('.flecha').forEach(f => f.remove());
+  [...w.children].forEach(sec => {
+    const txt = FLUJO[(sec.id || '').slice(1)];
+    if (!txt || !sec.nextElementSibling) return;
+    const d = document.createElement('div');
+    d.className = 'flecha';
+    d.innerHTML = FLECHA_SVG + '<span>' + esc(txt) + '</span>';
+    sec.after(d);
+  });
+}
+/* todo lo que hay que rehacer después de dibujar el mundo */
+function despuesDeRender(){
+  const intro = document.querySelector('#r0 .intro');
+  if (intro && !intro.querySelector('.mapa')) intro.insertAdjacentHTML('beforeend', mapaHTML());
+  flechas(); marcarLigas();
+}
+
+/* el visor grande de una lámina */
+let lbox = null, lboxImgs = [], lboxI = 0;
+function verLamina(id, i){
+  const p = pieza(id); if (!p || !(p.imgs || []).length) return;
+  lboxImgs = p.imgs; lboxI = i;
+  if (!lbox){
+    document.body.insertAdjacentHTML('beforeend', '<dialog id="lbox"><img alt=""><div class="nav"><button type="button" id="lbAnt">← Anterior</button><span id="lbN"></span><button type="button" id="lbSig">Siguiente →</button></div><div class="nav"><span></span><button type="button" id="lbCerrar">Cerrar</button></div></dialog>');
+    lbox = $('#lbox');
+    $('#lbAnt').onclick = () => pasarLamina(-1);
+    $('#lbSig').onclick = () => pasarLamina(1);
+    $('#lbCerrar').onclick = () => lbox.close();
+    lbox.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') pasarLamina(-1); if (e.key === 'ArrowRight') pasarLamina(1); });
+  }
+  pintarLamina(); lbox.showModal();
+}
+function pintarLamina(){
+  lbox.querySelector('img').src = lboxImgs[lboxI];
+  $('#lbN').textContent = (lboxI + 1) + ' de ' + lboxImgs.length;
+}
+function pasarLamina(d){
+  lboxI = (lboxI + d + lboxImgs.length) % lboxImgs.length;
+  pintarLamina();
+}
+
+/* escribir en una pieza: se guarda como todo lo demás, sin volver a dibujar la tarjeta */
+document.addEventListener('input', e => {
+  const el = e.target.closest && e.target.closest('[data-pz][data-c]');
+  if (!el || el.tagName === 'SELECT') return;
+  const p = pieza(el.dataset.pz); if (!p) return;
+  p[el.dataset.c] = el.value;
+  guardarPz();
+  if (el.dataset.c === 'link'){
+    const a = document.querySelector(`[data-pzabrir="${p.id}"]`);
+    if (a){ a.href = p.link || '#'; a.hidden = !p.link.trim(); }
+  }
+  if (el.dataset.c === 'titulo') marcarLigas();
+});
+document.addEventListener('change', e => {
+  const sel = e.target.closest && e.target.closest('select[data-pz][data-c]');
+  if (sel){
+    const p = pieza(sel.dataset.pz); if (!p) return;
+    p[sel.dataset.c] = sel.value;
+    guardarPz();
+    if (sel.dataset.c === 'estado'){
+      const b = document.querySelector(`[data-pzest="${p.id}"]`);
+      if (b){ b.textContent = p.estado; b.className = 'est-pz ' + estCls(p.estado); }
+    }
+    if (sel.dataset.c === 'de'){
+      const card = sel.closest('.piez'), l = ligaDe(p.de);
+      card.querySelector('.angle').textContent = l ? 'Sale de: ' + l.t : 'Todavía no dice de qué guion sale';
+      card.querySelector('.ir').hidden = !l;
+      marcarLigas();
+    }
+    return;
+  }
+  const f = e.target.closest && e.target.closest('input[data-pzfile]');
+  if (!f || !f.files.length) return;
+  const p = pieza(f.dataset.pzfile), files = [...f.files]; f.value = '';
+  if (!p) return;
+  (async () => {
+    const antes = (p.imgs || []).slice();
+    p.imgs = antes.slice();
+    for (const file of files.slice(0, 20)){
+      try { p.imgs.push(await achicarEntera(file, 900)); }
+      catch { toast('Una de las imágenes no se pudo abrir', 2600); }
+    }
+    /* si no entran, se vuelve atrás: mejor decirlo que dejarlas a medio guardar */
+    if (!guardarPz()){
+      p.imgs = antes;
+      store.set(PZK, piezas, true);
+      alert('No entraron: las láminas ocupan más de lo que este navegador guarda. Subí menos, o dejalas en un link.');
+    }
+    refrescarDis();
+  })();
+});
+document.addEventListener('click', e => {
+  const add = e.target.closest('[data-pzadd]');
+  if (add){
+    piezas.push({id: nuevaId(), tipo: add.dataset.pzadd, titulo: '', de: '', link: '', imgs: [], cuando: '', estado: PZ_EST[0], nota: '', com: ''});
+    guardarPz(); refrescarDis();
+    const ultima = document.querySelector('#rDIS .piez:last-child .tit');
+    if (ultima) ultima.focus();
+    return;
+  }
+  const sub = e.target.closest('[data-pzsubir]');
+  if (sub){ document.querySelector(`[data-pzfile="${sub.dataset.pzsubir}"]`).click(); return; }
+  const vac = e.target.closest('[data-pzvaciar]');
+  if (vac){
+    const p = pieza(vac.dataset.pzvaciar);
+    if (p && confirm('¿Sacar las láminas de esta pieza? El link y lo escrito quedan.')){ p.imgs = []; guardarPz(); refrescarDis(); }
+    return;
+  }
+  const ver = e.target.closest('[data-pzver]');
+  if (ver){ verLamina(ver.dataset.pzver, +ver.dataset.i); return; }
+  const ir = e.target.closest('[data-pzir]');
+  if (ir){
+    const p = pieza(ir.dataset.pzir), l = p && ligaDe(p.de); if (!l) return;
+    goTo(l.row);
+    const card = document.querySelector(`[data-k="${CSS.escape(l.k)}"]`);
+    if (card && document.body.classList.contains('list')) card.scrollIntoView({behavior: 'smooth', block: 'center'});
+    return;
+  }
+  const ir2 = e.target.closest('[data-pzir2]');
+  if (ir2){ irAPieza(ir2.dataset.pzir2); return; }
+  const cop = e.target.closest('[data-pzcopiar]');
+  if (cop){
+    const p = pieza(cop.dataset.pzcopiar); if (!p) return;
+    alPortapapeles(textoPieza(p, true)); avisarCopia(cop);
+    return;
+  }
+  if (e.target.closest('#pzcopiartodo')){
+    alPortapapeles(textoPiezas()); avisarCopia(e.target.closest('#pzcopiartodo'));
+    return;
+  }
+  const qui = e.target.closest('[data-pzquitar]');
+  if (qui){
+    const p = pieza(qui.dataset.pzquitar); if (!p) return;
+    if (!confirm('¿Quitar «' + ((p.titulo || '').trim() || 'esta pieza') + '»? No se puede deshacer.')) return;
+    piezas = piezas.filter(x => x.id !== p.id);
+    if (conf['pz' + p.id]){ delete conf['pz' + p.id]; store.set('si-conf', conf, true); }
+    guardarPz(); refrescarDis();
+    return;
+  }
+  const go = e.target.closest('[data-go]');
+  if (go){ goTo(go.dataset.go); return; }
+  const cc = e.target.closest('[data-copiarcar]');
+  if (cc){ alPortapapeles(textoFuente(cc.dataset.copiarcar)); avisarCopia(cc); return; }
+  const ct = e.target.closest('[data-copiargrupo]');
+  if (ct){
+    const ks = ct.dataset.copiargrupo.split(',');
+    alPortapapeles(ks.map(textoFuente).filter(Boolean).join('\n\n'));
+    avisarCopia(ct, 'Copiados ' + ks.length + ' carruseles');
+    return;
+  }
+});
+
 function render(){
   const intro = `<section class="row" id="r0"><div class="card intro">
     <span class="rotulo">Impermeabilización Elástica Solmi · techos</span>
@@ -714,17 +1142,18 @@ function render(){
     ${D.falta ? `<div class="falta"><span class="rotulo">Lo que falta para publicar</span><ol>${D.falta.map(p => `<li>${esc(p)}</li>`).join('')}</ol></div>` : ''}
   </div></section>`;
   const guionesVideo = fila('VID', 'VID', 'Guiones de video', 'Para cuando haya obra y alguien a cámara', `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Qué hay acá</h4><ol><li>Los guiones de video que ya teníamos, en los cuatro formatos de la propuesta.</li><li>Sus ideas ya pasaron a carrusel, más arriba.</li><li>Los tres animados (5A, 4B y 4A) están en el calendario: se arman sin filmar.</li></ol></div></aside>`);
-  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + grupo('PAR') + grupo('EMP') + renderVideos() + grupo('RES') + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
+  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + grupo('PAR') + grupo('EMP') + renderVideos() + grupo('RES') + renderDis() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
     <div class="row-title"><span class="n">${String(r.n).padStart(2,'0')}</span><span class="f">${esc(r.formato)}</span><span class="m">${esc(r.resumen)}</span></div>
     ${renderRef(r)}
     <div class="scripts">${r.guiones.map(g => renderScript(r, g)).join('')}</div>
   </section>`).join('');
-  $('#jump').innerHTML = `<option value="0">Ir a…</option>` + (D.estrategia ? `<option value="EST">EST · La estrategia</option>` : '') + (D.calendario ? `<option value="CAL">CAL · El calendario</option>` : '') + (D.pauta ? `<option value="PAU">$ · La pauta</option>` : '') + (P ? `<option value="P">IG · El perfil</option>` : '') + GR.map(g => `<option value="${g.id}">${esc(g.n)} · ${esc(g.titulo)}</option>`).join('') + (D.videos ? `<option value="YT">YT · Los videos de YouTube</option>` : '') + D.refs.map(r => `<option value="${r.n}">${String(r.n).padStart(2,'0')} · ${esc(r.formato)}</option>`).join('');
+  $('#jump').innerHTML = `<option value="0">Ir a…</option>` + (D.estrategia ? `<option value="EST">EST · La estrategia</option>` : '') + (D.calendario ? `<option value="CAL">CAL · El calendario</option>` : '') + (D.pauta ? `<option value="PAU">$ · La pauta</option>` : '') + (P ? `<option value="P">IG · El perfil</option>` : '') + GR.map(g => `<option value="${g.id}">${esc(g.n)} · ${esc(g.titulo)}</option>`).join('') + (D.videos ? `<option value="YT">YT · Los videos de YouTube</option>` : '') + `<option value="DIS">PZ · Lo que ya está diseñado</option>` + D.refs.map(r => `<option value="${r.n}">${String(r.n).padStart(2,'0')} · ${esc(r.formato)}</option>`).join('');
   prog();
 }
 const alto = t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 2 + 'px'; };
 const altos = () => document.querySelectorAll('textarea[data-e]').forEach(alto);
 render();
+despuesDeRender();
 requestAnimationFrame(altos); addEventListener('load', altos); addEventListener('resize', altos);
 /* si un texto guardado quedó igual al original (o el original cambió), se limpia */
 const limpiarEd = () => Object.keys(ed).forEach(k => { if (!(k in ORIG) || ed[k] === ORIG[k]) delete ed[k]; });
@@ -887,6 +1316,10 @@ function textoTodo(){
     if (it.confirmar) L.push('Confirmar: ' + it.confirmar + ' → ' + (conf[it.k] || 'sin respuesta'));
     L.push('');
   });
+  if (piezas.length){
+    L.push('== Lo que ya está diseñado');
+    piezas.forEach(p => { L.push(textoPieza(p, false)); L.push(''); });
+  }
   if (P){
     const p = perfil, igual = esOriginal(), x = verDe(p.version);
     L.push('== El perfil · versión ' + (x ? x.v + ' «' + x.titulo + '»' : '') + (igual ? ' (tal cual)' : ' (con cambios tuyos)'));
@@ -922,6 +1355,16 @@ function filasTodo(){
     });
     F.push([sec, 'Texto de la publicación' + cambio(it.k + '|cap'), val(it.k + '|cap')]);
     if (it.confirmar) F.push([sec, 'Confirmar: ' + it.confirmar, conf[it.k] || '']);
+  });
+  piezas.forEach(p => {
+    const sec = 'Diseñado · ' + p.tipo + ' · ' + ((p.titulo || '').trim() || 'sin título'), l = ligaDe(p.de);
+    if (l) F.push([sec, 'Sale de', l.t]);
+    F.push([sec, 'Estado', (p.estado || '') + (p.cuando ? ' · ' + p.cuando : '')]);
+    if ((p.link || '').trim()) F.push([sec, 'Link', p.link.trim()]);
+    if ((p.imgs || []).length) F.push([sec, 'Láminas cargadas', String(p.imgs.length)]);
+    if ((p.nota || '').trim()) F.push([sec, 'Nota nuestra', p.nota.trim()]);
+    F.push([sec, 'Confirmar: ¿va así?', conf['pz' + p.id] || '']);
+    if ((p.com || '').trim()) F.push([sec, 'Comentario', p.com.trim()]);
   });
   if (P){
     const p = perfil, x = verDe(p.version) || {};
