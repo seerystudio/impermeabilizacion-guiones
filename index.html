@@ -412,6 +412,24 @@ body.list .cal{overflow-x:auto}
 body.list .flecha{margin:-20px 0}
 body.list .flecha span{white-space:normal}
 
+/* 27/09 · las piezas terminadas que subimos nosotros: cada lámina con su miniatura y su casillero de cambios */
+.g[data-v="PZ"] .var::before{content:"✓";background:#0A5BAA}
+.lam .pzth{display:block;width:92px;aspect-ratio:4/5;border:1px solid var(--lin);border-radius:8px;overflow:hidden;background:#EDEBE7;padding:0;position:relative;cursor:zoom-in}
+.lam .pzth img{width:100%;height:100%;object-fit:cover;display:block}
+.lam .pzth::after{content:"⤢";position:absolute;right:3px;bottom:2px;font-size:11px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.vert .lam .pzth{aspect-ratio:9/16}
+.lam .dice{margin:0 0 6px;font-family:var(--tit);font-weight:700;font-size:15px;line-height:1.15;letter-spacing:-.01em;color:#141414}
+.lam .seve{margin:0 0 7px;font-size:12.5px;color:var(--tenue);line-height:1.35}
+.lam textarea.camb{font-size:13.5px;min-height:42px;background:#FBFAF8;border-style:dashed}
+.lam textarea.camb.edited{background:#fff;border-style:solid}
+.pz-cierres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pz-cierres .op-c{display:grid;gap:6px}
+.pz-cierres button{display:block;width:100%;aspect-ratio:9/16;border:1px solid var(--lin);border-radius:8px;overflow:hidden;background:#EDEBE7;padding:0;cursor:zoom-in}
+.pz-cierres img{width:100%;height:100%;object-fit:cover;display:block}
+.pz-cierres .nm{font-size:12px;font-weight:700;color:#141414;line-height:1.2}
+.pz-cierres .qu{font-size:11.5px;color:var(--tenue);line-height:1.3}
+.pz-acc{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
 /* piezas ya diseñadas: el carrusel o la historia terminada, para que del otro lado la aprueben */
 .piez{width:470px}
 .piez header{display:block}
@@ -507,7 +525,7 @@ body.list .piez{width:auto}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="alerta" id="alerta" hidden>Este navegador no está guardando lo que escribís (puede ser una ventana privada). Antes de cerrar, tocá «Enviar» o bajate un respaldo.</div>
 
-<script src="guiones.js?v=2026-09-27"></script>
+<script src="guiones.js?v=2026-09-27b"></script>
 <script>
 const D = window.GUIONES;
 /* 23/09: carruseles por estrategia (fijados, particulares, empresas, reserva). Cada uno con tres portadas para elegir. */
@@ -520,7 +538,9 @@ const HIS = (D.historias && D.historias.dias) || [];
 /* 27/09 · destacadas: el menú permanente del perfil. Mismo formato de frame que las historias del día. */
 const DES = (D.destacadas && D.destacadas.items) || [];
 const SECUENCIAS = HIS.concat(DES);
-const PIEZA = k => CARS.find(x => x.k === k) || SECUENCIAS.find(x => x.k === k) || (() => { for (const r of D.refs) for (const g of r.guiones) if (r.n + g.v === k) return g; })();
+/* 27/09 · las piezas que ya están diseñadas y subimos nosotros, con sus láminas en assets/piezas/ */
+const DIS = (D.disenado && D.disenado.items) || [];
+const PIEZA = k => CARS.find(x => x.k === k) || SECUENCIAS.find(x => x.k === k) || DIS.find(x => x.k === k) || (() => { for (const r of D.refs) for (const g of r.guiones) if (r.n + g.v === k) return g; })();
 const esPub = k => { const p = PIEZA(k); return !!p && p.etq === 'publicidad'; };
 const etqTxt = k => esPub(k) ? 'Publicidad' : 'Publicaciones';
 const etq = k => `<span class="etq ${esPub(k) ? 'pub' : 'org'}">${etqTxt(k)}</span>`;
@@ -758,6 +778,53 @@ function renderDestacadas(){
     <div class="acc-copia"><button type="button" data-copiargrupo="${DES.map(x => x.k).join(',')}">Copiar las ${DES.length} destacadas</button></div></aside>`;
   return fila('DES', 'DES', X.titulo, X.resumen, aside + `<div class="scripts">${DES.map(renderHis).join('')}</div>`);
 }
+/* 27/09 · lo ya diseñado. Las láminas son archivos de assets/piezas/, no texto: al lado de cada una
+   va el casillero de cambios (clave X1|c0), que se guarda y viaja igual que cualquier otro texto. */
+const PZ_SRC = n => 'assets/piezas/' + n + '.jpg';
+const contPz = n => n ? (n === 1 ? '1 cambio pedido' : n + ' cambios pedidos') : 'Sin marcas todavía';
+function renderPzLista(it){
+  const n = cambiosDe(it.k), l = ligaDe(it.de);
+  const lams = it.laminas.map((f, i) => `<div class="lam"><div class="ln">${i + 1}</div>
+    <button type="button" class="pzth" data-verpz="${it.k}" data-i="${i}" aria-label="Ver la lámina ${i + 1} en grande"><img src="${PZ_SRC(f.img)}" alt="" loading="lazy"></button>
+    <div><p class="dice">${esc(f.t)}</p>
+      <p class="seve">${esc(f.b)}</p>
+      ${f.st ? `<p class="lstk"><b>Sticker:</b> ${esc(f.st)}</p>` : ''}
+      ${campo(it.k + '|c' + i, '', 'camb', 'Cambios en la lámina ' + (i + 1), 2)}
+    </div></div>`).join('');
+  const cierres = (it.cierres || []).length ? `<div class="sec"><p class="lab">El cierre · tres versiones para elegir</p>
+    <div class="pz-cierres">${it.cierres.map((c, j) => `<div class="op-c">
+      <button type="button" data-vercierre="${it.k}" data-i="${j}" aria-label="Ver ${esc(c.t)} en grande"><img src="${PZ_SRC(c.img)}" alt="" loading="lazy"></button>
+      <div class="nm">${esc(c.t)}</div><div class="qu">${esc(c.b)}</div></div>`).join('')}</div>
+    <div class="conf" style="margin-top:10px"><div><b>¿Cuál de los tres va?</b></div>
+      <div class="op">${it.cierres.map((c, j) => `<button type="button" data-conf="cierre${it.k}" aria-pressed="${conf['cierre' + it.k] === 'Versión ' + (j + 1)}">Versión ${j + 1}</button>`).join('')}</div></div>
+    ${campo(it.k + '|ccom', '', 'camb', 'Por qué ese cierre', 2)}</div>` : '';
+  const ad = it.copyAd ? `<div class="sec"><p class="lab">El texto del anuncio · versión corta para la pauta</p>
+    ${campo(it.k + '|ads', it.copyAd, 'capt', 'Texto del anuncio', 4)}
+    <div class="pz-acc"><button type="button" data-copiartxt="${it.k}|ads">Copiar el texto del anuncio</button></div></div>` : '';
+  return `<article class="card g car${it.vertical ? ' vert' : ''}" data-v="PZ" data-k="${esc(it.k)}">
+    <header><span class="var" data-id="${esc(it.k)}">${esc(it.tipo)}</span>${etq(it.k)}
+      <h3>${esc(it.titulo)}</h3>
+      <p class="angle">${esc(it.formato)} · Para: ${esc(it.para)}${l ? ' · Sale de: ' + esc(l.t) : ''}</p>
+      <div class="cont ${n ? 'mod' : ''}" data-cont="${esc(it.k)}">${contPz(n)}</div></header>
+    <div class="sec"><p class="lab">${it.laminas.length} ${it.vertical ? 'frames' : 'láminas'} · tocá una para verla grande · al lado, lo que haya que cambiar</p>
+      <div class="lams">${lams}</div></div>
+    ${cierres}
+    <div class="sec"><p class="lab">${esc(it.labCopy || 'El copy')}</p>
+      ${campo(it.k + '|cap', it.copy, 'capt', it.labCopy || 'El copy', 6)}
+      <div class="pz-acc"><button type="button" data-copiartxt="${it.k}|cap">Copiar el copy</button>${l ? `<button type="button" class="ir" data-pzir3="${esc(it.k)}">Ver de dónde sale ↗</button>` : ''}</div></div>
+    ${ad}
+    ${it.confirmar ? `<div class="sec"><div class="conf"><div><b>Confirmanos:</b> ${esc(it.confirmar)}</div>${opciones(it.k)}</div></div>` : ''}
+    <div class="sec acciones"><button type="button" data-copiarcar="${esc(it.k)}">Copiar la pieza entera</button><button type="button" class="reset" data-reset="${esc(it.k)}" ${n ? '' : 'hidden'}>Borrar lo que escribí acá</button></div>
+  </article>`;
+}
+function renderDisenado(){
+  const X = D.disenado; if (!X || !DIS.length) return '';
+  const I = X.intro, lista = a => `<ol>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`;
+  const aside = `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>${esc(I.titulo)}</h4>${lista(I.lista)}</div>
+    <div class="sticky"><h4>${esc(I.titulo2)}</h4>${lista(I.lista2)}</div>
+    <div class="acc-copia"><button type="button" data-copiargrupo="${DIS.map(x => x.k).join(',')}">Copiar las ${DIS.length} piezas</button></div></aside>`;
+  return fila('PD', 'PD', X.titulo, X.resumen, aside + `<div class="scripts">${DIS.map(renderPzLista).join('')}</div>`);
+}
 function renderEstrategia(){
   const E = D.estrategia; if (!E) return '';
   const col = c => `<aside class="card est"><span class="rotulo">${esc(c.nombre)}</span><dl>${c.filas.map(x => `<dt>${esc(x[0])}</dt><dd>${esc(x[1])}</dd>`).join('')}</dl></aside>`;
@@ -874,6 +941,27 @@ let destinoFoto = null;
 /* el texto del carrusel o del guion del que sale una pieza: es lo que se copia para diseñarlo */
 function textoFuente(k){
   if (!k) return '';
+  /* 27/09 · una pieza ya diseñada: las láminas, los cambios pedidos y el copy */
+  const d = DIS.find(x => x.k === k);
+  if (d){
+    const L = [(d.vertical ? 'HISTORIA YA DISEÑADA · ' : 'CARRUSEL YA DISEÑADO · ') + d.titulo, d.tipo + ' · ' + d.formato, 'Etiqueta: ' + etqTxt(d.k)];
+    const li = ligaDe(d.de); if (li) L.push('Sale de: ' + li.t);
+    L.push('');
+    d.laminas.forEach((f, i) => {
+      L.push((i + 1) + '. ' + f.t + (f.b ? ' — ' + f.b : ''));
+      if (f.st) L.push('   sticker: ' + f.st);
+      const c = (val(d.k + '|c' + i) || '').trim();
+      if (c) L.push('   ✎ cambiar: ' + c);
+    });
+    if ((d.cierres || []).length){
+      L.push('', 'Cierre elegido: ' + (conf['cierre' + d.k] || 'sin elegir'));
+      const cc = (val(d.k + '|ccom') || '').trim(); if (cc) L.push('   ✎ ' + cc);
+    }
+    L.push('', (d.labCopy || 'El copy') + ':', val(d.k + '|cap'));
+    if (d.copyAd) L.push('', 'Texto del anuncio:', val(d.k + '|ads'));
+    if (d.confirmar) L.push('', 'Confirmar: ' + d.confirmar + ' → ' + (conf[d.k] || 'sin respuesta'));
+    return L.join('\n');
+  }
   const h = SECUENCIAS.find(x => x.k === k);
   if (h){
     const L = [(h.v === 'D' ? 'DESTACADA ' : 'HISTORIA ') + h.k + ' · ' + h.titulo, h.tipo + ' · para: ' + h.para, 'Etiqueta: ' + etqTxt(h.k), ''];
@@ -1034,7 +1122,7 @@ function disInner(){
       </div>
     </div>
   </aside>`;
-  return `<div class="row-title"><span class="n">PZ</span><span class="f">Lo que ya está diseñado</span><span class="m">Los carruseles y las historias terminadas, para aprobar</span></div>`
+  return `<div class="row-title"><span class="n">PZ</span><span class="f">Para sumar más piezas</span><span class="m">Si diseñan otro carrusel u otra historia, se sube acá. Las que ya están terminadas están en PD, arriba</span></div>`
     + intro + `<div class="scripts">${piezas.map(renderPz).join('')}</div>`;
 }
 const renderDis = () => `<section class="row" id="rDIS">${disInner()}</section>`;
@@ -1045,6 +1133,16 @@ function refrescarDis(){
 /* la flecha de ida: en el guion o el carrusel del que sale, un botón para venir hasta la pieza */
 function marcarLigas(){
   document.querySelectorAll('.yadis').forEach(b => b.remove());
+  /* 27/09 · las piezas que ya subimos nosotros también dejan su flecha en el guion del que salen */
+  DIS.forEach(d => {
+    if (!d.de) return;
+    const card = document.querySelector(`[data-k="${CSS.escape(d.de)}"] header`);
+    if (!card) return;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'yadis'; b.dataset.pzir4 = d.k;
+    b.textContent = '▼ Ya diseñado: ' + d.titulo;
+    card.appendChild(b);
+  });
   piezas.forEach(p => {
     if (!p.de) return;
     const card = document.querySelector(`[data-k="${CSS.escape(p.de)}"] header`);
@@ -1064,7 +1162,7 @@ function irAPieza(id){
 /* el recorrido de arriba y las flechas entre una fila y la siguiente */
 const RECORRIDO = [{id: 'EST', t: 'La estrategia'}, {id: 'CAL', t: 'El calendario'}, {id: 'PAU', t: 'La pauta'}, {id: 'P', t: 'El perfil'},
   {id: 'F', t: 'Los 3 fijados'}, {id: 'PAR', t: 'Particulares'}, {id: 'EMP', t: 'Empresas'}, {id: 'YT', t: 'Los videos'},
-  {id: 'RES', t: 'En reserva'}, {id: 'DIS', t: 'Lo ya diseñado'}, {id: 'VID', t: 'Guiones de video'}];
+  {id: 'RES', t: 'En reserva'}, {id: 'PD', t: 'Lo ya diseñado'}, {id: 'DIS', t: 'Sumar más piezas'}, {id: 'VID', t: 'Guiones de video'}];
 const FLUJO = {
   '0': 'Empecemos por la estrategia',
   'EST': 'De la estrategia sale el calendario',
@@ -1075,7 +1173,8 @@ const FLUJO = {
   'PAR': 'El otro público: empresas',
   'EMP': 'Varios de estos salen de sus propios videos',
   'YT': 'Y estos quedan listos, en reserva',
-  'RES': 'Cuando el carrusel ya está diseñado, va acá',
+  'RES': 'Y lo que ya está diseñado y terminado, acá',
+  'PD': 'Si diseñan otra pieza, se suma acá',
   'DIS': 'Más adelante, cuando se filme: los guiones de video'
 };
 const mapaHTML = () => `<div class="mapa"><span class="rotulo">El recorrido</span><div class="pasos">${RECORRIDO.map((p, i) => `${i ? '<span class="fx">→</span>' : ''}<button type="button" data-go="${esc(p.id)}">${esc(p.t)}</button>`).join('')}</div></div>`;
@@ -1103,7 +1202,12 @@ function despuesDeRender(){
 let lbox = null, lboxImgs = [], lboxI = 0;
 function verLamina(id, i){
   const p = pieza(id); if (!p || !(p.imgs || []).length) return;
-  lboxImgs = p.imgs; lboxI = i;
+  abrirLbox(p.imgs, i);
+}
+/* 27/09 · el mismo visor sirve para las láminas que subimos nosotros, que son archivos y no dataURL */
+function abrirLbox(imgs, i){
+  if (!imgs || !imgs.length) return;
+  lboxImgs = imgs; lboxI = i;
   if (!lbox){
     document.body.insertAdjacentHTML('beforeend', '<dialog id="lbox"><img alt=""><div class="nav"><button type="button" id="lbAnt">← Anterior</button><span id="lbN"></span><button type="button" id="lbSig">Siguiente →</button></div><div class="nav"><span></span><button type="button" id="lbCerrar">Cerrar</button></div></dialog>');
     lbox = $('#lbox');
@@ -1193,6 +1297,36 @@ document.addEventListener('click', e => {
   }
   const ver = e.target.closest('[data-pzver]');
   if (ver){ verLamina(ver.dataset.pzver, +ver.dataset.i); return; }
+  /* 27/09 · las piezas ya diseñadas: ver la lámina grande, ver un cierre, copiar un texto, ir al guion */
+  const vpz = e.target.closest('[data-verpz]');
+  if (vpz){
+    const d = DIS.find(x => x.k === vpz.dataset.verpz); if (!d) return;
+    abrirLbox(d.laminas.map(f => PZ_SRC(f.img)), +vpz.dataset.i);
+    return;
+  }
+  const vci = e.target.closest('[data-vercierre]');
+  if (vci){
+    const d = DIS.find(x => x.k === vci.dataset.vercierre); if (!d) return;
+    abrirLbox((d.cierres || []).map(c => PZ_SRC(c.img)), +vci.dataset.i);
+    return;
+  }
+  const ctx = e.target.closest('[data-copiartxt]');
+  if (ctx){ alPortapapeles(val(ctx.dataset.copiartxt) || ''); avisarCopia(ctx); return; }
+  const ir4 = e.target.closest('[data-pzir4]');
+  if (ir4){
+    goTo('PD');
+    const card = document.querySelector(`[data-k="${CSS.escape(ir4.dataset.pzir4)}"]`);
+    if (card && document.body.classList.contains('list')) card.scrollIntoView({behavior: 'smooth', block: 'center'});
+    return;
+  }
+  const ir3 = e.target.closest('[data-pzir3]');
+  if (ir3){
+    const d = DIS.find(x => x.k === ir3.dataset.pzir3), l = d && ligaDe(d.de); if (!l) return;
+    goTo(l.row);
+    const card = document.querySelector(`[data-k="${CSS.escape(l.k)}"]`);
+    if (card && document.body.classList.contains('list')) card.scrollIntoView({behavior: 'smooth', block: 'center'});
+    return;
+  }
   const ir = e.target.closest('[data-pzir]');
   if (ir){
     const p = pieza(ir.dataset.pzir), l = p && ligaDe(p.de); if (!l) return;
@@ -1232,6 +1366,7 @@ document.addEventListener('click', e => {
     alPortapapeles(ks.map(textoFuente).filter(Boolean).join('\n\n'));
     const que = ks.every(k => HIS.some(h => h.k === k)) ? 'as ' + ks.length + ' historias'
       : ks.every(k => DES.some(h => h.k === k)) ? 'as ' + ks.length + ' destacadas'
+      : ks.every(k => DIS.some(h => h.k === k)) ? 'as ' + ks.length + ' piezas'
       : 'os ' + ks.length + ' carruseles';
     avisarCopia(ct, 'Copiad' + que);
     return;
@@ -1248,7 +1383,7 @@ function render(){
   </div></section>`;
   const guionesVideo = fila('VID', 'VID', 'Guiones de video', 'Para cuando haya obra y alguien a cámara', `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Qué hay acá</h4><ol><li>Los guiones de video que ya teníamos, en los cuatro formatos de la propuesta.</li><li>Sus ideas ya pasaron a carrusel, más arriba.</li><li>Los tres animados (5A, 4B y 4A) están en el calendario: se arman sin filmar.</li></ol></div></aside>`);
   /* 27/09 · el orden es el de cómo se sube todo: primero lo que se decide, después lo que se publica, al final el material */
-  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
+  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDisenado() + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
     <div class="row-title"><span class="n">${String(r.n).padStart(2,'0')}</span><span class="f">${esc(r.formato)}</span><span class="m">${esc(r.resumen)}</span></div>
     ${renderRef(r)}
     <div class="scripts">${r.guiones.map(g => renderScript(r, g)).join('')}</div>
@@ -1264,7 +1399,8 @@ function render(){
     + (HIS.length ? opt('HIS', 'HIS · Las historias') : '')
     + (DES.length ? opt('DES', 'DES · Las destacadas') : '')
     + optGR('PAR') + optGR('EMP') + optGR('RES')
-    + opt('DIS', 'PZ · Lo que ya está diseñado')
+    + (DIS.length ? opt('PD', 'PD · Lo ya diseñado') : '')
+    + opt('DIS', 'PZ · Para sumar más piezas')
     + (D.videos ? opt('YT', 'YT · Los videos de YouTube') : '')
     + D.refs.map(r => opt(r.n, String(r.n).padStart(2, '0') + ' · ' + r.formato)).join('');
   prog();
@@ -1280,7 +1416,7 @@ limpiarEd();
 
 function marcarCont(pre){
   const n = cambiosDe(pre), el = document.querySelector(`[data-cont="${pre}"]`);
-  if (el){ el.textContent = contTxt(n); el.classList.toggle('mod', !!n); }
+  if (el){ el.textContent = DIS.some(x => x.k === pre) ? contPz(n) : contTxt(n); el.classList.toggle('mod', !!n); }
   const rb = document.querySelector(`[data-reset="${pre}"]`); if (rb) rb.hidden = !n;
 }
 /* escribir: se guarda en el dispositivo a cada tecla */
@@ -1361,8 +1497,8 @@ document.addEventListener('click', e => {
   }
   const rs = e.target.closest('[data-reset]');
   if (rs){
-    const pre = rs.dataset.reset;
-    if (!confirm('¿Volver al texto original de este guion? Se pierden los cambios que le hiciste.')) return;
+    const pre = rs.dataset.reset, esPz = DIS.some(x => x.k === pre);
+    if (!confirm(esPz ? '¿Borrar todo lo que escribiste en esta pieza? Se van los cambios que pediste en cada lámina y vuelve el copy original.' : '¿Volver al texto original de este guion? Se pierden los cambios que le hiciste.')) return;
     Object.keys(ed).filter(k => k.startsWith(pre + '|')).forEach(k => delete ed[k]);
     store.set('si-ed', ed);
     rs.closest('.g').querySelectorAll('textarea[data-e]').forEach(t => { t.value = ORIG[t.dataset.e]; t.classList.remove('edited'); alto(t); });
@@ -1445,8 +1581,24 @@ function textoTodo(){
     if (it.confirmar) L.push('Confirmar: ' + it.confirmar + ' → ' + (conf[it.k] || 'sin respuesta'));
     L.push('');
   });
+  /* 27/09 · las piezas ya diseñadas: solo lo que pidió cambiar, que es lo que hay que leer */
+  DIS.forEach(d => {
+    L.push('== Ya diseñado · ' + d.titulo + ' · ' + etqTxt(d.k));
+    d.laminas.forEach((f, i) => {
+      const c = (val(d.k + '|c' + i) || '').trim();
+      if (c) L.push((i + 1) + '. ' + f.t + ' → CAMBIAR: ' + c);
+    });
+    if ((d.cierres || []).length){
+      L.push('Cierre elegido: ' + (conf['cierre' + d.k] || 'sin elegir'));
+      const cc = (val(d.k + '|ccom') || '').trim(); if (cc) L.push('Cierre, nota: ' + cc);
+    }
+    L.push((d.labCopy || 'Copy') + ': ' + t(d.k + '|cap'));
+    if (d.copyAd) L.push('Texto del anuncio: ' + t(d.k + '|ads'));
+    if (d.confirmar) L.push('Confirmar: ' + d.confirmar + ' → ' + (conf[d.k] || 'sin respuesta'));
+    L.push('');
+  });
   if (piezas.length){
-    L.push('== Lo que ya está diseñado');
+    L.push('== Lo que sumaron ustedes');
     piezas.forEach(p => { L.push(textoPieza(p, false)); L.push(''); });
   }
   if (P){
@@ -1495,6 +1647,22 @@ function filasTodo(){
       if (l.st) F.push([sec, 'Frame ' + (i + 1) + ' · sticker', l.st]);
     });
     if (h.confirmar) F.push([sec, 'Confirmar: ' + h.confirmar, conf[h.k] || '']);
+  });
+  /* 27/09 · una fila por lámina que tenga un cambio pedido, más el copy y la respuesta */
+  DIS.forEach(d => {
+    const sec = 'Ya diseñado · ' + d.titulo, li = ligaDe(d.de);
+    F.push([sec, 'Qué es', d.tipo + ' · ' + d.formato + ' · ' + etqTxt(d.k) + (li ? ' · sale de ' + li.t : '')]);
+    d.laminas.forEach((f, i) => {
+      const c = (val(d.k + '|c' + i) || '').trim();
+      if (c) F.push([sec, 'Lámina ' + (i + 1) + ' · cambiar ✎', f.t + ' → ' + c]);
+    });
+    if ((d.cierres || []).length){
+      F.push([sec, 'Cierre elegido', conf['cierre' + d.k] || '']);
+      const cc = (val(d.k + '|ccom') || '').trim(); if (cc) F.push([sec, 'Cierre · nota', cc]);
+    }
+    F.push([sec, (d.labCopy || 'Copy') + cambio(d.k + '|cap'), val(d.k + '|cap')]);
+    if (d.copyAd) F.push([sec, 'Texto del anuncio' + cambio(d.k + '|ads'), val(d.k + '|ads')]);
+    if (d.confirmar) F.push([sec, 'Confirmar: ' + d.confirmar, conf[d.k] || '']);
   });
   piezas.forEach(p => {
     const sec = 'Diseñado · ' + p.tipo + ' · ' + ((p.titulo || '').trim() || 'sin título'), l = ligaDe(p.de);

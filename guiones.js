@@ -1161,3 +1161,98 @@ window.GUIONES.destacadas = {
     "Cuando haya obra filmada, «Obras» es la que más rinde renovar: es la que contesta sola si son reales."
   ]
 };
+
+/* 27/09 · Lo ya diseñado. Las piezas que Víctor ya tiene terminadas, subidas al tablero lámina por
+   lámina: cada una con su etiqueta (publicidad o publicaciones), el copy de la publicación y, al lado
+   de cada lámina, un lugar para escribir lo que haya que cambiar. Las imágenes están en assets/piezas/.
+   La etiqueta de cada una la hereda del carrusel o la historia del que sale; donde no había pieza en el
+   tablero (la comparativa), va dicho en «Confirmanos». */
+window.GUIONES.disenado = {
+  titulo: "Lo ya diseñado",
+  resumen: "Cuatro piezas terminadas: tres carruseles y una historia. Cada lámina con su casillero para pedir cambios",
+  intro: {
+    titulo: "Qué hay acá",
+    lista: [
+      "Las piezas que ya están diseñadas, lámina por lámina. Tocá una lámina y se ve grande.",
+      "Al lado de cada lámina hay un casillero: escribí ahí lo que haya que cambiar de ESA lámina. Lo que escribas queda guardado y viaja con «Enviar».",
+      "Cada pieza lleva su etiqueta: «Publicidad» es la que va con plata atrás, «Publicaciones» la que sale sola.",
+      "Abajo de las láminas está el copy de la publicación: también se puede cambiar."
+    ],
+    titulo2: "Antes de publicar cualquiera",
+    lista2: [
+      "El número que se publica: hoy la historia muestra el 11 5954-7352, que es el del estudio jurídico.",
+      "Los nombres de clientes de la historia: hay permisos que pedir y dos que no pueden ir.",
+      "El pronóstico del Niño se vuelve a chequear la semana que sale cada pieza."
+    ]
+  },
+  items: [
+    {k: "X1", etq: "publicidad", tipo: "Carrusel · particulares · El Niño", titulo: "El Niño: cinco cosas para mirar en tu techo",
+      para: "La dueña de casa", de: "P1", formato: "8 láminas · 4:5", cierre: "Envianos un mensaje o comentá",
+      labCopy: "El copy de la publicación",
+      laminas: [
+        {img: "p1-01", t: "El Niño ya está acá. ¿Tu techo?", b: "Rótulo «Último momento» sobre un cielo de tormenta. Abajo: 5 puntos para revisar antes de las lluvias"},
+        {img: "p1-02", t: "El dato · Qué es El Niño", b: "El Pacífico más caliente de lo normal cambia las lluvias. Cita al Servicio Meteorológico Nacional al pie"},
+        {img: "p1-03", t: "Punto 1 de 5 · Canaletas y desagües", b: "Sacales hojas y tierra. Tapados, el agua se junta arriba"},
+        {img: "p1-04", t: "Punto 2 de 5 · Grietas", b: "Por más finas que sean, una tormenta fuerte las encuentra"},
+        {img: "p1-05", t: "Punto 3 de 5 · Membrana", b: "Bordes levantados, globos o capas arriba de capas: por ahí entra"},
+        {img: "p1-06", t: "Punto 4 de 5 · Chapa", b: "Óxido alrededor de los tornillos y en las uniones"},
+        {img: "p1-07", t: "Punto 5 de 5 · Adentro", b: "Manchas o pintura inflada en el cielorraso: el agua ya está entrando"},
+        {img: "p1-08", t: "¿Encontraste alguna?", b: "El techo se arregla antes de que llueva. Botón: envianos un mensaje o comentá"}
+      ],
+      copy: "El Niño ya está acá. Antes de la próxima tormenta, subí al techo y mirá estas cinco cosas.\n\n1. Canaletas y desagües tapados: el agua se junta arriba en vez de irse.\n2. Grietas, por más finas que sean.\n3. La membrana: bordes levantados, globos, capas arriba de capas.\n4. La chapa: óxido alrededor de los tornillos y en las uniones.\n5. Adentro: manchas o pintura inflada en el cielorraso o arriba de las paredes. Ahí el agua ya está entrando.\n\nNinguna de las cinco se arregla sola, y todas se arreglan mejor antes de que llueva que después.\n\nGuardalo para tenerlo a mano cuando subas. Si encontrás alguna, comentá o mandanos la foto: te decimos qué estás mirando.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      copyAd: "El Niño ya está acá. ¿Y tu techo?\n\nCinco cosas para mirar hoy, antes de la próxima tormenta: canaletas, grietas, membrana, chapa y el cielorraso.\n\nSi encontrás alguna, escribinos y te decimos qué estás mirando. Impermeabilización elástica, sin romper el techo. Solmi · San Pedro.",
+      confirmar: "Tres cosas. La lámina 2 pone el pronóstico con fuente del Servicio Meteorológico: hay que volver a chequearlo la semana que se publica y corregirlo si cambió. El cierre dice «envianos un mensaje o comentá», no WhatsApp: ¿queda así hasta que haya número propio? Y esta es de las que van con pauta: el reparto le da las semanas 3 y 4 de particulares a P1 o P2, y esta es P1."},
+
+    {k: "X2", etq: "publicaciones", tipo: "Carrusel · fijado", titulo: "Cómo trabajamos: sin romper nada",
+      para: "Las dos estrategias", de: "F3", formato: "8 láminas · 4:5", cierre: "Comentá SERVICIO y te enviamos toda la info",
+      labCopy: "El copy de la publicación",
+      laminas: [
+        {img: "ct-01", t: "Así es como arreglamos tu techo sin romper nada", b: "Ilustración 3D de la casa con la terraza rajada. Abajo: deslizá →"},
+        {img: "ct-02", t: "1 · Visita diagnóstico", b: "Vamos a tu casa, revisamos el techo y encontramos por dónde entra el agua"},
+        {img: "ct-03", t: "2 · Aplicamos el producto con rodillo", b: "Tachados: albañiles, polvo, ruido"},
+        {img: "ct-04", t: "3 · Recorre el mismo camino que el agua", b: "El corte de la losa con la grieta"},
+        {img: "ct-05", t: "4 · Adentro se transforma en gel", b: "Y el agua ya no moja"},
+        {img: "ct-06", t: "Lo de siempre vs. Solmi", b: "Cuatro filas: romper el techo / membrana encima / pintura que se gasta / albañiles, polvo y ruido"},
+        {img: "ct-07", t: "¿Dónde se aplica?", b: "Techos y terrazas, techos de chapa, membranas viejas, piletas, tanques de agua y cañerías"},
+        {img: "ct-08", t: "¿Tenés humedad en el techo?", b: "Comentá SERVICIO y te enviamos toda la info. solmi.com.ar · San Pedro, Bs. As."}
+      ],
+      copy: "Así arreglamos un techo con humedad, sin romper nada.\n\n1. Visita diagnóstico: vamos, revisamos el techo y encontramos por dónde entra el agua.\n2. Aplicamos el producto con rodillo. Sin albañiles, sin polvo, sin ruido.\n3. El producto recorre el mismo camino que el agua.\n4. Adentro se transforma en gel, y el agua ya no moja.\n\nNo es una membrana encima ni una pintura que se gasta: va por dentro. Sirve en techos y terrazas, techos de chapa, techos con membranas viejas, piletas de natación, tanques de agua y cañerías.\n\n¿Tenés humedad en el techo? Comentá SERVICIO y te mandamos toda la info por mensaje.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      confirmar: "La lámina 6 compara con «lo de siempre» y promete «resiste granizo y tránsito»: ¿lo firman así o lo bajamos? Y el cierre pide comentar SERVICIO: eso solo funciona si alguien contesta esos comentarios el mismo día. ¿Quién los contesta?"},
+
+    {k: "X3", etq: "publicidad", tipo: "Carrusel · particulares · chapa", titulo: "El mismo techo, dos finales distintos",
+      para: "La dueña de casa con techo de chapa", de: "E2", formato: "7 láminas · 4:5", cierre: "Comentá o envianos un mensaje",
+      labCopy: "El copy de la publicación",
+      laminas: [
+        {img: "cp-01", t: "El mismo techo. Dos finales distintos.", b: "La casa partida al medio: a la izquierda «sin nuestro servicio», con lluvia y óxido; a la derecha, «con nuestro servicio». Deslizá y compará"},
+        {img: "cp-02", t: "Sin nuestro servicio · Empieza con un punto de óxido", b: "En tornillos y solapes, donde nadie mira"},
+        {img: "cp-03", t: "Sin nuestro servicio · Cada lluvia lo hace avanzar", b: "Perfora la chapa, mancha las paredes y el agua termina adentro de tu casa"},
+        {img: "cp-04", t: "Con nuestro servicio · Frenamos el óxido, sellamos y plastificamos", b: "Sin cambiar las chapas y sin molestias de obra"},
+        {img: "cp-05", t: "Con nuestro servicio · La lluvia llega. Y se va.", b: "Las chapas quedan protegidas de futuras degradaciones"},
+        {img: "cp-06", t: "Con nuestro servicio · Tu techo, recuperado", b: "Las mismas chapas, protegidas y listas para muchos años más"},
+        {img: "cp-07", t: "¿Tu techo ya muestra óxido?", b: "Frenalo antes de que llegue adentro. Te asesoramos sin compromiso"}
+      ],
+      copy: "El mismo techo de chapa, dos finales distintos.\n\nUno empieza con un punto de óxido en los tornillos y los solapes, donde nadie mira. Cada lluvia lo hace avanzar: perfora la chapa, mancha las paredes y el agua termina adentro de tu casa.\n\nEl otro: frenamos el óxido, sellamos y plastificamos. Sin cambiar las chapas y sin molestias de obra. La lluvia llega y se va, y el techo queda con las mismas chapas, protegidas.\n\n¿El tuyo ya muestra óxido? Frenalo antes de que llegue adentro. Comentá o escribinos y te asesoramos, sin compromiso.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      copyAd: "¿Tu techo de chapa ya tiene óxido?\n\nEmpieza en los tornillos y los solapes, donde nadie mira, y cada lluvia lo hace avanzar hasta que el agua entra.\n\nSe frena, se sella y se plastifica: las mismas chapas, sin cambiar el techo y sin obra. Escribinos y te asesoramos, sin compromiso. Solmi · San Pedro.",
+      confirmar: "Esta pieza no estaba en el tablero: es un ángulo nuevo, el «sin / con». La colgamos de E2, que dice lo mismo (recuperar la chapa sin cambiarla), pero la casa que se ve es de particulares, no un galpón: ¿la dejamos en particulares? Y la etiquetamos «Publicidad» porque es la que mejor entra en frío: entraría como tercera candidata de las semanas 3 y 4 de particulares, en lugar de P2, sin plata extra. ¿Va?"},
+
+    {k: "X4", etq: "publicaciones", tipo: "Historia · destacada «Ya confiaron»", titulo: "Los que ya confiaron",
+      para: "El que busca el nombre antes de llamar", de: "D4", formato: "7 frames · 9:16", vertical: true,
+      cierre: "Escribinos y te asesoramos", labCopy: "El texto para contestarle al que responda la historia",
+      laminas: [
+        {img: "hc-01", t: "Desde 1889 · Estas empresas ya confiaron en nosotros", b: "Más de 130 años. Seis generaciones. Abajo: «Mirá quiénes ↘»"},
+        {img: "hc-02", t: "Gobierno e instituciones", b: "Dos columnas de nombres, del Cabildo y CEAMSE a municipios y obras sociales"},
+        {img: "hc-03", t: "Medios y marcas nacionales", b: "Coca Cola, YPF, La Nación, Editorial Perfil, Bunge y Born, ACA, diarios y radios"},
+        {img: "hc-04", t: "Estadios, clubes y edificios", b: "River, Hipódromo, Autódromo, Galerías Pacífico, clubes y consorcios"},
+        {img: "hc-05", t: "Hotelería y complejos", b: "Panamericano, Intercontinental, Libertador, Carlton, cadena Solans y complejos de costa"},
+        {img: "hc-06", t: "Industria, agro y comercio", b: "Ledesma, Molinos Cañuelas, Cementos Avellaneda, Papel Prensa y muchas más"},
+        {img: "hc-07", t: "Tu techo puede ser el próximo", b: "Cierre, versión 1: la foto del rodillo arriba, el texto abajo. Botón «Escribinos y te asesoramos» y el número", st: "Link · wa.me/[el número que se publique]"}
+      ],
+      cierres: [
+        {img: "hc-07", t: "Versión 1 · la que vino elegida", b: "Foto grande arriba y el texto abajo, sobre el fondo hueso"},
+        {img: "hc-07b", t: "Versión 2 · foto al medio", b: "El logo arriba, la foto en una franja al medio, el texto abajo"},
+        {img: "hc-07c", t: "Versión 3 · foto de fondo", b: "La foto ocupa todo el frame y el texto va encima"}
+      ],
+      copy: "Gracias por escribir. Solmi impermeabiliza techos desde 1889: seis generaciones de la misma familia, y en esa lista están los trabajos que hicimos para empresas, hoteles, clubes y consorcios.\n\nSi querés que te orientemos con el tuyo, mandanos dos fotos: una de lejos, para ver el techo entero, y una de cerca de la mancha o del óxido. Decinos también en qué ciudad estás.\n\nCon eso ya te podemos decir qué se ve y cómo seguimos.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      confirmar: "🔴 Dos cosas antes de subirla, y las dos frenan la publicación. (1) El número: el cierre publica el 11 5954-7352, que es el del estudio jurídico. Si sale así, las consultas de techos y las del estudio se mezclan y no se va a poder saber qué trajo cada pieza. (2) Los nombres: la historia los nombra uno por uno. Subterráneos de Buenos Aires y las escuelas, museos y el Ministerio de la Ciudad no pueden ir; de los demás hace falta el permiso de cada uno, o la lista va por rubro y sin nombres. ¿Con cuáles tenemos permiso? Y abajo están las tres versiones del cierre: ¿cuál va?"}
+  ]
+};
