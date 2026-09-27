@@ -1,15 +1,18 @@
 /* Guiones · Impermeabilización Elástica Solmi (21/09/2026, versión 2: recortados y aptos para publicidad;
    22/09/2026: se suman la fila 05, la temporada del Niño, y los carruseles C4 y C5;
    23/09/2026: se arranca con carruseles y videos animados. Los guiones de video pasan a carrusel, se suman carruseles
-   de los videos de YouTube de la empresa, y entran la estrategia, el calendario y la pauta).
+   de los videos de YouTube de la empresa, y entran la estrategia, el calendario y la pauta;
+   27/09/2026: entran las historias —tres semanas, tres días por semana—, cada pieza lleva su etiqueta de publicidad
+   o publicaciones, y las secciones quedan en el orden en que se sube todo).
    Cada dato sale de los folletos de la empresa (2013 y 2018), de sus videos, de lo que contestó en el formulario o de lo
    que dijo Víctor. Beat: [tiempo, quién, qué se ve, texto]. El texto se puede cambiar en la página; lo que va
    [entre corchetes] se completa en la obra con el dato real. */
 window.GUIONES = {
-  titulo: "Techos: carruseles, videos animados y estrategia",
+  titulo: "Techos: carruseles, historias, videos animados y estrategia",
   intro: [
-    "Arrancamos con carruseles y videos animados: por ahora no hace falta filmar. Son dos publicaciones por semana, en dos estrategias, una para empresas y otra para particulares.",
-    "De arriba abajo: la estrategia, el calendario de ocho semanas, la pauta, el perfil, los tres fijados y los carruseles de cada estrategia. Después, los videos de YouTube de ustedes, de donde salen varios carruseles, y al final los guiones de video, para cuando se filme.",
+    "Arrancamos con carruseles y videos animados: por ahora no hace falta filmar. Son dos publicaciones y tres historias por semana, en dos estrategias, una para empresas y otra para particulares.",
+    "Las secciones están en el orden en que se sube todo: primero lo que se decide (estrategia, calendario, pauta), después lo que se publica (el perfil, los tres fijados, las historias de las tres primeras semanas y los carruseles de cada estrategia) y al final el material del que sale cada pieza: lo ya diseñado, los videos de YouTube de ustedes y los guiones de video, para cuando se filme.",
+    "Cada pieza lleva su etiqueta: «Publicidad» es la que va con plata atrás (el reparto está en la sección $) y «Publicaciones» es la que sale sola en la cuenta.",
     "Lo del Niño va en el primer mes: conviene publicarlo antes de las tormentas fuertes.",
     "Los textos se pueden cambiar: tocá cualquiera. Lo que cambiás queda en naranja y «Volver al original» lo deshace. En cada carrusel podés elegir la portada. Cuando termines, tocá «Enviar»."
   ],
@@ -28,6 +31,7 @@ window.GUIONES = {
     "Permiso para nombrar a Cementos Avellaneda, Editorial Perfil, Molinos Cañuelas y Multigranos.",
     "Las fotos originales (las del folleto miden 230 píxeles) y, si están, los videos originales.",
     "Una foto actual del lugar y una de un techo terminado.",
+    "Para las historias: quién las sube y quién contesta las cajas de preguntas el mismo día.",
     "Lo del Niño: chequear el pronóstico del Servicio Meteorológico la semana que se publica cada pieza."
   ],
   refs: [
@@ -342,7 +346,7 @@ window.GUIONES = {
       ],
       guiones: [
         {
-          v: "A", tipo: "Pieza animada · se publica ya",
+          v: "A", etq: "publicidad", tipo: "Pieza animada · se publica ya",
           titulo: "El Niño ya está acá. ¿Y tu techo?",
           hooks: [
             ["Pregunta inducida", "Seguro escuchaste que llegó el Niño. ¿Qué tiene que ver con tu techo?"],
@@ -468,24 +472,30 @@ window.GUIONES.estrategia = {
   ]
 };
 
+/* 27/09 · el calendario suma las historias: dos publicaciones y tres historias por semana.
+   Cada publicación lleva su clave, que es de donde sale la etiqueta de publicidad o publicaciones. */
 window.GUIONES.calendario = {
-  titulo: "Calendario · ocho semanas, dos por semana",
-  resumen: "La semana 1 es la semana en que se abre la cuenta. Dos días fijos, por ejemplo martes y viernes",
+  titulo: "Calendario · ocho semanas, dos publicaciones y tres historias por semana",
+  resumen: "La semana 1 es la semana en que se abre la cuenta. Dos días fijos para las publicaciones —por ejemplo martes y viernes— y tres para las historias",
   semanas: [
-    ["F1 · Quiénes somos", "carrusel · fijado", "V1 · El Niño ya está acá (5A)", "video animado · particulares · Niño"],
-    ["F3 · Cómo trabajamos", "carrusel · fijado", "P1 · El Niño: cinco cosas", "carrusel · particulares · Niño"],
-    ["F2 · Qué nos diferencia", "carrusel · fijado", "E1 · Si guardás algo bajo un techo de chapa", "carrusel · empresas · Niño"],
-    ["P2 · Cuatro frases antes de las lluvias", "carrusel · particulares · Niño", "Y3 · Tu techo de chapa en tres pasos", "carrusel · empresas"],
-    ["Y2 · Sin tratamiento, la humedad pasa", "carrusel · particulares", "V2 · No cambies el techo de chapa (4B)", "video animado · empresas"],
-    ["Y1 · ¿Membranas y pinturas que fallan?", "carrusel · particulares", "E3 · Obras", "carrusel · empresas"],
-    ["P4 · Tres techos sin romperlos", "carrusel · particulares", "E2 · No cambies el techo de chapa: recuperalo", "carrusel · empresas"],
-    ["P3 · ¿Le pusiste membrana y sigue filtrando?", "carrusel · particulares", "V3 · La humedad no avisa (4A)", "video animado · particulares"]
+    {p1: {k: "F1", t: "F1 · Quiénes somos", s: "carrusel · fijado"}, p2: {k: "5A", t: "V1 · El Niño ya está acá (5A)", s: "video animado · particulares · Niño"},
+      his: ["H1 · La bienvenida", "H2 · De carruajes a techos", "H3 · El Niño ya está acá"]},
+    {p1: {k: "F3", t: "F3 · Cómo trabajamos", s: "carrusel · fijado"}, p2: {k: "P1", t: "P1 · El Niño: cinco cosas", s: "carrusel · particulares · Niño"},
+      his: ["H4 · Ya te lo arreglaron y volvió a filtrar", "H5 · Sin romper nada", "H6 · Antes y después"]},
+    {p1: {k: "F2", t: "F2 · Qué nos diferencia", s: "carrusel · fijado"}, p2: {k: "E1", t: "E1 · Si guardás algo bajo un techo de chapa", s: "carrusel · empresas · Niño"},
+      his: ["H7 · Si guardás algo bajo un techo de chapa", "H8 · Si administrás un edificio", "H9 · No lo cambies: recuperalo"]},
+    {p1: {k: "P2", t: "P2 · Cuatro frases antes de las lluvias", s: "carrusel · particulares · Niño"}, p2: {k: "Y3", t: "Y3 · Tu techo de chapa en tres pasos", s: "carrusel · empresas"}, his: []},
+    {p1: {k: "Y2", t: "Y2 · Sin tratamiento, la humedad pasa", s: "carrusel · particulares"}, p2: {k: "4B", t: "V2 · No cambies el techo de chapa (4B)", s: "video animado · empresas"}, his: []},
+    {p1: {k: "Y1", t: "Y1 · ¿Membranas y pinturas que fallan?", s: "carrusel · particulares"}, p2: {k: "E3", t: "E3 · Obras", s: "carrusel · empresas"}, his: []},
+    {p1: {k: "P4", t: "P4 · Tres techos sin romperlos", s: "carrusel · particulares"}, p2: {k: "E2", t: "E2 · No cambies el techo de chapa: recuperalo", s: "carrusel · empresas"}, his: []},
+    {p1: {k: "P3", t: "P3 · ¿Le pusiste membrana y sigue filtrando?", s: "carrusel · particulares"}, p2: {k: "4A", t: "V3 · La humedad no avisa (4A)", s: "video animado · particulares"}, his: []}
   ],
   notas: [
     "Lo del Niño va en el primer mes: pierde valor si se corre. Cada publicación sale con el pronóstico del Servicio Meteorológico chequeado esa semana.",
     "Los fijados se fijan en orden F3, F2, F1: Instagram muestra primero el último.",
     "E3 nombra clientes: si no hay permiso, sale sin nombres o cambia de semana con P3.",
     "Los tres videos animados son los guiones 5A, 4B y 4A de más abajo. Los videos de YouTube tienen material para armarlos sin filmar: la demostración del gel y la aplicación en un techo de chapa real.",
+    "Las historias son tres semanas, no ocho: de la semana 4 en adelante salen de lo que conteste la gente en las cajas de preguntas.",
     "En reserva: Y4, Y5 y Y6, de plastificado."
   ]
 };
@@ -560,7 +570,7 @@ window.GUIONES.carruseles = {
         "4A, 4B y 5A quedan también como videos animados"
       ]},
       items: [
-        {k: "F1", tipo: "Fijado 01 · la historia", titulo: "Quiénes somos", para: "Las dos estrategias", sale: "2A, con el cambio guardado el 23/09, C1 y el folleto de 2018",
+        {k: "F1", etq: "publicaciones", tipo: "Fijado 01 · la historia", titulo: "Quiénes somos", para: "Las dos estrategias", sale: "2A, con el cambio guardado el 23/09, C1 y el folleto de 2018",
           hooks: [["Idea tuya (2A)", "Una empresa familiar desde 1889. Y al alcance tuyo."], ["Contracorriente", "No empezamos arreglando techos. Empezamos haciendo carruajes."], ["Pregunta", "¿Qué tiene que ver una herrería de carruajes con tu techo?"]],
           laminas: [
             {t: "Una empresa familiar desde 1889. Y al alcance tuyo.", b: "", img: "El logo «Desde 1889»", f: "2A"},
@@ -574,7 +584,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Impermeabilización Elástica Solmi. Desde 1889, la misma familia en San Pedro. Fabricamos nuestro producto y lo aplicamos en todo el país. Escribinos por WhatsApp.",
           confirmar: "¿Tienen un papel que muestre el 1889? ¿Y una foto actual del lugar?"},
-        {k: "F2", tipo: "Fijado 02", titulo: "Qué nos diferencia", para: "Las dos estrategias", sale: "3A y los dos folletos",
+        {k: "F2", etq: "publicaciones", tipo: "Fijado 02", titulo: "Qué nos diferencia", para: "Las dos estrategias", sale: "3A y los dos folletos",
           hooks: [["Tensión (3A)", "Seguro ya te prometieron que tu techo no iba a filtrar más."], ["Lista", "Tres hechos que nos diferencian. Ninguno es una promesa."], ["Pregunta", "¿Quién hizo el producto que te pusieron en el techo?"]],
           laminas: [
             {t: "Seguro ya te prometieron que tu techo no iba a filtrar más.", b: "", img: "Solo texto", f: "3A"},
@@ -587,7 +597,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Seguro ya te prometieron que tu techo no iba a filtrar más. Nosotros preferimos mostrártelo: el producto lo fabricamos y lo aplicamos nosotros, y somos la misma familia desde 1889. Escribinos por WhatsApp.",
           confirmar: "¿Hablamos de garantía o todavía no? ¿Tienen un papel que muestre el 1889?"},
-        {k: "F3", tipo: "Fijado 03", titulo: "Cómo trabajamos", para: "Las dos estrategias", sale: "1A, los videos A y C y los dos folletos",
+        {k: "F3", etq: "publicaciones", tipo: "Fijado 03", titulo: "Cómo trabajamos", para: "Las dos estrategias", sale: "1A, los videos A y C y los dos folletos",
           hooks: [["Idea tuya (1A)", "Así es como impermeabilizamos tu techo, paso a paso."], ["Pregunta", "¿Cómo se arregla un techo con humedad sin romperlo?"], ["Vulnerabilidad", "Si ya arreglaste el techo y volvió a filtrar, mirá cómo lo hacemos nosotros."]],
           laminas: [
             {t: "Así es como impermeabilizamos tu techo, paso a paso.", b: "", img: "Video C 0:09 · el aplicador en la terraza", yt: [SOLMI_YT.C, 9], f: "1A"},
@@ -610,7 +620,7 @@ window.GUIONES.carruseles = {
         "P1 y P2 son para guardar; el resto cierra en WhatsApp."
       ]},
       items: [
-        {k: "P1", tipo: "Particulares · El Niño", titulo: "El Niño: cinco cosas para mirar en tu techo", para: "La dueña de casa", sale: "C4 (con el título cambiado el 23/09), que reúne a 5A y 5B",
+        {k: "P1", etq: "publicidad", tipo: "Particulares · El Niño", titulo: "El Niño: cinco cosas para mirar en tu techo", para: "La dueña de casa", sale: "C4 (con el título cambiado el 23/09), que reúne a 5A y 5B",
           hooks: [["Predicción (C4)", "El Niño ya está acá. ¿Tu techo?"], ["Pregunta (5A)", "Seguro escuchaste que llegó el Niño. ¿Qué tiene que ver con tu techo?"], ["Lista (5B)", "Antes de la próxima tormenta, subí al techo y mirá estas cinco cosas."]],
           laminas: [
             {t: "El Niño ya está acá. ¿Tu techo?", b: "Cinco cosas para mirar hoy, antes de la próxima tormenta.", img: "Solo texto", f: "C4"},
@@ -624,7 +634,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "El Niño está activo y, según el Servicio Meteorológico Nacional, sigue hasta el verano. Antes de la próxima tormenta, mirá estas cinco cosas en tu techo. Guardalo para tenerlo a mano y, si encontrás alguna, mandanos la foto por WhatsApp.",
           confirmar: "¿Los cinco puntos los firmarían ustedes? ¿Contestan si les mandan una foto? El pronóstico se chequea la semana que sale."},
-        {k: "P2", tipo: "Particulares · El Niño", titulo: "Cuatro frases que se escuchan antes de las lluvias", para: "La dueña de casa", sale: "C5, con dos frases cambiadas porque no tenían fuente",
+        {k: "P2", etq: "publicidad", tipo: "Particulares · El Niño", titulo: "Cuatro frases que se escuchan antes de las lluvias", para: "La dueña de casa", sale: "C5, con dos frases cambiadas porque no tenían fuente",
           hooks: [["Creencias (C5)", "Cuatro frases que se escuchan antes de las lluvias."], ["Espejo", "«Si no gotea, está bien». ¿La dijiste?"], ["Pregunta", "¿Cuál de estas cuatro dijiste antes de la última tormenta?"]],
           laminas: [
             {t: "Cuatro frases que se escuchan antes de las lluvias.", b: "Y lo que pasa en el techo.", img: "Solo texto", f: "C5"},
@@ -637,7 +647,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Si no gotea, está bien. Le pongo otra membrana y listo. La chapa oxidada hay que cambiarla. Lo arreglo cuando pare de llover. Antes del Niño, cuatro frases que conviene revisar. Escribinos por WhatsApp.",
           confirmar: "¿Lo de las membranas y la chapa se puede decir así? ¿El producto se aplica con el techo húmedo? (por eso salió el «con sol»)"},
-        {k: "P3", tipo: "Particulares", titulo: "¿Le pusiste membrana y sigue filtrando?", para: "La dueña de casa (sirve también para el administrador)", sale: "3B y los dos folletos",
+        {k: "P3", etq: "publicaciones", tipo: "Particulares", titulo: "¿Le pusiste membrana y sigue filtrando?", para: "La dueña de casa (sirve también para el administrador)", sale: "3B y los dos folletos",
           hooks: [["Pregunta (3B)", "¿Le pusiste membrana y sigue filtrando?"], ["Número", "Una membrana. Dos. Tres. Y la gotera sigue ahí."], ["Provocación", "¿Cuántas membranas le pusiste ya a tu techo?"]],
           laminas: [
             {t: "¿Le pusiste membrana y sigue filtrando?", b: "", img: "Video C 0:04 · las membranas rotas", yt: [SOLMI_YT.C, 4], f: "3B"},
@@ -650,7 +660,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Cada vez que filtra, otra membrana arriba: las capas se acumulan, juntan humedad por debajo y el agua sigue entrando. Nuestro producto no es una membrana: entra en el techo y lo sella por dentro. Y las membranas viejas no hace falta sacarlas. ¿Te pasa? Escribinos por WhatsApp.",
           confirmar: "¿Las membranas viejas nunca hace falta sacarlas, o depende del techo? ¿El antes y el después de la lámina 6 son el mismo techo?"},
-        {k: "P4", tipo: "Particulares", titulo: "Tres techos que se arreglan sin romperlos", para: "La dueña de casa", sale: "C3, con otra portada por defecto (la del C3 era genérica)",
+        {k: "P4", etq: "publicaciones", tipo: "Particulares", titulo: "Tres techos que se arreglan sin romperlos", para: "La dueña de casa", sale: "C3, con otra portada por defecto (la del C3 era genérica)",
           hooks: [["Espejo", "Losa, chapa o membrana vieja: ¿cuál es tu techo?"], ["Pregunta (C3)", "¿Tu techo tiene humedad?"], ["Pregunta", "¿Cómo se arregla un techo con humedad sin romperlo?"]],
           laminas: [
             {t: "Losa, chapa o membrana vieja: ¿cuál es tu techo?", b: "Tres techos, tres arreglos. Ninguno lo rompe.", img: "Solo texto", f: "C3"},
@@ -661,7 +671,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Losa, chapa o membrana vieja: los tres se arreglan sin romper el techo. Escribinos por WhatsApp.",
           confirmar: "¿Los tres arreglos se pueden explicar así?"},
-        {k: "Y1", tipo: "Particulares · del video C", titulo: "¿Membranas y pinturas que fallan?", para: "La dueña de casa", sale: "El video C y el folleto de 2013",
+        {k: "Y1", etq: "publicaciones", tipo: "Particulares · del video C", titulo: "¿Membranas y pinturas que fallan?", para: "La dueña de casa", sale: "El video C y el folleto de 2013",
           hooks: [["Pregunta (video C)", "¿Membranas y pinturas que fallan?"], ["Pregunta (video C)", "¿Humedad? ¿Filtraciones? Hay otra técnica."], ["Vulnerabilidad (3B)", "Si ya le pusiste membrana al techo y volvió a filtrar, no pases de largo."]],
           laminas: [
             {t: "¿Membranas y pinturas que fallan?", b: "", img: "Video C 0:04", yt: [SOLMI_YT.C, 4], f: "Video C"},
@@ -676,7 +686,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "¿Membranas y pinturas que fallan? Hay otra técnica: un producto que entra como el agua, se transforma en gel y sella por dentro. Sin membrana, pintura ni brea, y sin roturas. Escribinos por WhatsApp.",
           confirmar: "¿Se puede decir así: «ocupa el lugar del agua», «no lo afecta el sol ni el granizo», «interna, no superficial»?"},
-        {k: "Y2", tipo: "Particulares · del video A", titulo: "Sin tratamiento, la humedad pasa", para: "La dueña de casa", sale: "El video A y el folleto de 2013",
+        {k: "Y2", etq: "publicaciones", tipo: "Particulares · del video A", titulo: "Sin tratamiento, la humedad pasa", para: "La dueña de casa", sale: "El video A y el folleto de 2013",
           hooks: [["Contraste (video A)", "Sin tratamiento, la humedad pasa."], ["Lista (video A)", "Filtraciones, goteras, humedad de todo tipo."], ["Pregunta (1A)", "¿Cómo se arregla un techo con humedad sin romperlo?"]],
           laminas: [
             {t: "Sin tratamiento, la humedad pasa.", b: "", img: "Video A 0:06 · la casita", yt: [SOLMI_YT.A, 6], f: "Video A"},
@@ -698,7 +708,7 @@ window.GUIONES.carruseles = {
         "El plastificado va en reserva, más abajo."
       ]},
       items: [
-        {k: "E1", tipo: "Empresas · El Niño", titulo: "Si guardás algo bajo un techo de chapa", para: "Galpones, depósitos y plantas", sale: "5C y el folleto de 2013",
+        {k: "E1", etq: "publicidad", tipo: "Empresas · El Niño", titulo: "Si guardás algo bajo un techo de chapa", para: "Galpones, depósitos y plantas", sale: "5C y el folleto de 2013",
           hooks: [["Advertencia (5C)", "Si guardás algo bajo un techo de chapa, esto es para vos."], ["Contraste", "Lo que se moja no es el techo. Es lo que está abajo."], ["Pregunta", "¿Galpón, quincho o depósito con la chapa oxidada? Antes del Niño, mirá esto."]],
           laminas: [
             {t: "Si guardás algo bajo un techo de chapa, esto es para vos.", b: "", img: "Video B 0:02", yt: [SOLMI_YT.B, 2], f: "5C"},
@@ -711,7 +721,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Si guardás algo bajo un techo de chapa, esto es para vos. La chapa se oxida primero en los tornillos y en las uniones, y por ahí entra el agua. Con el Niño activo hasta el verano, lo que se moja es lo que tenés abajo. Frenamos el óxido y protegemos la chapa, sin cambiarla. Escribinos por WhatsApp.",
           confirmar: "¿Trabajan galpones de campo y depósitos? ¿La chapa se oxida primero en tornillos y uniones? El pronóstico se chequea la semana que sale."},
-        {k: "E2", tipo: "Empresas", titulo: "No cambies el techo de chapa: recuperalo", para: "Plantas, galpones y edificios con techo de chapa", sale: "1B, 4B y los dos folletos",
+        {k: "E2", etq: "publicaciones", tipo: "Empresas", titulo: "No cambies el techo de chapa: recuperalo", para: "Plantas, galpones y edificios con techo de chapa", sale: "1B, 4B y los dos folletos",
           hooks: [["Contracorriente (1B y 4B)", "No cambies el techo de chapa: recuperalo."], ["Número (4B)", "Tres techos de chapa. Ninguno se cambió."], ["Contracorriente (1B)", "Techo de chapa oxidado no quiere decir techo nuevo."]],
           laminas: [
             {t: "No cambies el techo de chapa: recuperalo.", b: "", img: "Solo texto", f: "1B · 4B"},
@@ -724,7 +734,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Tres techos de chapa, antes y después. Ninguno se cambió: se reparó lo que hacía falta, se frenó el óxido y se protegió la chapa con plastificación elástica. ¿Tu techo de chapa está así? Escribinos por WhatsApp.",
           confirmar: "¿En qué orden van los pasos? El folleto de 2013 dice reparación, pavonizado y plastificación; el video B, curado y pavonizado, impermeabilizado y plastificado. ¿Tienen las fotos en tamaño original?"},
-        {k: "E3", tipo: "Empresas", titulo: "Obras", para: "El que busca el nombre antes de llamar", sale: "C2, sin los antes y después de chapa (ahora van en E2)",
+        {k: "E3", etq: "publicaciones", tipo: "Empresas", titulo: "Obras", para: "El que busca el nombre antes de llamar", sale: "C2, sin los antes y después de chapa (ahora van en E2)",
           hooks: [["Prueba", "De una cementera a un molino: cuatro obras."], ["Lista", "Fábricas, silos y terrazas. En todo el país."], ["Título (C2)", "Dónde trabajamos."]],
           laminas: [
             {t: "De una cementera a un molino: cuatro obras.", b: "Impermeabilización Elástica Solmi · desde 1889", foto: "cementos-avellaneda", img: "Folleto: Cementos Avellaneda", f: "C2"},
@@ -738,7 +748,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Fábricas, silos y terrazas, en todo el país. Escribinos por WhatsApp.",
           confirmar: "¿Se puede nombrar a estos cuatro clientes? Si no, va sin nombres: una cementera, una editorial, un molino, una planta de cereales. ¿Tienen las fotos en tamaño original?"},
-        {k: "Y3", tipo: "Empresas · del video B", titulo: "Tu techo de chapa, en tres pasos", para: "Galpones, plantas y quinchos", sale: "El video B y el folleto de 2013",
+        {k: "Y3", etq: "publicaciones", tipo: "Empresas · del video B", titulo: "Tu techo de chapa, en tres pasos", para: "Galpones, plantas y quinchos", sale: "El video B y el folleto de 2013",
           hooks: [["Proceso (video B)", "Tu techo de chapa se recupera en tres pasos."], ["Advertencia (video B)", "Detené el deterioro de tu techo de chapa."], ["Contracorriente (1B)", "Techo de chapa oxidado no quiere decir techo nuevo."]],
           laminas: [
             {t: "Tu techo de chapa se recupera en tres pasos.", b: "", img: "Video B 0:02", yt: [SOLMI_YT.B, 2], f: "Video B"},
@@ -759,7 +769,7 @@ window.GUIONES.carruseles = {
         "Los videos son de 240 píxeles: sirven para mostrar la prueba en un recuadro."
       ]},
       items: [
-        {k: "Y4", tipo: "Reserva · particulares", titulo: "La gota que no entra", para: "Paredes, frentes y piletas", sale: "Los videos de plastificado sobre un auto, una pared y frentes",
+        {k: "Y4", etq: "publicaciones", tipo: "Reserva · particulares", titulo: "La gota que no entra", para: "Paredes, frentes y piletas", sale: "Los videos de plastificado sobre un auto, una pared y frentes",
           hooks: [["Contraste (video)", "Esta mitad está plastificada. Esta no."], ["Curiosidad", "Mirá qué hace el agua en cada mitad."], ["Pregunta", "¿Humedad en la pared?"]],
           laminas: [
             {t: "Esta mitad está plastificada. Esta no.", b: "", img: "El capó, mitad y mitad", yt: ["rHYZLWd80s0", 11], f: "Video"},
@@ -771,7 +781,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Esta mitad está plastificada; esta no. Del lado plastificado el agua queda en gotas y no entra. Plastificado elástico para frentes, paredes y piletas. Escribinos por WhatsApp.",
           confirmar: "¿Cómo se muestra el plastificado? ¿Se puede decir que repele la humedad?"},
-        {k: "Y5", tipo: "Reserva · empresas", titulo: "Contra el óxido", para: "Campo, logística y náutica", sale: "Los videos de la batea, el contenedor y el barco, y el folleto de 2018",
+        {k: "Y5", etq: "publicaciones", tipo: "Reserva · empresas", titulo: "Contra el óxido", para: "Campo, logística y náutica", sale: "Los videos de la batea, el contenedor y el barco, y el folleto de 2018",
           hooks: [["Caso (video)", "Esta batea se la estaba comiendo el óxido."], ["Pregunta", "¿Tus bateas, contenedores o tanques están así?"], ["Causa", "Humedad y fermentación del maíz: así quedó esta batea."]],
           laminas: [
             {t: "Esta batea se la estaba comiendo el óxido.", b: "", img: "La batea corroída", yt: ["w7D0Ar8ZGOw", 10], f: "Video"},
@@ -784,7 +794,7 @@ window.GUIONES.carruseles = {
           ],
           caption: "Esta batea se la estaba comiendo el óxido, por la humedad y la fermentación del maíz. Se plastifica para salvar lo que queda. Plastificado anticorrosión para bateas, contenedores, barcos, tanques y cañerías. Escribinos por WhatsApp.",
           confirmar: "¿Cómo se muestra el plastificado? ¿Se puede mostrar la batea? ¿«Resistente a químicos» se puede decir así?"},
-        {k: "Y6", tipo: "Reserva · empresas", titulo: "Pisos, playones y caminos", para: "Plantas, playones y campos", sale: "Los videos del piso y del camino de tierra",
+        {k: "Y6", etq: "publicaciones", tipo: "Reserva · empresas", titulo: "Pisos, playones y caminos", para: "Plantas, playones y campos", sale: "Los videos del piso y del camino de tierra",
           hooks: [["Demostración (video)", "Largamos algo pesado y con puntas sobre este piso."], ["Curiosidad", "Un camino de tierra que no levanta tierra."], ["Pregunta", "¿Piso de playón o camino interno?"]],
           laminas: [
             {t: "Largamos algo pesado y con puntas sobre este piso.", b: "", img: "El piso", yt: ["hXP24IKVCzY", 8], f: "Video"},
@@ -932,3 +942,135 @@ window.GUIONES.perfil.versiones = [
     }
   }
 ];
+
+/* 27/09/2026 · Historias: tres semanas, tres días por semana. Nueve secuencias, de la bienvenida a empresas.
+   Frame: {rol, t: texto grande, b: texto chico, img: qué se ve, foto: foto del folleto, st: sticker, f: de dónde sale}.
+   Una historia dura 24 horas y se mira con el dedo listo para salir: texto corto, una idea por frame, el sticker
+   con su lugar reservado. Vale lo mismo que en el resto del tablero: nada inventado. */
+window.GUIONES.historias = {
+  titulo: "Historias · tres semanas, tres días por semana",
+  resumen: "Nueve secuencias, de la bienvenida a empresas. Se van a las 24 h: lo que queda es la destacada",
+  intro: {titulo: "Cómo leer las historias", lista: [
+    "Cada día es una secuencia de cinco o seis frames. Se suben seguidos, en el orden de acá.",
+    "El primero y el último nunca llevan foto: uno frena el dedo, el otro tiene que ser inequívoco.",
+    "Un solo sticker de acción por secuencia, y el hueco se deja antes de escribir el texto: si tapa el texto, está mal puesto.",
+    "Ninguna de las nueve va a pauta. La plata está toda en las publicaciones (ver $)."
+  ], titulo2: "El cierre sube de a poco", lista2: [
+    "Semana 1: caja de preguntas. La cuenta recién abre y deja el archivo de las dudas reales.",
+    "Semana 2: «mandanos la foto del techo». Es el mismo paso que pide P1.",
+    "Semana 3: WhatsApp, con el texto ya escrito y distinto por día. Recién acá, y solo si el número está resuelto.",
+    "Las respuestas se contestan el mismo día. Una caja de preguntas sin responder hace más daño que no ponerla."
+  ]},
+  dias: [
+    {k: "H1", tipo: "Semana 1 · día 1", titulo: "La bienvenida", para: "Las dos estrategias", etq: "publicaciones",
+      objetivo: "Que el que entra entienda en diez segundos qué es esto y por qué no es una cuenta más",
+      destacada: "Nuestra historia", sale: "El perfil elegido (versión C), el folleto de 2018 y lo que dijo Víctor el 10/09",
+      frames: [
+        {rol: "Gancho", t: "Esta cuenta es nueva.", b: "La empresa no.", img: "Solo texto, fondo azul", f: "Nuevo. Contesta sola la pregunta del que ve una cuenta en cero"},
+        {rol: "Contexto", t: "Somos Solmi, de San Pedro.", b: "Techos, terrazas y chapa. Fabricamos nuestro producto y lo aplicamos nosotros.", img: "Solo texto", f: "Bio del perfil · Víctor, 10/09: «desde la producción hasta la aplicación»"},
+        {rol: "Núcleo", t: "Sin romper nada.", b: "Sin sacar la membrana vieja, sin escombro, sin ruido de obra.", img: "Una foto de un techo terminado (falta)", f: "Folleto 2018 · lo confirma Solmi"},
+        {rol: "Clímax", t: "1889.", b: "Seis generaciones. El mismo lugar.", img: "Solo texto, el año enorme", f: "Folleto 2018, página 2 · sin «la más antigua»"},
+        {rol: "Cierre", t: "¿Dónde tenés humedad?", b: "Contanos y te decimos qué le pasa.", img: "Solo texto, con el logo abajo", st: "Caja de preguntas · «Contame dónde tenés humedad»", f: "El cierre de la semana 1"}
+      ],
+      confirmar: "¿Arrancamos diciendo que la cuenta es nueva? Es lo más honesto y de paso explica el cero. ¿Y quién contesta las preguntas que lleguen?"},
+    {k: "H2", tipo: "Semana 1 · día 2", titulo: "De carruajes a techos", para: "El que busca el nombre antes de llamar", etq: "publicaciones",
+      objetivo: "La credencial completa. Es lo que mira el que te googlea",
+      destacada: "Nuestra historia", sale: "F1 y el guion 2A · folleto 2018, página 2",
+      frames: [
+        {rol: "Gancho", t: "Antes de arreglar techos, esta familia hacía carruajes.", b: "", img: "Solo texto", st: "Quiz · «¿De qué año es Solmi?» · 1889 / 1975", f: "Folleto 2018, página 2. El quiz es el mecanismo que los hace quedarse"},
+        {rol: "Contexto", t: "1889, en Mitre 2250.", b: "Seguimos en la misma esquina de San Pedro.", img: "Una foto actual del portón (falta). Si no llega, solo texto", f: "2A · folleto"},
+        {rol: "Núcleo", t: "Seis generaciones después, seguimos fabricando lo que aplicamos.", b: "", img: "El taller o la preparación del producto (falta)", f: "Víctor, 10/09"},
+        {rol: "Clímax", t: "El que promete y desaparece no dura 137 años.", b: "", img: "Solo texto", f: "137 = 2026 − 1889. Falta el papel que muestre el 1889"},
+        {rol: "Cierre", t: "¿Qué te gustaría que te mostremos?", b: "", img: "Solo texto", st: "Caja de preguntas · «¿Qué querés ver?»", f: "Lo que conteste es el contenido de la semana 4"}
+      ],
+      confirmar: "¿Se puede filmar o fotografiar el portón de Mitre 2250 y dónde preparan el producto? Son las dos fotos que le faltan a esta secuencia."},
+    {k: "H3", tipo: "Semana 1 · día 3", titulo: "El Niño ya está acá", para: "Particulares", etq: "publicaciones",
+      objetivo: "Empujar el video animado del Niño (V1), que es lo que se pauta esas dos semanas",
+      destacada: "Techos", sale: "P1 y el guion 5B · Servicio Meteorológico Nacional",
+      frames: [
+        {rol: "Gancho", t: "Escuchaste lo del Niño.", b: "¿Y tu techo?", img: "Solo texto", st: "Encuesta · «¿Ya lo miraste?» · Sí / Todavía no", f: "P1 · la encuesta dice a cuántos les toca el tema"},
+        {rol: "Contexto", t: "El Pacífico más caliente de lo normal cambia las lluvias.", b: "El Servicio Meteorológico lo da activo hasta el verano.", img: "Solo texto, con «Fuente: Servicio Meteorológico Nacional»", f: "P1 · chequear el pronóstico la semana que sale. Sin «en tu zona» ni «el más fuerte de la historia»"},
+        {rol: "Núcleo", t: "Tres cosas para mirar hoy.", b: "Canaletas tapadas. Bordes de la membrana levantados. Óxido en los tornillos de la chapa.", img: "Video C 0:04 · las membranas rotas", f: "P1, puntos 1, 3 y 4"},
+        {rol: "Clímax", t: "Y adentro.", b: "Manchas o pintura inflada en el cielorraso: el agua ya está entrando.", img: "Video C 0:01 · la pared manchada", f: "P1, punto 5"},
+        {rol: "Cierre", t: "¿Encontraste alguna?", b: "Mandanos la foto.", img: "Solo texto, con el logo", st: "Caja de preguntas · «Mandanos la foto»", f: "El mismo cierre que P1"}
+      ],
+      confirmar: "Los tres puntos, ¿son los que ustedes miran primero cuando llegan a un techo?"},
+    {k: "H4", tipo: "Semana 2 · día 1", titulo: "Ya te lo arreglaron y volvió a filtrar", para: "Particulares y consorcios", etq: "publicaciones",
+      objetivo: "Nombrar el enojo antes que la solución: el que llama ya probó algo antes",
+      destacada: "Techos", sale: "P2 y P3 · lo que la empresa contestó en el formulario",
+      frames: [
+        {rol: "Gancho", t: "Ya te arreglaron el techo.", b: "Y volvió a filtrar.", img: "Solo texto", st: "Encuesta · «¿Te pasó?» · Sí / No", f: "Formulario 08/09: lo que escuchan todo el tiempo son «garantías inexistentes»"},
+        {rol: "Contexto", t: "No es mala suerte.", b: "Es cómo se arregla.", img: "Solo texto", f: "P3"},
+        {rol: "Núcleo", t: "La membrana se pega arriba.", b: "El sol, el granizo y el frío la van despegando.", foto: "membranas-antes", img: "Folleto: las membranas acumuladas", f: "Folleto 2013 · lo confirma Solmi"},
+        {rol: "Núcleo", t: "Entonces le ponen otra capa encima.", b: "Y después otra.", img: "Video C 0:04 · las membranas rotas", f: "Folleto 2018, página 9 · P2, frase 2"},
+        {rol: "Clímax", t: "No hace falta sacarlas.", b: "Se repara la última y se protege.", foto: "membranas-despues", img: "Folleto: la membrana recuperada", f: "Folleto 2018, página 9"},
+        {rol: "Cierre", t: "Mandanos la foto de tu techo.", b: "Te decimos qué le pasa.", img: "Solo texto, con el logo", st: "Caja de preguntas · «Mandanos la foto»", f: "El cierre de la semana 2"}
+      ],
+      confirmar: "¿La membrana se despega por sol, granizo y frío, o hay otra razón que digan ustedes? Es la explicación que sostiene toda la secuencia."},
+    {k: "H5", tipo: "Semana 2 · día 2", titulo: "Sin romper nada", para: "Particulares y consorcios", etq: "publicaciones",
+      objetivo: "La promesa de la marca entera en una secuencia, mostrada y no prometida",
+      destacada: "Techos", sale: "El guion 1A, los videos A y C, y el folleto de 2013",
+      frames: [
+        {rol: "Gancho", t: "¿Se puede arreglar un techo con humedad sin romperlo?", b: "", img: "Solo texto", f: "Arranque 2 del guion 1A, que pasó el filtro"},
+        {rol: "Núcleo", t: "No levantamos la membrana vieja.", b: "", img: "El techo antes de tocar nada (falta)", f: "Folleto 2018 · lo confirma Solmi"},
+        {rol: "Núcleo", t: "Sin roturas, sin polvo, sin ruido de obra.", b: "", img: "Solo texto", f: "Folleto 2018, página 3 · lo confirma Solmi"},
+        {rol: "Clímax", t: "Entra mojando, como el agua.", b: "Adentro se hace un gel elástico y sella por dentro.", img: "Video A 0:18 · el gotero y la cuchara que levanta el gel", f: "Videos A y C, de ustedes · lo confirma Solmi antes de publicar"},
+        {rol: "Núcleo", t: "Y como sella por dentro, no hay nada arriba que se despegue.", b: "", img: "El mismo techo terminado (falta)", f: "Video A: «no lo afectan el sol ni el granizo» · lo confirma Solmi"},
+        {rol: "Cierre", t: "Mandanos la foto de tu techo.", b: "", img: "Solo texto, con el logo", st: "Caja de preguntas · «Mandanos la foto»", f: "El cierre de la semana 2"}
+      ],
+      confirmar: "Los dos frames del medio son cómo actúa el producto. Van tal cual como lo dicen los videos de ustedes: ¿los firman así?"},
+    {k: "H6", tipo: "Semana 2 · día 3", titulo: "Antes y después", para: "Particulares y consorcios", etq: "publicaciones",
+      objetivo: "Mostrar. Es lo único que contesta al enojo del día 1 sin sumar otra promesa",
+      destacada: "Obras", sale: "E3 y C2 · las fotos del folleto de 2018, página 10",
+      frames: [
+        {rol: "Gancho", t: "Así estaba este techo.", b: "", img: "Solo texto", f: "Nuevo"},
+        {rol: "Antes", t: "Antes", b: "", foto: "chapa-1-antes", img: "Folleto: el techo de chapa, antes. A pantalla completa, sin más texto que la palabra", f: "Folleto 2018, página 10"},
+        {rol: "Núcleo", t: "Así se trabaja.", b: "", img: "La aplicación en obra (falta). Es el frame que prueba que la obra es de ustedes", f: "Video B, si no hay foto nueva"},
+        {rol: "Después", t: "Después", b: "", foto: "chapa-1-despues", img: "Folleto: el mismo techo, después. Mismo encuadre que el frame 2", f: "Folleto 2018, página 10"},
+        {rol: "Clímax", t: "Las mismas chapas.", b: "No cambiamos ninguna.", img: "Solo texto", f: "Folleto 2018, página 9"},
+        {rol: "Cierre", t: "¿Querés ver el tuyo?", b: "Mandanos la foto.", img: "Solo texto, con el logo", st: "Caja de preguntas · «Mandanos la foto»", f: "El cierre de la semana 2"}
+      ],
+      confirmar: "Estas fotos son las del folleto y miden 230 píxeles: en una historia a pantalla completa se van a ver mal. ¿Están las originales? Si no, este día se corre a la próxima obra."},
+    {k: "H7", tipo: "Semana 3 · día 1", titulo: "Si guardás algo bajo un techo de chapa", para: "Empresas: galpones, depósitos y quinchos", etq: "publicaciones",
+      objetivo: "Empujar E1, el carrusel de empresas que se pauta en las semanas 3 y 4",
+      destacada: "Obras", sale: "E1 y el guion 5C · folleto de 2013",
+      frames: [
+        {rol: "Gancho", t: "¿Galpón, quincho o depósito con la chapa oxidada?", b: "", img: "Solo texto", f: "La portada que eligieron para E1"},
+        {rol: "Contexto", t: "Abajo de ese techo hay mercadería, máquinas o autos.", b: "", img: "Un galpón por dentro (falta)", f: "5C"},
+        {rol: "Núcleo", t: "El óxido empieza en los tornillos y en las uniones.", b: "", foto: "chapa-2-antes", img: "Folleto: la chapa oxidada", f: "P1, punto 4 · folleto 2018"},
+        {rol: "Clímax", t: "La chapa se recupera sin cambiarla.", b: "Se frena el óxido y se protege.", foto: "chapa-2-despues", img: "Folleto: la misma chapa, recuperada", f: "Folleto 2018, página 9 · video B · lo confirma Solmi"},
+        {rol: "Cierre", t: "Escribinos por WhatsApp.", b: "", img: "Solo texto, con el logo", st: "Link · wa.me/[número]?text=Tengo un galpón con la chapa oxidada", f: "Falta el número que se publica"}
+      ],
+      confirmar: "¿El texto que ya viene escrito en el WhatsApp les sirve? Es la única forma de saber qué día trajo cada consulta."},
+    {k: "H8", tipo: "Semana 3 · día 2", titulo: "Si administrás un edificio", para: "Consorcios", etq: "publicaciones",
+      objetivo: "El administrador, que decide con presupuesto y asamblea pero decide",
+      destacada: "Terrazas", sale: "P3 y la estrategia de empresas",
+      frames: [
+        {rol: "Gancho", t: "La terraza filtra.", b: "El reclamo lo recibís vos.", img: "Solo texto", f: "Estrategia: los administradores van con empresas"},
+        {rol: "Contexto", t: "Y la pregunta de la asamblea es siempre la misma.", b: "Cuánto tiempo va a estar el edificio en obra.", img: "Solo texto", f: "Estrategia: lo que más lo frena es la obra, no el precio"},
+        {rol: "Núcleo", t: "Sin andamios, sin escombro en el palier, sin cortar el paso.", b: "", img: "Solo texto", f: "Folleto: «sin molestias de obra» · lo confirma Solmi"},
+        {rol: "Núcleo", t: "Se trabaja arriba y abajo el edificio sigue viviendo.", b: "", foto: "cementos-avellaneda", img: "Folleto: el operario en el canasto colgante. Mejor una foto de edificio, si la hay", f: "Folleto 2018, página 4"},
+        {rol: "Clímax", t: "Ya trabajamos en consorcios de Buenos Aires.", b: "", img: "Solo texto", f: "Folleto 2018, página 11: cinco consorcios en la lista. Sin nombrarlos hasta que haya permiso"},
+        {rol: "Cierre", t: "Pasanos la foto de la terraza.", b: "", img: "Solo texto, con el logo", st: "Link · wa.me/[número]?text=Administro un edificio y tengo una filtración", f: "Falta el número que se publica"}
+      ],
+      confirmar: "¿Se puede decir «sin andamios y sin cortar el paso» en un edificio, o depende de la obra? Y la foto del canasto colgante, ¿es de un edificio o de una planta?"},
+    {k: "H9", tipo: "Semana 3 · día 3", titulo: "No lo cambies: recuperalo", para: "Empresas y consorcios con techo de chapa", etq: "publicaciones",
+      objetivo: "El argumento económico del folleto, sin decir un solo precio",
+      destacada: "Obras", sale: "E2, Y3 y el video B · folleto de 2018, páginas 9 y 10",
+      frames: [
+        {rol: "Gancho", t: "Antes de cambiar el techo, mirá esto.", b: "", img: "Solo texto", f: "E2"},
+        {rol: "Contexto", t: "Cambiarlo es chapas nuevas más la mano de obra de sacar las viejas.", b: "", img: "Solo texto", f: "Estrategia de empresas: el argumento económico del folleto, sin precios"},
+        {rol: "Núcleo", t: "Recuperarlo son tres pasos.", b: "Se repara, se frena el óxido y se protege.", foto: "chapa-3-antes", img: "Video B · el techo de chapa real, con los aplicadores", f: "Video B, de ustedes: «recuperamos su techo de chapa en solo tres pasos»"},
+        {rol: "Clímax", t: "Tres pasos, y ni una chapa nueva.", b: "", foto: "chapa-3-despues", img: "Folleto: el techo recuperado", f: "Folleto 2018, páginas 9 y 10"},
+        {rol: "Cierre", t: "Escribinos por WhatsApp.", b: "", img: "Solo texto, con el logo", st: "Link · wa.me/[número]?text=Quiero recuperar un techo de chapa", f: "Falta el número que se publica"}
+      ],
+      confirmar: "El argumento de que recuperar sale menos que cambiar, ¿lo sostienen ustedes? Va sin ningún número."}
+  ],
+  notas: [
+    "Las historias no reemplazan a las dos publicaciones de la semana: las empujan. El día 3 de la semana 1 empuja el video del Niño, y el día 1 de la semana 3 empuja E1.",
+    "Ninguna va a pauta. Si más adelante se quiere pautar en historias, la que más sirve es la del día 6: un antes y después se entiende sin sonido y sin contexto.",
+    "Las nueve terminan guardadas en una destacada: es lo único que sigue estando cuando alguien entra al perfil tres meses después.",
+    "Paredes, tanques y piletas quedaron afuera: la cuenta hoy es de techos, terrazas y chapa. Si entran, es una secuencia más.",
+    "De la semana 4 en adelante, las historias salen de lo que conteste la gente en las cajas de preguntas."
+  ]
+};

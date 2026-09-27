@@ -101,6 +101,9 @@ details.tr pre{white-space:pre-wrap;font-family:inherit;font-size:13px;color:var
 .g[data-v="B"] .var::before{content:"B"}
 .g[data-v="C"] .var::before{content:"C";background:transparent;color:#141414;border:1.5px solid #141414}
 .g[data-v="D"] .var::before{content:"D";background:#63625E}
+.g[data-v="S1"] .var::before{content:"1";background:var(--naranja)}
+.g[data-v="S2"] .var::before{content:"2"}
+.g[data-v="S3"] .var::before{content:"3";background:transparent;color:#141414;border:1.5px solid #141414}
 .g h3{font-family:var(--tit);margin:0;font-size:25px;font-weight:800;line-height:1.05;letter-spacing:-.03em;padding-right:48px}
 .g .angle{margin:8px 0 0;font-size:13.5px;color:var(--tenue)}
 .star{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--lin);background:transparent;font-size:18px;line-height:1;color:#141414;transition:background .25s,color .25s,transform .3s var(--sal)}
@@ -366,6 +369,20 @@ body.list .car{width:auto}
 .limg b{color:#141414}
 .limg a{color:#C23A00}
 .lsrc{margin:2px 0 0;font-size:11.5px;color:var(--tenue)}
+/* 27/09 · la etiqueta de cada pieza y las historias */
+.etq{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:100px;padding:3px 9px;white-space:nowrap;vertical-align:middle}
+.etq.pub{color:#fff;background:var(--naranja)}
+.etq.org{color:var(--tenue);border:1px solid rgba(0,0,0,.2)}
+.g header .etq{margin:0 0 8px 8px}
+.cal .etq{margin-top:6px}
+.cal .etq.org{color:var(--gris);border-color:var(--linea-2)}
+.cal .his{font-size:12.5px;color:var(--gris)}
+.cal .his div{margin:2px 0}
+.cal .his .no{color:var(--gris-2)}
+.lam .rol{font-family:var(--tit);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--naranja);padding-top:3px;line-height:1.2}
+.lam .th.sf{background:#0A5BAA}
+.lstk{margin:6px 0 0;font-size:12.5px;color:#141414;background:rgba(255,77,0,.09);border:1px solid rgba(255,77,0,.25);border-radius:8px;padding:5px 9px}
+.lstk b{color:#C23A00}
 body.list .est,body.list .cal{width:auto}
 body.list .cal{overflow-x:auto}
 
@@ -482,13 +499,20 @@ body.list .piez{width:auto}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="alerta" id="alerta" hidden>Este navegador no está guardando lo que escribís (puede ser una ventana privada). Antes de cerrar, tocá «Enviar» o bajate un respaldo.</div>
 
-<script src="guiones.js?v=2026-09-23"></script>
+<script src="guiones.js?v=2026-09-27"></script>
 <script>
 const D = window.GUIONES;
 /* 23/09: carruseles por estrategia (fijados, particulares, empresas, reserva). Cada uno con tres portadas para elegir. */
 const GR = (D.carruseles && D.carruseles.grupos) || [];
 const CARS = GR.flatMap(g => g.items);
 CARS.forEach(it => { if (!it.hook) it.hook = {dice: it.hooks[0][1]}; });
+/* 27/09 · historias: tres semanas, tres días por semana. Y la etiqueta de cada pieza:
+   «Publicidad» es la que lleva plata atrás (el reparto está en la sección $), «Publicaciones» la que sale sola. */
+const HIS = (D.historias && D.historias.dias) || [];
+const PIEZA = k => CARS.find(x => x.k === k) || HIS.find(x => x.k === k) || (() => { for (const r of D.refs) for (const g of r.guiones) if (r.n + g.v === k) return g; })();
+const esPub = k => { const p = PIEZA(k); return !!p && p.etq === 'publicidad'; };
+const etqTxt = k => esPub(k) ? 'Publicidad' : 'Publicaciones';
+const etq = k => `<span class="etq ${esPub(k) ? 'pub' : 'org'}">${etqTxt(k)}</span>`;
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 /* guardado: todo en localStorage de este navegador, con prefijo «si-»: el tablero de Solmi & Asociados
@@ -601,7 +625,7 @@ function renderScript(r, g){
   const hooks = g.hooks ? `<details class="hks"><summary>${g.hooks.length} arranques más · o escribí el tuyo</summary><ol data-hkl="${key}">${hooksList(key, g)}</ol><div class="hkadd"><textarea data-hkin="${key}" rows="2" aria-label="Tu propio arranque" placeholder="Escribí tu propio arranque…"></textarea><button type="button" data-hkadd="${key}">Agregar</button></div></details>` : '';
   return `<article class="card g" data-v="${g.v}" data-k="${key}">
     <header>
-      <span class="var">${esc(g.tipo)}</span>
+      <span class="var">${esc(g.tipo)}</span>${etq(key)}
       <h3>${esc(g.titulo)}</h3>
       <p class="angle">${esc(g.angulo)}</p>
       <div class="cont ${n ? 'mod' : ''}" data-cont="${key}">${contTxt(n)}</div>
@@ -638,7 +662,7 @@ function prog(){
 const ytUrl = (id, s) => 'https://www.youtube.com/watch?v=' + id + (s ? '&t=' + s + 's' : '');
 function miniatura(it, l, i){
   const fotos = l.foto ? [].concat(l.foto) : [];
-  return `<div class="th${fotos.length > 1 ? ' th2' : ''}">${fotos.map(f => `<img src="assets/obras/${esc(f)}.jpg" alt="" loading="lazy">`).join('')}<span data-th="${it.k}|${i}">${esc(val(it.k + '|l' + i + 't') ?? l.t)}</span></div>`;
+  return `<div class="th${fotos.length > 1 ? ' th2' : ''}">${fotos.map(f => `<img src="assets/obras/${esc(f)}.jpg" alt="" loading="lazy">`).join('')}<span data-th="${it.k}|l${i}">${esc(val(it.k + '|l' + i + 't') ?? l.t)}</span></div>`;
 }
 const opciones = k => `<div class="op">${['Sí, va así', 'No, cambiarlo', 'Lo hablamos'].map(o => `<button type="button" data-conf="${k}" aria-pressed="${conf[k] === o}">${o}</button>`).join('')}</div>`;
 function renderCar(it, gr){
@@ -647,7 +671,7 @@ function renderCar(it, gr){
     <div>${campo(it.k + '|l' + i + 't', l.t, 't1', 'Título de la lámina ' + (i + 1), 1)}${campo(it.k + '|l' + i + 'b', l.b, 't2', 'Texto de la lámina ' + (i + 1), 2)}
       <p class="limg"><b>Imagen:</b> ${l.yt ? `<a href="${ytUrl(l.yt[0], l.yt[1])}" target="_blank" rel="noopener">${esc(l.img)} ↗</a>` : esc(l.img || 'Solo texto')}</p>
       ${l.f ? `<p class="lsrc">Sale de: ${esc(l.f)}</p>` : ''}</div></div>`).join('');
-  const cab = gr.id === 'F' ? `<span class="imp-c">Importante · ${esc(it.tipo)}</span>` : `<span class="var" data-id="${esc(it.k)}">${esc(it.tipo)}</span>`;
+  const cab = (gr.id === 'F' ? `<span class="imp-c">Importante · ${esc(it.tipo)}</span>` : `<span class="var" data-id="${esc(it.k)}">${esc(it.tipo)}</span>`) + etq(it.k);
   return `<article class="card g car" data-v="${gr.id === 'F' ? 'A' : gr.id === 'RES' ? 'D' : gr.id === 'EMP' ? 'C' : 'B'}" data-k="${it.k}">
     <header>${cab}<h3>${gr.id === 'F' ? esc(it.k) + ' · ' : ''}${esc(it.titulo)}</h3>
       <p class="angle">Para: ${esc(it.para)} · Sale de: ${esc(it.sale)}</p>
@@ -672,6 +696,42 @@ function renderGrupo(gr){
 }
 const grupo = id => { const g = GR.find(x => x.id === id); return g ? renderGrupo(g) : ''; };
 const fila = (id, n, f, m, cards) => `<section class="row" id="r${id}"><div class="row-title"><span class="n">${esc(n)}</span><span class="f">${esc(f)}</span><span class="m">${esc(m)}</span></div>${cards}</section>`;
+/* 27/09 · historias. Cada día es una secuencia de frames; el texto se cambia igual que en un carrusel,
+   con la clave H1|f0t. El sticker y el rol no se editan: son la estructura de la secuencia. */
+function renderHis(it){
+  const n = cambiosDe(it.k), sem = (String(it.tipo).match(/Semana (\d)/) || [, '1'])[1];
+  const frames = it.frames.map((l, i) => {
+    const kt = it.k + '|f' + i + 't', kb = it.k + '|f' + i + 'b', hayB = l.b !== '' && l.b != null;
+    return `<div class="lam"><div class="ln">${i + 1}</div>
+      <div class="th sf">${l.foto ? `<img src="assets/obras/${esc(l.foto)}.jpg" alt="" loading="lazy">` : ''}<span data-th="${it.k}|f${i}">${esc(val(kt) ?? l.t)}</span></div>
+      <div><p class="rol">${esc(l.rol)}</p>
+        ${campo(kt, l.t, 't1', 'Texto grande del frame ' + (i + 1), 1)}
+        ${hayB ? campo(kb, l.b, 't2', 'Texto chico del frame ' + (i + 1), 2) : ''}
+        <p class="limg"><b>Se ve:</b> ${esc(l.img)}</p>
+        ${l.st ? `<p class="lstk"><b>Sticker:</b> ${esc(l.st)}</p>` : ''}
+        ${l.f ? `<p class="lsrc">Sale de: ${esc(l.f)}</p>` : ''}
+      </div></div>`;
+  }).join('');
+  return `<article class="card g car" data-v="S${esc(sem)}" data-k="${it.k}">
+    <header><span class="var" data-id="${esc(it.k)}">${esc(it.tipo)}</span>${etq(it.k)}
+      <h3>${esc(it.k)} · ${esc(it.titulo)}</h3>
+      <p class="angle">Para: ${esc(it.para)} · Sale de: ${esc(it.sale)}</p>
+      <div class="cont ${n ? 'mod' : ''}" data-cont="${it.k}">${contTxt(n)}</div></header>
+    <div class="sec"><p class="lab">Qué busca</p><p class="nota">${esc(it.objetivo)}. Después queda guardada en la destacada «${esc(it.destacada)}».</p></div>
+    <div class="sec"><p class="lab">${it.frames.length} frames · tocá un texto para cambiarlo</p><div class="lams">${frames}</div></div>
+    ${it.confirmar ? `<div class="sec"><div class="conf"><div><b>Confirmanos:</b> ${esc(it.confirmar)}</div>${opciones(it.k)}</div></div>` : ''}
+    <div class="sec acciones"><button type="button" data-copiarcar="${it.k}">Copiar la historia</button><button type="button" class="reset" data-reset="${it.k}" ${n ? '' : 'hidden'}>Volver al original</button></div>
+  </article>`;
+}
+function renderHistorias(){
+  const H = D.historias; if (!H || !HIS.length) return '';
+  const I = H.intro, lista = a => `<ol>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`;
+  const aside = `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>${esc(I.titulo)}</h4>${lista(I.lista)}</div>
+    <div class="sticky"><h4>${esc(I.titulo2)}</h4>${lista(I.lista2)}</div>
+    <div class="sticky"><h4>Y además</h4><ul>${H.notas.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
+    <div class="acc-copia"><button type="button" data-copiargrupo="${HIS.map(x => x.k).join(',')}">Copiar las ${HIS.length} historias</button></div></aside>`;
+  return fila('HIS', 'HIS', H.titulo, H.resumen, aside + `<div class="scripts">${HIS.map(renderHis).join('')}</div>`);
+}
 function renderEstrategia(){
   const E = D.estrategia; if (!E) return '';
   const col = c => `<aside class="card est"><span class="rotulo">${esc(c.nombre)}</span><dl>${c.filas.map(x => `<dt>${esc(x[0])}</dt><dd>${esc(x[1])}</dd>`).join('')}</dl></aside>`;
@@ -681,8 +741,10 @@ function renderEstrategia(){
 }
 function renderCalendario(){
   const C = D.calendario; if (!C) return '';
-  return fila('CAL', 'CAL', C.titulo, C.resumen, `<aside class="card cal"><table><thead><tr><th>Semana</th><th>Publicación 1</th><th>Publicación 2</th></tr></thead><tbody>
-      ${C.semanas.map((x, i) => `<tr><td class="sn">${i + 1}</td><td><b>${esc(x[0])}</b><span>${esc(x[1])}</span></td><td><b>${esc(x[2])}</b><span>${esc(x[3])}</span></td></tr>`).join('')}
+  const cel = p => `<td><b>${esc(p.t)}</b><span>${esc(p.s)}</span>${etq(p.k)}</td>`;
+  const his = h => `<td class="his">${h && h.length ? h.map(x => `<div>${esc(x)}</div>`).join('') : '<div class="no">—</div>'}</td>`;
+  return fila('CAL', 'CAL', C.titulo, C.resumen, `<aside class="card cal"><table><thead><tr><th>Semana</th><th>Publicación 1</th><th>Publicación 2</th><th>Historias · 3 días</th></tr></thead><tbody>
+      ${C.semanas.map((x, i) => `<tr><td class="sn">${i + 1}</td>${cel(x.p1)}${cel(x.p2)}${his(x.his)}</tr>`).join('')}
     </tbody></table><ul>${C.notas.map(x => `<li>${esc(x)}</li>`).join('')}</ul></aside>`);
 }
 function renderPauta(){
@@ -786,6 +848,18 @@ let destinoFoto = null;
 /* el texto del carrusel o del guion del que sale una pieza: es lo que se copia para diseñarlo */
 function textoFuente(k){
   if (!k) return '';
+  const h = HIS.find(x => x.k === k);
+  if (h){
+    const L = ['HISTORIA ' + h.k + ' · ' + h.titulo, h.tipo + ' · para: ' + h.para, 'Etiqueta: ' + etqTxt(h.k), ''];
+    h.frames.forEach((l, i) => {
+      const t = val(h.k + '|f' + i + 't'), b = val(h.k + '|f' + i + 'b');
+      L.push('Frame ' + (i + 1) + ' · ' + l.rol + ': ' + t + (b ? ' — ' + b : ''));
+      L.push('   se ve: ' + l.img);
+      if (l.st) L.push('   sticker: ' + l.st);
+    });
+    L.push('', 'Después queda en la destacada: ' + h.destacada);
+    return L.join('\n');
+  }
   const it = CARS.find(x => x.k === k);
   if (it){
     const L = ['CARRUSEL ' + it.k + ' · ' + it.titulo, 'Para: ' + it.para];
@@ -816,6 +890,7 @@ let piezas = store.get(PZK, []);
 const PZ_EST = ['Borrador', 'Listo para publicar', 'Publicado'];
 const LIGAS = [].concat(
   GR.flatMap(g => g.items.map(it => ({k: it.k, t: 'Carrusel ' + it.k + ' · ' + it.titulo, row: g.id}))),
+  HIS.map(it => ({k: it.k, t: 'Historia ' + it.k + ' · ' + it.titulo, row: 'HIS'})),
   D.refs.flatMap(r => r.guiones.map(g => ({k: r.n + g.v, t: 'Guion ' + String(r.n).padStart(2,'0') + g.v + ' · ' + g.titulo, row: r.n})))
 );
 const ligaDe = k => LIGAS.find(x => x.k === k);
@@ -1128,7 +1203,7 @@ document.addEventListener('click', e => {
   if (ct){
     const ks = ct.dataset.copiargrupo.split(',');
     alPortapapeles(ks.map(textoFuente).filter(Boolean).join('\n\n'));
-    avisarCopia(ct, 'Copiados ' + ks.length + ' carruseles');
+    avisarCopia(ct, 'Copiad' + (ks.every(k => k[0] === 'H') ? 'as ' + ks.length + ' historias' : 'os ' + ks.length + ' carruseles'));
     return;
   }
 });
@@ -1142,12 +1217,25 @@ function render(){
     ${D.falta ? `<div class="falta"><span class="rotulo">Lo que falta para publicar</span><ol>${D.falta.map(p => `<li>${esc(p)}</li>`).join('')}</ol></div>` : ''}
   </div></section>`;
   const guionesVideo = fila('VID', 'VID', 'Guiones de video', 'Para cuando haya obra y alguien a cámara', `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Qué hay acá</h4><ol><li>Los guiones de video que ya teníamos, en los cuatro formatos de la propuesta.</li><li>Sus ideas ya pasaron a carrusel, más arriba.</li><li>Los tres animados (5A, 4B y 4A) están en el calendario: se arman sin filmar.</li></ol></div></aside>`);
-  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + grupo('PAR') + grupo('EMP') + renderVideos() + grupo('RES') + renderDis() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
+  /* 27/09 · el orden es el de cómo se sube todo: primero lo que se decide, después lo que se publica, al final el material */
+  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
     <div class="row-title"><span class="n">${String(r.n).padStart(2,'0')}</span><span class="f">${esc(r.formato)}</span><span class="m">${esc(r.resumen)}</span></div>
     ${renderRef(r)}
     <div class="scripts">${r.guiones.map(g => renderScript(r, g)).join('')}</div>
   </section>`).join('');
-  $('#jump').innerHTML = `<option value="0">Ir a…</option>` + (D.estrategia ? `<option value="EST">EST · La estrategia</option>` : '') + (D.calendario ? `<option value="CAL">CAL · El calendario</option>` : '') + (D.pauta ? `<option value="PAU">$ · La pauta</option>` : '') + (P ? `<option value="P">IG · El perfil</option>` : '') + GR.map(g => `<option value="${g.id}">${esc(g.n)} · ${esc(g.titulo)}</option>`).join('') + (D.videos ? `<option value="YT">YT · Los videos de YouTube</option>` : '') + `<option value="DIS">PZ · Lo que ya está diseñado</option>` + D.refs.map(r => `<option value="${r.n}">${String(r.n).padStart(2,'0')} · ${esc(r.formato)}</option>`).join('');
+  const opt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
+  const optGR = id => { const g = GR.find(x => x.id === id); return g ? opt(g.id, g.n + ' · ' + g.titulo) : ''; };
+  $('#jump').innerHTML = opt('0', 'Ir a…')
+    + (D.estrategia ? opt('EST', 'EST · La estrategia') : '')
+    + (D.calendario ? opt('CAL', 'CAL · El calendario') : '')
+    + (D.pauta ? opt('PAU', '$ · La pauta') : '')
+    + (P ? opt('P', 'IG · El perfil') : '')
+    + optGR('F')
+    + (HIS.length ? opt('HIS', 'HIS · Las historias') : '')
+    + optGR('PAR') + optGR('EMP') + optGR('RES')
+    + opt('DIS', 'PZ · Lo que ya está diseñado')
+    + (D.videos ? opt('YT', 'YT · Los videos de YouTube') : '')
+    + D.refs.map(r => opt(r.n, String(r.n).padStart(2, '0') + ' · ' + r.formato)).join('');
   prog();
 }
 const alto = t => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 2 + 'px'; };
@@ -1191,8 +1279,8 @@ document.addEventListener('input', e => {
   if (ta.value === ORIG[k]) delete ed[k]; else ed[k] = ta.value;
   store.set('si-ed', ed);
   ta.classList.toggle('edited', ta.value !== ORIG[k]); alto(ta);
-  const m = k.match(/^([A-Z]\d)\|l(\d+)t$/);
-  if (m){ const th = document.querySelector(`[data-th="${m[1]}|${m[2]}"]`); if (th) th.textContent = ta.value; }
+  const m = k.match(/^(\w+\|[lf]\d+)t$/);
+  if (m){ const th = document.querySelector(`[data-th="${m[1]}"]`); if (th) th.textContent = ta.value; }
   marcarCont(k.split('|')[0]);
   prog();
 });
@@ -1237,7 +1325,7 @@ document.addEventListener('click', e => {
     Object.keys(ed).filter(k => k.startsWith(pre + '|')).forEach(k => delete ed[k]);
     store.set('si-ed', ed);
     rs.closest('.g').querySelectorAll('textarea[data-e]').forEach(t => { t.value = ORIG[t.dataset.e]; t.classList.remove('edited'); alto(t); });
-    rs.closest('.g').querySelectorAll('[data-th]').forEach(s => { s.textContent = ORIG[s.dataset.th.replace('|', '|l') + 't']; });
+    rs.closest('.g').querySelectorAll('[data-th]').forEach(s => { s.textContent = ORIG[s.dataset.th + 't']; });
     marcarCont(pre); prog();
     return;
   }
@@ -1355,6 +1443,16 @@ function filasTodo(){
     });
     F.push([sec, 'Texto de la publicación' + cambio(it.k + '|cap'), val(it.k + '|cap')]);
     if (it.confirmar) F.push([sec, 'Confirmar: ' + it.confirmar, conf[it.k] || '']);
+  });
+  HIS.forEach(h => {
+    const sec = 'Historia ' + h.k + ' · ' + h.titulo;
+    F.push([sec, 'Cuándo y para quién', h.tipo + ' · ' + h.para + ' · ' + etqTxt(h.k)]);
+    h.frames.forEach((l, i) => {
+      const kt = h.k + '|f' + i + 't', kb = h.k + '|f' + i + 'b';
+      F.push([sec, 'Frame ' + (i + 1) + ' · ' + l.rol + (cambio(kt) || cambio(kb)), val(kt) + (val(kb) ? ' — ' + val(kb) : '')]);
+      if (l.st) F.push([sec, 'Frame ' + (i + 1) + ' · sticker', l.st]);
+    });
+    if (h.confirmar) F.push([sec, 'Confirmar: ' + h.confirmar, conf[h.k] || '']);
   });
   piezas.forEach(p => {
     const sec = 'Diseñado · ' + p.tipo + ' · ' + ((p.titulo || '').trim() || 'sin título'), l = ligaDe(p.de);
