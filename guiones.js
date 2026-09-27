@@ -11,7 +11,7 @@ window.GUIONES = {
   titulo: "Techos: carruseles, historias, videos animados y estrategia",
   intro: [
     "Arrancamos con carruseles y videos animados: por ahora no hace falta filmar. Son dos publicaciones y tres historias por semana, en dos estrategias, una para empresas y otra para particulares.",
-    "Las secciones están en el orden en que se sube todo: primero lo que se decide (estrategia, calendario, pauta), después lo que se publica (el perfil, los tres fijados, las historias de las tres primeras semanas y los carruseles de cada estrategia) y al final el material del que sale cada pieza: lo ya diseñado, los videos de YouTube de ustedes y los guiones de video, para cuando se filme.",
+    "Las secciones están en el orden en que se sube todo: primero lo que se decide (estrategia, calendario, pauta), después lo que se publica (el perfil, los tres fijados, las historias de las tres primeras semanas, las cuatro destacadas y los carruseles de cada estrategia) y al final el material del que sale cada pieza: lo ya diseñado, los videos de YouTube de ustedes y los guiones de video, para cuando se filme.",
     "Cada pieza lleva su etiqueta: «Publicidad» es la que va con plata atrás (el reparto está en la sección $) y «Publicaciones» es la que sale sola en la cuenta.",
     "Lo del Niño va en el primer mes: conviene publicarlo antes de las tormentas fuertes.",
     "Los textos se pueden cambiar: tocá cualquiera. Lo que cambiás queda en naranja y «Volver al original» lo deshace. En cada carrusel podés elegir la portada. Cuando termines, tocá «Enviar»."
@@ -964,7 +964,7 @@ window.GUIONES.historias = {
   dias: [
     {k: "H1", tipo: "Semana 1 · día 1", titulo: "La bienvenida", para: "Las dos estrategias", etq: "publicaciones",
       objetivo: "Que el que entra entienda en diez segundos qué es esto y por qué no es una cuenta más",
-      destacada: "Nuestra historia", sale: "El perfil elegido (versión C), el folleto de 2018 y lo que dijo Víctor el 10/09",
+      destacada: null, sinDest: "Quiénes somos ya vive en el fijado F1: esta no se guarda", sale: "El perfil elegido (versión C), el folleto de 2018 y lo que dijo Víctor el 10/09",
       frames: [
         {rol: "Gancho", t: "Esta cuenta es nueva.", b: "La empresa no.", img: "Solo texto, fondo azul", f: "Nuevo. Contesta sola la pregunta del que ve una cuenta en cero"},
         {rol: "Contexto", t: "Somos Solmi, de San Pedro.", b: "Techos, terrazas y chapa. Fabricamos nuestro producto y lo aplicamos nosotros.", img: "Solo texto", f: "Bio del perfil · Víctor, 10/09: «desde la producción hasta la aplicación»"},
@@ -975,7 +975,7 @@ window.GUIONES.historias = {
       confirmar: "¿Arrancamos diciendo que la cuenta es nueva? Es lo más honesto y de paso explica el cero. ¿Y quién contesta las preguntas que lleguen?"},
     {k: "H2", tipo: "Semana 1 · día 2", titulo: "De carruajes a techos", para: "El que busca el nombre antes de llamar", etq: "publicaciones",
       objetivo: "La credencial completa. Es lo que mira el que te googlea",
-      destacada: "Nuestra historia", sale: "F1 y el guion 2A · folleto 2018, página 2",
+      destacada: null, sinDest: "Lo mismo que H1: el fijado F1 lo cuenta mejor y queda arriba de todo", sale: "F1 y el guion 2A · folleto 2018, página 2",
       frames: [
         {rol: "Gancho", t: "Antes de arreglar techos, esta familia hacía carruajes.", b: "", img: "Solo texto", st: "Quiz · «¿De qué año es Solmi?» · 1889 / 1975", f: "Folleto 2018, página 2. El quiz es el mecanismo que los hace quedarse"},
         {rol: "Contexto", t: "1889, en Mitre 2250.", b: "Seguimos en la misma esquina de San Pedro.", img: "Una foto actual del portón (falta). Si no llega, solo texto", f: "2A · folleto"},
@@ -986,7 +986,7 @@ window.GUIONES.historias = {
       confirmar: "¿Se puede filmar o fotografiar el portón de Mitre 2250 y dónde preparan el producto? Son las dos fotos que le faltan a esta secuencia."},
     {k: "H3", tipo: "Semana 1 · día 3", titulo: "El Niño ya está acá", para: "Particulares", etq: "publicaciones",
       objetivo: "Empujar el video animado del Niño (V1), que es lo que se pauta esas dos semanas",
-      destacada: "Techos", sale: "P1 y el guion 5B · Servicio Meteorológico Nacional",
+      destacada: null, sinDest: "Es de temporada: se va con el Niño", sale: "P1 y el guion 5B · Servicio Meteorológico Nacional",
       frames: [
         {rol: "Gancho", t: "Escuchaste lo del Niño.", b: "¿Y tu techo?", img: "Solo texto", st: "Encuesta · «¿Ya lo miraste?» · Sí / Todavía no", f: "P1 · la encuesta dice a cuántos les toca el tema"},
         {rol: "Contexto", t: "El Pacífico más caliente de lo normal cambia las lluvias.", b: "El Servicio Meteorológico lo da activo hasta el verano.", img: "Solo texto, con «Fuente: Servicio Meteorológico Nacional»", f: "P1 · chequear el pronóstico la semana que sale. Sin «en tu zona» ni «el más fuerte de la historia»"},
@@ -997,7 +997,7 @@ window.GUIONES.historias = {
       confirmar: "Los tres puntos, ¿son los que ustedes miran primero cuando llegan a un techo?"},
     {k: "H4", tipo: "Semana 2 · día 1", titulo: "Ya te lo arreglaron y volvió a filtrar", para: "Particulares y consorcios", etq: "publicaciones",
       objetivo: "Nombrar el enojo antes que la solución: el que llama ya probó algo antes",
-      destacada: "Techos", sale: "P2 y P3 · lo que la empresa contestó en el formulario",
+      destacada: null, sinDest: "Se puede sumar a «Servicios» cuando haya que renovarla", sale: "P2 y P3 · lo que la empresa contestó en el formulario",
       frames: [
         {rol: "Gancho", t: "Ya te arreglaron el techo.", b: "Y volvió a filtrar.", img: "Solo texto", st: "Encuesta · «¿Te pasó?» · Sí / No", f: "Formulario 08/09: lo que escuchan todo el tiempo son «garantías inexistentes»"},
         {rol: "Contexto", t: "No es mala suerte.", b: "Es cómo se arregla.", img: "Solo texto", f: "P3"},
@@ -1009,7 +1009,7 @@ window.GUIONES.historias = {
       confirmar: "¿La membrana se despega por sol, granizo y frío, o hay otra razón que digan ustedes? Es la explicación que sostiene toda la secuencia."},
     {k: "H5", tipo: "Semana 2 · día 2", titulo: "Sin romper nada", para: "Particulares y consorcios", etq: "publicaciones",
       objetivo: "La promesa de la marca entera en una secuencia, mostrada y no prometida",
-      destacada: "Techos", sale: "El guion 1A, los videos A y C, y el folleto de 2013",
+      destacada: null, sinDest: "Se puede sumar a «Servicios» cuando haya que renovarla", sale: "El guion 1A, los videos A y C, y el folleto de 2013",
       frames: [
         {rol: "Gancho", t: "¿Se puede arreglar un techo con humedad sin romperlo?", b: "", img: "Solo texto", f: "Arranque 2 del guion 1A, que pasó el filtro"},
         {rol: "Núcleo", t: "No levantamos la membrana vieja.", b: "", img: "El techo antes de tocar nada (falta)", f: "Folleto 2018 · lo confirma Solmi"},
@@ -1033,7 +1033,7 @@ window.GUIONES.historias = {
       confirmar: "Estas fotos son las del folleto y miden 230 píxeles: en una historia a pantalla completa se van a ver mal. ¿Están las originales? Si no, este día se corre a la próxima obra."},
     {k: "H7", tipo: "Semana 3 · día 1", titulo: "Si guardás algo bajo un techo de chapa", para: "Empresas: galpones, depósitos y quinchos", etq: "publicaciones",
       objetivo: "Empujar E1, el carrusel de empresas que se pauta en las semanas 3 y 4",
-      destacada: "Obras", sale: "E1 y el guion 5C · folleto de 2013",
+      destacada: null, sinDest: "Lo permanente de este día ya está en «Si tenés un galpón, una planta o un edificio»", sale: "E1 y el guion 5C · folleto de 2013",
       frames: [
         {rol: "Gancho", t: "¿Galpón, quincho o depósito con la chapa oxidada?", b: "", img: "Solo texto", f: "La portada que eligieron para E1"},
         {rol: "Contexto", t: "Abajo de ese techo hay mercadería, máquinas o autos.", b: "", img: "Un galpón por dentro (falta)", f: "5C"},
@@ -1044,7 +1044,7 @@ window.GUIONES.historias = {
       confirmar: "¿El texto que ya viene escrito en el WhatsApp les sirve? Es la única forma de saber qué día trajo cada consulta."},
     {k: "H8", tipo: "Semana 3 · día 2", titulo: "Si administrás un edificio", para: "Consorcios", etq: "publicaciones",
       objetivo: "El administrador, que decide con presupuesto y asamblea pero decide",
-      destacada: "Terrazas", sale: "P3 y la estrategia de empresas",
+      destacada: null, sinDest: "Lo permanente de este día ya está en «Si tenés un galpón, una planta o un edificio»", sale: "P3 y la estrategia de empresas",
       frames: [
         {rol: "Gancho", t: "La terraza filtra.", b: "El reclamo lo recibís vos.", img: "Solo texto", f: "Estrategia: los administradores van con empresas"},
         {rol: "Contexto", t: "Y la pregunta de la asamblea es siempre la misma.", b: "Cuánto tiempo va a estar el edificio en obra.", img: "Solo texto", f: "Estrategia: lo que más lo frena es la obra, no el precio"},
@@ -1067,10 +1067,97 @@ window.GUIONES.historias = {
       confirmar: "El argumento de que recuperar sale menos que cambiar, ¿lo sostienen ustedes? Va sin ningún número."}
   ],
   notas: [
+    "Las historias del día se van; las destacadas quedan. Cuál va a cuál está en cada tarjeta, y el detalle en la fila de al lado.",
     "Las historias no reemplazan a las dos publicaciones de la semana: las empujan. El día 3 de la semana 1 empuja el video del Niño, y el día 1 de la semana 3 empuja E1.",
     "Ninguna va a pauta. Si más adelante se quiere pautar en historias, la que más sirve es la del día 6: un antes y después se entiende sin sonido y sin contexto.",
     "Las nueve terminan guardadas en una destacada: es lo único que sigue estando cuando alguien entra al perfil tres meses después.",
     "Paredes, tanques y piletas quedaron afuera: la cuenta hoy es de techos, terrazas y chapa. Si entran, es una secuencia más.",
     "De la semana 4 en adelante, las historias salen de lo que conteste la gente en las cajas de preguntas."
+  ]
+};
+
+/* 27/09/2026 · Las destacadas, a pedido del usuario: afuera la de «quiénes somos» —eso ya lo dice el fijado F1—,
+   adentro «Servicios», con una historia para empresas, otra para particulares y los servicios; y «Ya confiaron»,
+   que él ya tiene diseñada. Mismo formato de frame que las historias del día.
+   Ojo con una diferencia que manda todo el diseño: en una destacada la encuesta y la caja de preguntas se ven
+   pero no se pueden contestar. El único sticker que se sigue tocando es el link. Por eso todas cierran en link. */
+window.GUIONES.destacadas = {
+  titulo: "Las destacadas · el menú permanente del perfil",
+  resumen: "Cuatro. Es lo primero que mira el que llega al perfil, y lo único que sigue estando tres meses después",
+  intro: {titulo: "Cómo se arman", lista: [
+    "La portada se recorta a un círculo chico: entra un color y una letra, nada más. Texto adentro de la portada no se lee.",
+    "Un solo color de fondo o los dos alternados. Seis colores distintos hacen que el perfil se vea desordenado.",
+    "Se arman una vez y se tocan poco. Lo del día es la historia; esto es el menú.",
+    "Cada una cierra con link a WhatsApp: en una destacada la encuesta y la caja de preguntas se ven, pero no se pueden contestar."
+  ], titulo2: "Qué cambió y por qué", lista2: [
+    "Sale «Quiénes somos»: eso ya lo dice el fijado F1, que está arriba de todo en el perfil y se lee mejor.",
+    "Sale «Techos» suelta: queda adentro de «Servicios», que dice lo mismo y además separa empresas de particulares.",
+    "Entra «Ya confiaron», con la pieza que ya está diseñada. Va en la fila PZ y desde ahí se aprueba.",
+    "Quedan «Obras» —los antes y después— y «Consultar», que ya estaban en el perfil."
+  ]},
+  portadas: [
+    {nombre: "Servicios", letra: "S", fondo: "azul", que: "Qué hacemos, y lo mismo contado dos veces: para una casa y para un galpón, una planta o un edificio"},
+    {nombre: "Ya confiaron", letra: "✓", fondo: "hueso", que: "La pieza que ya tenés diseñada. Si nombra clientes, antes hay que tener el permiso"},
+    {nombre: "Obras", letra: "O", fondo: "azul", que: "Los antes y después: las historias H6 y H9, y las que vengan de cada obra nueva"},
+    {nombre: "Consultar", letra: "?", fondo: "hueso", que: "Qué mandarnos para que te podamos decir algo, y por dónde"}
+  ],
+  items: [
+    {k: "D1", v: "D", tipo: "Destacada «Servicios» · 1 de 3", titulo: "Qué hacemos", para: "Las dos estrategias", etq: "publicaciones",
+      objetivo: "El índice de la destacada: en cinco frames, todo lo que la cuenta ofrece hoy",
+      destacada: "Servicios", sale: "F3 y los guiones 1A y 4B · folleto de 2018, páginas 3 y 9",
+      frames: [
+        {rol: "Portada", t: "Si entra agua, lo arreglamos sin romperlo.", b: "", img: "Solo texto, fondo azul, el logo abajo", f: "El norte de la marca, en una línea"},
+        {rol: "1 de 3", t: "Techos y terrazas.", b: "La mancha que aparece cuando llueve.", img: "Un techo o una terraza en obra (falta)", f: "Folleto 2018, página 3"},
+        {rol: "2 de 3", t: "Techos de chapa.", b: "Se recupera sin cambiar una sola chapa.", foto: "chapa-2-despues", img: "Folleto: el techo de chapa recuperado", f: "Folleto 2018, página 9 · video B"},
+        {rol: "3 de 3", t: "Membranas viejas.", b: "No hace falta sacarlas: se repara la última y se protege.", foto: "membranas-despues", img: "Folleto: la membrana recuperada", f: "Folleto 2018, página 9"},
+        {rol: "Cierre", t: "Contanos qué te pasa.", b: "", img: "Solo texto, con el logo", st: "Link · wa.me/[número]?text=Hola, quiero consultar por un techo", f: "En una destacada el link es el único sticker que se sigue tocando"}
+      ],
+      confirmar: "¿La cuenta se queda en techos, terrazas y chapa, o sumamos paredes, tanques y piletas? Si entran, es un frame más acá y se decide cómo se muestran."},
+    {k: "D2", v: "D", tipo: "Destacada «Servicios» · 2 de 3", titulo: "Si tenés una casa", para: "Particulares", etq: "publicaciones",
+      objetivo: "Que la dueña de casa se reconozca sin tener que entender una palabra de obra",
+      destacada: "Servicios", sale: "P1, P3 y el guion 1A",
+      frames: [
+        {rol: "Portada", t: "Si tenés una casa.", b: "Y una mancha en el techo.", img: "Solo texto", f: "P3"},
+        {rol: "Núcleo", t: "Suele empezar así.", b: "Una mancha en el cielorraso, pintura inflada, y cuando llueve fuerte, la gotera.", img: "Video C 0:01 · la pared manchada", f: "P1, punto 5"},
+        {rol: "Núcleo", t: "Y casi siempre ya lo arreglaste una vez.", b: "", img: "Solo texto", f: "Formulario 08/09: lo que escuchan todo el tiempo son «garantías inexistentes»"},
+        {rol: "Clímax", t: "Esta vez no hay que romper nada.", b: "Sin sacar la membrana vieja, sin escombro, sin ruido de obra.", img: "Un techo terminado (falta)", f: "Folleto 2018, página 3 · lo confirma Solmi"},
+        {rol: "Cierre", t: "Mandanos una foto del techo.", b: "Con eso ya te podemos decir algo.", img: "Solo texto, con el logo", st: "Link · wa.me/[número]?text=Tengo humedad en mi casa y les mando una foto", f: "El mismo paso que pide P1"}
+      ],
+      confirmar: "¿Con una foto alcanza para decir algo, o siempre hace falta ir a ver? Cambia el cierre de las tres destacadas."},
+    {k: "D3", v: "D", tipo: "Destacada «Servicios» · 3 de 3", titulo: "Si tenés un galpón, una planta o un edificio", para: "Empresas y consorcios", etq: "publicaciones",
+      objetivo: "Lo mismo, contado para el que decide por costo de parada y no por gotera",
+      destacada: "Servicios", sale: "E1, E2 y la estrategia de empresas",
+      frames: [
+        {rol: "Portada", t: "Si tenés un galpón, una planta o un edificio.", b: "", img: "Solo texto", f: "Estrategia de empresas"},
+        {rol: "Núcleo", t: "Acá el problema no es el techo.", b: "Es parar la producción, o cortar el paso en el edificio.", img: "Solo texto", f: "Estrategia: lo que más lo frena es la obra, no el precio"},
+        {rol: "Núcleo", t: "Se trabaja con todo funcionando.", b: "Sin andamios, sin escombro, sin sacar nada de lugar.", foto: "cementos-avellaneda", img: "Folleto: el operario en el canasto colgante", f: "Folleto: «sin molestias de obra» · lo confirma Solmi"},
+        {rol: "Clímax", t: "Y la chapa se recupera.", b: "Se repara, se frena el óxido y se protege. Sin chapas nuevas.", foto: "chapa-3-despues", img: "Folleto: el techo de chapa recuperado", f: "Folleto 2018, página 9 · video B"},
+        {rol: "Cierre", t: "Escribinos y lo vemos.", b: "", img: "Solo texto, con el logo", st: "Link · wa.me/[número]?text=Tengo una filtración en un galpón / una planta / un edificio", f: "El texto precargado dice de qué destacada vino"}
+      ],
+      confirmar: "«Se trabaja con todo funcionando» es la promesa más fuerte de todo el tablero: ¿la firman así, o depende de la obra?"},
+    {k: "D4", v: "D", tipo: "Destacada «Ya confiaron»", titulo: "Los que ya confiaron", para: "El que busca el nombre antes de llamar", etq: "publicaciones",
+      objetivo: "La prueba social. Es la destacada que mira el que ya escuchó el nombre y quiere saber si sos real",
+      destacada: "Ya confiaron", sale: "La pieza que ya tenés diseñada · folleto de 2018, página 11",
+      frames: [
+        {rol: "Lo que ya tenés", t: "[Acá va la pieza que ya diseñaste]", b: "Subila en la fila PZ, elegí «Historia D4 · Los que ya confiaron» en «de dónde sale», y desde allá se aprueba.", img: "Tu pieza, tal como está", f: "Ya diseñada por ustedes"},
+        {rol: "Cierre", t: "¿Te lo recomendaron?", b: "Escribinos y contanos qué te pasa.", img: "Solo texto, con el logo", f: "El 100% de los clientes de hoy entra por boca a boca (formulario 08/09)", st: "Link · wa.me/[número]?text=Me los recomendaron y quiero consultar"}
+      ],
+      confirmar: "🔴 Si la pieza nombra clientes (Cementos Avellaneda, Editorial Perfil, Molinos Cañuelas, Multigranos), antes hace falta el permiso de cada uno. Y no pueden ir ni Subterráneos ni la Ciudad de Buenos Aires. ¿La pieza nombra a alguno?"},
+    {k: "D5", v: "D", tipo: "Destacada «Consultar»", titulo: "Cómo pedir un presupuesto", para: "Las dos estrategias", etq: "publicaciones",
+      objetivo: "Sacarle la fricción al último paso: que sepa qué mandar y no tenga que redactar nada",
+      destacada: "Consultar", sale: "Nuevo · el mecanismo de conversión del BRIEF",
+      frames: [
+        {rol: "Portada", t: "Tres cosas y te contestamos.", b: "", img: "Solo texto", f: "Nuevo"},
+        {rol: "Núcleo", t: "Una foto de lejos y una de cerca.", b: "De lejos se ve el techo entero; de cerca, la mancha o el óxido.", img: "Dos fotos de obra, una al lado de la otra", f: "Nuevo · lo confirma Solmi"},
+        {rol: "Núcleo", t: "En qué ciudad estás.", b: "Trabajamos en todo el país.", img: "Solo texto", f: "Formulario 08/09: todo el país, sin zonas excluidas"},
+        {rol: "Cierre", t: "Mandalo por WhatsApp.", b: "", img: "Solo texto, con el logo", st: "Link · wa.me/[número]?text=Hola, les mando las fotos del techo", f: "Falta el número que se publica"}
+      ],
+      confirmar: "¿Qué necesitan para poder contestar algo sin ir a ver? Estas tres son una propuesta: cambien las que haga falta. Y ojo: acá no se promete plazo de respuesta hasta que sepamos quién contesta."}
+  ],
+  notas: [
+    "El orden en el perfil es el de la lista de arriba. Adentro de «Servicios» se suben en orden: qué hacemos, casa, galpón.",
+    "Ninguna destacada lleva precio, ni «desde $», ni plazo de respuesta.",
+    "«Ya confiaron» es la única que depende de algo que ya existe: hasta que la pieza no esté cargada y aprobada, la destacada no se crea.",
+    "Cuando haya obra filmada, «Obras» es la que más rinde renovar: es la que contesta sola si son reales."
   ]
 };

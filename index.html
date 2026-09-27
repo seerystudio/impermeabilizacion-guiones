@@ -383,6 +383,14 @@ body.list .car{width:auto}
 .lam .th.sf{background:#0A5BAA}
 .lstk{margin:6px 0 0;font-size:12.5px;color:#141414;background:rgba(255,77,0,.09);border:1px solid rgba(255,77,0,.25);border-radius:8px;padding:5px 9px}
 .lstk b{color:#C23A00}
+/* 27/09 · las portadas de las destacadas, como se ven en el perfil: un círculo, un color y una letra */
+.hlps{display:grid;gap:14px;margin:12px 0 4px}
+.hlp{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:start}
+.hlp .c{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--tit);font-weight:800;font-size:21px}
+.hlp .c.az{background:#0A5BAA;color:#F4F1EA}
+.hlp .c.hu{background:#F4F1EA;color:#0A5BAA}
+.hlp .nm{font-weight:600;color:var(--hueso);font-size:14px;margin-top:6px}
+.hlp .qu{font-size:12.5px;color:var(--gris);margin-top:2px;line-height:1.35}
 body.list .est,body.list .cal{width:auto}
 body.list .cal{overflow-x:auto}
 
@@ -509,7 +517,10 @@ CARS.forEach(it => { if (!it.hook) it.hook = {dice: it.hooks[0][1]}; });
 /* 27/09 · historias: tres semanas, tres días por semana. Y la etiqueta de cada pieza:
    «Publicidad» es la que lleva plata atrás (el reparto está en la sección $), «Publicaciones» la que sale sola. */
 const HIS = (D.historias && D.historias.dias) || [];
-const PIEZA = k => CARS.find(x => x.k === k) || HIS.find(x => x.k === k) || (() => { for (const r of D.refs) for (const g of r.guiones) if (r.n + g.v === k) return g; })();
+/* 27/09 · destacadas: el menú permanente del perfil. Mismo formato de frame que las historias del día. */
+const DES = (D.destacadas && D.destacadas.items) || [];
+const SECUENCIAS = HIS.concat(DES);
+const PIEZA = k => CARS.find(x => x.k === k) || SECUENCIAS.find(x => x.k === k) || (() => { for (const r of D.refs) for (const g of r.guiones) if (r.n + g.v === k) return g; })();
 const esPub = k => { const p = PIEZA(k); return !!p && p.etq === 'publicidad'; };
 const etqTxt = k => esPub(k) ? 'Publicidad' : 'Publicaciones';
 const etq = k => `<span class="etq ${esPub(k) ? 'pub' : 'org'}">${etqTxt(k)}</span>`;
@@ -712,12 +723,13 @@ function renderHis(it){
         ${l.f ? `<p class="lsrc">Sale de: ${esc(l.f)}</p>` : ''}
       </div></div>`;
   }).join('');
-  return `<article class="card g car" data-v="S${esc(sem)}" data-k="${it.k}">
+  const dest = it.destacada ? `Después queda guardada en la destacada «${esc(it.destacada)}».` : `No queda en destacada: ${esc(it.sinDest || 'es del día')}.`;
+  return `<article class="card g car" data-v="${esc(it.v || 'S' + sem)}" data-k="${it.k}">
     <header><span class="var" data-id="${esc(it.k)}">${esc(it.tipo)}</span>${etq(it.k)}
       <h3>${esc(it.k)} · ${esc(it.titulo)}</h3>
       <p class="angle">Para: ${esc(it.para)} · Sale de: ${esc(it.sale)}</p>
       <div class="cont ${n ? 'mod' : ''}" data-cont="${it.k}">${contTxt(n)}</div></header>
-    <div class="sec"><p class="lab">Qué busca</p><p class="nota">${esc(it.objetivo)}. Después queda guardada en la destacada «${esc(it.destacada)}».</p></div>
+    <div class="sec"><p class="lab">Qué busca</p><p class="nota">${esc(it.objetivo)}. ${dest}</p></div>
     <div class="sec"><p class="lab">${it.frames.length} frames · tocá un texto para cambiarlo</p><div class="lams">${frames}</div></div>
     ${it.confirmar ? `<div class="sec"><div class="conf"><div><b>Confirmanos:</b> ${esc(it.confirmar)}</div>${opciones(it.k)}</div></div>` : ''}
     <div class="sec acciones"><button type="button" data-copiarcar="${it.k}">Copiar la historia</button><button type="button" class="reset" data-reset="${it.k}" ${n ? '' : 'hidden'}>Volver al original</button></div>
@@ -731,6 +743,20 @@ function renderHistorias(){
     <div class="sticky"><h4>Y además</h4><ul>${H.notas.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
     <div class="acc-copia"><button type="button" data-copiargrupo="${HIS.map(x => x.k).join(',')}">Copiar las ${HIS.length} historias</button></div></aside>`;
   return fila('HIS', 'HIS', H.titulo, H.resumen, aside + `<div class="scripts">${HIS.map(renderHis).join('')}</div>`);
+}
+/* 27/09 · las destacadas. La portada se recorta a un círculo: color y letra, nada más. */
+function renderDestacadas(){
+  const X = D.destacadas; if (!X || !DES.length) return '';
+  const I = X.intro, lista = a => `<ol>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`;
+  const circulos = X.portadas.map(p => `<div class="hlp"><div class="c ${p.fondo === 'hueso' ? 'hu' : 'az'}">${esc(p.letra)}</div><div class="nm">${esc(p.nombre)}</div><div class="qu">${esc(p.que)}</div></div>`).join('');
+  const aside = `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Las cuatro, en orden</h4><div class="hlps">${circulos}</div>
+      <div class="acc"><button type="button" class="btn pri" id="usardest">Poner estas destacadas en el perfil</button></div>
+      <p class="hueco">Arriba, en el perfil, siguen las que están guardadas hoy. Este botón las reemplaza por estas cuatro; lo demás del perfil no se toca.</p></div>
+    <div class="sticky"><h4>${esc(I.titulo)}</h4>${lista(I.lista)}</div>
+    <div class="sticky"><h4>${esc(I.titulo2)}</h4>${lista(I.lista2)}</div>
+    <div class="sticky"><h4>Y además</h4><ul>${X.notas.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
+    <div class="acc-copia"><button type="button" data-copiargrupo="${DES.map(x => x.k).join(',')}">Copiar las ${DES.length} destacadas</button></div></aside>`;
+  return fila('DES', 'DES', X.titulo, X.resumen, aside + `<div class="scripts">${DES.map(renderHis).join('')}</div>`);
 }
 function renderEstrategia(){
   const E = D.estrategia; if (!E) return '';
@@ -848,16 +874,16 @@ let destinoFoto = null;
 /* el texto del carrusel o del guion del que sale una pieza: es lo que se copia para diseñarlo */
 function textoFuente(k){
   if (!k) return '';
-  const h = HIS.find(x => x.k === k);
+  const h = SECUENCIAS.find(x => x.k === k);
   if (h){
-    const L = ['HISTORIA ' + h.k + ' · ' + h.titulo, h.tipo + ' · para: ' + h.para, 'Etiqueta: ' + etqTxt(h.k), ''];
+    const L = [(h.v === 'D' ? 'DESTACADA ' : 'HISTORIA ') + h.k + ' · ' + h.titulo, h.tipo + ' · para: ' + h.para, 'Etiqueta: ' + etqTxt(h.k), ''];
     h.frames.forEach((l, i) => {
       const t = val(h.k + '|f' + i + 't'), b = val(h.k + '|f' + i + 'b');
       L.push('Frame ' + (i + 1) + ' · ' + l.rol + ': ' + t + (b ? ' — ' + b : ''));
       L.push('   se ve: ' + l.img);
       if (l.st) L.push('   sticker: ' + l.st);
     });
-    L.push('', 'Después queda en la destacada: ' + h.destacada);
+    L.push('', h.destacada ? 'Destacada: ' + h.destacada : 'No queda en destacada: ' + (h.sinDest || 'es del día'));
     return L.join('\n');
   }
   const it = CARS.find(x => x.k === k);
@@ -891,6 +917,7 @@ const PZ_EST = ['Borrador', 'Listo para publicar', 'Publicado'];
 const LIGAS = [].concat(
   GR.flatMap(g => g.items.map(it => ({k: it.k, t: 'Carrusel ' + it.k + ' · ' + it.titulo, row: g.id}))),
   HIS.map(it => ({k: it.k, t: 'Historia ' + it.k + ' · ' + it.titulo, row: 'HIS'})),
+  DES.map(it => ({k: it.k, t: 'Destacada ' + it.k + ' · ' + it.titulo, row: 'DES'})),
   D.refs.flatMap(r => r.guiones.map(g => ({k: r.n + g.v, t: 'Guion ' + String(r.n).padStart(2,'0') + g.v + ' · ' + g.titulo, row: r.n})))
 );
 const ligaDe = k => LIGAS.find(x => x.k === k);
@@ -1203,7 +1230,10 @@ document.addEventListener('click', e => {
   if (ct){
     const ks = ct.dataset.copiargrupo.split(',');
     alPortapapeles(ks.map(textoFuente).filter(Boolean).join('\n\n'));
-    avisarCopia(ct, 'Copiad' + (ks.every(k => k[0] === 'H') ? 'as ' + ks.length + ' historias' : 'os ' + ks.length + ' carruseles'));
+    const que = ks.every(k => HIS.some(h => h.k === k)) ? 'as ' + ks.length + ' historias'
+      : ks.every(k => DES.some(h => h.k === k)) ? 'as ' + ks.length + ' destacadas'
+      : 'os ' + ks.length + ' carruseles';
+    avisarCopia(ct, 'Copiad' + que);
     return;
   }
 });
@@ -1218,7 +1248,7 @@ function render(){
   </div></section>`;
   const guionesVideo = fila('VID', 'VID', 'Guiones de video', 'Para cuando haya obra y alguien a cámara', `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Qué hay acá</h4><ol><li>Los guiones de video que ya teníamos, en los cuatro formatos de la propuesta.</li><li>Sus ideas ya pasaron a carrusel, más arriba.</li><li>Los tres animados (5A, 4B y 4A) están en el calendario: se arman sin filmar.</li></ol></div></aside>`);
   /* 27/09 · el orden es el de cómo se sube todo: primero lo que se decide, después lo que se publica, al final el material */
-  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
+  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
     <div class="row-title"><span class="n">${String(r.n).padStart(2,'0')}</span><span class="f">${esc(r.formato)}</span><span class="m">${esc(r.resumen)}</span></div>
     ${renderRef(r)}
     <div class="scripts">${r.guiones.map(g => renderScript(r, g)).join('')}</div>
@@ -1232,6 +1262,7 @@ function render(){
     + (P ? opt('P', 'IG · El perfil') : '')
     + optGR('F')
     + (HIS.length ? opt('HIS', 'HIS · Las historias') : '')
+    + (DES.length ? opt('DES', 'DES · Las destacadas') : '')
     + optGR('PAR') + optGR('EMP') + optGR('RES')
     + opt('DIS', 'PZ · Lo que ya está diseñado')
     + (D.videos ? opt('YT', 'YT · Los videos de YouTube') : '')
@@ -1304,6 +1335,16 @@ document.addEventListener('click', e => {
     const n = perfil.destacadas.length;
     perfil.destacadas.push({nombre: 'Nueva', letra: 'N', fondo: n % 2 ? 'hueso' : 'azul'});
     guardarPerfil(); refrescarVista(); refrescarEditor(); return;
+  }
+  /* 27/09 · pone en el perfil las cuatro destacadas de la fila DES. Solo toca las destacadas. */
+  if (e.target.closest('#usardest')){
+    const P4 = (D.destacadas || {}).portadas || []; if (!P4.length) return;
+    const antes = (perfil.destacadas || []).map(h => h.nombre).join(', ');
+    if (!confirm('¿Reemplazar las destacadas del perfil por «' + P4.map(p => p.nombre).join(', ') + '»?' + (antes ? '\n\nHoy dice: ' + antes + '.' : '') + '\nEl resto del perfil no se toca.')) return;
+    perfil.destacadas = P4.map(p => ({nombre: p.nombre, letra: p.letra, fondo: p.fondo}));
+    guardarPerfil(); refrescarVista(); refrescarEditor();
+    toast('Listo: las destacadas del perfil son las cuatro nuevas', 2600);
+    return;
   }
   const vb = e.target.closest('[data-ver]');
   if (vb){
@@ -1444,9 +1485,10 @@ function filasTodo(){
     F.push([sec, 'Texto de la publicación' + cambio(it.k + '|cap'), val(it.k + '|cap')]);
     if (it.confirmar) F.push([sec, 'Confirmar: ' + it.confirmar, conf[it.k] || '']);
   });
-  HIS.forEach(h => {
-    const sec = 'Historia ' + h.k + ' · ' + h.titulo;
+  SECUENCIAS.forEach(h => {
+    const sec = (h.v === 'D' ? 'Destacada ' : 'Historia ') + h.k + ' · ' + h.titulo;
     F.push([sec, 'Cuándo y para quién', h.tipo + ' · ' + h.para + ' · ' + etqTxt(h.k)]);
+    if (h.destacada) F.push([sec, 'Queda en la destacada', h.destacada]);
     h.frames.forEach((l, i) => {
       const kt = h.k + '|f' + i + 't', kb = h.k + '|f' + i + 'b';
       F.push([sec, 'Frame ' + (i + 1) + ' · ' + l.rol + (cambio(kt) || cambio(kb)), val(kt) + (val(kb) ? ' — ' + val(kb) : '')]);
