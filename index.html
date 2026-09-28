@@ -525,7 +525,7 @@ body.list .piez{width:auto}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="alerta" id="alerta" hidden>Este navegador no está guardando lo que escribís (puede ser una ventana privada). Antes de cerrar, tocá «Enviar» o bajate un respaldo.</div>
 
-<script src="guiones.js?v=2026-09-27d"></script>
+<script src="guiones.js?v=2026-09-28a"></script>
 <script>
 const D = window.GUIONES;
 /* 23/09: carruseles por estrategia (fijados, particulares, empresas, reserva). Cada uno con tres portadas para elegir. */
@@ -540,6 +540,11 @@ const DES = (D.destacadas && D.destacadas.items) || [];
 const SECUENCIAS = HIS.concat(DES);
 /* 27/09 · las piezas que ya están diseñadas y subimos nosotros, con sus láminas en assets/piezas/ */
 const DIS = (D.disenado && D.disenado.items) || [];
+/* 28/09 · «Lo ya diseñado» se muestra en dos secciones: los carruseles y las historias (con las destacadas).
+   La lista sigue siendo una sola, así las claves, lo escrito y el envío no cambian */
+const esHistoriaDis = d => /^(Historia|Destacadas)/.test(d.tipo);
+const DIS_C = DIS.filter(d => !esHistoriaDis(d)), DIS_H = DIS.filter(esHistoriaDis);
+const filaDe = k => { const d = DIS.find(x => x.k === k); return d ? (esHistoriaDis(d) ? 'PDH' : 'PDC') : null; };
 const PIEZA = k => CARS.find(x => x.k === k) || SECUENCIAS.find(x => x.k === k) || DIS.find(x => x.k === k) || (() => { for (const r of D.refs) for (const g of r.guiones) if (r.n + g.v === k) return g; })();
 const esPub = k => { const p = PIEZA(k); return !!p && p.etq === 'publicidad'; };
 const etqTxt = k => esPub(k) ? 'Publicidad' : 'Publicaciones';
@@ -820,10 +825,15 @@ function renderPzLista(it){
 function renderDisenado(){
   const X = D.disenado; if (!X || !DIS.length) return '';
   const I = X.intro, lista = a => `<ol>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`;
-  const aside = `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>${esc(I.titulo)}</h4>${lista(I.lista)}</div>
+  const copiar = (a, t) => `<div class="acc-copia"><button type="button" data-copiargrupo="${a.map(x => x.k).join(',')}">${t}</button></div>`;
+  const asideC = `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>${esc(I.titulo)}</h4>${lista(I.lista)}</div>
     <div class="sticky"><h4>${esc(I.titulo2)}</h4>${lista(I.lista2)}</div>
-    <div class="acc-copia"><button type="button" data-copiargrupo="${DIS.map(x => x.k).join(',')}">Copiar las ${DIS.length} piezas</button></div></aside>`;
-  return fila('PD', 'PD', X.titulo, X.resumen, aside + `<div class="scripts">${DIS.map(renderPzLista).join('')}</div>`);
+    ${copiar(DIS_C, 'Copiar los ' + DIS_C.length + ' carruseles')}</aside>`;
+  const asideH = `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>${esc(I.titulo2)}</h4>${lista(I.lista2H)}</div>
+    ${copiar(DIS_H, 'Copiar las ' + DIS_H.length + ' piezas')}</aside>`;
+  const C = X.carruseles, H = X.historias;
+  return fila('PDC', 'PD', C.titulo, C.resumen, asideC + `<div class="scripts">${DIS_C.map(renderPzLista).join('')}</div>`)
+    + fila('PDH', 'PD', H.titulo, H.resumen, asideH + `<div class="scripts">${DIS_H.map(renderPzLista).join('')}</div>`);
 }
 function renderEstrategia(){
   const E = D.estrategia; if (!E) return '';
@@ -1122,7 +1132,7 @@ function disInner(){
       </div>
     </div>
   </aside>`;
-  return `<div class="row-title"><span class="n">PZ</span><span class="f">Para sumar más piezas</span><span class="m">Si diseñan otro carrusel u otra historia, se sube acá. Las que ya están terminadas están en PD, arriba</span></div>`
+  return `<div class="row-title"><span class="n">PZ</span><span class="f">Para sumar más piezas</span><span class="m">Si diseñan otro carrusel u otra historia, se sube acá. Las que ya están terminadas están arriba, en «Carruseles ya diseñados» e «Historias ya diseñadas»</span></div>`
     + intro + `<div class="scripts">${piezas.map(renderPz).join('')}</div>`;
 }
 const renderDis = () => `<section class="row" id="rDIS">${disInner()}</section>`;
@@ -1162,9 +1172,11 @@ function irAPieza(id){
 /* el recorrido de arriba y las flechas entre una fila y la siguiente */
 const RECORRIDO = [{id: 'EST', t: 'La estrategia'}, {id: 'CAL', t: 'El calendario'}, {id: 'PAU', t: 'La pauta'}, {id: 'P', t: 'El perfil'},
   {id: 'F', t: 'Los 3 fijados'}, {id: 'PAR', t: 'Particulares'}, {id: 'EMP', t: 'Empresas'}, {id: 'YT', t: 'Los videos'},
-  {id: 'RES', t: 'En reserva'}, {id: 'PD', t: 'Lo ya diseñado'}, {id: 'DIS', t: 'Sumar más piezas'}, {id: 'VID', t: 'Guiones de video'}];
+  {id: 'RES', t: 'En reserva'}, {id: 'PDC', t: 'Carruseles ya diseñados'}, {id: 'PDH', t: 'Historias ya diseñadas'}, {id: 'DIS', t: 'Sumar más piezas'}, {id: 'VID', t: 'Guiones de video'}];
 const FLUJO = {
-  '0': 'Empecemos por la estrategia',
+  '0': 'Empecemos por lo que ya está diseñado: los carruseles',
+  'PDC': 'Y las historias ya diseñadas',
+  'PDH': 'Ahora sí, la estrategia',
   'EST': 'De la estrategia sale el calendario',
   'CAL': 'Y para empujarlo, la pauta',
   'PAU': 'Todo cae en el mismo perfil',
@@ -1174,7 +1186,6 @@ const FLUJO = {
   'EMP': 'Varios de estos salen de sus propios videos',
   'YT': 'Y estos quedan listos, en reserva',
   'RES': 'Y lo que ya está diseñado y terminado, acá',
-  'PD': 'Si diseñan otra pieza, se suma acá',
   'DIS': 'Más adelante, cuando se filme: los guiones de video'
 };
 const mapaHTML = () => `<div class="mapa"><span class="rotulo">El recorrido</span><div class="pasos">${RECORRIDO.map((p, i) => `${i ? '<span class="fx">→</span>' : ''}<button type="button" data-go="${esc(p.id)}">${esc(p.t)}</button>`).join('')}</div></div>`;
@@ -1314,7 +1325,7 @@ document.addEventListener('click', e => {
   if (ctx){ alPortapapeles(val(ctx.dataset.copiartxt) || ''); avisarCopia(ctx); return; }
   const ir4 = e.target.closest('[data-pzir4]');
   if (ir4){
-    goTo('PD');
+    goTo(filaDe(ir4.dataset.pzir4) || 'PDC');
     const card = document.querySelector(`[data-k="${CSS.escape(ir4.dataset.pzir4)}"]`);
     if (card && document.body.classList.contains('list')) card.scrollIntoView({behavior: 'smooth', block: 'center'});
     return;
@@ -1366,7 +1377,8 @@ document.addEventListener('click', e => {
     alPortapapeles(ks.map(textoFuente).filter(Boolean).join('\n\n'));
     const que = ks.every(k => HIS.some(h => h.k === k)) ? 'as ' + ks.length + ' historias'
       : ks.every(k => DES.some(h => h.k === k)) ? 'as ' + ks.length + ' destacadas'
-      : ks.every(k => DIS.some(h => h.k === k)) ? 'as ' + ks.length + ' piezas'
+      : ks.every(k => DIS_C.some(h => h.k === k)) ? 'os ' + ks.length + ' carruseles'
+      : ks.every(k => DIS_H.some(h => h.k === k)) ? 'as ' + ks.length + ' piezas'
       : 'os ' + ks.length + ' carruseles';
     avisarCopia(ct, 'Copiad' + que);
     return;
@@ -1392,7 +1404,8 @@ function render(){
   const opt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
   const optGR = id => { const g = GR.find(x => x.id === id); return g ? opt(g.id, g.n + ' · ' + g.titulo) : ''; };
   $('#jump').innerHTML = opt('0', 'Ir a…')
-    + (DIS.length ? opt('PD', 'PD · Lo ya diseñado') : '')
+    + (DIS_C.length ? opt('PDC', 'PD · Carruseles ya diseñados') : '')
+    + (DIS_H.length ? opt('PDH', 'PD · Historias ya diseñadas') : '')
     + (D.estrategia ? opt('EST', 'EST · La estrategia') : '')
     + (D.calendario ? opt('CAL', 'CAL · El calendario') : '')
     + (D.pauta ? opt('PAU', '$ · La pauta') : '')

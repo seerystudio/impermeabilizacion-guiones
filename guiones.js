@@ -1170,11 +1170,20 @@ window.GUIONES.destacadas = {
 window.GUIONES.disenado = {
   titulo: "Lo ya diseñado",
   resumen: "Las siete de Víctor, los carruseles de empresas con sus portadas A/B y las historias de las tres semanas. Cada lámina con su casillero para pedir cambios",
+  /* 28/09 · la sección se muestra en dos: carruseles por un lado, historias y destacadas por el otro */
+  carruseles: {
+    titulo: "Carruseles ya diseñados",
+    resumen: "E1 primero, las siete de Víctor con P2 al lado de P1, el resto de los carruseles de empresas con sus portadas A/B y las dos portadas de Y3. Cada lámina con su casillero para pedir cambios"
+  },
+  historias: {
+    titulo: "Historias ya diseñadas",
+    resumen: "Las historias de las tres semanas, las destacadas y sus portadas. Cada lámina con su casillero para pedir cambios"
+  },
   intro: {
     titulo: "Qué hay acá",
     lista: [
       "Las piezas que ya están diseñadas, lámina por lámina. Tocá una lámina y se ve grande.",
-      "Primero va E1, el carrusel de empresas ya terminado con sus imágenes. Después, las siete de Víctor, el resto de los carruseles de empresas (E2, E3 y las dos portadas de Y3) y las historias de las tres semanas con las destacadas.",
+      "Esta sección son los carruseles: primero E1, el de empresas ya terminado con sus imágenes; después las siete de Víctor (con P2, «Cuatro frases», al lado de P1: son los dos del Niño) y el resto de los carruseles de empresas (E2, E3 y las dos portadas de Y3). Las historias de las tres semanas y las destacadas están en la sección de abajo.",
       "Los carruseles de empresas llevan dos portadas, A y B, para probar cuál trae más mensajes: se cambia solo la portada.",
       "Donde todavía falta la imagen va un recuadro rayado: el diseño ya está armado alrededor.",
       "Al lado de cada lámina hay un casillero: escribí ahí lo que haya que cambiar de ESA lámina. Lo que escribas queda guardado y viaja con «Enviar».",
@@ -1183,6 +1192,9 @@ window.GUIONES.disenado = {
     ],
     titulo2: "Antes de publicar cualquiera",
     lista2: [
+      "El pronóstico del Niño se vuelve a chequear la semana que sale cada pieza."
+    ],
+    lista2H: [
       "El número que se publica: hoy la historia muestra el 11 5954-7352, que es el del estudio jurídico.",
       "Los nombres de clientes de la historia: hay permisos que pedir y dos que no pueden ir.",
       "El pronóstico del Niño se vuelve a chequear la semana que sale cada pieza."
@@ -1207,6 +1219,26 @@ window.GUIONES.disenado = {
       copy: "El Niño ya está acá. Antes de la próxima tormenta, subí al techo y mirá estas cinco cosas.\n\n1. Canaletas y desagües tapados: el agua se junta arriba en vez de irse.\n2. Grietas, por más finas que sean.\n3. La membrana: bordes levantados, globos, capas arriba de capas.\n4. La chapa: óxido alrededor de los tornillos y en las uniones.\n5. Adentro: manchas o pintura inflada en el cielorraso o arriba de las paredes. Ahí el agua ya está entrando.\n\nNinguna de las cinco se arregla sola, y todas se arreglan mejor antes de que llueva que después.\n\nGuardalo para tenerlo a mano cuando subas. Si encontrás alguna, comentá o mandanos la foto: te decimos qué estás mirando.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
       copyAd: "El Niño ya está acá. ¿Y tu techo?\n\nCinco cosas para mirar hoy, antes de la próxima tormenta: canaletas, grietas, membrana, chapa y el cielorraso.\n\nSi encontrás alguna, escribinos y te decimos qué estás mirando. Impermeabilización elástica, sin romper el techo. Solmi · San Pedro.",
       confirmar: "Tres cosas. La lámina 2 pone el pronóstico con fuente del Servicio Meteorológico: hay que volver a chequearlo la semana que se publica y corregirlo si cambió. El cierre dice «envianos un mensaje o comentá», no WhatsApp: ¿queda así hasta que haya número propio? Y esta es de las que van con pauta: el reparto le da las semanas 3 y 4 de particulares a P1 o P2, y esta es P1."},
+
+    /* 28/09 · P2, diseñado con el sistema de E1-E3 (carrusel-solmi-empresas/particulares.html). Va al lado de X1:
+       son los dos del Niño para particulares. Tres imágenes hechas con IA (portada, membranas y lluvia); el antes y
+       después es el techo 1 del folleto 2013, porque el techo 3 del guion está a 230 px. */
+    {k: "X27", etq: "publicidad", tipo: "Carrusel · particulares · El Niño", titulo: "Cuatro frases que se escuchan antes de las lluvias",
+      para: "La dueña de casa", de: "P2", formato: "8 láminas · 4:5", cierre: "Envianos un mensaje",
+      labCopy: "El copy de la publicación",
+      laminas: [
+        {img: "p2-01", t: "Cuatro frases que se escuchan antes de las lluvias", b: "Y lo que pasa en el techo. · Imagen (IA): casa de barrio con terraza y tanque, bajo nubes de tormenta"},
+        {img: "p2-02", t: "Frase 1 de 4 · «Si no gotea, está bien.»", b: "Las membranas viejas juntan humedad por debajo. · Solo texto, fondo azul"},
+        {img: "p2-03", t: "Frase 2 de 4 · «Le pongo otra membrana y listo.»", b: "Las capas se acumulan y el agua sigue entrando. No hace falta sacarlas: se repara la última y se protege. · Imagen (IA): terraza con capas de membrana levantadas"},
+        {img: "p2-04", t: "Frase 3 de 4 · «La chapa oxidada hay que cambiarla.»", b: "Se repara, se frena el óxido y se protege. Sin cambiar las chapas. · Imagen (IA): óxido en los tornillos de la chapa"},
+        {img: "p2-05", t: "Antes · Así estaba este techo de chapa.", b: "Folleto 2013 p. 10 · techo 1, antes"},
+        {img: "p2-06", t: "Después · Recuperado, sin cambiar las chapas.", b: "Folleto 2013 p. 10 · techo 1, después"},
+        {img: "p2-07", t: "Frase 4 de 4 · «Lo arreglo cuando pare de llover.»", b: "El Niño sigue activo hasta el verano: el momento de arreglarlo es ahora. Fuente: Servicio Meteorológico Nacional · Imagen (IA): la canaleta desborda bajo la lluvia"},
+        {img: "p2-08", t: "¿Dijiste alguna?", b: "Envianos un mensaje."}
+      ],
+      copy: "«Si no gotea, está bien.» «Le pongo otra membrana y listo.» «La chapa oxidada hay que cambiarla.» «Lo arreglo cuando pare de llover.»\n\nCuatro frases que se escuchan antes de las lluvias, y lo que pasa en el techo:\n\n1. Las membranas viejas juntan humedad por debajo.\n2. Las capas se acumulan y el agua sigue entrando. No hace falta sacarlas: se repara la última y se protege.\n3. La chapa oxidada se repara, se frena el óxido y se protege, sin cambiarla.\n4. El Niño sigue activo hasta el verano, según el Servicio Meteorológico Nacional: el momento de arreglarlo es ahora.\n\n¿Dijiste alguna? Envianos un mensaje.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      copyAd: "«Si no gotea, está bien.» «Le pongo otra membrana y listo.» ¿Dijiste alguna?\n\nCon el Niño activo hasta el verano, el momento de arreglar el techo es antes de la próxima tormenta. Envianos un mensaje. Impermeabilización Elástica Solmi · San Pedro.",
+      confirmar: "Cuatro cosas. ¿Lo de las membranas (juntan humedad por debajo, no hace falta sacarlas) y lo de la chapa se puede decir así? ¿El producto se aplica con el techo húmedo? Por eso salió el «con sol» de la frase 4. El pronóstico del Niño de la lámina 7 se vuelve a chequear la semana que sale. Y es de las que van con pauta: el reparto le da a particulares un solo anuncio por vez, así que va P1 o P2, no los dos juntos."},
 
     {k: "X2", etq: "publicaciones", tipo: "Carrusel · fijado", titulo: "Cómo trabajamos: sin romper nada",
       para: "Las dos estrategias", de: "F3", formato: "8 láminas · 4:5", cierre: "Comentá SERVICIO y te enviamos toda la info",
