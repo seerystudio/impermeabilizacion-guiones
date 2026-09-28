@@ -1382,8 +1382,9 @@ function render(){
     ${D.falta ? `<div class="falta"><span class="rotulo">Lo que falta para publicar</span><ol>${D.falta.map(p => `<li>${esc(p)}</li>`).join('')}</ol></div>` : ''}
   </div></section>`;
   const guionesVideo = fila('VID', 'VID', 'Guiones de video', 'Para cuando haya obra y alguien a cámara', `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Qué hay acá</h4><ol><li>Los guiones de video que ya teníamos, en los cuatro formatos de la propuesta.</li><li>Sus ideas ya pasaron a carrusel, más arriba.</li><li>Los tres animados (5A, 4B y 4A) están en el calendario: se arman sin filmar.</li></ol></div></aside>`);
-  /* 27/09 · el orden es el de cómo se sube todo: primero lo que se decide, después lo que se publica, al final el material */
-  $('#world').innerHTML = intro + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDisenado() + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
+  /* 27/09 · el orden es el de cómo se sube todo: primero lo que se decide, después lo que se publica, al final el material.
+     28/09 · a pedido del usuario, «Lo ya diseñado» va primero, antes que todo lo demás */
+  $('#world').innerHTML = intro + renderDisenado() + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
     <div class="row-title"><span class="n">${String(r.n).padStart(2,'0')}</span><span class="f">${esc(r.formato)}</span><span class="m">${esc(r.resumen)}</span></div>
     ${renderRef(r)}
     <div class="scripts">${r.guiones.map(g => renderScript(r, g)).join('')}</div>
@@ -1391,6 +1392,7 @@ function render(){
   const opt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
   const optGR = id => { const g = GR.find(x => x.id === id); return g ? opt(g.id, g.n + ' · ' + g.titulo) : ''; };
   $('#jump').innerHTML = opt('0', 'Ir a…')
+    + (DIS.length ? opt('PD', 'PD · Lo ya diseñado') : '')
     + (D.estrategia ? opt('EST', 'EST · La estrategia') : '')
     + (D.calendario ? opt('CAL', 'CAL · El calendario') : '')
     + (D.pauta ? opt('PAU', '$ · La pauta') : '')
@@ -1399,7 +1401,6 @@ function render(){
     + (HIS.length ? opt('HIS', 'HIS · Las historias') : '')
     + (DES.length ? opt('DES', 'DES · Las destacadas') : '')
     + optGR('PAR') + optGR('EMP') + optGR('RES')
-    + (DIS.length ? opt('PD', 'PD · Lo ya diseñado') : '')
     + opt('DIS', 'PZ · Para sumar más piezas')
     + (D.videos ? opt('YT', 'YT · Los videos de YouTube') : '')
     + D.refs.map(r => opt(r.n, String(r.n).padStart(2, '0') + ' · ' + r.formato)).join('');
