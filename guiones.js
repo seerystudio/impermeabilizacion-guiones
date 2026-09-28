@@ -1271,7 +1271,7 @@ window.GUIONES.disenado = {
       copy: "Una empresa familiar desde 1889. Y al alcance tuyo.\n\nTodo empezó en una herrería: los abuelos llegaron a San Pedro, pisaron tierra argentina y ahí mismo instalaron la herrería de fabricación de carruajes. Seis generaciones después, seguimos en el mismo lugar: la misma familia.\n\nNunca dejamos de inventar: a lo largo de los años desarrollamos técnicas y productos propios. Hoy impermeabilizamos techos y terrazas, y recuperamos chapas y membranas viejas, sin cambiarlas. El producto es nuestro: lo fabricamos y lo aplicamos nosotros, a medida de cada trabajo.\n\nTrabajamos en todo el país: fábricas, hoteles, edificios y casas.\n\n¿Humedad en el techo? Envianos un mensaje o dejanos un comentario.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
       confirmar: "Es la misma historia que ya cuenta F1 (la de 1A y el folleto), pero rediseñada: ¿esta reemplaza a la de F3 «Cómo trabajamos» como uno de los tres fijados, o se suma como cuarta pieza? Y en la lámina 6, «el producto es nuestro»: ¿lo fabrican en San Pedro o en otra planta? No lo dice ninguna de las dos versiones."},
 
-    {k: "X6", etq: "publicaciones", tipo: "Carrusel · fijado", titulo: "Te prometieron que tu techo no iba a filtrar más",
+    {k: "X6", etq: "publicidad", tipo: "Carrusel · fijado", titulo: "Te prometieron que tu techo no iba a filtrar más",
       para: "Las dos estrategias", de: "F2", formato: "6 láminas · 4:5", cierre: "Envianos un mensaje o dejanos un comentario",
       labCopy: "El copy de la publicación",
       laminas: [
@@ -1283,9 +1283,10 @@ window.GUIONES.disenado = {
         {img: "qd-06", t: "¿Tu techo volvió a filtrar?", b: "Envianos un mensaje o dejanos un comentario"}
       ],
       copy: "Te prometieron que tu techo no iba a filtrar más. Y volvió a gotear.\n\nImpermeabilizamos techos, terrazas y techos de chapa, con un producto que hacemos nosotros. Y en vez de prometerte, te lo mostramos.\n\nNo es membrana ni pintura: es una técnica propia que sella el techo por dentro. No rompemos nada: se aplica sin obra, sin albañiles, sin polvo, sin ruido. Y el producto es nuestro: no te prometemos de más.\n\n¿Tu techo volvió a filtrar? Envianos un mensaje o dejanos un comentario.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
-      confirmar: "Encara directo contra las promesas de otros («te prometieron», «no te prometemos de más»): ¿lo firman así, o suena a pegarle a la competencia? Y la lámina 5 muestra un galpón antes/después sin decir de qué obra es: ¿tienen el dato, o queda genérico?"},
+      copyAd: "¿Te prometieron que tu techo no iba a filtrar más? Y volvió a gotear.\n\nNo es membrana ni pintura: es una técnica propia que sella el techo por dentro, sin romper nada y sin obra.\n\nEnvianos un mensaje y te mostramos cómo. Impermeabilización elástica Solmi.",
+      confirmar: "Encara directo contra las promesas de otros («te prometieron», «no te prometemos de más»): ¿lo firman así, o suena a pegarle a la competencia? Y la lámina 5 muestra un galpón antes/después sin decir de qué obra es: ¿tienen el dato, o queda genérico? Va como publicidad, a pedido: ¿en qué semana entra? Hoy el reparto no le tiene asignado presupuesto."},
 
-    {k: "X7", etq: "publicaciones", tipo: "Carrusel · empresas · chapa", titulo: "Recuperamos tu techo en 3 simples pasos",
+    {k: "X7", etq: "publicidad", tipo: "Carrusel · empresas · chapa", titulo: "Recuperamos tu techo en 3 simples pasos",
       para: "Galpones, plantas y quinchos con techo de chapa", de: "Y3", formato: "8 láminas · 4:5", cierre: "Envianos un mensaje y te asesoramos",
       labCopy: "El copy de la publicación",
       laminas: [
@@ -1299,6 +1300,7 @@ window.GUIONES.disenado = {
         {img: "rt-08", t: "¿Tu techo ya muestra óxido?", b: "Envianos un mensaje y te asesoramos · Tocá «Mensaje» en nuestro perfil. Pie: Impermeabilización elástica Solmi · 03329 430298"}
       ],
       copy: "El óxido no se detiene solo: avanza, perfora y termina en filtraciones dentro de tu casa o tu negocio. Esperar solo hace que la reparación cueste más, y el daño, más grande.\n\nRecuperamos tu techo de chapa en 3 simples pasos:\n1. Curado y pavonizado: frenamos el óxido y la corrosión en origen.\n2. Impermeabilización: sellamos la chapa para que el agua no vuelva a filtrar.\n3. Plastificado de la chapa: la capa final, protección definitiva para tu techo.\n\n¿Tu techo ya muestra óxido? Envianos un mensaje y te asesoramos.\n\nImpermeabilización elástica Solmi · 03329 430298",
-      confirmar: "🔴 El cierre trae un teléfono distinto de los otros: 03329 430298, sin el 11 5954-7352 ni ningún WhatsApp. ¿Ese es el fijo de la empresa? ¿Va junto con el WhatsApp que se defina, o en lugar de? Y dice «Tocá 'Mensaje' en nuestro perfil»: ¿corresponde a un botón de mensaje directo de Instagram, o hay que cambiarlo por «Comentá» como en las demás piezas?"}
+      copyAd: "¿Tu techo de chapa ya muestra óxido?\n\nEl óxido no se detiene solo: avanza, perfora y termina en filtraciones. Lo recuperamos en 3 simples pasos, sin cambiar las chapas.\n\nEnvianos un mensaje y te asesoramos. Impermeabilización elástica Solmi.",
+      confirmar: "🔴 El cierre trae un teléfono distinto de los otros: 03329 430298, sin el 11 5954-7352 ni ningún WhatsApp. ¿Ese es el fijo de la empresa? ¿Va junto con el WhatsApp que se defina, o en lugar de? Y dice «Tocá 'Mensaje' en nuestro perfil»: ¿corresponde a un botón de mensaje directo de Instagram, o hay que cambiarlo por «Comentá» como en las demás piezas? Va como publicidad, a pedido: ¿en qué semana entra? Hoy el reparto no le tiene asignado presupuesto."}
   ]
 };
