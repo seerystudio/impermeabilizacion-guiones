@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Historias · tres semanas · Solmi</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="solmi.css">
+<script>
+/* Historias de las tres semanas + destacadas · Impermeabilización Elástica Solmi · 2026-09-28.
+   Base: el tablero de guiones del 27/09 (H1 a H9 y D1 a D5, impermeabilizacion-guiones/guiones.js) y
+   STORIES-3-SEMANAS-2026-09.md. Revisadas el 28/09 a pedido del usuario para que no queden genéricas: cada día
+   lleva algo que solo puede decir Solmi, sacado de sus fuentes —la herrería de 1889, «producto de desarrollo
+   propio, no se vende en el mercado» (video C), la prueba de la casita (video A), los tres pasos de la chapa
+   (video B), las fotos de obra del folleto— y empuja la publicación de su semana.
+   Cierre: «Envianos un mensaje», sin número a la vista (usuario, 28/09). El número vive solo en el sticker de link. */
+const L = t => `Link · ${'wa.me/5491159547352'}?text=${t}`;
+window.PIEZAS = [
+{
+  id: 'H1', tipo: 'historia', titulo: 'Semana 1 · día 1 · La bienvenida',
+  meta: '<b>Propuesta de día:</b> martes 29/9. <b>Para:</b> todos. <b>Qué cambió contra el tablero:</b> el frame 3 decía «Sin romper nada», que lo dice cualquier impermeabilizador; ahora dice lo que solo dice Solmi: el producto no se vende en el mercado (video C). <b>Se guarda en destacada:</b> no, quiénes somos ya lo cuenta el fijado.',
+  conf: '⬜ El 1889: falta el papel que lo muestre · ⬜ quién contesta la caja de preguntas el mismo día.',
+  frames: [
+    {l: 'texto', rol: 'gancho', k: 'Desde 1889', t: 'Esta cuenta es nueva.\n*La empresa, no.*'},
+    {l: 'texto', rol: 'contexto', t: 'Somos *Solmi,* de San Pedro.', b: 'Techos, terrazas y chapa. Fabricamos nuestro producto y lo aplicamos nosotros.'},
+    {l: 'panel', rol: 'núcleo', img: 'ia-aplicador-rodillo', t: 'Un producto que *no se vende en el mercado.*', b: 'Lo desarrolla la familia y lo aplica nuestra gente.'},
+    {l: 'dato', rol: 'clímax', t: '1889.', b: '*Seis generaciones.*\nEl mismo lugar de San Pedro.'},
+    {l: 'cierre', rol: 'cierre', t: '¿Dónde tenés *humedad?*', b: 'Contanos y te decimos qué le pasa.', st: 'Caja de preguntas · «Contame dónde tenés humedad»'}
+  ]
+},
+{
+  id: 'H2', tipo: 'historia', titulo: 'Semana 1 · día 2 · De carruajes a techos',
+  meta: '<b>Propuesta:</b> jueves 1/10. <b>Para:</b> el que busca el nombre antes de llamar. <b>Qué cambió:</b> el frame 3 ahora une la herrería con el producto: de la herrería les quedó inventar lo que usan (folleto; «Nunca dejamos de inventar», la pieza de Víctor). Y el yunque del fondo es el del logo: la herrería de 1889.',
+  conf: '🔴 Frames 2 y 3 necesitan fotos reales: el portón de Mitre 2250 y el taller. Sin IA: es el lugar de verdad. Si no llegan, los dos van solo texto.',
+  frames: [
+    {l: 'texto', rol: 'gancho', t: 'Antes de arreglar techos, esta familia *hacía carruajes.*', st: 'Quiz · «¿De qué año es Solmi?» · 1889 / 1975'},
+    {l: 'panel', lado: 'der', rol: 'contexto', img: 'real-porton', t: '1889, *Mitre 2250.*', b: 'Una herrería de carruajes, antes de que existieran los autos. Seguimos en la misma esquina.'},
+    {l: 'panel', rol: 'núcleo', img: 'real-taller', t: 'De la herrería nos quedó una costumbre: *inventar lo que usamos.*', b: 'Hoy fabricamos el producto que aplicamos en cada techo.'},
+    {l: 'texto', rol: 'clímax', t: 'El que promete y desaparece *no dura 137 años.*'},
+    {l: 'cierre', rol: 'cierre', t: '¿Qué te gustaría *que te mostremos?*', st: 'Caja de preguntas · «¿Qué querés ver?»'}
+  ]
+},
+{
+  id: 'H3', tipo: 'historia', titulo: 'Semana 1 · día 3 · El Niño ya está acá',
+  meta: '<b>Propuesta:</b> sábado 3/10. <b>Para:</b> particulares. <b>Empuja:</b> P1, el carrusel del Niño que Víctor ya diseñó. Los puntos son los de P1.',
+  conf: '⬜ Chequear el pronóstico del Servicio Meteorológico la semana que sale · ⬜ ¿son estas tres cosas las que ustedes miran primero cuando suben a un techo?',
+  frames: [
+    {l: 'texto', rol: 'gancho', t: 'Escuchaste lo del Niño.\n*¿Y tu techo?*', st: 'Encuesta · «¿Ya lo miraste?» · Sí / Todavía no'},
+    {l: 'texto', rol: 'contexto', t: 'El Pacífico más caliente de lo normal *cambia las lluvias.*', b: 'El Servicio Meteorológico Nacional lo da activo hasta el verano.', nota: 'Fuente: Servicio Meteorológico Nacional.'},
+    {l: 'panel', rol: 'núcleo', img: 'ia-membrana-rota', t: 'Tres cosas para *mirar hoy:*', num: false, rows: ['Canaletas tapadas.', 'Bordes de la membrana *levantados.*', 'Óxido en los *tornillos de la chapa.*']},
+    {l: 'panel', lado: 'der', rol: 'clímax', img: 'ia-cielorraso-mancha', t: 'Y *adentro.*', b: 'Manchas o pintura inflada en el cielorraso: el agua ya está entrando.'},
+    {l: 'cierre', rol: 'cierre', t: '¿Encontraste *alguna?*', b: 'Mandanos la foto y te decimos qué es.', st: 'Caja de preguntas · «Mandanos la foto»'}
+  ]
+},
+{
+  id: 'H4', tipo: 'historia', titulo: 'Semana 2 · día 1 · Ya te lo arreglaron y volvió a filtrar',
+  meta: '<b>Propuesta:</b> martes 6/10. <b>Para:</b> particulares y consorcios. <b>Qué cambió:</b> salió «el sol, el granizo y el frío la van despegando», que no tenía fuente de ellos. Entra lo del folleto: las membranas se acumulan y juntan humedad por debajo, y no hace falta sacarlas. Las dos fotos son las del folleto.',
+  conf: '⬜ ¿Las membranas viejas nunca hace falta sacarlas, o depende del techo?',
+  frames: [
+    {l: 'texto', rol: 'gancho', t: 'Ya te arreglaron el techo.\n*Y volvió a filtrar.*', st: 'Encuesta · «¿Te pasó?» · Sí / No'},
+    {l: 'texto', rol: 'contexto', t: 'No es mala suerte.\n[Es cómo se arregla.]'},
+    {l: 'panel', rol: 'núcleo', img: 'membranas-antes', t: 'Cada vez que filtra, *otra membrana arriba.*', b: 'Las capas se acumulan y el agua sigue entrando.'},
+    {l: 'texto', rol: 'núcleo', t: 'Y abajo, *la humedad.*', b: 'Las membranas viejas juntan humedad por debajo.'},
+    {l: 'panel', lado: 'der', rol: 'clímax', img: 'membranas-despues', t: 'No hace falta *sacarlas.*', b: 'Se repara la última y se protege.'},
+    {l: 'cierre', rol: 'cierre', t: 'Mandanos la foto *de tu techo.*', b: 'Te decimos qué le pasa.', st: 'Caja de preguntas · «Mandanos la foto»'}
+  ]
+},
+{
+  id: 'H5', tipo: 'historia', titulo: 'Semana 2 · día 2 · La prueba de la casita',
+  meta: '<b>Propuesta:</b> jueves 8/10. <b>Para:</b> particulares y consorcios. <b>Qué cambió:</b> antes era «Sin romper nada», contado con frases. Ahora se muestra con la prueba del video A de ellos: la casita sin tratamiento deja pasar la humedad, la tratada no, y la cuchara levanta el gel. Nadie más tiene ese material.',
+  conf: '⬜ Cómo actúa el producto (entra como el agua, se hace gel, no lo afectan el sol ni el granizo): va tal cual lo dicen sus videos, lo firman antes de publicar · ⬜ los cuadros del video son de 480 píxeles: si tienen el original, mejor.',
+  frames: [
+    {l: 'texto', rol: 'gancho', t: '¿Se puede arreglar un techo con humedad *sin romperlo?*'},
+    {l: 'panel', rol: 'núcleo', img: 'video-a-casita', t: '*Sin tratamiento,* la humedad pasa.', b: 'Lo mostramos con una casita de prueba.'},
+    {l: 'panel', lado: 'der', rol: 'núcleo', img: 'video-a-bloque', t: '*Con Solmi,* no pasa.'},
+    {l: 'panel', rol: 'clímax', img: 'video-a-gel', t: 'Entra mojando, *como el agua.*', b: 'Adentro se hace un gel elástico y sella por dentro.'},
+    {l: 'texto', rol: 'núcleo', t: 'Sin membrana, *sin pintura, sin brea.*', b: 'Y como sella por dentro, no lo afectan el sol ni el granizo.'},
+    {l: 'cierre', rol: 'cierre', t: 'Mandanos la foto *de tu techo.*', st: 'Caja de preguntas · «Mandanos la foto»'}
+  ]
+},
+{
+  id: 'H6', tipo: 'historia', titulo: 'Semana 2 · día 3 · Antes y después',
+  meta: '<b>Propuesta:</b> sábado 10/10. <b>Para:</b> particulares y consorcios. <b>Qué cambió:</b> el frame del medio decía «Así se trabaja»; ahora dice cómo: los tres pasos del video B. <b>Se guarda en:</b> «Obras».',
+  conf: '🔴 El antes y el después tienen que ser el mismo techo y el mismo encuadre: se mejoran las fotos del folleto, no se inventan · ⬜ el frame 3 va con IA hasta que haya una foto de ellos aplicando (el video B sirve).',
+  frames: [
+    {l: 'texto', rol: 'gancho', t: 'Así estaba *este techo de chapa.*'},
+    {l: 'full', rol: 'antes', img: 'chapa1-antes', k: 'Antes'},
+    {l: 'panel', rol: 'núcleo', img: 'ia-aplicador-mochila', t: 'Se recupera en *tres pasos:*', rows: ['Curado y pavonizado', 'Impermeabilizado', 'Plastificado']},
+    {l: 'full', rol: 'después', img: 'chapa1-despues', k: 'Después', azul: true},
+    {l: 'texto', rol: 'clímax', t: 'Las mismas chapas.\n*No cambiamos ninguna.*'},
+    {l: 'cierre', rol: 'cierre', t: '¿Querés ver *el tuyo?*', b: 'Mandanos la foto.', st: 'Caja de preguntas · «Mandanos la foto»'}
+  ]
+},
+{
+  id: 'H7', tipo: 'historia', titulo: 'Semana 3 · día 1 · Si guardás algo bajo un techo de chapa',
+  meta: '<b>Propuesta:</b> martes 13/10. <b>Para:</b> empresas (galpones, depósitos, plantas). <b>Empuja:</b> E1, que es el que se pauta en empresas. Mismo argumento que E1: lo que se moja es lo que está abajo.',
+  conf: '⬜ Que la chapa se oxida primero en tornillos y uniones · ⬜ el pronóstico del Niño.',
+  frames: [
+    {l: 'texto', rol: 'gancho', t: '¿Galpón, depósito o planta con *la chapa oxidada?*'},
+    {l: 'foto', rol: 'contexto', img: 'ia-galpon-adentro', t: 'Con el Niño, lo que se moja no es el techo.\n*Es lo que tenés abajo.*'},
+    {l: 'panel', rol: 'núcleo', img: 'chapa2-antes', t: 'El óxido empieza en *los tornillos y las uniones.*', b: 'Por ahí entra el agua.'},
+    {l: 'panel', lado: 'der', rol: 'clímax', img: 'chapa2-despues', t: 'La chapa se recupera *sin cambiarla.*', b: 'Frenamos el óxido y la protegemos.'},
+    {l: 'cierre', rol: 'cierre', wa: true, t: 'Envianos *un mensaje.*', b: 'Contanos qué tenés abajo del techo.', st: L('Tengo un galpón con la chapa oxidada')}
+  ]
+},
+{
+  id: 'H8', tipo: 'historia', titulo: 'Semana 3 · día 2 · Si administrás un edificio',
+  meta: '<b>Propuesta:</b> jueves 15/10. <b>Para:</b> administradores de consorcio. <b>Qué cambió:</b> «Sin andamios» (que no tenía fuente) pasa a lo que sí dice el folleto: no se sacan las membranas viejas y el producto entra en la losa, así no hay escombro en el palier.',
+  conf: '⬜ ¿Se puede decir «sin escombro en el palier» y «el edificio sigue viviendo»? · ⬜ los consorcios no se nombran hasta tener permiso.',
+  frames: [
+    {l: 'texto', rol: 'gancho', t: 'La terraza filtra.\n*El reclamo lo recibís vos.*'},
+    {l: 'texto', rol: 'contexto', t: 'Y en la asamblea, la pregunta es *siempre la misma:*', b: '[¿Cuánto tiempo va a estar el edificio en obra?]'},
+    {l: 'texto', rol: 'núcleo', t: 'Sin sacar las membranas viejas.\n*Sin escombro en el palier.*', b: 'El producto se aplica arriba y entra en la losa, como el agua.'},
+    {l: 'foto', rol: 'núcleo', img: 'ia-edificio-terraza', t: 'Se trabaja arriba,\n*y abajo el edificio sigue viviendo.*'},
+    {l: 'texto', rol: 'clímax', k: 'Desde 1889', t: 'Ya trabajamos en *consorcios de Buenos Aires.*', b: 'Y en hoteles, fábricas y casas de todo el país.'},
+    {l: 'cierre', rol: 'cierre', wa: true, t: 'Pasanos la foto *de la terraza.*', b: 'Te decimos qué se puede hacer.', st: L('Administro un edificio y tengo una filtración')}
+  ]
+},
+{
+  id: 'H9', tipo: 'historia', titulo: 'Semana 3 · día 3 · No lo cambies: recuperalo',
+  meta: '<b>Propuesta:</b> sábado 17/10. <b>Para:</b> empresas y consorcios con techo de chapa. <b>Empuja:</b> E2 e Y3. El argumento económico del folleto, sin un solo número. <b>Se guarda en:</b> «Obras».',
+  conf: '⬜ Que recuperar sale menos que cambiar: lo sostienen ellos, va sin cifras · ⬜ el orden de los tres pasos.',
+  frames: [
+    {l: 'texto', rol: 'gancho', t: 'Antes de cambiar el techo de chapa, *mirá esto.*'},
+    {l: 'texto', rol: 'contexto', t: 'Cambiarlo es chapas nuevas *más la mano de obra de sacar las viejas.*'},
+    {l: 'panel', rol: 'núcleo', img: 'chapa3-antes', t: 'Recuperarlo son *tres pasos.*', b: 'Curado y pavonizado, impermeabilizado y plastificado.'},
+    {l: 'panel', lado: 'der', rol: 'clímax', img: 'chapa3-despues', t: 'Tres pasos, *y ni una chapa nueva.*'},
+    {l: 'cierre', rol: 'cierre', wa: true, t: 'Envianos *un mensaje.*', b: '¿Tenés un techo de chapa para recuperar?', st: L('Quiero recuperar un techo de chapa')}
+  ]
+},
+{
+  id: 'D0', tipo: 'historia', titulo: 'Portadas de las destacadas', contador: false,
+  meta: 'Se recortan a un círculo chico: entra un color y un signo, nada más. Azul y gris alternados, en el orden del perfil. El nombre de abajo es solo para ubicarlas: en el círculo no se ve.',
+  frames: [
+    {l: 'destacada', rol: 'Servicios', nombre: 'Servicios', glifo: 'S', fondo: 'azul'},
+    {l: 'destacada', rol: 'Ya confiaron', nombre: 'Ya confiaron', glifo: 'check', fondo: 'gris'},
+    {l: 'destacada', rol: 'Obras', nombre: 'Obras', glifo: 'O', fondo: 'azul'},
+    {l: 'destacada', rol: 'Consultar', nombre: 'Consultar', glifo: '?', fondo: 'gris'}
+  ]
+},
+{
+  id: 'D1', tipo: 'historia', titulo: 'Destacada «Servicios» · 1 de 3 · Qué hacemos',
+  meta: 'En una destacada la encuesta y la caja de preguntas se ven pero no se pueden contestar: por eso todas cierran en link.',
+  conf: '⬜ ¿La cuenta queda en techos, terrazas y chapa, o suma paredes, tanques y piletas?',
+  frames: [
+    {l: 'texto', rol: 'portada', t: 'Si entra agua, lo arreglamos *sin romperlo.*', logo: true},
+    {l: 'panel', rol: '1 de 3', k: '1 de 3', img: 'ia-aplicador-rodillo', t: '*Techos y terrazas.*', b: 'El producto entra como el agua y sella por dentro.'},
+    {l: 'panel', lado: 'der', rol: '2 de 3', k: '2 de 3', img: 'chapa2-despues', t: '*Techos de chapa.*', b: 'Se recuperan sin cambiar una sola chapa.'},
+    {l: 'panel', rol: '3 de 3', k: '3 de 3', img: 'membranas-despues', t: '*Membranas viejas.*', b: 'No hace falta sacarlas: se repara la última y se protege.'},
+    {l: 'cierre', rol: 'cierre', wa: true, t: 'Contanos *qué te pasa.*', st: L('Hola, quiero consultar por un techo')}
+  ]
+},
+{
+  id: 'D2', tipo: 'historia', titulo: 'Destacada «Servicios» · 2 de 3 · Si tenés una casa',
+  conf: '⬜ ¿Con una foto alcanza para decir algo, o siempre hay que ir a ver? Cambia el cierre de las tres.',
+  frames: [
+    {l: 'texto', rol: 'portada', t: 'Si tenés una casa.\n*Y una mancha en el techo.*'},
+    {l: 'panel', rol: 'núcleo', img: 'ia-cielorraso-mancha', t: 'Suele *empezar así.*', b: 'Una mancha en el cielorraso, pintura inflada, y cuando llueve fuerte, la gotera.'},
+    {l: 'texto', rol: 'núcleo', t: 'Y casi siempre *ya lo arreglaste una vez.*'},
+    {l: 'panel', lado: 'der', rol: 'clímax', img: 'ia-terraza-terminada', t: 'Esta vez *no hay que romper nada.*', b: 'Sin sacar la membrana vieja, sin escombro, sin ruido de obra.'},
+    {l: 'cierre', rol: 'cierre', wa: true, t: 'Mandanos una foto *del techo.*', b: 'Con eso ya te podemos decir algo.', st: L('Tengo humedad en mi casa y les mando una foto')}
+  ]
+},
+{
+  id: 'D3', tipo: 'historia', titulo: 'Destacada «Servicios» · 3 de 3 · Si tenés un galpón, una planta o un edificio',
+  conf: '🔴 «Se trabaja con todo funcionando» es la promesa más fuerte de todas: si no la firman tal cual, el frame 3 se reescribe.',
+  frames: [
+    {l: 'texto', rol: 'portada', t: 'Si tenés un galpón, *una planta o un edificio.*'},
+    {l: 'texto', rol: 'núcleo', t: 'Acá el problema *no es el techo.*', b: '[Es parar la producción, o cortar el paso en el edificio.]'},
+    {l: 'panel', rol: 'núcleo', img: 'obra-cementera', t: 'Se trabaja con *todo funcionando.*', b: 'Sin andamios, sin escombro, sin sacar nada de lugar.'},
+    {l: 'panel', lado: 'der', rol: 'clímax', img: 'chapa3-despues', t: 'Y la chapa *se recupera.*', b: 'Se repara, se frena el óxido y se protege. Sin chapas nuevas.'},
+    {l: 'cierre', rol: 'cierre', wa: true, t: 'Envianos un mensaje *y lo vemos.*', st: L('Tengo una filtración en un galpón / una planta / un edificio')}
+  ]
+},
+{
+  id: 'D4', tipo: 'historia', titulo: 'Destacada «Ya confiaron» · el cierre', contador: false,
+  meta: 'Los frames de antes son los de Víctor («Estas empresas ya confiaron en nosotros»): no se tocan. Este es el cierre que le falta, con link, porque en una destacada es lo único que se puede tocar.',
+  conf: '🔴 Si la pieza de Víctor nombra clientes, antes hace falta el permiso de cada uno · el cierre de Víctor publica el número y va con este, que lleva el link.',
+  frames: [
+    {l: 'cierre', rol: 'cierre', wa: true, t: '¿Te lo *recomendaron?*', b: 'Envianos un mensaje y contanos qué te pasa.', st: L('Me los recomendaron y quiero consultar')}
+  ]
+},
+{
+  id: 'D5', tipo: 'historia', titulo: 'Destacada «Consultar» · Cómo pedir un presupuesto',
+  conf: '⬜ ¿Qué necesitan para contestar algo sin ir a ver? Estas tres son una propuesta · no se promete plazo de respuesta.',
+  frames: [
+    {l: 'texto', rol: 'portada', t: 'Tres cosas *y te contestamos.*'},
+    {l: 'par', rol: 'núcleo', a: 'ia-techo-lejos', d: 'ia-chapa-tornillos', t: 'Una foto de lejos *y una de cerca.*', b: 'De lejos se ve el techo entero; de cerca, la mancha o el óxido.'},
+    {l: 'texto', rol: 'núcleo', t: 'En qué ciudad *estás.*', b: 'Trabajamos en todo el país.'},
+    {l: 'cierre', rol: 'cierre', wa: true, t: 'Envianos *un mensaje.*', b: 'Con las fotos y tu ciudad.', st: L('Hola, les mando las fotos del techo')}
+  ]
+}
+];
+</script>
+<script src="solmi.js"></script>
+</head>
+<body>
+<header class="top">
+  <a href="../">← Tablero de guiones</a>
+  <h1>Historias · tres semanas · Solmi <small>H1 a H9 · destacadas — 1080 × 1920</small></h1>
+  <label><input type="checkbox" checked data-toggle="sinzonas"> Zonas de sticker y márgenes seguros</label>
+  <label><input type="checkbox" checked data-toggle="sintag"> Mostrar qué imagen va</label>
+  <a href="carruseles.html">← Carruseles</a>
+</header>
+<div class="intro">
+  <p><b>Tres días por semana, propuesta martes, jueves y sábado.</b> El cierre sube de a poco: la semana 1 pide la caja de preguntas, la 2 «mandanos la foto» y la 3 pide «Envianos un mensaje», con un sticker de link a WhatsApp que ya trae el mensaje escrito, distinto por día, para saber qué historia trajo cada consulta.</p>
+  <ul>
+    <li><b>Rosa arriba y abajo:</b> ahí Instagram tapa con su barra. Nada importante entra en esas zonas.</li>
+    <li><b>Recuadro azul punteado:</b> el lugar del sticker. Se pone en Instagram, no en el diseño.</li>
+    <li><b>Recuadros rayados:</b> las imágenes que todavía faltan.</li>
+  </ul>
+</div>
+<main id="piezas"></main>
+</body>
+</html>
