@@ -892,6 +892,7 @@ function renderPauta(){
       <div class="conf dk"><div>¿Va este reparto?</div>${opciones('pauta-reparto')}</div></aside>
     <aside class="card est"><span class="rotulo">Antes de gastar un peso</span><ol>${A.antes.map(x => `<li>${esc(x)}</li>`).join('')}</ol></aside>
     <aside class="card est"><span class="rotulo">Qué se mide</span><ul>${A.mide.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+      ${A.revision ? `<span class="rotulo" style="margin-top:18px">Con qué se decide en cada revisión, en este orden</span><ol>${A.revision.map(x => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}
       <span class="rotulo" style="margin-top:18px">Y además</span><ul>${A.notas.map(x => `<li>${esc(x)}</li>`).join('')}</ul></aside>`);
 }
 /* 29/09 · qué subir y cuándo: la grilla es carril × momento; en cada celda van sus notas, una abajo de la otra */

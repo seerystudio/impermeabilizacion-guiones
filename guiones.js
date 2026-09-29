@@ -510,22 +510,31 @@ window.GUIONES.pauta = {
   resumen: "Una campaña, dos conjuntos, cuatro anuncios. El paso a paso está en «Qué subir y cuándo»",
   donde: "En Instagram y Facebook, con anuncios que abren una conversación de WhatsApp: el que toca el anuncio escribe directo, no hace falta página web. Es una sola campaña de mensajes con dos conjuntos, cada uno con su zona y su presupuesto. Los anuncios se arman en el Administrador de anuncios con «usar publicación existente», no con el botón «Promocionar» de Instagram.",
   reparto: [
-    ["Particulares · el corredor", "$100.000", "De Campana y Zárate a San Nicolás y Villa Constitución: donde llega la cuadrilla. Unos $3.300 por día, parejo todo el mes. Semana 1: V1, el video del Niño. Desde la semana 2 se suma P1."],
-    ["Empresas · todo el país", "$50.000", "Unos $1.700 por día. Semana 1: E1, los galpones con el Niño. Desde la semana 2 se suma V2, el video de la chapa."],
+    ["Particulares · el corredor", "$100.000", "Campana, Zárate, Lima, Baradero, San Pedro, Gobernador Castro, Ramallo, San Nicolás, Arrecifes, Pergamino, Salto, Chacabuco, San Antonio de Areco, Luján, Mercedes, Villa Constitución, Empalme, Arroyo Seco y Rosario: donde llega la cuadrilla. Capital queda afuera: se llevaba casi todo el presupuesto y ahí la gotera la resuelve el consorcio, que ya entra por empresas. Presupuesto total, del 29/9 al 30/10, de 8 a 24. Semana 1: V1, el video del Niño. Desde la semana 2 se suma P1."],
+    ["Empresas · todo el país", "$50.000", "Presupuesto total, mismas fechas y horario. Semana 1: E1, los galpones con el Niño. Desde la semana 2 se suma V2, el video de la chapa. El botón «Es para mi casa» separa a los particulares de lejos."],
     ["Reserva", "$50.000", "Sin asignar. Se decide el día 14, con lo que haya traído cada conjunto."]
   ],
   antes: [
-    "El número de WhatsApp de siempre, en WhatsApp Business y vinculado a la página de Facebook de Solmi. Falta confirmar cuál es: el 7352 es también el del estudio jurídico.",
-    "El mensaje de bienvenida de WhatsApp con dos preguntas: «¿Es para una casa o para un galpón o empresa?» y «¿En qué localidad?». Filtra antes de la primera respuesta y dice de dónde viene cada consulta.",
+    "✓ El número de siempre, +54 9 11 5954-7352, en WhatsApp Business y vinculado a la página. Es el mismo del estudio jurídico: las consultas de las dos empresas llegan al mismo chat.",
+    "✓ El mensaje de bienvenida de cada anuncio, con botones: casa o empresa, la zona y las formas de pago. Pide la localidad y una visita o un presupuesto. Filtra antes de la primera respuesta y dice de dónde viene cada consulta.",
     "Instagram abierto con los tres fijados y las destacadas: el que llega desde un anuncio mira el perfil antes de escribir.",
     "Contesta la misma persona de siempre, rápido. Un anuncio que trae mensajes que tardan días en contestarse hace más daño que no pautar.",
-    "✓ La cuenta publicitaria de Meta ya está."
+    "✓ La cuenta publicitaria «Solmi Impermeabilización», en pesos y con hora de Buenos Aires. Falta la tarjeta de Solmi.",
+    "El mensaje de ausencia en WhatsApp Business, de 0 a 8."
   ],
   mide: [
     "Cuántas conversaciones empezó cada anuncio y cuánto costó cada una.",
     "De qué localidad escriben y si es casa o empresa: sale de las dos preguntas del mensaje de bienvenida.",
-    "Cuántas mandaron la foto del techo y cuántas terminaron en visita o presupuesto.",
+    "Cuántas terminaron en visita o presupuesto, y cuántas en trabajo.",
     "Guardados y envíos de cada publicación, pautada o no."
+  ],
+  /* 29/09 · lo que sumó el cuaderno de Meta Ads: con qué se decide en cada revisión, en este orden */
+  revision: [
+    "Gasto de cada anuncio: a cuál le da la plata Meta. Uno que casi no gasta es uno que Meta ya descartó.",
+    "Frecuencia: cuántas veces vio el anuncio cada persona. Si sube y el costo por conversación también, el anuncio se cansó: se cambia.",
+    "CPM, lo que cuesta mostrarse mil veces: dice si la zona o el público salen caros.",
+    "Costo por conversación, y después cuántas conversaciones eran de la zona y del tipo de cliente correcto.",
+    "Al final, la cuenta que importa: lo que dejó el trabajo cerrado menos lo que costó conseguirlo. Sin precio fijo, se hace trabajo por trabajo."
   ],
   notas: [
     "Día 7: si empresas trae solo particulares de lejos, ese conjunto pasa al corredor, que también está lleno de plantas.",
@@ -564,13 +573,13 @@ window.GUIONES.subir = {
     {id: "emp3", col: 5, carril: "emp", tipo: "paso", t: "Y3 · E3 · E2", b: "Una por semana. La semana 7 queda libre para el video de obras."},
     {id: "obras", col: 5, carril: "pend", tipo: "pendiente", conf: "sub-obras", t: "Un video o carrusel con las obras importantes", b: "Subte, Coca-Cola, Cementos Avellaneda, Ingenio Ledesma, los hoteles, los consorcios: la prueba de que trabajan con empresas grandes, que es lo que más necesita ver el de empresas. Las fotos viejas van en chico, como archivo y con el año: la baja calidad se lee como trayectoria, no como descuido. Se arma con Remotion, como V1 y V2. Se cruza con E3 «Obras»: o lo reemplaza o E3 pasa a video. Falta el permiso para nombrar a cada cliente y saber qué fotos hay de cada obra. La tapa de Clarín del Subte se puede nombrar; mostrarla en un anuncio pago puede necesitar permiso del diario."},
 
-    {id: "antes", col: 0, carril: "pauta", tipo: "paso", t: "Antes de gastar un peso", b: "WhatsApp Business en el número, vinculado a la página de Facebook. El mensaje de bienvenida con las dos preguntas: casa o empresa, y localidad. La cuenta publicitaria ya está."},
-    {id: "numero", col: 0, carril: "pend", tipo: "pendiente", conf: "sub-numero", t: "¿Cuál es el número?", b: "Siguen con su número de siempre. Si es el 11 5954 7352, es el mismo del estudio jurídico: las consultas de las dos empresas llegan al mismo chat. Meta igual cuenta cuántas trajo cada anuncio."},
+    {id: "antes", col: 0, carril: "pauta", tipo: "paso", t: "Antes de gastar un peso", b: "WhatsApp Business en el número, vinculado a la página de Facebook. El mensaje de bienvenida con las dos preguntas: casa o empresa, y localidad. La cuenta publicitaria, en pesos y con hora de Buenos Aires."},
+    {id: "numero", col: 0, carril: "pauta", tipo: "paso", t: "El número: el de siempre", b: "+54 9 11 5954-7352, ya vinculado. Es el mismo del estudio jurídico: las consultas de las dos empresas llegan al mismo chat. Meta igual cuenta cuántas trajo cada anuncio."},
     {id: "arranque", col: 1, carril: "pauta", tipo: "paso", t: "Arranca la pauta", b: "Una campaña de mensajes a WhatsApp, dos conjuntos. Particulares, $100.000 con V1. Empresas, $50.000 con E1. Parejo todo el mes."},
-    {id: "rosario", col: 1, carril: "pend", tipo: "pendiente", conf: "sub-rosario", t: "¿Entra Rosario?", b: "Tuvieron trabajo ahí y hay muchos edificios y casas: tiene sentido. El riesgo: en el mismo conjunto que Zárate, Meta le va a dar casi todo a Rosario, que es mucho más grande. Propuesta: entra en el conjunto de particulares, y el día 7 miramos de qué localidad escriben. Si Zárate quedó sin mensajes, Rosario pasa a su propio conjunto con parte de la reserva."},
-    {id: "r7", col: 2, carril: "pauta", tipo: "revision", t: "Primera revisión", b: "¿De dónde escriben y quiénes? Si empresas trae solo particulares de lejos, ese conjunto pasa al corredor."},
+    {id: "rosario", col: 1, carril: "pauta", tipo: "paso", t: "Rosario entra", b: "Está en el conjunto de particulares. El riesgo: Meta le puede dar casi todo a Rosario, que es mucho más grande. El día 7 miramos de qué localidad escriben; si Zárate quedó sin mensajes, Rosario pasa a su propio conjunto con parte de la reserva."},
+    {id: "r7", col: 2, carril: "pauta", tipo: "revision", t: "Primera revisión", b: "En orden: gasto de cada anuncio, frecuencia, CPM y costo por conversación. Después, de dónde escriben y quiénes: si empresas trae solo particulares de lejos, ese conjunto pasa al corredor."},
     {id: "suma", col: 3, carril: "pauta", tipo: "paso", t: "Segundo anuncio en cada conjunto", b: "P1 en particulares, V2 en empresas. Meta reparte entre los dos de cada conjunto."},
-    {id: "r14", col: 4, carril: "pauta", tipo: "revision", t: "Segunda revisión", b: "Se apaga el anuncio que no trajo mensajes: en particulares entra P2."},
+    {id: "r14", col: 4, carril: "pauta", tipo: "revision", t: "Segunda revisión", b: "Lo mismo que el día 7, más cuántas conversaciones terminaron en visita o presupuesto. Se apaga el anuncio que no trajo mensajes: en particulares entra P2."},
     {id: "reserva", col: 4, carril: "pend", tipo: "pendiente", conf: "sub-reserva", t: "¿Los $50.000 más?", b: "No desde el día 1: con más plata Meta busca más gente, no mejor gente. Se asignan acá. Si empresas trajo empresas reales en lugares a donde llega la cuadrilla, van ahí. Si no, a particulares en el corredor o a Rosario."},
     {id: "sigue", col: 5, carril: "pauta", tipo: "paso", t: "Hasta fin de mes", b: "La plata queda en el anuncio de cada conjunto que más mensajes trajo. El mes 2 se arma con estos datos."}
   ],
