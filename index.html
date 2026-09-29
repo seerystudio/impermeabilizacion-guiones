@@ -1249,17 +1249,17 @@ function irAPieza(id){
 }
 
 /* el recorrido de arriba y las flechas entre una fila y la siguiente */
-const RECORRIDO = [{id: 'EST', t: 'La estrategia'}, {id: 'CAL', t: 'El calendario'}, {id: 'PAU', t: 'La pauta'}, {id: 'SUB', t: 'Qué subir y cuándo'}, {id: 'P', t: 'El perfil'},
+const RECORRIDO = [{id: 'SUB', t: 'Qué subir y cuándo'}, {id: 'EST', t: 'La estrategia'}, {id: 'CAL', t: 'El calendario'}, {id: 'PAU', t: 'La pauta'}, {id: 'P', t: 'El perfil'},
   {id: 'F', t: 'Los 3 fijados'}, {id: 'PAR', t: 'Particulares'}, {id: 'EMP', t: 'Empresas'}, {id: 'YT', t: 'Los videos'},
   {id: 'RES', t: 'En reserva'}, {id: 'PDC', t: 'Carruseles ya diseñados'}, {id: 'PDH', t: 'Historias ya diseñadas'}, {id: 'DIS', t: 'Sumar más piezas'}, {id: 'VID', t: 'Guiones de video'}];
 const FLUJO = {
-  '0': 'Empecemos por lo que ya está diseñado: los carruseles',
+  '0': 'Primero, qué se sube y cuándo',
+  'SUB': 'Lo que ya está diseñado: los carruseles',
   'PDC': 'Y las historias ya diseñadas',
   'PDH': 'Ahora sí, la estrategia',
   'EST': 'De la estrategia sale el calendario',
   'CAL': 'Y para empujarlo, la pauta',
-  'PAU': 'Y el paso a paso: qué se sube y cuándo',
-  'SUB': 'Todo cae en el mismo perfil',
+  'PAU': 'Todo cae en el mismo perfil',
   'P': 'Lo primero que se ve: los tres fijados',
   'F': 'Después, los carruseles de cada público',
   'PAR': 'El otro público: empresas',
@@ -1475,8 +1475,9 @@ function render(){
   </div></section>`;
   const guionesVideo = fila('VID', 'VID', 'Guiones de video', 'Para cuando haya obra y alguien a cámara', `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Qué hay acá</h4><ol><li>Los guiones de video que ya teníamos, en los cuatro formatos de la propuesta.</li><li>Sus ideas ya pasaron a carrusel, más arriba.</li><li>Los tres animados (5A, 4B y 4A) están en el calendario: se arman sin filmar.</li></ol></div></aside>`);
   /* 27/09 · el orden es el de cómo se sube todo: primero lo que se decide, después lo que se publica, al final el material.
-     28/09 · a pedido del usuario, «Lo ya diseñado» va primero, antes que todo lo demás */
-  $('#world').innerHTML = intro + renderDisenado() + renderEstrategia() + renderCalendario() + renderPauta() + renderSubir() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
+     28/09 · a pedido del usuario, «Lo ya diseñado» va primero, antes que todo lo demás.
+     29/09 · a pedido del usuario, «Qué subir y cuándo» va primero de todo, antes de «Lo ya diseñado» */
+  $('#world').innerHTML = intro + renderSubir() + renderDisenado() + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
     <div class="row-title"><span class="n">${String(r.n).padStart(2,'0')}</span><span class="f">${esc(r.formato)}</span><span class="m">${esc(r.resumen)}</span></div>
     ${renderRef(r)}
     <div class="scripts">${r.guiones.map(g => renderScript(r, g)).join('')}</div>
@@ -1484,12 +1485,12 @@ function render(){
   const opt = (v, t) => `<option value="${esc(v)}">${esc(t)}</option>`;
   const optGR = id => { const g = GR.find(x => x.id === id); return g ? opt(g.id, g.n + ' · ' + g.titulo) : ''; };
   $('#jump').innerHTML = opt('0', 'Ir a…')
+    + (D.subir ? opt('SUB', '→ · Qué subir y cuándo') : '')
     + (DIS_C.length ? opt('PDC', 'PD · Carruseles ya diseñados') : '')
     + (DIS_H.length ? opt('PDH', 'PD · Historias ya diseñadas') : '')
     + (D.estrategia ? opt('EST', 'EST · La estrategia') : '')
     + (D.calendario ? opt('CAL', 'CAL · El calendario') : '')
     + (D.pauta ? opt('PAU', '$ · La pauta') : '')
-    + (D.subir ? opt('SUB', '→ · Qué subir y cuándo') : '')
     + (P ? opt('P', 'IG · El perfil') : '')
     + optGR('F')
     + (HIS.length ? opt('HIS', 'HIS · Las historias') : '')
