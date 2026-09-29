@@ -394,6 +394,40 @@ body.list .car{width:auto}
 body.list .est,body.list .cal{width:auto}
 body.list .cal{overflow-x:auto}
 
+/* 29/09 · qué subir y cuándo: notas tipo Miro por carril y momento, con flechas que se dibujan entre notas */
+.sub{padding:26px;background:var(--negro-2);border:1px solid var(--linea);border-radius:18px}
+.sub-ley{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 22px;font-size:12.5px;color:var(--gris)}
+.sub-ley span{display:inline-flex;align-items:center;gap:7px}
+.sub-ley i{width:14px;height:14px;border-radius:3px;display:block}
+.sub-ley .l-paso{background:var(--hueso)}
+.sub-ley .l-pauta{background:var(--negro-3);border:1px solid var(--linea-2)}
+.sub-ley .l-rev{background:var(--naranja)}
+.sub-ley .l-pend{border:1.5px dashed var(--naranja)}
+.sub-board{position:relative;display:grid;grid-template-columns:132px 250px 250px 210px 250px 210px 290px;column-gap:58px;row-gap:30px;
+  padding:14px;border-radius:12px;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:18px 18px}
+.sub-col{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--naranja);align-self:end}
+.sub-car{font-family:var(--tit);font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--hueso);padding-top:10px;border-top:1px solid var(--linea-2)}
+.sub-cel{display:flex;flex-direction:column;gap:26px}
+.nota{position:relative;z-index:1;border-radius:6px;padding:12px 14px 13px;font-size:13px;line-height:1.42;box-shadow:0 10px 22px rgba(0,0,0,.4);
+  background:var(--hueso);color:#141414;--tenue:#63625E}
+.nota b{display:block;font-family:var(--tit);font-size:15.5px;font-weight:800;line-height:1.12;letter-spacing:-.015em;margin:0 0 5px}
+.nota p{margin:0}
+.nota .etq{margin:0 0 7px}
+.nota.pauta{background:var(--negro-3);color:var(--hueso);border:1px solid var(--linea-2)}
+.nota.revision{background:var(--naranja);color:#fff}
+.nota.pendiente{background:var(--negro);color:var(--hueso);border:1.5px dashed var(--naranja);box-shadow:none}
+.nota .pend{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--naranja);margin:0 0 6px}
+.nota .conf.dk{margin-top:10px;padding:8px 10px}
+.sub-svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;z-index:0}
+.sub-svg path.fl{fill:none;stroke:var(--gris-2);stroke-width:1.6}
+.sub-svg path.fl.pe{stroke:var(--naranja);stroke-dasharray:5 5}
+.sub-svg marker path{fill:var(--gris-2)}
+.sub-svg marker.pe path{fill:var(--naranja)}
+.sub-lbl{position:absolute;z-index:2;transform:translate(-50%,-50%);font-size:11.5px;color:var(--gris);background:var(--negro-2);border:1px solid var(--linea);border-radius:100px;padding:2px 9px;white-space:nowrap;pointer-events:none}
+body.list .sub{width:auto;overflow-x:auto;padding:18px}
+body.list .sub-board{grid-template-columns:96px 250px 250px 210px 250px 210px 290px}
+body.list .sub-car{position:sticky;left:0;z-index:3;align-self:start;font-size:14px;background:var(--negro-2);padding:10px 8px 8px 0}
+
 /* 25/09: el recorrido con flechas y el apartado de las piezas ya diseñadas */
 
 /* el recorrido: el mapa de todo el tablero, arriba de todo, con flechas */
@@ -844,7 +878,7 @@ function renderEstrategia(){
 }
 function renderCalendario(){
   const C = D.calendario; if (!C) return '';
-  const cel = p => `<td><b>${esc(p.t)}</b><span>${esc(p.s)}</span>${etq(p.k)}</td>`;
+  const cel = p => p ? `<td><b>${esc(p.t)}</b><span>${esc(p.s)}</span>${etq(p.k)}</td>` : '<td class="his"><div class="no">— libre</div></td>';
   const his = h => `<td class="his">${h && h.length ? h.map(x => `<div>${esc(x)}</div>`).join('') : '<div class="no">—</div>'}</td>`;
   return fila('CAL', 'CAL', C.titulo, C.resumen, `<aside class="card cal"><table><thead><tr><th>Semana</th><th>Publicación 1</th><th>Publicación 2</th><th>Historias · 3 días</th></tr></thead><tbody>
       ${C.semanas.map((x, i) => `<tr><td class="sn">${i + 1}</td>${cel(x.p1)}${cel(x.p2)}${his(x.his)}</tr>`).join('')}
@@ -859,6 +893,51 @@ function renderPauta(){
     <aside class="card est"><span class="rotulo">Antes de gastar un peso</span><ol>${A.antes.map(x => `<li>${esc(x)}</li>`).join('')}</ol></aside>
     <aside class="card est"><span class="rotulo">Qué se mide</span><ul>${A.mide.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
       <span class="rotulo" style="margin-top:18px">Y además</span><ul>${A.notas.map(x => `<li>${esc(x)}</li>`).join('')}</ul></aside>`);
+}
+/* 29/09 · qué subir y cuándo: la grilla es carril × momento; en cada celda van sus notas, una abajo de la otra */
+function renderSubir(){
+  const S = D.subir; if (!S) return '';
+  const nota = n => {
+    const cls = n.tipo === 'revision' ? 'revision' : n.tipo === 'pendiente' ? 'pendiente' : n.carril === 'pauta' ? 'pauta' : '';
+    return `<div class="nota ${cls}" data-nota="${esc(n.id)}">${n.tipo === 'pendiente' ? '<span class="pend">Pendiente de definir</span>' : ''}${n.k ? etq(n.k) : ''}
+      <b>${esc(n.t)}</b><p>${esc(n.b)}</p>${n.conf ? `<div class="conf dk"><div>¿Va así?</div>${opciones(n.conf)}</div>` : ''}</div>`;
+  };
+  const cab = '<div></div>' + S.columnas.map(c => `<div class="sub-col">${esc(c)}</div>`).join('');
+  const filas = S.carriles.map(c => `<div class="sub-car">${esc(c.t)}</div>` + S.columnas.map((_, i) =>
+    `<div class="sub-cel">${S.notas.filter(n => n.carril === c.k && n.col === i).map(nota).join('')}</div>`).join('')).join('');
+  const ley = `<div class="sub-ley"><span><i class="l-paso"></i>Se publica</span><span><i class="l-pauta"></i>Se hace en la pauta</span><span><i class="l-rev"></i>Se revisa</span><span><i class="l-pend"></i>Pendiente de definir</span></div>`;
+  return fila('SUB', '→', S.titulo, S.resumen, `<aside class="card sub">${ley}<div class="sub-board"><svg class="sub-svg" aria-hidden="true"></svg>${cab}${filas}</div></aside>`);
+}
+/* las flechas: posiciones con offsetLeft/offsetTop, que no cambian con el zoom del tablero */
+function dibujarSubir(){
+  const S = D.subir, b = document.querySelector('.sub-board'); if (!S || !b) return;
+  const svg = b.querySelector('.sub-svg');
+  b.querySelectorAll('.sub-lbl').forEach(x => x.remove());
+  const caja = el => { let x = 0, y = 0; for (let e = el; e && e !== b; e = e.offsetParent){ x += e.offsetLeft; y += e.offsetTop; }
+    return {l: x, t: y, r: x + el.offsetWidth, b: y + el.offsetHeight, cx: x + el.offsetWidth / 2, cy: y + el.offsetHeight / 2}; };
+  const C = {}; b.querySelectorAll('[data-nota]').forEach(el => C[el.dataset.nota] = caja(el));
+  const pend = id => (S.notas.find(n => n.id === id) || {}).tipo === 'pendiente';
+  const bez = (p, t) => { const u = 1 - t; return [0, 1].map(j => u*u*u*p[0][j] + 3*u*u*t*p[1][j] + 3*u*t*t*p[2][j] + t*t*t*p[3][j]); };
+  let paths = '';
+  S.flechas.forEach(([de, a, txt]) => {
+    const A = C[de], B = C[a]; if (!A || !B) return;
+    let p;
+    if (B.l >= A.r - 4){ const d = Math.max(28, (B.l - A.r) / 2); p = [[A.r, A.cy], [A.r + d, A.cy], [B.l - d, B.cy], [B.l, B.cy]]; }
+    else if (B.r <= A.l + 4){ const d = Math.max(28, (A.l - B.r) / 2); p = [[A.l, A.cy], [A.l - d, A.cy], [B.r + d, B.cy], [B.r, B.cy]]; }
+    else {
+      const baja = B.t > A.b, y0 = baja ? A.b : A.t, y1 = baja ? B.t : B.b;
+      /* si en el camino recto hay otra nota, la flecha va por el costado derecho */
+      const tapa = Object.entries(C).some(([k, R]) => k !== de && k !== a && R.r > A.cx && R.l < A.cx && R.t < Math.max(y0, y1) && R.b > Math.min(y0, y1));
+      if (tapa){ const x = Math.max(A.r, B.r); p = [[A.r, A.cy], [x + 44, A.cy], [x + 44, B.cy], [B.r, B.cy]]; }
+      else { const d = Math.max(16, Math.abs(y1 - y0) / 2) * (baja ? 1 : -1); p = [[A.cx, y0], [A.cx, y0 + d], [B.cx, y1 - d], [B.cx, y1]]; }
+    }
+    const pe = pend(de) || pend(a);
+    paths += `<path class="fl${pe ? ' pe' : ''}" d="M${p[0]} C${p[1]} ${p[2]} ${p[3]}" marker-end="url(#${pe ? 'subpe' : 'subp'})"/>`;
+    if (txt){ const [x, y] = bez(p, .5), l = document.createElement('div'); l.className = 'sub-lbl'; l.style.left = x + 'px'; l.style.top = y + 'px'; l.textContent = txt; b.appendChild(l); }
+  });
+  svg.setAttribute('width', b.scrollWidth); svg.setAttribute('height', b.scrollHeight);
+  svg.innerHTML = `<defs><marker id="subp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 L10 5 L0 9 z"/></marker>
+    <marker id="subpe" class="pe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 L10 5 L0 9 z"/></marker></defs>` + paths;
 }
 function renderVideos(){
   const V = D.videos; if (!V) return '';
@@ -1170,7 +1249,7 @@ function irAPieza(id){
 }
 
 /* el recorrido de arriba y las flechas entre una fila y la siguiente */
-const RECORRIDO = [{id: 'EST', t: 'La estrategia'}, {id: 'CAL', t: 'El calendario'}, {id: 'PAU', t: 'La pauta'}, {id: 'P', t: 'El perfil'},
+const RECORRIDO = [{id: 'EST', t: 'La estrategia'}, {id: 'CAL', t: 'El calendario'}, {id: 'PAU', t: 'La pauta'}, {id: 'SUB', t: 'Qué subir y cuándo'}, {id: 'P', t: 'El perfil'},
   {id: 'F', t: 'Los 3 fijados'}, {id: 'PAR', t: 'Particulares'}, {id: 'EMP', t: 'Empresas'}, {id: 'YT', t: 'Los videos'},
   {id: 'RES', t: 'En reserva'}, {id: 'PDC', t: 'Carruseles ya diseñados'}, {id: 'PDH', t: 'Historias ya diseñadas'}, {id: 'DIS', t: 'Sumar más piezas'}, {id: 'VID', t: 'Guiones de video'}];
 const FLUJO = {
@@ -1179,7 +1258,8 @@ const FLUJO = {
   'PDH': 'Ahora sí, la estrategia',
   'EST': 'De la estrategia sale el calendario',
   'CAL': 'Y para empujarlo, la pauta',
-  'PAU': 'Todo cae en el mismo perfil',
+  'PAU': 'Y el paso a paso: qué se sube y cuándo',
+  'SUB': 'Todo cae en el mismo perfil',
   'P': 'Lo primero que se ve: los tres fijados',
   'F': 'Después, los carruseles de cada público',
   'PAR': 'El otro público: empresas',
@@ -1206,7 +1286,7 @@ function flechas(){
 function despuesDeRender(){
   const intro = document.querySelector('#r0 .intro');
   if (intro && !intro.querySelector('.mapa')) intro.insertAdjacentHTML('beforeend', mapaHTML());
-  flechas(); marcarLigas();
+  flechas(); marcarLigas(); requestAnimationFrame(dibujarSubir);
 }
 
 /* el visor grande de una lámina */
@@ -1396,7 +1476,7 @@ function render(){
   const guionesVideo = fila('VID', 'VID', 'Guiones de video', 'Para cuando haya obra y alguien a cámara', `<aside class="card ref"><div class="sticky" style="border-top:0;padding-top:0"><h4>Qué hay acá</h4><ol><li>Los guiones de video que ya teníamos, en los cuatro formatos de la propuesta.</li><li>Sus ideas ya pasaron a carrusel, más arriba.</li><li>Los tres animados (5A, 4B y 4A) están en el calendario: se arman sin filmar.</li></ol></div></aside>`);
   /* 27/09 · el orden es el de cómo se sube todo: primero lo que se decide, después lo que se publica, al final el material.
      28/09 · a pedido del usuario, «Lo ya diseñado» va primero, antes que todo lo demás */
-  $('#world').innerHTML = intro + renderDisenado() + renderEstrategia() + renderCalendario() + renderPauta() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
+  $('#world').innerHTML = intro + renderDisenado() + renderEstrategia() + renderCalendario() + renderPauta() + renderSubir() + renderPerfil() + grupo('F') + renderHistorias() + renderDestacadas() + grupo('PAR') + grupo('EMP') + grupo('RES') + renderDis() + renderVideos() + guionesVideo + D.refs.map(r => `<section class="row" id="r${r.n}">
     <div class="row-title"><span class="n">${String(r.n).padStart(2,'0')}</span><span class="f">${esc(r.formato)}</span><span class="m">${esc(r.resumen)}</span></div>
     ${renderRef(r)}
     <div class="scripts">${r.guiones.map(g => renderScript(r, g)).join('')}</div>
@@ -1409,6 +1489,7 @@ function render(){
     + (D.estrategia ? opt('EST', 'EST · La estrategia') : '')
     + (D.calendario ? opt('CAL', 'CAL · El calendario') : '')
     + (D.pauta ? opt('PAU', '$ · La pauta') : '')
+    + (D.subir ? opt('SUB', '→ · Qué subir y cuándo') : '')
     + (P ? opt('P', 'IG · El perfil') : '')
     + optGR('F')
     + (HIS.length ? opt('HIS', 'HIS · Las historias') : '')
@@ -1424,6 +1505,7 @@ const altos = () => document.querySelectorAll('textarea[data-e]').forEach(alto);
 render();
 despuesDeRender();
 requestAnimationFrame(altos); addEventListener('load', altos); addEventListener('resize', altos);
+addEventListener('load', dibujarSubir); addEventListener('resize', dibujarSubir); if (document.fonts) document.fonts.ready.then(dibujarSubir);
 /* si un texto guardado quedó igual al original (o el original cambió), se limpia */
 const limpiarEd = () => Object.keys(ed).forEach(k => { if (!(k in ORIG) || ed[k] === ORIG[k]) delete ed[k]; });
 limpiarEd();
@@ -1583,7 +1665,9 @@ function textoTodo(){
   if (D.estrategia){
     L.push('== La estrategia · lo que falta confirmar');
     D.estrategia.confirmar.forEach(x => L.push(x.q + ' → ' + (conf[x.k] || 'sin respuesta')));
-    L.push('¿Va el reparto de la pauta? → ' + (conf['pauta-reparto'] || 'sin respuesta'), '');
+    L.push('¿Va el reparto de la pauta? → ' + (conf['pauta-reparto'] || 'sin respuesta'));
+    if (D.subir) D.subir.notas.filter(n => n.conf).forEach(n => L.push('Pendiente · ' + n.t + ' → ' + (conf[n.conf] || 'sin respuesta')));
+    L.push('');
   }
   CARS.forEach(it => {
     const el = elegido(it.k, it);
@@ -1639,6 +1723,7 @@ function filasTodo(){
   if (D.estrategia){
     D.estrategia.confirmar.forEach(x => F.push(['Estrategia', 'Confirmar: ' + x.q, conf[x.k] || '']));
     F.push(['Pauta', 'Confirmar: ¿va este reparto?', conf['pauta-reparto'] || '']);
+    if (D.subir) D.subir.notas.filter(n => n.conf).forEach(n => F.push(['Qué subir y cuándo', 'Pendiente: ' + n.t, conf[n.conf] || '']));
   }
   CARS.forEach(it => {
     const sec = 'Carrusel ' + it.k + ' · ' + it.titulo, el = elegido(it.k, it);
@@ -1791,7 +1876,7 @@ function setMode(m){
   $('#mBoard').setAttribute('aria-pressed', m !== 'list');
   store.set('si-mode', m, true);
   if (m !== 'list') apply();
-  requestAnimationFrame(altos);
+  requestAnimationFrame(altos); requestAnimationFrame(dibujarSubir);
 }
 $('#mBoard').onclick = () => setMode('board');
 $('#mList').onclick = () => setMode('list');

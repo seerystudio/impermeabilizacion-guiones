@@ -24,8 +24,7 @@ window.GUIONES = {
     "Nada inventado: cada frase sale de los folletos, de los videos de ustedes o de lo que nos dijeron."
   ],
   falta: [
-    "El WhatsApp que se publica: el 7352 es el mismo del estudio jurídico. Los videos de YouTube publican el 7351: ¿es ese?",
-    "La cuenta publicitaria de Meta a nombre de Solmi, para la pauta.",
+    "El WhatsApp: siguen con su número de siempre, ¿cuál es? El 7352 es también el del estudio jurídico. Tiene que estar en WhatsApp Business y vinculado a la página de Facebook de Solmi.",
     "El OK a lo que dice cada carrusel en «Confirmanos».",
     "Un papel que muestre el 1889.",
     "Permiso para nombrar a Cementos Avellaneda, Editorial Perfil, Molinos Cañuelas y Multigranos.",
@@ -464,7 +463,7 @@ window.GUIONES.estrategia = {
       ["Qué necesita ver", "Que existen desde 1889 y trabajaron en plantas, que la chapa se recupera sin cambiarla y que el trabajo es llave en mano."],
       ["Cómo se le habla", "Con el argumento económico del folleto: se recupera la chapa y se evita el costo de chapas nuevas y la mano de obra de cambiar un techo. Sin precios."],
       ["El Niño", "Entra por lo que se moja abajo del techo (E1)."],
-      ["Publicaciones", "E1 · Y3 · No cambies el techo de chapa en video (V2) · E3 · E2. Y el plastificado (Y5, Y6) cuando lo definamos."],
+      ["Publicaciones", "E1 · No cambies el techo de chapa en video (V2) · Y3 · E3 · E2. Y el plastificado (Y5, Y6) cuando lo definamos."],
       ["Cierre", "«Escribinos por WhatsApp». Para este público también puede servir el mail: lo definimos juntos."],
       ["Pauta", "$50.000"],
       ["Qué se mide", "Cuántos escriben, cuántos miran el perfil y cuántos terminan en visita o presupuesto. Para el que busca el nombre, la ficha de Google pesa tanto como las publicaciones."]
@@ -473,57 +472,117 @@ window.GUIONES.estrategia = {
 };
 
 /* 27/09 · el calendario suma las historias: dos publicaciones y tres historias por semana.
-   Cada publicación lleva su clave, que es de donde sale la etiqueta de publicidad o publicaciones. */
+   Cada publicación lleva su clave, que es de donde sale la etiqueta de publicidad o publicaciones.
+   29/09 · con la pauta armada: los tres fijados y las destacadas van el día 0, antes de pautar, y las cuatro
+   piezas que se pautan (V1, E1, P1, V2) pasan a las semanas 1 y 2. Quedan siete semanas; la 7 deja lugar
+   para el video de obras, si se aprueba. */
 window.GUIONES.calendario = {
-  titulo: "Calendario · ocho semanas, dos publicaciones y tres historias por semana",
-  resumen: "La semana 1 es la semana en que se abre la cuenta. Dos días fijos para las publicaciones —por ejemplo martes y viernes— y tres para las historias",
+  titulo: "Calendario · día 0 y siete semanas, dos publicaciones y tres historias por semana",
+  resumen: "El día 0 se arma el perfil entero. La semana 1 es la primera publicación y el primer anuncio. Dos días fijos para las publicaciones —por ejemplo martes y viernes— y tres para las historias",
   semanas: [
-    {p1: {k: "F1", t: "F1 · Quiénes somos", s: "carrusel · fijado"}, p2: {k: "5A", t: "V1 · El Niño ya está acá (5A)", s: "video animado · particulares · Niño"},
+    {p1: {k: "5A", t: "V1 · El Niño ya está acá (5A)", s: "video animado · particulares · Niño"}, p2: {k: "E1", t: "E1 · Si guardás algo bajo un techo de chapa", s: "carrusel · empresas · Niño"},
       his: ["H1 · La bienvenida", "H2 · De carruajes a techos", "H3 · El Niño ya está acá"]},
-    {p1: {k: "F3", t: "F3 · Cómo trabajamos", s: "carrusel · fijado"}, p2: {k: "P1", t: "P1 · El Niño: cinco cosas", s: "carrusel · particulares · Niño"},
+    {p1: {k: "P1", t: "P1 · El Niño: cinco cosas", s: "carrusel · particulares · Niño"}, p2: {k: "4B", t: "V2 · No cambies el techo de chapa (4B)", s: "video animado · empresas"},
       his: ["H4 · Ya te lo arreglaron y volvió a filtrar", "H5 · Sin romper nada", "H6 · Antes y después"]},
-    {p1: {k: "F2", t: "F2 · Qué nos diferencia", s: "carrusel · fijado"}, p2: {k: "E1", t: "E1 · Si guardás algo bajo un techo de chapa", s: "carrusel · empresas · Niño"},
+    {p1: {k: "P2", t: "P2 · Cuatro frases antes de las lluvias", s: "carrusel · particulares · Niño"}, p2: {k: "Y3", t: "Y3 · Tu techo de chapa en tres pasos", s: "carrusel · empresas"},
       his: ["H7 · Si guardás algo bajo un techo de chapa", "H8 · Si administrás un edificio", "H9 · No lo cambies: recuperalo"]},
-    {p1: {k: "P2", t: "P2 · Cuatro frases antes de las lluvias", s: "carrusel · particulares · Niño"}, p2: {k: "Y3", t: "Y3 · Tu techo de chapa en tres pasos", s: "carrusel · empresas"}, his: []},
-    {p1: {k: "Y2", t: "Y2 · Sin tratamiento, la humedad pasa", s: "carrusel · particulares"}, p2: {k: "4B", t: "V2 · No cambies el techo de chapa (4B)", s: "video animado · empresas"}, his: []},
-    {p1: {k: "Y1", t: "Y1 · ¿Membranas y pinturas que fallan?", s: "carrusel · particulares"}, p2: {k: "E3", t: "E3 · Obras", s: "carrusel · empresas"}, his: []},
-    {p1: {k: "P4", t: "P4 · Tres techos sin romperlos", s: "carrusel · particulares"}, p2: {k: "E2", t: "E2 · No cambies el techo de chapa: recuperalo", s: "carrusel · empresas"}, his: []},
-    {p1: {k: "P3", t: "P3 · ¿Le pusiste membrana y sigue filtrando?", s: "carrusel · particulares"}, p2: {k: "4A", t: "V3 · La humedad no avisa (4A)", s: "video animado · particulares"}, his: []}
+    {p1: {k: "Y2", t: "Y2 · Sin tratamiento, la humedad pasa", s: "carrusel · particulares"}, p2: {k: "E3", t: "E3 · Obras", s: "carrusel · empresas"}, his: []},
+    {p1: {k: "Y1", t: "Y1 · ¿Membranas y pinturas que fallan?", s: "carrusel · particulares"}, p2: {k: "E2", t: "E2 · No cambies el techo de chapa: recuperalo", s: "carrusel · empresas"}, his: []},
+    {p1: {k: "P4", t: "P4 · Tres techos sin romperlos", s: "carrusel · particulares"}, p2: {k: "4A", t: "V3 · La humedad no avisa (4A)", s: "video animado · particulares"}, his: []},
+    {p1: {k: "P3", t: "P3 · ¿Le pusiste membrana y sigue filtrando?", s: "carrusel · particulares"}, p2: null, his: []}
   ],
   notas: [
-    "Lo del Niño va en el primer mes: pierde valor si se corre. Cada publicación sale con el pronóstico del Servicio Meteorológico chequeado esa semana.",
-    "Los fijados se fijan en orden F3, F2, F1: Instagram muestra primero el último.",
+    "Día 0, antes de la primera publicación: foto, bio, los tres fijados y las destacadas. Los fijados se publican y se fijan en orden F3, F2, F1: Instagram muestra primero el último.",
+    "Lo del Niño va en las tres primeras semanas: pierde valor si se corre. Cada publicación sale con el pronóstico del Servicio Meteorológico chequeado esa semana.",
     "E3 nombra clientes: si no hay permiso, sale sin nombres o cambia de semana con P3.",
-    "Los tres videos animados son los guiones 5A, 4B y 4A de más abajo. Los videos de YouTube tienen material para armarlos sin filmar: la demostración del gel y la aplicación en un techo de chapa real.",
-    "Las historias son tres semanas, no ocho: de la semana 4 en adelante salen de lo que conteste la gente en las cajas de preguntas.",
+    "La semana 7 deja un lugar libre para el video de obras de empresas, si se aprueba (ver «Qué subir y cuándo»).",
+    "Los tres videos animados son los guiones 5A, 4B y 4A de más abajo. V1 y V2 ya están armados.",
+    "Las historias son tres semanas, no siete: de la semana 4 en adelante salen de lo que conteste la gente en las cajas de preguntas.",
     "En reserva: Y4, Y5 y Y6, de plastificado."
   ]
 };
 
+/* 29/09 · la pauta, rehecha con lo que definió Solmi: su número de WhatsApp, particulares en el corredor y empresas en
+   todo el país. Con dos zonas, cada conjunto lleva su propio presupuesto: con uno solo para la campaña, Meta se lleva casi
+   todo al conjunto nacional. */
 window.GUIONES.pauta = {
   titulo: "Pauta · $150.000",
-  resumen: "Una propuesta: el reparto, las publicaciones y la zona se definen juntos",
-  donde: "En Instagram y Facebook, con anuncios que abren una conversación de WhatsApp. No hace falta página web: el que toca el anuncio escribe directo. Google Ads necesita una página a donde llevar el clic, así que queda para cuando haya web.",
+  resumen: "Una campaña, dos conjuntos, cuatro anuncios. El paso a paso está en «Qué subir y cuándo»",
+  donde: "En Instagram y Facebook, con anuncios que abren una conversación de WhatsApp: el que toca el anuncio escribe directo, no hace falta página web. Es una sola campaña de mensajes con dos conjuntos, cada uno con su zona y su presupuesto. Los anuncios se arman en el Administrador de anuncios con «usar publicación existente», no con el botón «Promocionar» de Instagram.",
   reparto: [
-    ["Particulares", "$100.000", "$25.000 por semana. Semanas 1 y 2: el video animado del Niño (V1). Semanas 3 y 4: la publicación de particulares que más mensajes y guardados haya traído (P1 o P2)."],
-    ["Empresas", "$50.000", "$25.000 por semana, en las semanas 3 y 4: E1, los galpones con el Niño."]
+    ["Particulares · el corredor", "$100.000", "De Campana y Zárate a San Nicolás y Villa Constitución: donde llega la cuadrilla. Unos $3.300 por día, parejo todo el mes. Semana 1: V1, el video del Niño. Desde la semana 2 se suma P1."],
+    ["Empresas · todo el país", "$50.000", "Unos $1.700 por día. Semana 1: E1, los galpones con el Niño. Desde la semana 2 se suma V2, el video de la chapa."],
+    ["Reserva", "$50.000", "Sin asignar. Se decide el día 14, con lo que haya traído cada conjunto."]
   ],
   antes: [
-    "El WhatsApp propio de impermeabilización. El 11 5954 7352 es el del estudio jurídico: las consultas se mezclarían y no se podría saber qué trajo cada anuncio. Los videos de YouTube de la empresa, de 2010 a 2019, publican el 11 5954 7351: ¿es ese?",
-    "Una cuenta publicitaria de Meta a nombre de Solmi, con su tarjeta: la pauta se paga directo.",
-    "Instagram abierto y con los tres fijados arriba: el que llega desde un anuncio mira el perfil antes de escribir.",
-    "Quién contesta los mensajes y en cuánto tiempo. Un anuncio que trae mensajes que tardan días en contestarse hace más daño que no pautar.",
-    "La zona: a dónde puede ir la cuadrilla. Con este monto rinde más una zona chica que todo el país."
+    "El número de WhatsApp de siempre, en WhatsApp Business y vinculado a la página de Facebook de Solmi. Falta confirmar cuál es: el 7352 es también el del estudio jurídico.",
+    "El mensaje de bienvenida de WhatsApp con dos preguntas: «¿Es para una casa o para un galpón o empresa?» y «¿En qué localidad?». Filtra antes de la primera respuesta y dice de dónde viene cada consulta.",
+    "Instagram abierto con los tres fijados y las destacadas: el que llega desde un anuncio mira el perfil antes de escribir.",
+    "Contesta la misma persona de siempre, rápido. Un anuncio que trae mensajes que tardan días en contestarse hace más daño que no pautar.",
+    "✓ La cuenta publicitaria de Meta ya está."
   ],
   mide: [
-    "Cuántas conversaciones empezaron desde cada anuncio y cuánto costó cada una.",
-    "Cuántas trajeron la foto del techo y cuántas terminaron en visita o presupuesto.",
+    "Cuántas conversaciones empezó cada anuncio y cuánto costó cada una.",
+    "De qué localidad escriben y si es casa o empresa: sale de las dos preguntas del mensaje de bienvenida.",
+    "Cuántas mandaron la foto del techo y cuántas terminaron en visita o presupuesto.",
     "Guardados y envíos de cada publicación, pautada o no."
   ],
   notas: [
-    "El primer mes se pauta lo del Niño, que vence con la temporada. Desde el segundo, la plata va a la publicación de cada estrategia que más mensajes trajo.",
+    "Día 7: si empresas trae solo particulares de lejos, ese conjunto pasa al corredor, que también está lleno de plantas.",
+    "Día 14: se apaga el anuncio que no trajo mensajes (en particulares entra P2) y se asigna la reserva.",
     "Nada de campañas de «reconocimiento de marca»: cada peso va a que alguien escriba.",
     "No prometemos un número de mensajes ni de clientes: el primer mes es para medir."
+  ]
+};
+
+/* 29/09 · qué subir y cuándo, en tablero: cuatro carriles (perfil, particulares, empresas, pauta) por seis momentos.
+   Cada nota: {id, col, carril, t, b, k (pieza, para la etiqueta), tipo: paso · revision · pendiente, conf (clave de «Confirmanos»)}.
+   Las flechas se dibujan solas entre notas: [desde, hasta, texto opcional]. Los pendientes van en su propio carril, abajo. */
+window.GUIONES.subir = {
+  titulo: "Qué subir y cuándo",
+  resumen: "Del perfil vacío al primer anuncio, y qué se revisa en el camino. Lo naranja punteado está pendiente de definir",
+  columnas: ["Día 0 · antes de pautar", "Semana 1", "Día 7 de pauta", "Semana 2", "Día 14 de pauta", "Semanas 3 a 7"],
+  carriles: [
+    {k: "perfil", t: "El perfil"},
+    {k: "par", t: "Particulares · el corredor"},
+    {k: "emp", t: "Empresas · todo el país"},
+    {k: "pauta", t: "La pauta"},
+    {k: "pend", t: "Pendiente de definir"}
+  ],
+  notas: [
+    {id: "perfil", col: 0, carril: "perfil", tipo: "paso", t: "El perfil completo", b: "Foto, bio, los tres fijados (F3, F2, F1, en ese orden) y las destacadas D1 a D5. Todo el mismo día."},
+    {id: "h1", col: 1, carril: "perfil", tipo: "paso", t: "Historias H1 a H3", b: "La bienvenida, de carruajes a techos y el Niño."},
+    {id: "h2", col: 3, carril: "perfil", tipo: "paso", t: "Historias H4 a H6", b: "Volvió a filtrar, sin romper nada, antes y después."},
+    {id: "h3", col: 5, carril: "perfil", tipo: "paso", t: "Historias H7 a H9 y después", b: "Semana 3: galpones, edificios y chapa. Desde la 4, las que salen de las cajas de preguntas."},
+
+    {id: "v1", col: 1, carril: "par", tipo: "paso", k: "5A", t: "V1 · El Niño ya está acá", b: "Video animado. Se publica y es el primer anuncio de particulares."},
+    {id: "p1", col: 3, carril: "par", tipo: "paso", k: "P1", t: "P1 · El Niño: cinco cosas", b: "Carrusel. Se publica y se suma como segundo anuncio."},
+    {id: "par3", col: 5, carril: "par", tipo: "paso", t: "P2 · Y2 · Y1 · P4 · V3 · P3", b: "Una por semana. P2 es el reemplazo si P1 no trae mensajes."},
+
+    {id: "e1", col: 1, carril: "emp", tipo: "paso", k: "E1", t: "E1 · Si guardás algo bajo un techo de chapa", b: "Carrusel. Se publica y es el primer anuncio de empresas."},
+    {id: "v2", col: 3, carril: "emp", tipo: "paso", k: "4B", t: "V2 · No cambies el techo de chapa", b: "Video animado. Se publica y se suma como segundo anuncio."},
+    {id: "emp3", col: 5, carril: "emp", tipo: "paso", t: "Y3 · E3 · E2", b: "Una por semana. La semana 7 queda libre para el video de obras."},
+    {id: "obras", col: 5, carril: "pend", tipo: "pendiente", conf: "sub-obras", t: "Un video o carrusel con las obras importantes", b: "Subte, Coca-Cola, Cementos Avellaneda, Ingenio Ledesma, los hoteles, los consorcios: la prueba de que trabajan con empresas grandes, que es lo que más necesita ver el de empresas. Las fotos viejas van en chico, como archivo y con el año: la baja calidad se lee como trayectoria, no como descuido. Se arma con Remotion, como V1 y V2. Se cruza con E3 «Obras»: o lo reemplaza o E3 pasa a video. Falta el permiso para nombrar a cada cliente y saber qué fotos hay de cada obra. La tapa de Clarín del Subte se puede nombrar; mostrarla en un anuncio pago puede necesitar permiso del diario."},
+
+    {id: "antes", col: 0, carril: "pauta", tipo: "paso", t: "Antes de gastar un peso", b: "WhatsApp Business en el número, vinculado a la página de Facebook. El mensaje de bienvenida con las dos preguntas: casa o empresa, y localidad. La cuenta publicitaria ya está."},
+    {id: "numero", col: 0, carril: "pend", tipo: "pendiente", conf: "sub-numero", t: "¿Cuál es el número?", b: "Siguen con su número de siempre. Si es el 11 5954 7352, es el mismo del estudio jurídico: las consultas de las dos empresas llegan al mismo chat. Meta igual cuenta cuántas trajo cada anuncio."},
+    {id: "arranque", col: 1, carril: "pauta", tipo: "paso", t: "Arranca la pauta", b: "Una campaña de mensajes a WhatsApp, dos conjuntos. Particulares, $100.000 con V1. Empresas, $50.000 con E1. Parejo todo el mes."},
+    {id: "rosario", col: 1, carril: "pend", tipo: "pendiente", conf: "sub-rosario", t: "¿Entra Rosario?", b: "Tuvieron trabajo ahí y hay muchos edificios y casas: tiene sentido. El riesgo: en el mismo conjunto que Zárate, Meta le va a dar casi todo a Rosario, que es mucho más grande. Propuesta: entra en el conjunto de particulares, y el día 7 miramos de qué localidad escriben. Si Zárate quedó sin mensajes, Rosario pasa a su propio conjunto con parte de la reserva."},
+    {id: "r7", col: 2, carril: "pauta", tipo: "revision", t: "Primera revisión", b: "¿De dónde escriben y quiénes? Si empresas trae solo particulares de lejos, ese conjunto pasa al corredor."},
+    {id: "suma", col: 3, carril: "pauta", tipo: "paso", t: "Segundo anuncio en cada conjunto", b: "P1 en particulares, V2 en empresas. Meta reparte entre los dos de cada conjunto."},
+    {id: "r14", col: 4, carril: "pauta", tipo: "revision", t: "Segunda revisión", b: "Se apaga el anuncio que no trajo mensajes: en particulares entra P2."},
+    {id: "reserva", col: 4, carril: "pend", tipo: "pendiente", conf: "sub-reserva", t: "¿Los $50.000 más?", b: "No desde el día 1: con más plata Meta busca más gente, no mejor gente. Se asignan acá. Si empresas trajo empresas reales en lugares a donde llega la cuadrilla, van ahí. Si no, a particulares en el corredor o a Rosario."},
+    {id: "sigue", col: 5, carril: "pauta", tipo: "paso", t: "Hasta fin de mes", b: "La plata queda en el anuncio de cada conjunto que más mensajes trajo. El mes 2 se arma con estos datos."}
+  ],
+  flechas: [
+    ["perfil", "h1"], ["h1", "h2"], ["h2", "h3"],
+    ["v1", "p1"], ["p1", "par3"], ["e1", "v2"], ["v2", "emp3"], ["obras", "emp3"],
+    ["perfil", "v1"], ["perfil", "e1"],
+    ["antes", "arranque"], ["numero", "antes"],
+    ["v1", "arranque", "se pauta la publicación"], ["e1", "arranque"],
+    ["rosario", "arranque"],
+    ["arranque", "r7"], ["r7", "suma"], ["p1", "suma"], ["v2", "suma"],
+    ["suma", "r14"], ["reserva", "r14"], ["r14", "sigue"]
   ]
 };
 
