@@ -294,7 +294,7 @@ window.GUIONES = {
           cta: "Escribinos por WhatsApp."
         },
         {
-          v: "B", tipo: "Recuperar en vez de cambiar",
+          v: "B", etq: "publicidad", tipo: "Recuperar en vez de cambiar",
           titulo: "No cambies el techo de chapa: recuperalo",
           hooks: [
             ["Transformación", "Antes. Después. Sin cambiar las chapas."],
@@ -510,7 +510,7 @@ window.GUIONES.pauta = {
   resumen: "Una campaña, dos conjuntos, cuatro anuncios. El paso a paso está en «Qué subir y cuándo»",
   donde: "En Instagram y Facebook, con anuncios que abren una conversación de WhatsApp: el que toca el anuncio escribe directo, no hace falta página web. Es una sola campaña de mensajes con dos conjuntos, cada uno con su zona y su presupuesto. Los anuncios se arman en el Administrador de anuncios con «usar publicación existente», no con el botón «Promocionar» de Instagram.",
   reparto: [
-    ["Particulares · el corredor", "$100.000", "Campana, Zárate, Lima, Baradero, San Pedro, Gobernador Castro, Ramallo, San Nicolás, Arrecifes, Pergamino, Salto, Chacabuco, San Antonio de Areco, Luján, Mercedes, Villa Constitución, Empalme, Arroyo Seco y Rosario: donde llega la cuadrilla. Capital queda afuera: se llevaba casi todo el presupuesto y ahí la gotera la resuelve el consorcio, que ya entra por empresas. Presupuesto total, del 29/9 al 30/10, de 8 a 24. Semana 1: V1, el video del Niño. Desde la semana 2 se suma P1."],
+    ["Particulares · el corredor", "$100.000", "Campana, Zárate, Lima, Baradero, San Pedro, Gobernador Castro, Ramallo, San Nicolás, Arrecifes, Pergamino, Salto, Chacabuco, San Antonio de Areco, Luján, Mercedes, Villa Constitución, Empalme, Arroyo Seco y Rosario: donde llega la cuadrilla. Capital queda afuera: se llevaba casi todo el presupuesto y ahí la gotera la resuelve el consorcio, que ya entra por empresas. Presupuesto total, del 30/9 al 30/10, de 8 a 24. Semana 1: V1, el video del Niño. Desde la semana 2 se suma P1."],
     ["Empresas · todo el país", "$50.000", "Presupuesto total, mismas fechas y horario. Semana 1: E1, los galpones con el Niño. Desde la semana 2 se suma V2, el video de la chapa. El botón «Es para mi casa» separa a los particulares de lejos."],
     ["Reserva", "$50.000", "Sin asignar. Se decide el día 14, con lo que haya traído cada conjunto."]
   ],
@@ -593,6 +593,46 @@ window.GUIONES.subir = {
     ["arranque", "r7"], ["r7", "suma"], ["p1", "suma"], ["v2", "suma"],
     ["suma", "r14"], ["reserva", "r14"], ["r14", "sigue"]
   ]
+};
+
+/* 29/09 · lo que sale mañana con pauta, aparte de los guiones: las dos piezas de la semana 1 y la que falta diseñar.
+   Cada pieza: {k (para la etiqueta), carril, t, tipo, b, estado, ojo, ir: [texto, a dónde] (fila o pieza ya diseñada)}. */
+/* 29/09 · la agenda de mañana a las 12, a pedido del usuario: todo lo que se sube, en orden y con sus archivos.
+   Cada paso: {h (hora), t, b, k (pieza, para la etiqueta), arch (archivos), ojo (lo que hay que mirar antes)}. */
+window.GUIONES.manana = {
+  titulo: "Mañana, con pauta",
+  resumen: "Miércoles 30/9 desde las 12 · qué se sube, en qué orden, con qué archivos. Y la que falta diseñar",
+  agenda: [
+    {h: "Antes", t: "Lo que tiene que estar listo", b: "Foto de perfil y bio cargadas. La tarjeta de Solmi en la cuenta publicitaria. El mensaje de ausencia de WhatsApp Business, de 0 a 8. El pronóstico del Niño chequeado con el Servicio Meteorológico (lo dicen V1 y la lámina 3 de E1)."},
+    {h: "12:00", k: "F3", t: "F3 · Cómo trabajamos: sin romper nada", b: "Carrusel. Se publica y se fija.", arch: "ct-01 a ct-08", ojo: "El cierre pide comentar SERVICIO: alguien tiene que contestar esos comentarios en el día."},
+    {h: "12:05", k: "F2", t: "F2 · Te prometieron que tu techo no iba a filtrar más", b: "Carrusel. Se publica y se fija.", arch: "qd-01 a qd-06"},
+    {h: "12:10", k: "F1", t: "F1 · Una empresa familiar desde 1889", b: "Carrusel. Se publica y se fija. Va última porque Instagram muestra primero el último que se fija.", arch: "qs-01 a qs-08"},
+    {h: "12:15", t: "Las destacadas «Servicios» y «Consultar»", b: "Se suben como historias y cada una se guarda en su destacada, con su portada. «Servicios»: D1, D2 y D3, en ese orden (portada d0-01). «Consultar»: D5 (portada d0-04). Para no llenar las historias del día, se pueden subir solo a «Mejores amigos»: la destacada igual la ve todo el mundo.", arch: "d1-01 a d1-05 · d2-01 a d2-05 · d3-01 a d3-05 · d5-01 a d5-04 · d0-01 y d0-04",
+      ojo: "D3, frame 3: «se trabaja con todo funcionando» es una promesa que Solmi todavía no firmó. Si no llega el sí, D3 va sin ese frame. «Ya confiaron» y «Obras» no se crean todavía: la primera espera los permisos de los clientes y la segunda no tiene material."},
+    {h: "12:30", k: "5A", t: "V1 · El Niño ya está acá", b: "Video, como reel. Es el primer anuncio de particulares.", arch: "solmi-nino-v1.mp4", ojo: "El copy está abajo, en su tarjeta."},
+    {h: "12:35", k: "E1", t: "E1 · Techos de chapa antes de las lluvias", b: "Carrusel con la portada A. Es el primer anuncio de empresas. La portada B no se publica: va solo como anuncio.", arch: "e1-01a y e1-02 a e1-08", ojo: "El copy está en la pieza, en «Carruseles ya diseñados»."},
+    {h: "12:40", k: "H1", t: "Historia H1 · La bienvenida", b: "Cinco frames. En el último va la caja de preguntas «Contame dónde tenés humedad».", arch: "h1-01 a h1-05", ojo: "Alguien tiene que contestar la caja de preguntas en el día."},
+    {h: "12:45", t: "Se prende la pauta", b: "Una campaña de mensajes a WhatsApp, del 30/9 al 30/10, de 8 a 24. Particulares, $100.000: V1 con «usar publicación existente». Empresas, $50.000: E1 portada A con «usar publicación existente» y E1 portada B subida en el Administrador. Meta revisa los anuncios antes de mostrarlos: puede tardar unas horas."}
+  ],
+  sale: [
+    {k: "5A", carril: "Particulares · el corredor · $100.000", t: "V1 · El Niño ya está acá", tipo: "Video animado · 18 s · 9:16",
+      b: "Se publica en el perfil y con esa misma publicación se arma el primer anuncio de particulares.",
+      estado: "Lista. El video está armado.",
+      ojo: "El pronóstico del Niño se chequea con el Servicio Meteorológico antes de publicarlo.",
+      copy: "El Niño ya está acá. ¿Y tu techo?\n\nEl Servicio Meteorológico Nacional lo da activo hasta el verano, y una tormenta fuerte encuentra cualquier fisura. El momento de revisar el techo es antes de que llueva, no con el balde abajo.\n\n¿Tenés humedad o una gotera? Envianos un mensaje.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      copyAd: "El Niño ya está acá. ¿Y tu techo?\n\nUna tormenta fuerte encuentra cualquier fisura. Revisalo antes de que llueva, no con el balde abajo. Envianos un mensaje. Impermeabilización Elástica Solmi · San Pedro.",
+      ir: ["Ver el guion (5A)", {go: "5"}]},
+    {k: "E1", carril: "Empresas · todo el país · $50.000", t: "E1 · Techos de chapa antes de las lluvias", tipo: "Carrusel · 8 láminas · 4:5 · portadas A y B",
+      b: "Se publica en el perfil y con esa misma publicación se arma el primer anuncio de empresas.",
+      estado: "Lista. Diseñada, con el copy de la publicación y el del anuncio.",
+      ojo: "Van las dos portadas, A y B, para ver cuál trae más mensajes. El pronóstico del Niño de la lámina 3 se chequea antes de publicarlo.",
+      ir: ["Ver las láminas", {pz: "X8"}]}
+  ],
+  falta: {k: "4B", carril: "Empresas · semana 2", t: "V2 · No cambies el techo de chapa: recuperalo", tipo: "Video animado · ≈15 s · guion 4B",
+    b: "Entra la semana 2 como segundo anuncio de empresas. Son los antes y después del folleto, animados: se arma sin filmar.",
+    ojo: "El video que ya está armado con el nombre «V2» es otro guion, el 5C: «Si guardás algo bajo un techo de chapa». Dice lo mismo que E1, así que empresas quedaría con dos anuncios iguales.",
+    conf: "man-v2", q: "Diseñamos el V2 del guion 4B, y el video 5C queda para historias o para reserva.",
+    ir: ["Ver el guion (4B)", {go: "4"}]}
 };
 
 window.GUIONES.videos = {
@@ -1308,8 +1348,30 @@ window.GUIONES.disenado = {
       copyAd: "«Si no gotea, está bien.» «Le pongo otra membrana y listo.» ¿Dijiste alguna?\n\nCon el Niño activo hasta el verano, el momento de arreglar el techo es antes de la próxima tormenta. Envianos un mensaje. Impermeabilización Elástica Solmi · San Pedro.",
       confirmar: "Cuatro cosas. ¿Lo de las membranas (juntan humedad por debajo, no hace falta sacarlas) y lo de la chapa se puede decir así? ¿El producto se aplica con el techo húmedo? Por eso salió el «con sol» de la frase 4. El pronóstico del Niño de la lámina 7 se vuelve a chequear la semana que sale. Y es de las que van con pauta: el reparto le da a particulares un solo anuncio por vez, así que va P1 o P2, no los dos juntos."},
 
+    /* 29/09 · P5, el anuncio directo de particulares para techos en general, con tres portadas para probar en la pauta.
+       Diseñado con el sistema de E1 y P2 (carrusel-solmi-empresas/particulares.html). Portada y lámina 3 con
+       imágenes de Nano Banana (ia-gotera-balde e ia-cielorraso-mancha), generadas por el usuario el 29/09. */
+    {k: "X28", etq: "publicidad", tipo: "Carrusel · particulares · A/B/C de portada", titulo: "La solución a tus goteras, sin romper el techo",
+      para: "La dueña de casa con goteras, cualquier techo", formato: "8 láminas · 4:5 · tres portadas", cierre: "Envianos un mensaje",
+      labCopy: "El copy de la publicación",
+      laminas: [
+        {img: "p5-01a", t: "Portada A · La solución a tus goteras, sin romper el techo.", b: "Imagen (IA): la gotera cae del cielorraso manchado a un balde"},
+        {img: "p5-01b", t: "Portada B · ¿Te arreglaron la gotera y volvió?", b: "Misma imagen"},
+        {img: "p5-01c", t: "Portada C · Para frenar una gotera no hace falta romper el techo.", b: "Misma imagen"},
+        {img: "p5-02", t: "Membrana, pintura, parche: todo tapa por arriba.", b: "Solo texto, fondo azul"},
+        {img: "p5-03", t: "Y el agua busca otro camino.", b: "En la próxima tormenta, la mancha vuelve. · Imagen (IA): cielorraso con mancha de humedad"},
+        {img: "p5-04", t: "Nosotros vamos por dentro.", b: "El producto entra en el techo como el agua. · Imagen: la foto de la portada de Víctor"},
+        {img: "p5-05", t: "Adentro se hace un gel elástico.", b: "Y sella el techo por dentro. · Imagen: video A 0:15, la cuchara que levanta el gel (real)"},
+        {img: "p5-06", t: "Sin romper nada.", b: "Sin albañiles, sin polvo, sin membrana encima. En losa, terraza, chapa o membrana vieja."},
+        {img: "p5-07", t: "Una terraza con membranas viejas. Antes y después.", b: "Folleto 2018 (real), en chico, como archivo: está a 336 px"},
+        {img: "p5-08", t: "¿Dónde tenés la gotera?", b: "Botón: envianos un mensaje"}
+      ],
+      copy: "¿Goteras en el techo? Membrana, pintura o parche tapan por arriba, y el agua busca otro camino.\n\nNosotros vamos por dentro: el producto entra en el techo como el agua y adentro se hace un gel elástico que lo sella. Sin romper nada: sin albañiles, sin polvo, sin membrana encima. En losa, terraza, chapa o membrana vieja.\n\n¿Dónde tenés la gotera? Envianos un mensaje.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      copyAd: "Goteras en el techo, sin romper nada.\n\nEl producto entra como el agua y adentro se hace un gel elástico que sella el techo. Losa, terraza, chapa o membrana vieja.\n\nEnvianos un mensaje. Impermeabilización Elástica Solmi · San Pedro.",
+      confirmar: "Tres portadas, A, B y C, para probar cuál trae más mensajes: se cambia solo la portada. Para probarlas, los anuncios se arman subiendo las láminas, no con «usar publicación existente». ⬜ ¿Reemplaza a P3 y P4? Dicen parecido. ⬜ ¿Entra el día 14 en lugar de P2 o de X3? ⬜ La foto original de la terraza del folleto 2018, si la tienen."},
+
     {k: "X2", etq: "publicaciones", tipo: "Carrusel · fijado", titulo: "Cómo trabajamos: sin romper nada",
-      para: "Las dos estrategias", de: "F3", formato: "8 láminas · 4:5", cierre: "Comentá SERVICIO y te enviamos toda la info",
+      para: "Las dos estrategias", de: "F3", formato: "8 láminas · 4:5", cierre: "Envianos un mensaje",
       labCopy: "El copy de la publicación",
       laminas: [
         {img: "ct-01", t: "Así es como arreglamos tu techo sin romper nada", b: "Ilustración 3D de la casa con la terraza rajada. Abajo: deslizá →"},
@@ -1319,26 +1381,28 @@ window.GUIONES.disenado = {
         {img: "ct-05", t: "4 · Adentro se transforma en gel", b: "Y el agua ya no moja"},
         {img: "ct-06", t: "Lo de siempre vs. Solmi", b: "Cuatro filas: romper el techo / membrana encima / pintura que se gasta / albañiles, polvo y ruido"},
         {img: "ct-07", t: "¿Dónde se aplica?", b: "Techos y terrazas, techos de chapa, membranas viejas, piletas, tanques de agua y cañerías"},
-        {img: "ct-08", t: "¿Tenés humedad en el techo?", b: "Comentá SERVICIO y te enviamos toda la info. solmi.com.ar · San Pedro, Bs. As."}
+        {img: "ct-08b", t: "¿Tenés humedad en el techo?", b: "Envianos un mensaje. solmi.com.ar · San Pedro, Bs. As. (29/09: antes decía «Comentá SERVICIO y te enviamos toda la info»)"}
       ],
-      copy: "Así arreglamos un techo con humedad, sin romper nada.\n\n1. Visita diagnóstico: vamos, revisamos el techo y encontramos por dónde entra el agua.\n2. Aplicamos el producto con rodillo. Sin albañiles, sin polvo, sin ruido.\n3. El producto recorre el mismo camino que el agua.\n4. Adentro se transforma en gel, y el agua ya no moja.\n\nNo es una membrana encima ni una pintura que se gasta: va por dentro. Sirve en techos y terrazas, techos de chapa, techos con membranas viejas, piletas de natación, tanques de agua y cañerías.\n\n¿Tenés humedad en el techo? Comentá SERVICIO y te mandamos toda la info por mensaje.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      copy: "Así arreglamos un techo con humedad, sin romper nada.\n\n1. Visita diagnóstico: vamos, revisamos el techo y encontramos por dónde entra el agua.\n2. Aplicamos el producto con rodillo. Sin albañiles, sin polvo, sin ruido.\n3. El producto recorre el mismo camino que el agua.\n4. Adentro se transforma en gel, y el agua ya no moja.\n\nNo es una membrana encima ni una pintura que se gasta: va por dentro. Sirve en techos y terrazas, techos de chapa, techos con membranas viejas, piletas de natación, tanques de agua y cañerías.\n\n¿Tenés humedad en el techo? Envianos un mensaje.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
       confirmar: "La lámina 6 compara con «lo de siempre» y promete «resiste granizo y tránsito»: ¿lo firman así o lo bajamos? Y el cierre pide comentar SERVICIO: eso solo funciona si alguien contesta esos comentarios el mismo día. ¿Quién los contesta?"},
 
     {k: "X3", etq: "publicidad", tipo: "Carrusel · particulares · chapa", titulo: "El mismo techo, dos finales distintos",
-      para: "La dueña de casa con techo de chapa", de: "E2", formato: "7 láminas · 4:5", cierre: "Comentá o envianos un mensaje",
+      /* 29/09 · pasa a particulares y baja de 7 a 5 láminas, a pedido del usuario: afuera cp-03, cp-05 y cp-06 (el
+         «después» hecho con IA y las frases que prometían: «listas para muchos años más», «futuras degradaciones»).
+         Entra cp-08, la obra real del folleto 2013 (techo 1), y cp-09 es el cierre de cp-07 con «Envianos un mensaje».
+         Las dos nuevas salen de carrusel-solmi-empresas/x3-arreglo.html. */
+      para: "La dueña de casa con techo de chapa", de: "E2", formato: "5 láminas · 4:5", cierre: "Envianos un mensaje",
       labCopy: "El copy de la publicación",
       laminas: [
         {img: "cp-01", t: "El mismo techo. Dos finales distintos.", b: "La casa partida al medio: a la izquierda «sin nuestro servicio», con lluvia y óxido; a la derecha, «con nuestro servicio». Deslizá y compará"},
         {img: "cp-02", t: "Sin nuestro servicio · Empieza con un punto de óxido", b: "En tornillos y solapes, donde nadie mira"},
-        {img: "cp-03", t: "Sin nuestro servicio · Cada lluvia lo hace avanzar", b: "Perfora la chapa, mancha las paredes y el agua termina adentro de tu casa"},
         {img: "cp-04", t: "Con nuestro servicio · Frenamos el óxido, sellamos y plastificamos", b: "Sin cambiar las chapas y sin molestias de obra"},
-        {img: "cp-05", t: "Con nuestro servicio · La lluvia llega. Y se va.", b: "Las chapas quedan protegidas de futuras degradaciones"},
-        {img: "cp-06", t: "Con nuestro servicio · Tu techo, recuperado", b: "Las mismas chapas, protegidas y listas para muchos años más"},
-        {img: "cp-07", t: "¿Tu techo ya muestra óxido?", b: "Frenalo antes de que llegue adentro. Te asesoramos sin compromiso"}
+        {img: "cp-08", t: "Esto no es una ilustración.", b: "Un techo real, recuperado sin cambiar las chapas. · Antes y después: folleto 2013, techo 1 (foto real, no IA)"},
+        {img: "cp-09", t: "¿Tu techo ya muestra óxido?", b: "Frenalo antes de que llegue adentro. Te asesoramos sin compromiso. Botón: envianos un mensaje"}
       ],
-      copy: "El mismo techo de chapa, dos finales distintos.\n\nUno empieza con un punto de óxido en los tornillos y los solapes, donde nadie mira. Cada lluvia lo hace avanzar: perfora la chapa, mancha las paredes y el agua termina adentro de tu casa.\n\nEl otro: frenamos el óxido, sellamos y plastificamos. Sin cambiar las chapas y sin molestias de obra. La lluvia llega y se va, y el techo queda con las mismas chapas, protegidas.\n\n¿El tuyo ya muestra óxido? Frenalo antes de que llegue adentro. Comentá o escribinos y te asesoramos, sin compromiso.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
-      copyAd: "¿Tu techo de chapa ya tiene óxido?\n\nEmpieza en los tornillos y los solapes, donde nadie mira, y cada lluvia lo hace avanzar hasta que el agua entra.\n\nSe frena, se sella y se plastifica: las mismas chapas, sin cambiar el techo y sin obra. Escribinos y te asesoramos, sin compromiso. Solmi · San Pedro.",
-      confirmar: "Esta pieza no estaba en el tablero: es un ángulo nuevo, el «sin / con». La colgamos de E2, que dice lo mismo (recuperar la chapa sin cambiarla), pero la casa que se ve es de particulares, no un galpón: ¿la dejamos en particulares? Y la etiquetamos «Publicidad» porque es la que mejor entra en frío: entraría como tercera candidata de las semanas 3 y 4 de particulares, en lugar de P2, sin plata extra. ¿Va?"},
+      copy: "El mismo techo de chapa, dos finales distintos.\n\nUno empieza con un punto de óxido en los tornillos y los solapes, donde nadie mira, y cada lluvia lo hace avanzar hasta que el agua termina adentro de tu casa.\n\nEl otro: frenamos el óxido, sellamos y plastificamos. Sin cambiar las chapas y sin molestias de obra.\n\n¿El tuyo ya muestra óxido? Frenalo antes de que llegue adentro. Envianos un mensaje y te asesoramos, sin compromiso.\n\nImpermeabilización Elástica Solmi · San Pedro, Bs. As.",
+      copyAd: "¿Tu techo de chapa ya tiene óxido?\n\nEmpieza en los tornillos y los solapes, donde nadie mira, y cada lluvia lo hace avanzar hasta que el agua entra.\n\nSe frena, se sella y se plastifica: las mismas chapas, sin cambiar el techo y sin obra. Envianos un mensaje y te asesoramos, sin compromiso. Solmi · San Pedro.",
+      confirmar: "Ahora va en particulares, con 5 láminas: salieron el «después» hecho con IA y las frases que prometían, y entró una obra real del folleto. Es candidata al anuncio de particulares del día 14, en lugar de P2. ⬜ Antes de pautarla: ¿cuántos de sus trabajos en casas son de chapa? Si son pocos, va como publicación, sin plata. ⬜ La obra real es un galpón: ¿tienen un antes y después de chapa en una casa?"},
 
     {k: "X4", etq: "publicaciones", tipo: "Historia · destacada «Ya confiaron»", titulo: "Los que ya confiaron",
       para: "El que busca el nombre antes de llamar", de: "D4", formato: "7 frames · 9:16", vertical: true,
@@ -1425,7 +1489,7 @@ window.GUIONES.disenado = {
     {"k":"X21","etq":"publicaciones","tipo":"Destacadas · portadas","titulo":"Portadas de las destacadas","para":"El que entra al perfil","formato":"4 frames · 9:16","vertical":true,"cierre":"—","labCopy":"Los textos de cada frame, para copiar","laminas":[{"img":"d0-01","t":"Portada «Servicios»","b":""},{"img":"d0-02","t":"Portada «Ya confiaron»","b":""},{"img":"d0-03","t":"Portada «Obras»","b":""},{"img":"d0-04","t":"Portada «Consultar»","b":""}],"copy":"Se recortan a un círculo chico: entra un color y un signo, nada más. Azul y gris alternados, en el orden del perfil. El nombre de abajo es solo para ubicarlas: en el círculo no se ve.","confirmar":"Se recortan a un círculo chico: entra un color y un signo, nada más. Azul y gris alternados, en el orden del perfil. El nombre de abajo es solo para ubicarlas: en el círculo no se ve."},
     {"k":"X22","etq":"publicaciones","tipo":"Historia · destacada","titulo":"1 de 3 · Qué hacemos","para":"El que entra al perfil","de":"D1","formato":"5 frames · 9:16","vertical":true,"cierre":"Contanos qué te pasa.","labCopy":"Los textos de cada frame, para copiar","laminas":[{"img":"d1-01","t":"Si entra agua, lo arreglamos sin romperlo.","b":""},{"img":"d1-02","t":"Techos y terrazas.","b":"El producto entra como el agua y sella por dentro. · Imagen: Aplicador con rodillo sobre la chapa · traje blanco, casco azul"},{"img":"d1-03","t":"Techos de chapa.","b":"Se recuperan sin cambiar una sola chapa. · Imagen: Folleto 2013 p. 10 · techo 2, después (falta, va el recuadro rayado)"},{"img":"d1-04","t":"Membranas viejas.","b":"No hace falta sacarlas: se repara la última y se protege. · Imagen: Folleto 2018 p. 4 · membranas recuperadas (falta, va el recuadro rayado)"},{"img":"d1-05","t":"Contanos qué te pasa.","b":"","st":"Link · wa.me/5491159547352?text=Hola, quiero consultar por un techo"}],"copy":"Si entra agua, lo arreglamos sin romperlo.\nTechos y terrazas. — El producto entra como el agua y sella por dentro.\nTechos de chapa. — Se recuperan sin cambiar una sola chapa.\nMembranas viejas. — No hace falta sacarlas: se repara la última y se protege.\nContanos qué te pasa.","confirmar":"⬜ ¿La cuenta queda en techos, terrazas y chapa, o suma paredes, tanques y piletas?"},
     {"k":"X23","etq":"publicaciones","tipo":"Historia · destacada","titulo":"2 de 3 · Si tenés una casa","para":"El que entra al perfil","de":"D2","formato":"5 frames · 9:16","vertical":true,"cierre":"Mandanos una foto del techo.","labCopy":"Los textos de cada frame, para copiar","laminas":[{"img":"d2-01","t":"Si tenés una casa. Y una mancha en el techo.","b":""},{"img":"d2-02","t":"Suele empezar así.","b":"Una mancha en el cielorraso, pintura inflada, y cuando llueve fuerte, la gotera. · Imagen: Cielorraso con mancha de humedad y pintura inflada (falta, va el recuadro rayado)"},{"img":"d2-03","t":"Y casi siempre ya lo arreglaste una vez.","b":""},{"img":"d2-04","t":"Esta vez no hay que romper nada.","b":"Sin sacar la membrana vieja, sin escombro, sin ruido de obra. · Imagen: Terraza de una casa, terminada, después de la lluvia (falta, va el recuadro rayado)"},{"img":"d2-05","t":"Mandanos una foto del techo.","b":"Con eso ya te podemos decir algo.","st":"Link · wa.me/5491159547352?text=Tengo humedad en mi casa y les mando una foto"}],"copy":"Si tenés una casa. Y una mancha en el techo.\nSuele empezar así. — Una mancha en el cielorraso, pintura inflada, y cuando llueve fuerte, la gotera.\nY casi siempre ya lo arreglaste una vez.\nEsta vez no hay que romper nada. — Sin sacar la membrana vieja, sin escombro, sin ruido de obra.\nMandanos una foto del techo. — Con eso ya te podemos decir algo.","confirmar":"⬜ ¿Con una foto alcanza para decir algo, o siempre hay que ir a ver? Cambia el cierre de las tres."},
-    {"k":"X24","etq":"publicaciones","tipo":"Historia · destacada","titulo":"3 de 3 · Si tenés un galpón, una planta o un edificio","para":"El que entra al perfil","de":"D3","formato":"5 frames · 9:16","vertical":true,"cierre":"Envianos un mensaje y lo vemos.","labCopy":"Los textos de cada frame, para copiar","laminas":[{"img":"d3-01","t":"Si tenés un galpón, una planta o un edificio.","b":""},{"img":"d3-02","t":"Acá el problema no es el techo.","b":"Es parar la producción, o cortar el paso en el edificio."},{"img":"d3-03","t":"Se trabaja con todo funcionando.","b":"Sin andamios, sin escombro, sin sacar nada de lugar. · Imagen: Folleto 2013 p. 4 · cementera, trabajo en altura (falta, va el recuadro rayado)"},{"img":"d3-04","t":"Y la chapa se recupera.","b":"Se repara, se frena el óxido y se protege. Sin chapas nuevas. · Imagen: Folleto 2018 p. 4 · techo 3, después (falta, va el recuadro rayado)"},{"img":"d3-05","t":"Envianos un mensaje y lo vemos.","b":"","st":"Link · wa.me/5491159547352?text=Tengo una filtración en un galpón / una planta / un edificio"}],"copy":"Si tenés un galpón, una planta o un edificio.\nAcá el problema no es el techo. — Es parar la producción, o cortar el paso en el edificio.\nSe trabaja con todo funcionando. — Sin andamios, sin escombro, sin sacar nada de lugar.\nY la chapa se recupera. — Se repara, se frena el óxido y se protege. Sin chapas nuevas.\nEnvianos un mensaje y lo vemos.","confirmar":"🔴 «Se trabaja con todo funcionando» es la promesa más fuerte de todas: si no la firman tal cual, el frame 3 se reescribe."},
+    {"k":"X24","etq":"publicaciones","tipo":"Historia · destacada","titulo":"3 de 3 · Si tenés un galpón, una planta o un edificio","para":"El que entra al perfil","de":"D3","formato":"5 frames · 9:16","vertical":true,"cierre":"Envianos un mensaje y lo vemos.","labCopy":"Los textos de cada frame, para copiar","laminas":[{"img":"d3-01","t":"Si tenés un galpón, una planta o un edificio.","b":""},{"img":"d3-02","t":"Acá el problema no es el techo.","b":"Es parar la producción, o cortar el paso en el edificio."},{"img":"d3-03n","t":"Y la chapa se recupera.","b":"Se repara, se frena el óxido y se protege. Sin chapas nuevas. · Imagen: Folleto 2018 p. 4 · techo 3, después (falta, va el recuadro rayado)"},{"img":"d3-04n","t":"Envianos un mensaje y lo vemos.","b":"","st":"Link · wa.me/5491159547352?text=Tengo una filtración en un galpón / una planta / un edificio"}],"copy":"Si tenés un galpón, una planta o un edificio.\nAcá el problema no es el techo. — Es parar la producción, o cortar el paso en el edificio.\nSe trabaja con todo funcionando. — Sin andamios, sin escombro, sin sacar nada de lugar.\nY la chapa se recupera. — Se repara, se frena el óxido y se protege. Sin chapas nuevas.\nEnvianos un mensaje y lo vemos.","confirmar":"🔴 «Se trabaja con todo funcionando» es la promesa más fuerte de todas: si no la firman tal cual, el frame 3 se reescribe."},
     {"k":"X25","etq":"publicaciones","tipo":"Historia · destacada","titulo":"el cierre","para":"El que entra al perfil","de":"D4","formato":"1 frames · 9:16","vertical":true,"cierre":"¿Te lo recomendaron?","labCopy":"Los textos de cada frame, para copiar","laminas":[{"img":"d4-01","t":"¿Te lo recomendaron?","b":"Envianos un mensaje y contanos qué te pasa.","st":"Link · wa.me/5491159547352?text=Me los recomendaron y quiero consultar"}],"copy":"¿Te lo recomendaron? — Envianos un mensaje y contanos qué te pasa.","confirmar":"🔴 Si la pieza de Víctor nombra clientes, antes hace falta el permiso de cada uno · el cierre de Víctor publica el número y va con este, que lleva el link."},
     {"k":"X26","etq":"publicaciones","tipo":"Historia · destacada","titulo":"Cómo pedir un presupuesto","para":"El que entra al perfil","de":"D5","formato":"4 frames · 9:16","vertical":true,"cierre":"Envianos un mensaje.","labCopy":"Los textos de cada frame, para copiar","laminas":[{"img":"d5-01","t":"Tres cosas y te contestamos.","b":""},{"img":"d5-02","t":"Una foto de lejos y una de cerca.","b":"De lejos se ve el techo entero; de cerca, la mancha o el óxido. · Imagen: Techo de chapa de una casa, sacado de lejos con el celular (falta, va el recuadro rayado) · Imagen: Primer plano: óxido en tornillos y uniones de la chapa"},{"img":"d5-03","t":"En qué ciudad estás.","b":"Trabajamos en todo el país."},{"img":"d5-04","t":"Envianos un mensaje.","b":"Con las fotos y tu ciudad.","st":"Link · wa.me/5491159547352?text=Hola, les mando las fotos del techo"}],"copy":"Tres cosas y te contestamos.\nUna foto de lejos y una de cerca. — De lejos se ve el techo entero; de cerca, la mancha o el óxido.\nEn qué ciudad estás. — Trabajamos en todo el país.\nEnvianos un mensaje. — Con las fotos y tu ciudad.","confirmar":"⬜ ¿Qué necesitan para contestar algo sin ir a ver? Estas tres son una propuesta · no se promete plazo de respuesta."}
   ]
